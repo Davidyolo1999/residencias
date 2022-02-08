@@ -1,0 +1,19 @@
+.title, .subtitle {
+    text-align: center;
+    font-size: 1.3rem;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    margin-top: 0;
+    font-size: 1.15rem;
+}
+.internal-company-name {
+    text-align: center;
+    font-size: 1.15rem;
+}
+
+.document-name, .table-title {
+    font-weight: bold;
+    text-align: center;
+}
