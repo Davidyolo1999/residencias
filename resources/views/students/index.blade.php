@@ -7,11 +7,33 @@
                 {{ $alert['message'] }}
             </div>
         @endif
-
         <div class="card">
             <div class="card-header card-header-success">
-                <h4 class="card-title text-white"><b>Estudiantes</b> </h4>
-                <p class="cart-category text-white"><b>Lista de Estudiantes</b> </p>
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4 class="card-title text-white"><b>Estudiantes</b> </h4>
+                        <p class="cart-category text-white"><b>Lista de Estudiantes</b> </p>
+                    </div>
+                    <form action="{{ route('students.index') }}">
+                        <div class="form-group">
+                            <label for="document" class="text-white">Documento</label>
+                            <select class="form-control bg-success text-white" name="document" id="document" onchange="$(this).closest('form').submit()">
+                                <option value="" selected disabled>Seleccione una opción</option>
+                                <option value="residencyRequest" @if (request('document') === 'residencyRequest') selected @endif>Petición de residencia</option>
+                                <option value="presentationLetter" @if (request('document') === 'presentationLetter') selected @endif>Carta de presentación</option>
+                                <option value="commitmentLetter" @if (request('document') === 'commitmentLetter') selected @endif>Carta de compromiso</option>
+                                <option value="acceptanceLetter" @if (request('document') === 'acceptanceLetter') selected @endif>Carta de aceptación</option>
+                                <option value="assignmentLetter" @if (request('document') === 'assignmentLetter') selected @endif>Carta de asignación</option>
+                                <option value="preliminaryLetter" @if (request('document') === 'preliminaryLetter') selected @endif>Anteproyecto</option>
+                                <option value="paperStructure" @if (request('document') === 'paperStructure') selected @endif>Estructura del informe final</option>
+                                <option value="complianceLetter" @if (request('document') === 'complianceLetter') selected @endif>Cédula de cumplimiento RP</option>
+                                <option value="qualificationLetter" @if (request('document') === 'qualificationLetter') selected @endif>Acta de calificación</option>
+                                <option value="completionLetter" @if (request('document') === 'completionLetter') selected @endif>Carta de término</option>
+                                <option value="submissionLetter" @if (request('document') === 'submissionLetter') selected @endif>Carta de entrega de proyecto</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
             </div>
 
             <div class="card-body">
