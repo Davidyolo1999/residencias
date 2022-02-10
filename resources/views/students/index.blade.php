@@ -15,11 +15,11 @@
                         <p class="cart-category text-white"><b>Lista de Estudiantes</b> </p>
                     </div>
                     <form action="{{ route('students.index') }}">
-                        <div class="form-group">
-                            <label for="document" class="text-white">Documento</label>
+                        <div class="form-group text-center">
+                            <label for="document" class="text-white ">Filtrar por Documento <i class="material-icons">filter_alt</i> </label>
                             <select class="form-control bg-success text-white" name="document" id="document" onchange="$(this).closest('form').submit()">
-                                <option value="" selected disabled>Seleccione una opción</option>
-                                <option value="residencyRequest" @if (request('document') === 'residencyRequest') selected @endif>Petición de residencia</option>
+                                <option class="text-center" value="" selected disabled><b> Seleccione una opción</b></option>
+                                <option value="residencyRequest" @if (request('document') === 'residencyRequest') selected @endif> <b>Petición de residencia</b> </option>
                                 <option value="presentationLetter" @if (request('document') === 'presentationLetter') selected @endif>Carta de presentación</option>
                                 <option value="commitmentLetter" @if (request('document') === 'commitmentLetter') selected @endif>Carta de compromiso</option>
                                 <option value="acceptanceLetter" @if (request('document') === 'acceptanceLetter') selected @endif>Carta de aceptación</option>

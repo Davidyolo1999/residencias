@@ -61,7 +61,7 @@
                             </label>
                         </div>
                     </div>
-                    <div class="card-footer justify-content-center">
+                    <div class="text-right">
                         <button type="submit" class="btn btn-danger animation-on-hover btn-round">{{ __('Iniciar Sesión') }} <i class="material-icons">login</i></button>
                     </div>
                 </div>

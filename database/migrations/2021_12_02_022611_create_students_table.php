@@ -18,7 +18,7 @@ class CreateStudentsTable extends Migration
             $table->string('first_name');
             $table->string('fathers_last_name');
             $table->string('mothers_last_name');
-            $table->string('account_number');
+            $table->string('account_number', 8);
             $table->char('sex');
             $table->string('curp', 18);
             $table->double('career_percentage');

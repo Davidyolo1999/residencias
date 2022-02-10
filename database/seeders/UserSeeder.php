@@ -71,7 +71,7 @@ class UserSeeder extends Seeder
             'mothers_last_name' => 'Vargas',
             'account_number' => '21170146',
             'sex' => 'f',
-            'curp' => '12356456454564466',
+            'curp' => 'FOBD990707HMCLNV06',
             'career_percentage' => 90,
             'phone_number' => '4261249733',
             'is_enrolled' => true,
