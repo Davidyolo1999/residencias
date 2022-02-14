@@ -64,7 +64,7 @@
     <header class="flex min-h-screen bg-white">
         {{-- Left side --}}
         <div class="w-2/5 p-12 text-white">
-            <img src="{{ asset('img/o.jpg') }}" alt="UMB" class="mb-12 rounded-full border-black border-2">
+            <img src="{{ asset('img/o.jpg') }}" alt="UMB" class="mb-12 rounded-full border-black border-4">
             <h1 class="mb-3 text-8xl font-semibold text-lime-500">UMB</h1>
             <p class="text-xl text-black">Unidad de Estudios Superiores Villa Victoria</p>
 

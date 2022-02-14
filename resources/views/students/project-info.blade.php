@@ -23,11 +23,11 @@
 
                     {{-- START DATE --}}
                     <x-inputs.text-field-row name="start_date" label="Fecha de Inicio:"
-                        placeholder="Ingresé la Fecha de Inicio" type="date" :default-value="$project->start_date" />
+                        placeholder="Ingresé la Fecha de Inicio" type="date" :default-value="optional($project->start_date)->format('Y-m-d')" />
 
                     {{-- END DATE --}}
                     <x-inputs.text-field-row name="end_date" label="Fecha de Término:"
-                        placeholder="Ingresé la Fecha de Término" type="date" :default-value="$project->end_date" />
+                        placeholder="Ingresé la Fecha de Término" type="date" :default-value="optional($project->end_date)->format('Y-m-d')" />
 
                     {{-- SCHEDULE --}}
                     <x-inputs.text-field-row name="schedule" label="Horario Requerdido:" class="bg-dark"
