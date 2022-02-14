@@ -4,9 +4,8 @@
     <div class="content">
         <div class="card">
             <div class="card-header card-header-success">
-                <h4 class="card-title text-white">Añadir Asesor Externo</h4>
+                <h4 class="card-title text-white"><b>Añadir Asesor Externo</b> </h4>
             </div>
-
             <div class="card-body">
                 <form action="{{ route('externalAdvisor.store') }}" method="POST">
                     @csrf

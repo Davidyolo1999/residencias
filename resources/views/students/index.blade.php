@@ -7,36 +7,36 @@
                 {{ $alert['message'] }}
             </div>
         @endif
-        <div class="card">
+        <div class="card" >
             <div class="card-header card-header-success">
                 <div class="d-flex justify-content-between">
                     <div>
                         <h4 class="card-title text-white"><b>Estudiantes</b> </h4>
-                        <p class="cart-category text-white"><b>Lista de Estudiantes</b> </p>
+                        <p class="card-category text-white"><b>Lista de Estudiantes</b> </p>
                     </div>
                     <form action="{{ route('students.index') }}">
                         <div class="form-group text-center">
                             <label for="document" class="text-white ">Filtrar por Documento <i class="material-icons">filter_alt</i> </label>
-                            <select class="form-control bg-success text-white" name="document" id="document" onchange="$(this).closest('form').submit()">
-                                <option class="text-center" value="" selected disabled><b> Seleccione una opción</b></option>
-                                <option value="residencyRequest" @if (request('document') === 'residencyRequest') selected @endif> <b>Petición de residencia</b> </option>
-                                <option value="presentationLetter" @if (request('document') === 'presentationLetter') selected @endif>Carta de presentación</option>
-                                <option value="commitmentLetter" @if (request('document') === 'commitmentLetter') selected @endif>Carta de compromiso</option>
-                                <option value="acceptanceLetter" @if (request('document') === 'acceptanceLetter') selected @endif>Carta de aceptación</option>
-                                <option value="assignmentLetter" @if (request('document') === 'assignmentLetter') selected @endif>Carta de asignación</option>
-                                <option value="preliminaryLetter" @if (request('document') === 'preliminaryLetter') selected @endif>Anteproyecto</option>
-                                <option value="paperStructure" @if (request('document') === 'paperStructure') selected @endif>Estructura del informe final</option>
-                                <option value="complianceLetter" @if (request('document') === 'complianceLetter') selected @endif>Cédula de cumplimiento RP</option>
-                                <option value="qualificationLetter" @if (request('document') === 'qualificationLetter') selected @endif>Acta de calificación</option>
-                                <option value="completionLetter" @if (request('document') === 'completionLetter') selected @endif>Carta de término</option>
-                                <option value="submissionLetter" @if (request('document') === 'submissionLetter') selected @endif>Carta de entrega de proyecto</option>
+                            <select class="bg-white text-dark text-center btn-outline-light" name="document" id="document" onchange="$(this).closest('form').submit()">
+                                <option class="text-center" value="" selected disabled><b> Selecciona una Opción</b></option>
+                                <option  value="residencyRequest" @if (request('document') === 'residencyRequest') selected @endif> <b>PETICIÓN DE RESIDENCIA</b> </option>
+                                <option value="presentationLetter" @if (request('document') === 'presentationLetter') selected @endif>CARTA DE PRESENTACIÓN</option>
+                                <option value="commitmentLetter" @if (request('document') === 'commitmentLetter') selected @endif>CARTA DE COMPROMISO</option>
+                                <option value="acceptanceLetter" @if (request('document') === 'acceptanceLetter') selected @endif>CARTA DE ACEPTACIÓN</option>
+                                <option value="assignmentLetter" @if (request('document') === 'assignmentLetter') selected @endif>CARTA DE ASIGNACIÓN</option>
+                                <option value="preliminaryLetter" @if (request('document') === 'preliminaryLetter') selected @endif>ANTEPROYECTO</option>
+                                <option value="paperStructure" @if (request('document') === 'paperStructure') selected @endif>ESTRUCTURA DEL INFORME FINAL</option>
+                                <option value="complianceLetter" @if (request('document') === 'complianceLetter') selected @endif>CÉDULA DE CUMPLIMIENTO</option>
+                                <option value="qualificationLetter" @if (request('document') === 'qualificationLetter') selected @endif>ACTA DE CALIFICACIÓN</option>
+                                <option value="completionLetter" @if (request('document') === 'completionLetter') selected @endif>CARTA DE TÉRMINO</option>
+                                <option value="submissionLetter" @if (request('document') === 'submissionLetter') selected @endif>CARTA DE ENTREGA DE PROYECTO</option>
                             </select>
                         </div>
                     </form>
                 </div>
             </div>
 
-            <div class="card-body">
+            <div class="card-body" >
                 <div class="text-right">
                     @can('create', App\Models\Student::class)
                     <a href="{{ route('students.create') }}" class="btn btn-sm btn-warning"><i class="material-icons">person_add</i>  Añadir estudiante</a>

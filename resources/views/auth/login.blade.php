@@ -8,9 +8,8 @@
             <form class="form" method="POST" action="{{ route('login') }}">
                 @csrf
                 <div class="card card-login card-hidden mb-3">
-                    <div class="card-header card-header-success text-center text-white">
+                    <div class="card-header card-header-success text-center text-white ">
                         <h4>{{ __('B I E N V E N I D O') }}</h4>
-                       {{--  <h4 class="card-title"><strong>{{ __('Login') }}</strong></h4>--}}
                     </div>
                     <div class="card-body">
                         <div class="col-md-9 ml-auto mr-auto mb-2 text-center" align="center">

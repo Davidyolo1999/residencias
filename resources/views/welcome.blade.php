@@ -61,17 +61,19 @@
 
 <body class="antialiased">
     {{-- Header --}}
-    <header class="flex min-h-screen bg-indigo-600">
+    <header class="flex min-h-screen bg-white">
         {{-- Left side --}}
         <div class="w-2/5 p-12 text-white">
-            <img src="{{ asset('img/o.jpg') }}" alt="UMB" class="mb-12 rounded-full">
+            <img src="{{ asset('img/o.jpg') }}" alt="UMB" class="mb-12 rounded-full border-black border-2">
             <h1 class="mb-3 text-8xl font-semibold text-lime-500">UMB</h1>
-            <p class="text-2xl">Unidad de Estudios Superiores Villa Victoria</p>
+            <p class="text-xl text-black">Unidad de Estudios Superiores Villa Victoria</p>
 
 
 
             <div class="text-center">
-                <p class="text-4xl" id="copy">Residencias Profesionales</p>
+                <p class="text-4xl text-black">Residencias Profesionales</p>
+                <br>
+                <br>
                 <a href="{{ route('login') }}"
                     class="mt-6 p-4 inline-block rounded bg-green-500 text-lg font-semibold">
                     <i class="fas fa-user inline-block"></i>
@@ -81,38 +83,27 @@
 
         {{-- Right side --}}
         <div class="w-3/5 p-12">
-            <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff"
+            <div style="--swiper-navigation-color: orange; --swiper-pagination-color: orange"
                 class="swiper mySwiper rounded">
-                <div class="parallax-bg" style="background-image: url({{ asset('img/ordenador.jpg') }});"
+                <div class="parallax-bg" style="background-image: url({{ asset('img/students.jpg') }});"
                     data-swiper-parallax="-23%"></div>
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
                         <div class="title" data-swiper-parallax="-300"></div>
+                    
+                       
+                      <br>
+                      <br>
+                      
+                        <div  class="subtitle text-white text-8x1 not-italic font-bold" data-swiper-parallax="-200">¿Cuál es la Residencia Profesional?</div>
                         <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <div class="subtitle" data-swiper-parallax="-200">¿Cuál es la Residencia Profesional?
-                        </div>
-                        <br>
-                        <div class="text" data-swiper-parallax="-100">
-                            <p class="text-8x1 text-white no-italic text-justify">
-                                <b>
-                                    Las Residencias profesionales son una estrategia educativa de carácter curricular,
-                                    que permite al estudiante emprender un proyecto teórico-práctico, analítico,
-                                    reflexivo, crítico y profesional; para resolver un problema específico de la
-                                    realidad social y productiva, para fortalecer y aplicar sus competencias ...
-                                </b>
-
-
-
-                            </p>
+                        <div class="text-9x1  text-white font-sans md:font-arial font-bold text-justify" data-swiper-parallax="-100">
+                             
+                             <br>
+                                Las Residencias profesionales son una estrategia educativa de carácter curricular,
+                                que permite al estudiante emprender un proyecto teórico-práctico, analítico,
+                                reflexivo, crítico y profesional; para resolver un problema específico de la
+                                realidad social y productiva, para fortalecer y aplicar sus competencias ...
                         </div>
                     </div>
                     <div class="swiper-slide">
@@ -126,11 +117,11 @@
                         <br>
                         <br>
 
-                        <div class="subtitle" data-swiper-parallax="-200">Beneficios que obtienen los alumnos con
+                        <div class="subtitle text-white text-8x1 not-italic font-bold" data-swiper-parallax="-200">Beneficios que obtienen los alumnos con
                             las Residencias Profesionales:</div> <br>
-                        <div class="text" data-swiper-parallax="-100">
-                            <p class="text-8x1 text-white no-italic text-justify">
-                                <b>
+                        <div class="text-9x1  text-white font-sans md:font-arial font-bold text-justify" data-swiper-parallax="-100">
+                            
+                            
                             <ol>
                                 <li>1. Retroalimentar y desarrollar conocimientos al participar en un proceso de
                                     aprendizaje/trabajo en que se aplican los conocimientos a la vez que se adquieren
@@ -142,23 +133,26 @@
                                     la
                                     que se tendrá que enfrentar.</li>
                                 <li>5. Disponer de una alternativa más para obtener el título profesional.</li>
-                            </ol></b>
-                            </p>
+                            </ol>
+                            
                         </div>
                     </div>
                     <div class="swiper-slide">
-                        <div class="title" data-swiper-parallax="-300">Slide 3</div>
-                        <div class="subtitle" data-swiper-parallax="-200">Requisitos para realizar las Residencias
+                        <div class="subtitle text-white text-8x1 not-italic font-bold" data-swiper-parallax="-200">Requisitos para realizar las Residencias
                             Profesionales:</div>
-                        <div class="text" data-swiper-parallax="-100">
-                            <p>
-                                1. Haber aprobado el 80% de los créditos de su carrera.
-                                2. Estar inscrito actualmente en el Instituto Haber seleccionado su tema de proyecto y
-                                que éste debidamente avalado por la academia.
-                                3. Disponer de constancia de su situación académica emitida por el Departamento de
-                                Control Escolar.
-                                4. Haber concluido el servicio social
-                            </p>
+                        <div class="text-9x1  text-white font-sans md:font-arial font-bold text-justify" data-swiper-parallax="-100">
+                            <br>
+                            <ol>
+                                <li>
+                                    1. Haber aprobado el 80% de los créditos de su carrera.
+                                </li>
+                                <li>   2. Estar inscrito actualmente en el Instituto Haber seleccionado su tema de proyecto y
+                                    que éste debidamente avalado por la academia.</li>
+                                    <li> 3. Disponer de constancia de su situación académica emitida por el Departamento de
+                                        Control Escolar.</li>
+                                        <li>         
+                                            4. Haber concluido el servicio social</li>
+                            </ol>
                         </div>
                     </div>
                 </div>
@@ -209,28 +203,21 @@
         </div>
     </main>
 
-    <footer class="py-12 bg-indigo-600">
+    <footer class="py-12 bg-white">
         <div class="container mx-auto">
             <div class="flex text-white">
                 {{-- Info --}}
-                <div class="w-2/5 p-4">
+                <div class="w-2/5 p-4 text-black">
                     <p class="mb-10 text-lg">UMB</p>
 
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione officia, blanditiis eius ipsa
-                        odit deleniti velit, libero animi nulla, a quisquam earum quaerat eum facere laboriosam cumque.
-                        Quaerat praesentium nobis voluptatum ex eius dicta animi, fugiat nam hic. Libero tempore illo
-                        consectetur animi numquam voluptas hic corrupti nemo nam voluptatem, repudiandae quisquam
-                        excepturi earum eum temporibus modi, aliquid illum neque. Repudiandae quas odit perferendis,
-                        numquam hic quam doloribus est repellendus eum natus a reiciendis, suscipit quos odio rem nisi!
-                        Laboriosam nesciunt sunt, at nisi quod sint nihil ea beatae molestiae voluptatibus. Aut
-                        explicabo, dolorum quaerat sequi velit deserunt reiciendis! Reiciendis!</p>
+                    <p>Copyright 2022 by David.</p>
                 </div>
 
                 {{-- Socials --}}
-                <div class="w-1/5 p-4">
+                <div class="w-1/5 p-4 text-black">
                     <p class="mb-10 text-lg">Redes Sociales</p>
 
-                    <ul class="space-y-4">
+                    <ul class="space-y-4 text-black">
                         <li class="flex items-center space-x-4"><i class="fab fa-facebook-square"></i>
                             <span>Facebook</span>
                         </li>
@@ -243,7 +230,7 @@
 
                 {{-- Another info --}}
 
-                <div class="w-1/5 p-4">
+                <div class="w-1/5 p-4 text-black">
                     <p class="mb-10 text-lg">Información</p>
 
                     <ul class="space-y-4">
@@ -252,7 +239,7 @@
                     </ul>
                 </div>
                 {{-- Payment methods --}}
-                <div class="w-1/5 p-4">
+                <div class="w-1/5 p-4 text-black">
                     <p class="mb-10 text-lg">Acerca de la UMB</p>
 
                     <ul class="space-y-4">
@@ -278,12 +265,6 @@
                 nextEl: ".swiper-button-next",
                 prevEl: ".swiper-button-prev",
             },
-        });
-
-        new Typewriter('#copy', {
-            strings: ['Residencias Profesionales'],
-            autoStart: true,
-            loop: true,
         });
     </script>
 </body>
