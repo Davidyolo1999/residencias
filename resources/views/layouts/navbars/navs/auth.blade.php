@@ -39,7 +39,11 @@
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
             @foreach ($corrections as $correction)
-              <a class="dropdown-item" href="#">{{ $correction->content }}</a>
+              <form action="{{ route('corrections.markAsSolved', $correction) }}" method="POST" class="d-none">
+                @csrf
+                <input type="hidden" name="document_type" value="{{ $correction->correctionable_type }}">
+              </form>
+              <a class="dropdown-item" href="#" onclick="$(this).prev().submit(); return false;">{{ $correction->content }}</a>
             @endforeach
           </div>
         </li>

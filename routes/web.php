@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommitmentLetterController;
 use App\Http\Controllers\CompletionLetterController;
 use App\Http\Controllers\ComplianceLetterController;
+use App\Http\Controllers\CorrectionsController;
 use App\Http\Controllers\ExternalAdvisorsController;
 use App\Http\Controllers\PaperStructureController;
 use App\Http\Controllers\PreliminaryLetterController;
@@ -155,8 +156,7 @@ Route::middleware('auth')->group(function() {
         Route::put('/{student}/submission-letter/signed-document', [SubmissionLetterController::class, 'submissionLetterUploadSignedDoc'])->name('submissionLetterUploadSignedDoc');
         Route::get('/{student}/submission-letter/signed-document', [SubmissionLetterController::class, 'submissionLetterDownloadSignedDoc'])->name('submissionLetterDownloadSignedDoc');
 
-        
-
-    
     });
+    
+    Route::post('/corrections/{correctionId}/mark-as-solved', [CorrectionsController::class, 'markAsSolved'])->name('corrections.markAsSolved');
 });
