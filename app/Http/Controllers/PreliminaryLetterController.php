@@ -120,6 +120,8 @@ class PreliminaryLetterController extends Controller
 
         $preliminaryLetter->save();
 
+        $preliminaryLetter->corrections->each(fn($correction) => $correction->update(['is_solved' => true]));
+
         return back()->with('alert', [
             'type' => 'success',
             'message' => 'Las correciones fueron verificadas',

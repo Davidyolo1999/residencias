@@ -119,6 +119,8 @@ class AcceptanceLetterController extends Controller
         $acceptanceLetter->status = DocumentStatus::STATUS_PROCESSING;
 
         $acceptanceLetter->save();
+        
+        $acceptanceLetter->corrections->each(fn($correction) => $correction->update(['is_solved' => true]));
 
         return back()->with('alert', [
             'type' => 'success',

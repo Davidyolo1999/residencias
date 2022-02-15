@@ -109,6 +109,8 @@ class AssignmentLetterController extends Controller
 
         $assignmentLetter->save();
 
+        $assignmentLetter->corrections->each(fn($correction) => $correction->update(['is_solved' => true]));
+
         return back()->with('alert', [
             'type' => 'success',
             'message' => 'Las correciones fueron verificadas',

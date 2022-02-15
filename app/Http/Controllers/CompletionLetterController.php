@@ -119,6 +119,9 @@ class CompletionLetterController extends Controller
         $completionLetter->status = DocumentStatus::STATUS_PROCESSING;
 
         $completionLetter->save();
+        
+        $completionLetter->corrections->each(fn($correction) => $correction->update(['is_solved' => true]));
+
 
         return back()->with('alert', [
             'type' => 'success',
