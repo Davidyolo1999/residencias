@@ -53,7 +53,7 @@ class CorrectionsController extends Controller
             
         return back()->with('alert', [
             'type' => 'success',
-            'message' => 'Las correcion fue verificada',
+            'message' => 'Las correción fue verificada',
         ]);
     }
 }
