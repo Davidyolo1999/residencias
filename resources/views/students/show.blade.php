@@ -326,7 +326,7 @@
                     <div class="col-md-6">
                         @include('residency-process.partials.compliance-letter-btn')
                     </div>
-                    @if(auth()->user()->isTeacher())
+                    @if(auth()->user()->isTeacher() || auth()->user()->isAdmin())
                         <div class="col-md-3">
                             <form action="{{ route('students.complianceLetterMarkAsApproved', $student) }}" method="POST">
                                 @method('PUT')
