@@ -9,6 +9,7 @@ use App\Http\Controllers\CompletionLetterController;
 use App\Http\Controllers\ComplianceLetterController;
 use App\Http\Controllers\CorrectionsController;
 use App\Http\Controllers\ExternalAdvisorsController;
+use App\Http\Controllers\LocationsController;
 use App\Http\Controllers\PaperStructureController;
 use App\Http\Controllers\PreliminaryLetterController;
 use App\Http\Controllers\PresentationLetterController;
@@ -157,6 +158,18 @@ Route::middleware('auth')->group(function() {
         Route::get('/{student}/submission-letter/signed-document', [SubmissionLetterController::class, 'submissionLetterDownloadSignedDoc'])->name('submissionLetterDownloadSignedDoc');
 
     });
-    
+
     Route::post('/corrections/{correctionId}/mark-as-solved', [CorrectionsController::class, 'markAsSolved'])->name('corrections.markAsSolved');
+        
+    Route::prefix('/locations')->name('locations.')->group(function(){
+
+        Route::get('/', [LocationsController::class, 'index'])->name('index');
+        Route::get('/create', [LocationsController::class, 'create'])->name('create');
+        Route::post('/', [LocationsController::class, 'store'])->name('store');
+        Route::delete('/{location}', [LocationsController::class, 'destroy'])->name('destroy');
+        Route::get('/{location}/edit', [LocationsController::class, 'edit'])->name('edit');
+        Route::put('/{location}', [LocationsController::class, 'update'])->name('update');
+    });
+
+    
 });

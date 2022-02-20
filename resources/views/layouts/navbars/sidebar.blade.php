@@ -120,6 +120,13 @@
                 </a>
             </li>
             @endcan
+
+            <li class="nav-item{{ $activePage == 'locations' ? ' active' : '' }}">
+                <a class="nav-link" href="{{ route('locations.index') }}">
+                <i class="material-icons">people</i>
+                    <p><b>Ubicaciones</b> </p>
+                </a>
+            </li>
         </ul>
     </div>
 </div>

@@ -5,7 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>Inicio | Residencias Profesionales</title>
+    <link rel="icon" type="image/png" href="{{ asset('img/colegio.png') }}">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -190,15 +191,35 @@
         </div>
 
 
-        <h2 class="my-10 text-6xl font-semibold text-center">Available For</h2>
+        <h2 class="my-10 text-6xl font-semibold text-center">Enlaces</h2>
 
-        <div class="container mx-auto">
+        <div class="container mx-auto text-2xl font-bold">
             <div class="flex justify-between">
-                <img src="{{ asset('img/js.svg') }}" alt="" class="h-52 w-52">
-                <img src="{{ asset('img/angular.svg') }}" alt="" class="h-52 w-52">
-                <img src="{{ asset('img/react.svg') }}" alt="" class="h-52 w-52">
-                <img src="{{ asset('img/vue.svg') }}" alt="" class="h-52 w-52">
-                <img src="{{ asset('img/svelte.svg') }}" alt="" class="h-52 w-52">
+                <div align="center" >
+                    <a href="//umb.edomex.gob.mx/directorio" target="_blank">
+                        <img src="{{ asset('img/unidades de estudio superiores 01.png') }}" alt="" class="h-171 w-52">
+                    </a>
+                    <h1 class="text-center"><a href="//umb.edomex.gob.mx/directorio" target="_blank">Unidades de Estudios Superiores</a></h1>
+                </div>
+               <div align="center" >
+                <a href="//umb.edomex.gob.mx/modelo_oferta" target="_blank">
+                    <img src="{{ asset('img/modelo y oferta educativa 02.png') }}" alt="" class="h-171 w-52">
+                </a>
+                <h1 class="text-center"><a href="//umb.edomex.gob.mx/modelo_oferta" target="_blank">Modelo y Oferta Educativa</a></h1>
+            </div>
+            <div align="center" >
+                <a href="https://sidiumb.umb.mx" target="_blank">
+                    <img src="{{ asset('img/SIDIUMB 03.png') }}" alt="" class="h-171 w-52">
+                    <h1 class="sub"><a href="https://sidiumb.umb.mx" target="_blank">SIDIUMB</a></h1>
+                </a>
+            </div>
+            <div align="center" >
+                <a href="https://sfpya.edomexico.gob.mx/recaudacion/" target="_blank">
+                    <img src="{{ asset('img/tarifas y pagos UMB 04.png') }}" alt="" class="h-171 w-52">
+                    <h1 class="sub"><a href="https://sidiumb.umb.mx" target="_blank">Tarifas y Pagos UMB</a></h1>
+                </a>
+            </div>
+          
             </div>
         </div>
     </main>
