@@ -191,7 +191,7 @@
         </div>
 
 
-        <h2 class="my-10 text-6xl font-semibold text-center">Enlaces</h2>
+        <h2 class="my-10 text-6xl font-semibold text-center">Más Información</h2>
 
         <div class="container mx-auto text-2xl font-bold">
             <div class="flex justify-between">

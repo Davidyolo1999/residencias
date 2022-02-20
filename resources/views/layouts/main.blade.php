@@ -26,7 +26,7 @@
     @endauth
 
     @guest()
-        @include('layouts.page_templates.guest')|
+        @include('layouts.page_templates.guest')
     @endguest
 
     @stack('modals')
