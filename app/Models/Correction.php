@@ -10,4 +10,16 @@ class Correction extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    protected $casts = [
+        'is_solved' => 'bool',
+    ];
+
+    /**
+     * Relationships
+     */
+    public function correctionable()
+    {
+        return $this->morphTo();
+    }
 }

@@ -157,35 +157,36 @@
                 </form>
             </div>
 
-            <div class="card">
-                <div class="card-header card-header-success">
-                    <h4 class="card-title text-white"><b>Cambiar Contraseña</b></h4>
-                </div>
-                <div class="card-body">
-                    <form action="{{ route('teachers.updatePassword', $teacher) }}" method="POST">
-                        @csrf
-                        @method('PUT')
-                        {{-- PASSWORD --}}
-                        <x-inputs.text-field-row
-                            name="password"
-                            label="Contraseña Nueva:"
-                            placeholder="Ingresé la Contraseña Nueva"
-                            type="password"
-                        />
-                        {{-- CONFIRM PASSWORD --}}
-                        <x-inputs.text-field-row
-                            name="password_confirmation"
-                            label="Confirmar Contraseña:"
-                            placeholder="Confirme la Contraseña Nueva"
-                            type="password"
-                        />
-                        <div class="text-right">
-                            <a href="{{ route('admins.index') }}" class="btn  btn-warning mr-3">
-                                <i class="material-icons">cancel</i><b> Cancelar</b> </a>
-                            <button class="btn  btn-success"><i class="material-icons">save</i><b> Guardar</b></button>
-                        </div>
-                    </form>
-                </div>
+            
+        </div>
+        <div class="card">
+            <div class="card-header card-header-success">
+                <h4 class="card-title text-white"><b>Cambiar Contraseña</b></h4>
+            </div>
+            <div class="card-body">
+                <form action="{{ route('teachers.updatePassword', $teacher) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    {{-- PASSWORD --}}
+                    <x-inputs.text-field-row
+                        name="password"
+                        label="Contraseña Nueva:"
+                        placeholder="Ingresé la Contraseña Nueva"
+                        type="password"
+                    />
+                    {{-- CONFIRM PASSWORD --}}
+                    <x-inputs.text-field-row
+                        name="password_confirmation"
+                        label="Confirmar Contraseña:"
+                        placeholder="Confirme la Contraseña Nueva"
+                        type="password"
+                    />
+                    <div class="text-right">
+                        <a href="{{ route('admins.index') }}" class="btn  btn-warning mr-3">
+                            <i class="material-icons">cancel</i><b> Cancelar</b> </a>
+                        <button class="btn  btn-success"><i class="material-icons">save</i><b> Guardar</b></button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

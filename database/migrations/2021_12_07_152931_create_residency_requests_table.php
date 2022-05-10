@@ -19,6 +19,7 @@ class CreateResidencyRequestsTable extends Migration
             $table->unsignedBigInteger('user_id')->unique();
             $table->unsignedBigInteger('project_id');
             $table->unsignedBigInteger('company_id');
+            
             $table->timestamps();
 
             $table->foreign('user_id')->references('user_id')->on('students')->onDelete('CASCADE');

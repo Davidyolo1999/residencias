@@ -44,7 +44,7 @@
                     </div>
                     {{-- MOTHERS'S LAST NAME --}}
                     <div class="col-md-4">
-                        <p class="mb-0"><b>Nombre(s):</b></p>
+                        <p class="mb-0"><b>Apellido materno:</b></p>
                         {{ $student->mothers_last_name }}
                     </div>
                 </div>
@@ -326,7 +326,7 @@
                     <div class="col-md-6">
                         @include('residency-process.partials.compliance-letter-btn')
                     </div>
-                    @if(auth()->user()->isTeacher())
+                    @if(auth()->user()->isTeacher() || auth()->user()->isAdmin())
                         <div class="col-md-3">
                             <form action="{{ route('students.complianceLetterMarkAsApproved', $student) }}" method="POST">
                                 @method('PUT')

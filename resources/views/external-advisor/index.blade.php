@@ -11,7 +11,7 @@
         <div class="card">
             <div class="card-header card-header-success">
                 <h4 class="card-title text-white"><b>Asesores Externos</b> </h4>
-                <p class="cart-category text-white"><b>Lista de Asesores Externos</b> </p>
+                <p class="card-category text-white"><b>Lista de Asesores Externos</b> </p>
             </div>
 
             <div class="card-body">

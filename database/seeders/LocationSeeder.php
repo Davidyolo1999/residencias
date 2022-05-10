@@ -14,8 +14,23 @@ class LocationSeeder extends Seeder
      */
     public function run()
     {
-        $mexico = Location::create(['name' => 'México']);
-        $villaDeAllende = Location::create(['name' => 'Villa de allende', 'parent_id' => $mexico->id]);
-        Location::create(['name' => 'San Ildefonso', 'parent_id' => $villaDeAllende->id]);
+        $states = config('locations.states');
+        
+        foreach ($states as $state) {
+            $this->storeLocation($state['name'], $state['children'] ?? null);
+        }
+    }
+
+    public function storeLocation(string $name, ?array $children = null, ?int $parentId = null)
+    {
+        $location = Location::create(['name' => $name, 'parent_id' => $parentId]);
+
+        if (!$children) {
+            return;
+        }
+        
+        foreach ($children as $child) {
+            $this->storeLocation($child['name'], $child['children'] ?? null, $location->id);
+        }
     }
 }

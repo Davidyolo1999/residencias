@@ -70,7 +70,9 @@
     </style>
 </head>
 <body>
-    @include('residency-process.partials.header', ['title' => 'SOLICITUD DE RESIDENCIAS PROFESIONALES'])
+    @include('residency-process.partials.header', [
+        'title' => 'SOLICITUD DE RESIDENCIAS PROFESIONALES',
+        ])
 
     <p class="request-date"><b>Fecha de solicitud:</b> {{ $residencyRequest->request_date_formatted }}.</p>
 
@@ -147,9 +149,9 @@
     <div class="footer">
         <p class="student-signature">{{ $student->first_name }} {{ $student->fathers_last_name }} {{ $student->mothers_last_name }}</p>
         <p class="person-in-charge-signature">
-            LCDA. Brenda González Pacheco
+            {{ $configuration->person_in_charge }}
             <br>
-            Coordinadora de la UES Villa Victoria
+            {{ $configuration->person_in_charge_position_abbreviation }}
         </p>
     </div>
 </body>

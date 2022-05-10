@@ -16,6 +16,7 @@ class CreateCorrectionsTable extends Migration
         Schema::create('corrections', function (Blueprint $table) {
             $table->id();
             $table->text('content');
+            $table->boolean('is_solved')->default(0);
             $table->unsignedBigInteger('correctionable_id');
             $table->string('correctionable_type');
             $table->timestamps();

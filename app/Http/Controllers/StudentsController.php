@@ -25,7 +25,20 @@ use Throwable;
 
 class StudentsController extends Controller
 {
-    public function index()
+    protected static $documents = [
+        'residencyRequest' => 'presentationLetter',
+        'presentationLetter' => 'commitmentLetter',
+        'commitmentLetter'=>'acceptanceLetter',
+        'acceptanceLetter'=>'assignmentLetter',
+        'assignmentLetter'=>'preliminaryLetter',
+        'preliminaryLetter'=>'paperStructure',
+        'paperStructure'=>'complianceLetter',
+        'complianceLetter'=>'qualificationLetter',
+        'qualificationLetter'=>'completionLetter',
+        'completionLetter'=>'submissionLetter',
+        'submissionLetter'=> null,
+    ];
+    public function index(Request $request)
     {
         $user = Auth::user();
 
@@ -34,6 +47,13 @@ class StudentsController extends Controller
             ->with('career')
             ->when($user->role === User::TEACHER_ROLE, fn($query) => $query->where('teacher_id', $user->id))
             ->when($user->role === User::EXTERNAL_ADVISOR_ROLE, fn($query) => $query->where('external_advisor_id', $user->id))
+            ->when($request->document && array_key_exists($request->document, self::$documents), function($query) use ($request) {
+                $nextDocument = self::$documents[$request->document];
+                
+                return $query
+                    ->whereHas($request->document)
+                    ->when($nextDocument !== null, fn($query) => $query->whereDoesntHave($nextDocument));
+            })
             ->paginate();
 
         return view('students.index', [

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
 {
     protected const REDIRECTS = [
-        User::ADMIN_ROLE => '/admins',
+        User::ADMIN_ROLE => '/configurations/unit-info',
         User::STUDENT_ROLE => '/students/personal-info',
         User::TEACHER_ROLE => '/students',
         User::EXTERNAL_ADVISOR_ROLE => '/students',
@@ -34,7 +34,7 @@ class AuthController extends Controller
         }
 
         return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
+            'email' => 'Las credenciales proporcionadas no coinciden con nuestros registros.',
         ]);
     }
 

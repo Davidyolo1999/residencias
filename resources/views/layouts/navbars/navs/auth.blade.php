@@ -32,17 +32,19 @@
         <li class="nav-item dropdown">
           <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="material-icons">notifications</i>
-            <span class="notification">5</span>
+            <span class="notification">{{ $corrections->count() }}</span>
             <p class="d-lg-none d-md-block">
               {{ __('Some Actions') }}
             </p>
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="#">{{ __('Mike John responded to your email') }}</a>
-            <a class="dropdown-item" href="#">{{ __('You have 5 new tasks') }}</a>
-            <a class="dropdown-item" href="#">{{ __('You\'re now friend with Andrew') }}</a>
-            <a class="dropdown-item" href="#">{{ __('Another Notification') }}</a>
-            <a class="dropdown-item" href="#">{{ __('Another One') }}</a>
+            @foreach ($corrections as $correction)
+              <form action="{{ route('corrections.markAsSolved', $correction) }}" method="POST" class="d-none">
+                @csrf
+                <input type="hidden" name="document_type" value="{{ $correction->correctionable_type }}">
+              </form>
+              <a class="dropdown-item" href="#" onclick="$(this).prev().submit(); return false;">{{ $correction->content }}</a>
+            @endforeach
           </div>
         </li>
         <li class="nav-item dropdown">

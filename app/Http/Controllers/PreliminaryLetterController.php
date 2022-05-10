@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enum\DocumentStatus;
+use App\Models\Configuration;
 use App\Models\PreliminaryLetter;
 use App\Models\Student;
 use Illuminate\Http\Request;
@@ -22,6 +23,8 @@ class PreliminaryLetterController extends Controller
             ->withEmail()
             ->where('user_id', $userId)
             ->firstOrFail();
+
+        $configuration = Configuration::firstOrFail();
 
         if (!$student->preliminaryLetter->exists && Auth::id() !== $student->user_id) {
             return back()->with('alert', [
@@ -57,6 +60,7 @@ class PreliminaryLetterController extends Controller
             'externalCompany' => $student->company,
             'project' => $student->project,
             'preliminaryLetter'=> $preliminaryLetter,
+            'configuration' => $configuration,
         ]);
 
         return $pdf->stream('preliminary-letter');
@@ -119,6 +123,8 @@ class PreliminaryLetterController extends Controller
         $preliminaryLetter->status = DocumentStatus::STATUS_PROCESSING;
 
         $preliminaryLetter->save();
+
+        $preliminaryLetter->corrections->each(fn($correction) => $correction->update(['is_solved' => true]));
 
         return back()->with('alert', [
             'type' => 'success',

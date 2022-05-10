@@ -46,8 +46,8 @@
                 <td colspan="3">Nombre del Proyecto:{{ $project->title }}</td>
             </tr>
             <tr>
-                <td align="center">Fecha de Inicio <br> {{ $project->start_date }}</td>
-                <td align="center">Fecha de Terminación <br> {{ $project->start_date }}</td>
+                <td align="center">Fecha de Inicio <br> {{ $project->start_date->format('Y-m-d') }}</td>
+                <td align="center">Fecha de Terminación <br> {{ $project->start_date->format('Y-m-d') }}</td>
                 <td align="center">No. de Control: <br> RPA/ {{ $student->career->abreviation }}/{{str_pad($student->user_id, 4,'0',STR_PAD_LEFT) }}/{{ date('Y') }}
                 </td>
             </tr>
@@ -92,9 +92,9 @@
         <div class="footer">
             <p class="student-signature">{{ $student->teacher->full_name }}</p>
             <p class="person-in-charge-signature">
-                LCDA. Brenda González Pacheco
+                {{ $configuration->person_in_charge }}
                 <br>
-                Coordinadora de la UES Villa Victoria
+                {{ $configuration->person_in_charge_position_abbreviation }}
             </p>
         </div>
         <div class="request-date">Villa Victoria, México a {{ $qualificationLetter->request_date_formatted }}.</div>

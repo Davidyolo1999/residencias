@@ -11,9 +11,8 @@
         <div class="card">
             <div class="card-header card-header-success">
                 <h4 class="card-title text-white"><b>Profesores</b> </h4>
-                <p class="cart-category text-white"><b>Lista de Profesores</b> </p>
+                <p class="card-category text-white"><b>Lista de Profesores</b> </p>
             </div>
-
             <div class="card-body">
                 <div class="text-right">
                     <a href="{{ route('teachers.create') }}" class="btn btn-sm btn-warning"><i class="material-icons">person_add</i> Añadir Profesor</a>
