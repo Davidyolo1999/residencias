@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enum\DocumentStatus;
 use App\Models\ComplianceLetter;
 use App\Models\ComplianceLetterQuestion;
+use App\Models\Configuration;
 use App\Models\Student;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
@@ -22,6 +23,8 @@ class ComplianceLetterController extends Controller
             ->withEmail()
             ->where('user_id', $userId)
             ->firstOrFail();
+
+        $configuration = Configuration::firstOrfail();
 
         if (!$student->complianceLetter->exists && Auth::id() !== $student->user_id) {
             return back()->with('alert', [
@@ -77,6 +80,7 @@ class ComplianceLetterController extends Controller
             'externalCompany' => $student->company,
             'project' => $student->project,
             'complianceLetter'=> $complianceLetter,
+            'configuration' => $configuration,
         ]);
 
         return $pdf->stream('compliance-letter');

@@ -86,6 +86,14 @@
                 </div>
             </li>
 
+            @can('index', App\Models\Admin::class)
+            <li class="nav-item{{ $activePage == 'configurations' ? ' active' : '' }}">
+                <a class="nav-link" href="{{ route('configurations.unitInfo') }}">
+                <i class="material-icons">manage_accounts</i>
+                    <p> <b>Configuración General</b> </p>
+                </a>
+            </li>
+            @endcan
 
             @can('index', App\Models\Admin::class)
             <li class="nav-item{{ $activePage == 'admins' ? ' active' : '' }}">
@@ -95,6 +103,7 @@
                 </a>
             </li>
             @endcan
+            
 
             @can('index', App\Models\Student::class)
             <li class="nav-item{{ $activePage == 'students' ? ' active' : '' }}">
@@ -120,13 +129,14 @@
                 </a>
             </li>
             @endcan
-
+            @can('index', App\Models\Admin::class)
             <li class="nav-item{{ $activePage == 'locations' ? ' active' : '' }}">
                 <a class="nav-link" href="{{ route('locations.index') }}">
                 <i class="material-icons">people</i>
                     <p><b>Ubicaciones</b> </p>
                 </a>
             </li>
+            @endcan
         </ul>
     </div>
 </div>

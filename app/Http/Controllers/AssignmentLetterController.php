@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enum\DocumentStatus;
 use App\Models\AssignmentLetter;
+use App\Models\Configuration;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -21,6 +22,7 @@ class AssignmentLetterController extends Controller
             ->withEmail()
             ->where('user_id', $userId)
             ->firstOrFail();
+        $configuration=Configuration::firstOrfail();
 
         if (!$student->assignmentLetter->exists && Auth::id() !== $student->user_id) {
             return back()->with('alert', [
@@ -47,6 +49,7 @@ class AssignmentLetterController extends Controller
             'student'=>$student,
             'externalCompany' => $student->company,
             'assignmentLetter'=> $assignmentLetter,
+            'configuration'=> $configuration,
         ]);
 
         return $pdf->stream('assignment-letter');

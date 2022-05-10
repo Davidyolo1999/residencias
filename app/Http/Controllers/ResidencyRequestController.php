@@ -11,6 +11,7 @@ use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ResidencyRequestUploadSignedDocRequest;
+use App\Models\Configuration;
 
 class ResidencyRequestController extends Controller
 {
@@ -23,6 +24,7 @@ class ResidencyRequestController extends Controller
             ->with(['residencyRequest', 'project', 'company'])
             ->where('user_id', $userId)
             ->firstOrFail();
+        $configuration = Configuration::firstOrfail();
 
         if (!$student->is_enrolled) {
             return back()->with('alert', [
@@ -79,6 +81,7 @@ class ResidencyRequestController extends Controller
             'externalCompany' => $student->company,
             'project' => $student->project,
             'residencyRequest' => $residencyRequest,
+            'configuration' => $configuration,
         ]);
 
         return $pdf->stream('residency-request.pdf');

@@ -44,7 +44,7 @@
                     </div>
                     {{-- MOTHERS'S LAST NAME --}}
                     <div class="col-md-4">
-                        <p class="mb-0"><b>Nombre(s):</b></p>
+                        <p class="mb-0"><b>Apellido materno:</b></p>
                         {{ $student->mothers_last_name }}
                     </div>
                 </div>

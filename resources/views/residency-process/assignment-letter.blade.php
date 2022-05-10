@@ -49,6 +49,9 @@
                 background-size: 10rem;
                 background-attachment: fixed;
             }
+            .mayus{
+            text-transform:uppercase;
+        }
     </style>
 </head>
 <body>
@@ -59,11 +62,11 @@
     <h1 class="title">UNIVERSIDAD MEXIQUENSE DEL BICENTENARIO</h1>
     <h2 class="subtitle">DIRECCIÓN ACADÉMICA</h2>
 
-    <p class="internal-company-name">Unidad de Estudios Superiores Villa Victoria</p>
+    <p class="internal-company-name">{{ $configuration->unit }}</p>
 
     <div class="document-name">ASIGNACIÓN  DE ASESOR INTERNO</div>
     <br>
-    <p class="request-date"><b>Fecha:{{$assignmentLetter->request_date_formatted}}</b> </p>
+    <p class="request-date"><b>Fecha: {{$assignmentLetter->request_date_formatted}}</b> </p>
     <div class="person"><b>Nombre del (a) Alumno(a): {{ $student->full_name }}</b></div>
 
     <table border="0" cellspacing="0" cellpadding="0" class="table">
@@ -93,14 +96,16 @@
     <p class="subtitle"> <b>ATENTAMENTE</b> </p>
     <br>
     <div class="subtitle">
-        <p> <b>
-                _________________________________
-                <br>
-                LCDA. BRENDA GONZALEZ PACHECO
-                <br>
-                COORDINADORA DE LA UNIDAD DE ESTUDIOS
-                <br>
-                SUPERIORES VILLA VICTORIA
+        <p class="mayus"> <b>
+            _________________________________
+            <br>
+            {{ $configuration->person_in_charge }}
+            <br>
+            <table cellspacing="0" border="0" width="60%" align="center">
+                <td width="10%" align="center"> {{ $configuration->person_in_charge_position}} </td>
+            </table>
+            <br>
+            </b>
         </p>
     </div>
     <br>

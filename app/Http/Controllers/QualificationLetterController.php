@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enum\DocumentStatus;
+use App\Models\Configuration;
 use App\Models\QualificationLetter;
 use App\Models\Student;
 use Illuminate\Http\Request;
@@ -21,6 +22,8 @@ class QualificationLetterController extends Controller
             ->withEmail()
             ->where('user_id', $userId)
             ->firstOrFail();
+
+        $configuration= Configuration::firstOrfail();
 
 
         if (!$student->qualificationLetter->exists && Auth::id() !== $student->user_id) {
@@ -57,6 +60,7 @@ class QualificationLetterController extends Controller
             'externalCompany' => $student->company,
             'project' => $student->project,
             'qualificationLetter'=> $qualificationLetter,
+            'configuration' => $configuration,
         ]);
 
         return $pdf->stream('qualification-letter');

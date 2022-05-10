@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enum\DocumentStatus;
 use App\Models\CommitmentLetter;
+use App\Models\Configuration;
 use App\Models\Student;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
@@ -21,6 +22,8 @@ class CommitmentLetterController extends Controller
             ->withEmail()
             ->where('user_id', $userId)
             ->firstOrFail();
+
+        $configuration=Configuration::firstOrfail();
 
         if (!$student->commitmentLetter->exists && Auth::id() !== $student->user_id) {
             return back()->with('alert', [
@@ -51,9 +54,10 @@ class CommitmentLetterController extends Controller
             ]);
 
         $pdf = PDF::loadView('residency-process.commitment-letter',[
-            'student'=>$student,
+            'student'=> $student,
             'externalCompany' => $student->company,
-            'commitmentLetter'=>$commitmentLetter,
+            'commitmentLetter'=> $commitmentLetter,
+            'configuration'=> $configuration,
         ]);
 
         return $pdf->stream('commitment-letter');

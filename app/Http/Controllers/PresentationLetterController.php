@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Throwable;
 use App\Models\Student;
 use App\Enum\DocumentStatus;
+use App\Models\Configuration;
 use App\Models\PresentationLetter;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -22,6 +23,7 @@ class PresentationLetterController extends Controller
             ->withEmail()
             ->where('user_id', $userId)
             ->firstOrFail();
+        $configuration = Configuration::firstOrfail();
 
         if (!$student->presentationLetter->exists && Auth::id() !== $student->user_id) {
             return back()->with('alert', [
@@ -54,6 +56,7 @@ class PresentationLetterController extends Controller
             'student'=>$student,
             'externalCompany' => $student->company,
             'presentationLetter'=>$presentationLetter,
+            'configuration'=>$configuration,
         ]);
 
         return $pdf->stream('presentation-letter');

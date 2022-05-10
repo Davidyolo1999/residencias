@@ -30,7 +30,7 @@
 </head>
 <body>
     <br>
-   
+
     @include('residency-process.partials.header', ['title' => 'ANTEPROYECTO DE RESIDENCIAS PROFESIONALES'])
 
     <br>
@@ -144,9 +144,9 @@
     </tr>
     <tr>
         <td height="4%">Fecha de Inicio:</td>
-        <td>{{ $project->start_date }}</td>
+        <td style="text-align:center;">{{ $project->start_date->format('Y-m-d') }}</td>
         <td width="20%">Fecha de término:</td>
-        <td>{{ $project->end_date }}</td>
+        <td style="text-align:center;">{{ $project->end_date->format('Y-m-d') }}</td>
     </tr>
     <tr>
         <td height="4%">Nombre del Asesor Interno:</td>
@@ -171,16 +171,22 @@
             _______________________
             <br>
             {{ $student->full_name }}
+            <br>
+            Alumno
         </td>
         <td width="33.3333%">
             _______________________
             <br>
             {{ $student->teacher->full_name }}
+            <br>
+            Asesor  Interno
         </td>
         <td width="33.3333%">
             _______________________
             <br>
             {{ $student->externalAdvisor->full_name }}
+            <br>
+            Asesor  Externo
         </td>
     </tr>
 </table>

@@ -55,6 +55,11 @@
         text-align: center;
         margin-top: 0px;
         }
+    .mayus{
+            text-transform:uppercase;
+        }
+  
+}
     </style>
 </head>
 <body>
@@ -65,15 +70,39 @@
 <div class="cargo"><b>{{ $externalCompany->person_in_charge_position }}</b></div>
 <div class="presente"><b>PRESENTE:</b></div>
 <p class="note">
-Por medio de la presente, me permito enviarle un cordial saludo y presentar a usted al (la) C. <b>{{$student->full_name}}</b> 
-con número de cuenta <b>{{$student->account_number}}</b> , alumno(a) de nuestra casa de estudios e inscrito(a) en la carrera de  <b>{{$student->career->name}}</b>, quien desea realizar su Residencia Profesional en la institución a su digno cargo, con un proyecto
+Por medio de la presente, me permito enviarle un cordial saludo y presentar a usted
+
+    @if ($student->sex=='m')
+        al 
+    @else
+        a la
+    @endif
+
+    C. <b>{{$student->full_name}}</b> 
+con número de cuenta <b>{{$student->account_number}}</b>,
+
+    @if ($student->sex=='m')
+    alumno de nuestra casa de estudios e inscrito
+    @else
+    alumna de nuestra casa de estudios e inscrita
+    @endif
+
+en la carrera de  <b>{{$student->career->name}}</b>, quien desea realizar su Residencia Profesional en la institución a su digno cargo, con un proyecto
 perfectamente definido, viable y dentro del área de especialidad afín a su carrera, debiendo cubrir un total de 640 hrs.
 durante un período mínimo de cuatro meses y máximo de seis. 
 <br>
 <br>
 En este sentido, el proyecto se realizará a distancia en atención a las políticas de salud emitidas por las instancias federal y
 estatal con motivo de la pandemia causada por el coronavirus SARS-COV2 (enfermedad denominada como COVID 19).
-Por lo tanto, el C. <b>{{$student->full_name}}</b>  no asistirá en ningún momento, ni bajo cualquier circunstancia, a las
+Por lo tanto, 
+
+@if ($student->sex=='m')
+    el 
+    @else
+    la
+    @endif
+
+C. <b>{{$student->full_name}}</b>  no asistirá en ningún momento, ni bajo cualquier circunstancia, a las
 instalaciones de la institución que usted representa.
 <br>
 <br>
@@ -85,13 +114,13 @@ impulso a la juventud en pro del desarrollo de nuestro país.
 <p class="subtitle"> <b>ATENTAMENTE</b> </p>
 <br>
     <div class="subtitle">
-        <p > <b>
-            LCDA. BRENDA GONZALEZ PACHECO
+        <p class="mayus"> <b>
+            {{ $configuration->person_in_charge }}
             <br>
-            COORDINADORA DE LA UNIDAD DE ESTUDIOS        
-            
+            <table cellspacing="0" border="0" width="60%" align="center">
+                <td width="10%" align="center"> {{ $configuration->person_in_charge_position}}      </td>
+            </table>
             <br>
-            SUPERIORES VILLA VICTORIA
         </b>
         </p>
     </div>

@@ -131,7 +131,7 @@
 
             <div><b> Nombre del estudiante: </b>{{ $student->full_name }}</div>
             <div><b> Carrera: </b>{{ $student->career->name }}</div>
-            <div><b> Unidad de Estudios Superiores de adscripción: </b>Unidad de Estudios Superiores Villa Victoria</div>
+            <div><b> Unidad de Estudios Superiores de adscripción: </b>{{ $configuration->unit }}</div>
             <div><b> No. de Matricula: </b>{{ $student->account_number }}</div>
             <div><b> Nombre del Proyecto: </b>{{ $project->title }}</div>
         </div>

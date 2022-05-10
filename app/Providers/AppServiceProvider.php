@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Correction;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
@@ -37,5 +38,8 @@ class AppServiceProvider extends ServiceProvider
 
             $view->with('corrections', $corrections);
         });
+
+        Model::unguard();
     }
 }
+

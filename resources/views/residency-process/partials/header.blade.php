@@ -5,6 +5,6 @@
 
 <h1 class="title">UNIVERSIDAD MEXIQUENSE DEL BICENTENARIO</h1>
 <h2 class="subtitle">DIRECCIÓN ACADÉMICA</h2>
-<div class="internal-company-name">Unidad de Estudios Superiores Villa Victoria</div>
+<div class="internal-company-name">{{ $configuration->unit }}</div>
 <br>
 <div class="document-name">{{ $title }}</div>
