@@ -168,6 +168,7 @@ return [
         'office_phone_number' => 'teléfono de oficina',
         'personal_phone_number' => 'teléfono personal',
         'commercial_business' => 'giro comercial',
+        'Department_requesting_project' => 'departamento solicitante del proyecto',
         'zip_code' => 'código postal',
         'teacher_id' => 'asesor interno',
         'external_advisor_id'=>'asesor externo',

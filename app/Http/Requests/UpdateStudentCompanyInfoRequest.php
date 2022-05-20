@@ -32,6 +32,7 @@ class UpdateStudentCompanyInfoRequest extends FormRequest
             'office_phone_number' => 'required|max:10',
             'personal_phone_number' => 'required|max:10',
             'commercial_business' => 'required|max:255',
+            'Department_requesting_project' => 'required|max:255',
             'zip_code' => 'required|max:10',
         ];
     }

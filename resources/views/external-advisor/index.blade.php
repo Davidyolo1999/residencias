@@ -24,7 +24,7 @@
                             <tr class="text-dark">
                                 <th><b> # </b></th>
                                 <th><b> E-mail </b></th>
-                                <th><b> Nombres </b></th>
+                                <th><b> Nombre(s) </b></th>
                                 <th><b> Apellido Paterno </b></th>
                                 <th><b> Apellido Materno </b></th>
                                 <th><b> Sexo </b></th>

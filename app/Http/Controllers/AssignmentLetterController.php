@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 use Throwable;
 
 class AssignmentLetterController extends Controller
@@ -52,7 +53,8 @@ class AssignmentLetterController extends Controller
             'configuration'=> $configuration,
         ]);
 
-        return $pdf->stream('assignment-letter');
+        $customReportName = 'Asignación de Asesor Interno-'.$student->full_name.'_'.Carbon::now()->format('d-m-Y').'.pdf'; 
+        return $pdf->stream($customReportName);
     }
 
     public function assignmentLetterCorrections(Request $request, Student $student)

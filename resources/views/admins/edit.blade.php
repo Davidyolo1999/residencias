@@ -41,10 +41,10 @@
                         :default-value="$admin->last_name"
                     />
 
-                    <div class="text-right">
-                        <a href="{{ route('admins.index') }}" class="btn  btn-warning mr-3">
+                    <div class="float-right">
+                        <a href="{{ route('admins.index') }}" type="buttomn" class="btn  btn-sm btn-warning d-inline-block mr-3">
                             <i class="material-icons">cancel</i><b> Cancelar</b> </a>
-                        <button class="btn  btn-success"><i class="material-icons">save</i><b> Guardar</b></button>
+                        <button class="btn  btn-success btn-sm" type="button" ><i class="material-icons">save</i><b> Guardar</b></button>
                     </div>
                 </form>
             </div>
@@ -72,10 +72,10 @@
                         placeholder="Confirme la Contraseña Nueva"
                         type="password"
                     />
-                    <div class="text-right">
-                        <a href="{{ route('admins.index') }}" class="btn  btn-warning mr-3">
+                    <div class="float-right">
+                        <a href="{{ route('admins.index') }}" class="btn btn-sm mr-3 btn-warning">
                             <i class="material-icons">cancel</i><b> Cancelar</b> </a>
-                        <button class="btn  btn-success"><i class="material-icons">save</i><b> Guardar</b></button>
+                        <button class="btn  btn-success btn-sm"><i class="material-icons">save</i><b> Guardar</b></button>
                     </div>
                 </form>
             </div>

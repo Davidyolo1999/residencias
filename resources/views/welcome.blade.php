@@ -23,6 +23,17 @@
             background: #000;
         }
 
+        .h1 {
+            font-family: "robotoregular";
+            font-weight: 400;
+            text-transform: none;
+        }
+
+        .principales {
+            float: left;
+            text-align: center;
+        }
+
         .swiper-slide {
             font-size: 18px;
             color: #fff;
@@ -55,6 +66,14 @@
             font-size: 14px;
             max-width: 400px;
             line-height: 1.3;
+        }
+
+        .img {
+            max-width: 100%;
+            height: auto;
+            box-sizing: border-box;
+            border: 0;
+            vertical-align: middle;
         }
 
     </style>
@@ -91,20 +110,22 @@
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
                         <div class="title" data-swiper-parallax="-300"></div>
-                    
-                       
-                      <br>
-                      <br>
-                      
-                        <div  class="subtitle text-white text-8x1 not-italic font-bold" data-swiper-parallax="-200">¿Cuál es la Residencia Profesional?</div>
+
+
                         <br>
-                        <div class="text-9x1  text-white font-sans md:font-arial font-bold text-justify" data-swiper-parallax="-100">
-                             
-                             <br>
-                                Las Residencias profesionales son una estrategia educativa de carácter curricular,
-                                que permite al estudiante emprender un proyecto teórico-práctico, analítico,
-                                reflexivo, crítico y profesional; para resolver un problema específico de la
-                                realidad social y productiva, para fortalecer y aplicar sus competencias ...
+                        <br>
+
+                        <div class="subtitle text-white text-8x1 not-italic font-bold" data-swiper-parallax="-200">¿Cuál
+                            es la Residencia Profesional?</div>
+                        <br>
+                        <div class="text-9x1  text-white font-sans md:font-arial font-bold text-justify"
+                            data-swiper-parallax="-100">
+
+                            <br>
+                            Las Residencias profesionales son una estrategia educativa de carácter curricular,
+                            que permite al estudiante emprender un proyecto teórico-práctico, analítico,
+                            reflexivo, crítico y profesional; para resolver un problema específico de la
+                            realidad social y productiva, para fortalecer y aplicar sus competencias ...
                         </div>
                     </div>
                     <div class="swiper-slide">
@@ -118,41 +139,48 @@
                         <br>
                         <br>
 
-                        <div class="subtitle text-white text-8x1 not-italic font-bold" data-swiper-parallax="-200">Beneficios que obtienen los alumnos con
+                        <div class="subtitle text-white text-8x1 not-italic font-bold" data-swiper-parallax="-200">
+                            Beneficios que obtienen los alumnos con
                             las Residencias Profesionales:</div> <br>
-                        <div class="text-9x1  text-white font-sans md:font-arial font-bold text-justify" data-swiper-parallax="-100">
-                            
-                            
+                        <div class="text-9x1  text-white font-sans md:font-arial font-bold text-justify"
+                            data-swiper-parallax="-100">
+
+
                             <ol>
                                 <li>1. Retroalimentar y desarrollar conocimientos al participar en un proceso de
                                     aprendizaje/trabajo en que se aplican los conocimientos a la vez que se adquieren
                                     experiencias</li>
-                                <li>2. Interactuar con profesionistas experimentados de los que se va a aprender más. </li>
+                                <li>2. Interactuar con profesionistas experimentados de los que se va a aprender más.
+                                </li>
                                 <li>3. Conocer y manejar tecnología, métodos, sistemas y procedimientos de trabajos
                                     actualizados y acordes con su profesión.</li>
-                                <li>4. Ser un profesionista competitivo, identificado con la realidad y la problemática a
+                                <li>4. Ser un profesionista competitivo, identificado con la realidad y la problemática
+                                    a
                                     la
                                     que se tendrá que enfrentar.</li>
                                 <li>5. Disponer de una alternativa más para obtener el título profesional.</li>
                             </ol>
-                            
+
                         </div>
                     </div>
                     <div class="swiper-slide">
-                        <div class="subtitle text-white text-8x1 not-italic font-bold" data-swiper-parallax="-200">Requisitos para realizar las Residencias
+                        <div class="subtitle text-white text-8x1 not-italic font-bold" data-swiper-parallax="-200">
+                            Requisitos para realizar las Residencias
                             Profesionales:</div>
-                        <div class="text-9x1  text-white font-sans md:font-arial font-bold text-justify" data-swiper-parallax="-100">
+                        <div class="text-9x1  text-white font-sans md:font-arial font-bold text-justify"
+                            data-swiper-parallax="-100">
                             <br>
                             <ol>
                                 <li>
                                     1. Haber aprobado el 80% de los créditos de su carrera.
                                 </li>
-                                <li>   2. Estar inscrito actualmente en el Instituto Haber seleccionado su tema de proyecto y
+                                <li> 2. Estar inscrito actualmente en el Instituto Haber seleccionado su tema de
+                                    proyecto y
                                     que éste debidamente avalado por la academia.</li>
-                                    <li> 3. Disponer de constancia de su situación académica emitida por el Departamento de
-                                        Control Escolar.</li>
-                                        <li>         
-                                            4. Haber concluido el servicio social</li>
+                                <li> 3. Disponer de constancia de su situación académica emitida por el Departamento de
+                                    Control Escolar.</li>
+                                <li>
+                                    4. Haber concluido el servicio social</li>
                             </ol>
                         </div>
                     </div>
@@ -195,31 +223,36 @@
 
         <div class="container mx-auto text-2xl font-bold">
             <div class="flex justify-between">
-                <div align="center" >
-                    <a href="//umb.edomex.gob.mx/directorio" target="_blank">
-                        <img src="{{ asset('img/unidades de estudio superiores 01.png') }}" alt="" class="h-171 w-52">
+                <div class="principales">
+                    <a class="flex items-center justify-center" href="//umb.edomex.gob.mx/directorio" target="_blank">
+                        <img src="{{ asset('img/unidades de estudio superiores 01.png') }}" alt=""
+                            class="h-171 w-52">
                     </a>
-                    <h1 class="text-center"><a href="//umb.edomex.gob.mx/directorio" target="_blank">Unidades de Estudios Superiores</a></h1>
+                    <h1><a href="//umb.edomex.gob.mx/directorio" target="_blank">Unidades de
+                            Estudios Superiores</a></h1>
                 </div>
-               <div align="center" >
-                <a href="//umb.edomex.gob.mx/modelo_oferta" target="_blank">
-                    <img src="{{ asset('img/modelo y oferta educativa 02.png') }}" alt="" class="h-171 w-52">
-                </a>
-                <h1 class="text-center"><a href="//umb.edomex.gob.mx/modelo_oferta" target="_blank">Modelo y Oferta Educativa</a></h1>
-            </div>
-            <div align="center" >
-                <a href="https://sidiumb.umb.mx" target="_blank">
-                    <img src="{{ asset('img/SIDIUMB 03.png') }}" alt="" class="h-171 w-52">
-                    <h1 class="sub"><a href="https://sidiumb.umb.mx" target="_blank">SIDIUMB</a></h1>
-                </a>
-            </div>
-            <div align="center" >
-                <a href="https://sfpya.edomexico.gob.mx/recaudacion/" target="_blank">
-                    <img src="{{ asset('img/tarifas y pagos UMB 04.png') }}" alt="" class="h-171 w-52">
-                    <h1 class="sub"><a href="https://sidiumb.umb.mx" target="_blank">Tarifas y Pagos UMB</a></h1>
-                </a>
-            </div>
-          
+                <div class="principales">
+                    <a class="flex items-center justify-center" href="//umb.edomex.gob.mx/modelo_oferta" target="_blank">
+                        <img src="{{ asset('img/modelo y oferta educativa 02.png') }}" alt="" class="h-171 w-52">
+                    </a>
+                    <h1><a href="//umb.edomex.gob.mx/modelo_oferta" target="_blank">Modelo y
+                            Oferta Educativa</a></h1>
+                </div>
+                <div class="principales">
+                    <a class="flex items-center justify-center" href="https://sidiumb.umb.mx" target="_blank">
+                        <img src="{{ asset('img/SIDIUMB 03.png') }}" alt="" class="h-171 w-52">
+                    </a>
+                    <h1><a href="https://sidiumb.umb.mx" target="_blank">SIDIUMB</a></h1>
+
+                </div>
+                <div class="center principales">
+                    <a class="flex items-center justify-center" href="https://sfpya.edomexico.gob.mx/recaudacion/" target="_blank">
+                        <img src="{{ asset('img/tarifas y pagos UMB 04.png') }}" alt="" class="h-171 w-52">
+                    </a>
+                    <h1><a href="https://sidiumb.umb.mx" target="_blank">Tarifas y Pagos
+                            UMB</a></h1>
+                </div>
+
             </div>
         </div>
     </main>

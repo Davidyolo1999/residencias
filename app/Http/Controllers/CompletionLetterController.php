@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Enum\DocumentStatus;
 use App\Models\CompletionLetter;
+use App\Models\Configuration;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Throwable;
+use Carbon\Carbon;
 
 class CompletionLetterController extends Controller
 {
@@ -21,6 +24,7 @@ class CompletionLetterController extends Controller
             ->withEmail()
             ->where('user_id', $userId)
             ->firstOrFail();
+            $configuration = Configuration::firstOrfail();
 
         if (!$student->completionLetter->exists && Auth::id() !== $student->user_id) {
             return back()->with('alert', [
@@ -56,9 +60,11 @@ class CompletionLetterController extends Controller
             'externalCompany' => $student->company,
             'project' => $student->project,
             'completionLetter'=> $completionLetter,
+            'configuration'=>$configuration,
         ]);
 
-        return $pdf->stream('completion-letter');
+        $customReportName = 'Carta de Terminación-'.$student->full_name.'_'.Carbon::now()->format('d-m-Y').'.pdf'; 
+        return $pdf->stream($customReportName);
 
     }
     public function completionLetterCorrections(Request $request, Student $student)

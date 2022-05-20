@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ResidencyRequestUploadSignedDocRequest;
 use App\Models\Configuration;
+use Carbon\Carbon;
 
 class ResidencyRequestController extends Controller
 {
@@ -84,7 +85,8 @@ class ResidencyRequestController extends Controller
             'configuration' => $configuration,
         ]);
 
-        return $pdf->stream('residency-request.pdf');
+        $customReportName = 'Solicitud de Residencias Profesionales-'.$student->full_name.'_'.Carbon::now()->format('d-m-Y').'.pdf'; 
+        return $pdf->stream($customReportName);
     }
 
     public function residencyRequestCorrections(Request $request, Student $student)

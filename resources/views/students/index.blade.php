@@ -2,22 +2,34 @@
 
 @section('content')
     <div class="content">
-        @if($alert = session('alert'))
-            <div class="alert alert-{{ $alert['type'] }}" role="alert">
-                {{ $alert['message'] }}
-            </div>
-        @endif
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    @if ($alert = session('alert'))
+                        <div class="row">
+                            <div class="col-sm-12">
+
+                                <div class="alert alert-{{ $alert['type'] }}" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <i class="material-icons">close</i>
+                                    </button>
+                                    <span>{{ $alert['message'] }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
         <div class="card" >
             <div class="card-header card-header-success">
                 <div class="d-flex justify-content-between">
+
                     <div>
                         <h4 class="card-title text-white"><b>Estudiantes</b> </h4>
                         <p class="card-category text-white"><b>Lista de Estudiantes</b> </p>
                     </div>
                     <form action="{{ route('students.index') }}">
                         <div class="form-group text-center">
-                            <label for="document" class="text-white ">Filtrar por Documento <i class="material-icons">filter_alt</i> </label>
-                            <select class="bg-white text-dark text-center btn-outline-light" name="document" id="document" onchange="$(this).closest('form').submit()">
+                            <label for="document" class="text-white ">Filtrar por</label>
+                            <select class="bg-white text-dark text-center form-control" name="document" id="document" onchange="$(this).closest('form').submit()">
                                 <option class="text-center" value="" selected disabled><b> Selecciona una Opción</b></option>
                                 <option  value="residencyRequest" @if (request('document') === 'residencyRequest') selected @endif> <b>PETICIÓN DE RESIDENCIA</b> </option>
                                 <option value="presentationLetter" @if (request('document') === 'presentationLetter') selected @endif>CARTA DE PRESENTACIÓN</option>
@@ -33,15 +45,20 @@
                             </select>
                         </div>
                     </form>
+                    
                 </div>
             </div>
 
             <div class="card-body" >
-                <div class="text-right">
-                    @can('create', App\Models\Student::class)
-                    <a href="{{ route('students.create') }}" class="btn btn-sm btn-warning"><i class="material-icons">person_add</i>  Añadir estudiante</a>
-                    @endcan
+                
+                <div class="row">
+                    <div class="col-12 text-right">
+                        @can('create', App\Models\Student::class)
+                        <a href="{{ route('students.create') }}" class="btn btn-sm btn-warning"><i class="material-icons">person_add</i> Nuevo</a>
+                        @endcan                    
+                    </div>
                 </div>
+                
                 <div class="table-responsive">
                     <table class="table">
                         <thead class="text-primary">
@@ -68,13 +85,13 @@
                                     <td class="text-center"><b> {{ $student->sex_text }} </b></td>
                                     <td class="text-center"><b> {{ $student->curp }} </b></td>
                                     <td class="text-center"><b> {{ $student->career->name }} </b></td>
-                                    <td class="text-nowrap">
+                                    <td class="td-actions text-nowrap">
                                         <a href="{{ route('students.show', $student) }}" class="btn btn-sm btn-info" title="Ver detalles">
                                             <i class="material-icons">details</i>
                                         </a>
 
                                         @can('update', $student)
-                                        <a href="{{ route('students.edit', $student) }}" class="btn btn-sm btn-info" title="Editar" >
+                                        <a href="{{ route('students.edit', $student) }}"  class="btn btn-sm btn-success" title="Editar" >
                                             <i class="material-icons">edit</i>
                                         </a>
                                         @endcan
@@ -87,7 +104,7 @@
                                         >
                                             @csrf
                                             @method('DELETE')
-                                            <button class="btn btn-sm btn-danger">
+                                            <button  class="btn btn-sm btn-danger" title="Eliminar">
                                                 <i class="material-icons">delete</i>
                                             </button>
                                         </form>
@@ -104,6 +121,9 @@
             </div>
         </div>
     </div>
+</div>
+</div>
+</div>
 @endsection
 
 @push('js')

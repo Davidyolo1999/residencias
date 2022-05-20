@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class PresentationLetterController extends Controller
 {
@@ -59,7 +60,8 @@ class PresentationLetterController extends Controller
             'configuration'=>$configuration,
         ]);
 
-        return $pdf->stream('presentation-letter');
+        $customReportName = 'Carta Presentación-'.$student->full_name.'_'.Carbon::now()->format('d-m-Y').'.pdf'; 
+        return $pdf->stream($customReportName);
     }
 
     public function presentatioLetterCorrections(Request $request, Student $student)

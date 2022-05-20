@@ -149,9 +149,9 @@
                         </div>
                     </div>
                     <div class="text-right">
-                        <a href="{{ route('admins.index') }}" class="btn  btn-warning mr-3">
+                        <a href="{{ route('teachers.index') }}" class="btn btn-sm btn-warning mr-3">
                             <i class="material-icons">cancel</i><b> Cancelar</b> </a>
-                        <button class="btn  btn-success"><i class="material-icons">save</i><b> Guardar</b></button>
+                        <button class="btn btn-sm btn-success"><i class="material-icons">save</i><b> Guardar</b></button>
                     </div>
 
                 </form>
@@ -182,9 +182,9 @@
                         type="password"
                     />
                     <div class="text-right">
-                        <a href="{{ route('admins.index') }}" class="btn  btn-warning mr-3">
+                        <a href="{{ route('teachers.index') }}" class="btn btn-sm btn-warning mr-3">
                             <i class="material-icons">cancel</i><b> Cancelar</b> </a>
-                        <button class="btn  btn-success"><i class="material-icons">save</i><b> Guardar</b></button>
+                        <button class="btn btn-sm btn-success"><i class="material-icons">save</i><b> Guardar</b></button>
                     </div>
                 </form>
             </div>

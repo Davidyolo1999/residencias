@@ -11,6 +11,7 @@ use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Throwable;
+use Carbon\Carbon;
 
 class PreliminaryLetterController extends Controller
 {
@@ -63,7 +64,8 @@ class PreliminaryLetterController extends Controller
             'configuration' => $configuration,
         ]);
 
-        return $pdf->stream('preliminary-letter');
+        $customReportName = 'Anteproyecto de Residencias Profesionales-'.$student->full_name.'_'.Carbon::now()->format('d-m-Y').'.pdf'; 
+        return $pdf->stream($customReportName);
 
     }
 

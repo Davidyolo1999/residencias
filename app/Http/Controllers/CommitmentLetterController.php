@@ -10,6 +10,7 @@ use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 use Throwable;
 
 class CommitmentLetterController extends Controller
@@ -60,7 +61,8 @@ class CommitmentLetterController extends Controller
             'configuration'=> $configuration,
         ]);
 
-        return $pdf->stream('commitment-letter');
+        $customReportName = 'Carta Compromiso-'.$student->full_name.'_'.Carbon::now()->format('d-m-Y').'.pdf'; 
+        return $pdf->stream($customReportName);
     }
 
     public function commitmentLetterCorrections(Request $request, Student $student)

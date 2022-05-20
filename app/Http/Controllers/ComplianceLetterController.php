@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Throwable;
+use Carbon\Carbon;
 
 class ComplianceLetterController extends Controller
 {
@@ -83,7 +84,8 @@ class ComplianceLetterController extends Controller
             'configuration' => $configuration,
         ]);
 
-        return $pdf->stream('compliance-letter');
+        $customReportName = 'Cédula de Cumplimiento de Residencias Profesionales-'.$student->full_name.'_'.Carbon::now()->format('d-m-Y').'.pdf'; 
+        return $pdf->stream($customReportName);
     }
 
     public function answerQuestions(Request $request, Student $student)
