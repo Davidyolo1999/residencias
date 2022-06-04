@@ -1,4 +1,4 @@
-<div class="sidebar" data-color="orange" data-background-color="white" data-image="{{ asset('material') }}/img/sidebar-1.jpg">
+<div class="sidebar" data-color="orange" data-background-color="white" data-image="{{ asset('material') }}/img/sidebar-3.jpg">
     <!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
@@ -7,19 +7,15 @@
     <div class="logo" align="center">
         <img src="{{ asset('img/logo2.png') }}" alt="umb" height="95" width="180">
         <h5>
-            <div class="text-warning"><b>Residencias Profesionales</b></div>
+            <div class="text-warning">Residencias Profesionales</div>
         </h5>
     </div>
     <div class="sidebar-wrapper">
         <ul class="nav">
-            <li class="nav-item{{ $activePage == 'dashboard' ? ' active' : '' }}">
-                <a class="nav-link" href="{{ route('home') }}">
-                    <i class="material-icons"> dashboard</i>
-                    <p>{{ __('Dashboard') }}</p>
-                </a>
-            </li>
+            
 
             {{-- PERFIL --}}
+            @can('view-personal-info')
             <li class="nav-item">
                 <a class="
                         nav-link
@@ -29,10 +25,10 @@
                     "
                     data-toggle="collapse" href="#profile-menu-item"
                     aria-expanded="{{ $profileMenuActive ? 'true' : 'false' }}">
-                    <p>
+                    
                         <i class="material-icons">account_circle</i>
-                        Perfil<b class="caret"></b>
-                    </p>
+                        Perfil
+                    
                 </a>
 
                 <div class="collapse show" id="profile-menu-item">
@@ -84,12 +80,13 @@
                     </ul>
                 </div>
             </li>
-
+            @endcan
+            
             @can('index', App\Models\Admin::class)
                 <li class="nav-item{{ $activePage == 'configurations' ? ' active' : '' }}">
                     <a class="nav-link" href="{{ route('configurations.unitInfo') }}">
                         <i class="material-icons">domain_add</i>
-                        <p> <b>Configuración General</b> </p>
+                         Configuración General
                     </a>
                 </li>
             @endcan
@@ -98,7 +95,7 @@
                 <li class="nav-item{{ $activePage == 'admins' ? ' active' : '' }}">
                     <a class="nav-link" href="{{ route('admins.index') }}">
                         <i class="material-icons">manage_accounts</i>
-                        <p> <b>Administradores</b> </p>
+                         Administradores
                     </a>
                 </li>
             @endcan
@@ -108,7 +105,7 @@
                 <li class="nav-item{{ $activePage == 'students' ? ' active' : '' }}">
                     <a class="nav-link" href="{{ route('students.index') }}">
                         <i class="material-icons">people</i>
-                        <p><b>Estudiantes</b> </p>
+                        Estudiantes
                     </a>
                 </li>
             @endcan
@@ -116,7 +113,7 @@
                 <li class="nav-item{{ $activePage == 'teachers' ? ' active' : '' }}">
                     <a class="nav-link" href="{{ route('teachers.index') }}">
                         <i class="material-icons">people</i>
-                        <p><b>Profesores</b> </p>
+                        Profesores
                     </a>
                 </li>
             @endcan
@@ -124,7 +121,7 @@
                 <li class="nav-item{{ $activePage == 'external-advisor' ? ' active' : '' }}">
                     <a class="nav-link" href="{{ route('externalAdvisor.index') }}">
                         <i class="material-icons">people</i>
-                        <p><b>Asesores Externos</b> </p>
+                        Asesores Externos
                     </a>
                 </li>
             @endcan
@@ -132,7 +129,7 @@
                 <li class="nav-item{{ $activePage == 'locations' ? ' active' : '' }}">
                     <a class="nav-link" href="{{ route('locations.index') }}">
                         <i class="material-icons">people</i>
-                        <p><b>Ubicaciones</b> </p>
+                        Ubicaciones
                     </a>
                 </li>
             @endcan

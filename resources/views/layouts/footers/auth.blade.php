@@ -1,13 +1,12 @@
-<script src="https://cdn.tailwindcss.com"></script>
-<footer class="footer bg-gray-300">
+<footer class="footer">
   <div class="container-fluid">
+    
     <div class="copyright float-center">
-        Copyright
-        &copy;
-        <script>
-          document.write(new Date().getFullYear())
-          
-        </script> by David Florentino Benito
+      Copyright
+      &copy;
+      <script>
+        document.write(new Date().getFullYear())
+      </script>, por David Florentino Benito | Todos los derechos reservados
     </div>
   </div>
 </footer>

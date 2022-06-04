@@ -26,28 +26,28 @@
             </div>
             <div class="card-body">
                 <div class="text-right ">
-                    <a href="{{ route('admins.create') }}" class="btn btn-warning btn-sm"> <i class="material-icons">person_add</i>  Añadir administrador</a>
+                    <a href="{{ route('admins.create') }}" class="btn btn-warning btn-sm btn-round"> <i class="material-icons">person_add</i>  Nuevo</a>
                 </div>
 
                 <div class="table-responsive">
                     <table class="table">
                         <thead class="thead">
                             <tr class="">
-                                <th class="text-center  table-  text-dark"><b>#</b> </th>
-                                <th class="text-center  table- text-dark"><b>E-mail</b> </th>
-                                <th class="text-center  table- text-dark"><b>Nombre(s)</b> </th>
-                                <th class="text-center  table-  text-dark"><b>Apellidos</b> </th>
-                                <th class="text-right   table-  text-dark"><b>Acciones</b> </th>
+                                <th class="text-center  table-  text-dark"># </th>
+                                <th class="text-center  table- text-dark">E-mail </th>
+                                <th class="text-center  table- text-dark">Nombre </th>
+                                <th class="text-center  table-  text-dark">Apellidos </th>
+                                <th class="text-right   table-  text-dark">Acciones </th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse ($admins as $admin)
                                 <tr>
-                                    <td class=" text-center"><b> {{ $admin->id }}</b></td>
-                                    <td class=" text-center"><b>{{ $admin->email }}</b> </td>
-                                    <td class=" text-center"><b>{{ $admin->admin->first_name }}</b> </td>
-                                    <td class="  text-center"><b>{{ $admin->admin->last_name }}</b> </td>
-                                    <td class="text-nowrap text-right ">
+                                    <td class=" text-center"> {{ $admin->id }}</td>
+                                    <td class=" text-center">{{ $admin->email }} </td>
+                                    <td class=" text-center">{{ $admin->admin->first_name }} </td>
+                                    <td class="  text-center">{{ $admin->admin->last_name }} </td>
+                                    <td class=" td-actions text-nowrap text-right ">
                                         <a href="" class="btn btn-sm btn-info" title="Ver detalles">
                                             <i class="material-icons">details</i>
                                         </a>
@@ -96,7 +96,7 @@
             Swal.fire({
                 title: '¿Está seguro?',
                 text: "Esta acción es irreversible",
-                icon: 'warning',
+                type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',

@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="content">
+        
         @if($alert = session('alert'))
             <div class="alert alert-{{ $alert['type'] }}" role="alert">
                 {{ $alert['message'] }}
@@ -83,7 +84,7 @@
             Swal.fire({
                 title: '¿Está seguro?',
                 text: "Esta acción es irreversible",
-                icon: 'warning',
+                type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',

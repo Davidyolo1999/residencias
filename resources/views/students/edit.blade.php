@@ -323,9 +323,9 @@
                         type="password"
                     />
                     <div class="text-right">
-                        <a href="{{ route('students.index') }}" type="button" class="btn btn-sm btn-warning mr-3">
+                        <a href="{{ route('students.index') }}" class="btn btn-sm btn-warning mr-3">
                             <i class="material-icons">cancel</i><b> Cancelar</b> </a>
-                        <button class="btn  btn-success btn-sm" type="button"><i class="material-icons">save</i><b> Guardar</b></button>
+                        <button class="btn  btn-success btn-sm"><i class="material-icons">save</i><b> Guardar</b></button>
                     </div>
                 </form>
             </div>

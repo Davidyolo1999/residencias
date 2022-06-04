@@ -12,7 +12,8 @@
         "laravel/framework": "^8.65",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
-        "laraveles/spanish": "^1.5"
+        "laraveles/spanish": "^1.5",
+        "snapappointments/bootstrap-select": "^1.13"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
