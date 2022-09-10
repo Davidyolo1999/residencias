@@ -405,16 +405,16 @@
                     <div class="modal-body">
                         @csrf
                         @method('PUT')
-
                         <div class="form-group">
                             <label for="signed_document_rr">Documento</label>
                             <input type="file" class="form-control" name="signed_document" id="signed_document_rr"
                                 accept="application/pdf" required>
                         </div>
+                        
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button class="btn btn-primary">Guardar</button>
+                        <button class="btn btn-success">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -437,15 +437,27 @@
                         @csrf
                         @method('PUT')
 
-                        <div class="form-group">
+                        <div class="form-group form-file-upload" >
                             <label for="signed_document_pl">Documento</label>
                             <input type="file" class="form-control" name="signed_document" id="signed_document_pl"
                                 accept="application/pdf" required>
                         </div>
+
+                        {{-- <div class="form-group form-file-upload form-file-multiple">
+                            <input type="file" id="document_input" class="inputFileHidden">
+                            <div class="input-group">
+                                <label for="document_input" class="form-control inputFileVisible">Cargar archivo</label>
+                                <span class="input-group-btn">
+                                    <label for="document_input" type="button" class="btn btn-fab btn-round btn-primary">
+                                        <i class="material-icons">attach_file</i>
+                                    </label>
+                                </span>
+                            </div>
+                        </div> --}}
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button class="btn btn-primary">Guardar</button>
+                        <button class="btn btn-success">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -475,7 +487,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button class="btn btn-primary">Guardar</button>
+                        <button class="btn btn-success">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -506,7 +518,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button class="btn btn-primary">Guardar</button>
+                        <button class="btn btn-success">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -536,7 +548,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button class="btn btn-primary">Guardar</button>
+                        <button class="btn btn-success">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -567,7 +579,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button class="btn btn-primary">Guardar</button>
+                        <button class="btn btn-success">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -598,7 +610,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button class="btn btn-primary">Guardar</button>
+                        <button class="btn btn-success">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -629,7 +641,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button class="btn btn-primary">Guardar</button>
+                        <button class="btn btn-success">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -660,7 +672,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button class="btn btn-primary">Guardar</button>
+                        <button class="btn btn-success">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -690,7 +702,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button class="btn btn-primary">Guardar</button>
+                        <button class="btn btn-success">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -720,7 +732,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button class="btn btn-primary">Guardar</button>
+                        <button class="btn btn-success">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -751,7 +763,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button class="btn btn-primary" @if (!$student->presentationLetter->needsCorrections()) disabled @endif>Marcar como corregida</button>
+                            <button class="btn btn-success" @if (!$student->presentationLetter->needsCorrections()) disabled @endif>Marcar como corregida</button>
                         </div>
                     </form>
                 </div>
@@ -783,7 +795,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button class="btn btn-primary" @if (!$student->commitmentLetter->needsCorrections()) disabled @endif>Marcar como corregida</button>
+                            <button class="btn btn-success" @if (!$student->commitmentLetter->needsCorrections()) disabled @endif>Marcar como corregida</button>
                         </div>
                     </form>
                 </div>
@@ -814,7 +826,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button class="btn btn-primary" @if (!$student->acceptanceLetter->needsCorrections()) disabled @endif>Marcar como corregida</button>
+                            <button class="btn btn-success" @if (!$student->acceptanceLetter->needsCorrections()) disabled @endif>Marcar como corregida</button>
                         </div>
                     </form>
                 </div>
@@ -844,7 +856,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button class="btn btn-primary" @if (!$student->paperStructure->needsCorrections()) disabled @endif>Marcar como corregida</button>
+                            <button class="btn btn-success" @if (!$student->paperStructure->needsCorrections()) disabled @endif>Marcar como corregida</button>
                         </div>
                     </form>
                 </div>
@@ -875,7 +887,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button class="btn btn-primary" @if (!$student->assignmentLetter->needsCorrections()) disabled @endif>Marcar como corregida</button>
+                            <button class="btn btn-success" @if (!$student->assignmentLetter->needsCorrections()) disabled @endif>Marcar como corregida</button>
                         </div>
                     </form>
                 </div>
@@ -906,7 +918,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button class="btn btn-primary" @if (!$student->preliminaryLetter->needsCorrections()) disabled @endif>Marcar como corregida</button>
+                            <button class="btn btn-success" @if (!$student->preliminaryLetter->needsCorrections()) disabled @endif>Marcar como corregida</button>
                         </div>
                     </form>
                 </div>
@@ -937,7 +949,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button class="btn btn-primary" @if (!$student->complianceLetter->needsCorrections()) disabled @endif>Marcar como corregida</button>
+                            <button class="btn btn-success" @if (!$student->complianceLetter->needsCorrections()) disabled @endif>Marcar como corregida</button>
                         </div>
                     </form>
                 </div>
@@ -968,7 +980,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button class="btn btn-primary" @if (!$student->submissionLetter->needsCorrections()) disabled @endif>Marcar como corregida</button>
+                            <button class="btn btn-success" @if (!$student->submissionLetter->needsCorrections()) disabled @endif>Marcar como corregida</button>
                         </div>
                     </form>
                 </div>
@@ -999,7 +1011,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button class="btn btn-primary" @if (!$student->qualificationLetter->needsCorrections()) disabled @endif>Marcar como corregida</button>
+                            <button class="btn btn-success" @if (!$student->qualificationLetter->needsCorrections()) disabled @endif>Marcar como corregida</button>
                         </div>
                     </form>
                 </div>
@@ -1030,7 +1042,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button class="btn btn-primary" @if (!$student->completionLetter->needsCorrections()) disabled @endif>Marcar como corregida</button>
+                            <button class="btn btn-success" @if (!$student->completionLetter->needsCorrections()) disabled @endif>Marcar como corregida</button>
                         </div>
                     </form>
                 </div>

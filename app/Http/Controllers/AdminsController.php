@@ -105,7 +105,7 @@ class AdminsController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect()->route('teachers.index')->with('alert',[
+        return redirect()->route('admins.index')->with('alert',[
             'type' => 'success',
             'message' =>'la contraseña ha sido actualizada',
         ]);

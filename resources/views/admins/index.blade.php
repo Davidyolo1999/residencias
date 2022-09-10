@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="content">
+
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
@@ -33,25 +34,25 @@
                     <table class="table">
                         <thead class="thead">
                             <tr class="">
-                                <th class="text-center  table-  text-dark"># </th>
-                                <th class="text-center  table- text-dark">E-mail </th>
-                                <th class="text-center  table- text-dark">Nombre </th>
-                                <th class="text-center  table-  text-dark">Apellidos </th>
-                                <th class="text-right   table-  text-dark">Acciones </th>
+                                <th class="text-center text-dark"># </th>
+                                <th class="text-center text-dark">E-mail </th>
+                                <th class="text-center text-dark">Nombre </th>
+                                <th class="text-center text-dark">Apellidos </th>
+                                <th class="text-center  text-dark">Acciones </th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse ($admins as $admin)
                                 <tr>
-                                    <td class=" text-center"> {{ $admin->id }}</td>
-                                    <td class=" text-center">{{ $admin->email }} </td>
-                                    <td class=" text-center">{{ $admin->admin->first_name }} </td>
-                                    <td class="  text-center">{{ $admin->admin->last_name }} </td>
-                                    <td class=" td-actions text-nowrap text-right ">
+                                    <td class="text-center"> {{ $admin->id }}</td>
+                                    <td class="text-center">{{ $admin->email }} </td>
+                                    <td class="text-center">{{ $admin->admin->first_name }} </td>
+                                    <td class="text-center">{{ $admin->admin->last_name }} </td>
+                                    <td class=" td-actions text-nowrap text-center ">
                                         <a href="" class="btn btn-sm btn-info" title="Ver detalles">
                                             <i class="material-icons">details</i>
                                         </a>
-                                        <a href="{{ route('admins.edit', $admin) }}" class="btn btn-sm btn-info" title="Editar" >
+                                        <a href="{{ route('admins.edit', $admin) }}" class="btn btn-sm btn-info btn-success" title="Editar" >
                                             <i class="material-icons">edit</i>
                                         </a>
                                         <form

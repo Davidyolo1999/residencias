@@ -2,12 +2,22 @@
 
 @section('content')
     <div class="content">
-        
-        @if($alert = session('alert'))
-            <div class="alert alert-{{ $alert['type'] }}" role="alert">
-                {{ $alert['message'] }}
-            </div>
-        @endif
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    @if ($alert = session('alert'))
+                        <div class="row">
+                            <div class="col-sm-12">
+
+                                <div class="alert alert-{{ $alert['type'] }}" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <i class="material-icons">close</i>
+                                    </button>
+                                    <span>{{ $alert['message'] }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
 
         <div class="card">
             <div class="card-header card-header-success">
@@ -16,37 +26,37 @@
             </div>
             <div class="card-body">
                 <div class="text-right">
-                    <a href="{{ route('teachers.create') }}" class="btn btn-sm btn-warning"><i class="material-icons">person_add</i> Añadir Profesor</a>
+                    <a href="{{ route('teachers.create') }}" class="btn btn-sm btn-warning btn-round"><i class="material-icons">person_add</i> Nuevo</a>
                 </div>
                 <div class="table-responsive">
                     <table class="table">
                         <thead class="text-primary text-center">
                             <tr class="text-dark">
-                                <th><b> # </b></th>
-                                <th><b> E-mail </b></th>
-                                <th><b> Nombres </b></th>
-                                <th><b> Apellido Paterno </b></th>
-                                <th><b> Apellido Materno </b></th>
-                                <th><b> Sexo </b></th>
-                                <th><b> CURP </b></th>
-                                <th><b> Acciones</b></th>
+                                <th> # </th>
+                                <th> E-mail </th>
+                                <th> Nombre </th>
+                                <th> Apellido Paterno </th>
+                                <th> Apellido Materno </th>
+                                <th> Sexo </th>
+                                <th> CURP </th>
+                                <th> Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($teachers as $teacher)
                                 <tr class="text-dark text-center">
-                                    <td><b>{{ $teacher->user_id }} </b></td>
-                                    <td><b>{{ $teacher->email }} </b></td>
-                                    <td><b>{{ $teacher->first_name }} </b></td>
-                                    <td><b>{{ $teacher->fathers_last_name }} </b></td>
-                                    <td><b>{{ $teacher->mothers_last_name }} </b></td>
-                                    <td><b>{{ $teacher->sex_text }} </b></td>
-                                    <td><b>{{ $teacher->curp }} </b></td>
-                                    <td>
+                                    <td>{{ $teacher->user_id }} </td>
+                                    <td>{{ $teacher->email }} </td>
+                                    <td>{{ $teacher->first_name }} </td>
+                                    <td>{{ $teacher->fathers_last_name }} </td>
+                                    <td>{{ $teacher->mothers_last_name }} </td>
+                                    <td>{{ $teacher->sex_text }} </td>
+                                    <td>{{ $teacher->curp }} </td>
+                                    <td class="td-actions text-nowrap">
                                         <a href="" class="btn btn-sm btn-info" title="Ver detalles">
                                             <i class="material-icons">details</i>
                                         </a>
-                                        <a href="{{ route('teachers.edit', $teacher) }}" class="btn btn-sm btn-info" title="Editar" >
+                                        <a href="{{ route('teachers.edit', $teacher) }}" class="btn btn-sm btn-info btn-success" title="Editar" >
                                             <i class="material-icons">edit</i>
                                         </a>
                                         <form
@@ -70,6 +80,9 @@
             <div class="card-footer">
                 {{ $teachers->links() }}
             </div>
+        </div>
+    </div>
+</div>
         </div>
     </div>
 @endsection

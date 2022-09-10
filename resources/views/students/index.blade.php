@@ -25,17 +25,17 @@
                                     <h4 class="card-title text-white"><b>Estudiantes</b> </h4>
                                     <p class="card-category text-white"><b>Lista de Estudiantes</b> </p>
                                 </div>
-                                
+
                                 <form action="{{ route('students.index') }}">
                                     <div class="form-group text-center text-dark">
-                                        <label for="document" class="text-white" >
-                                            
+                                        <label for="document" class="text-white">
+
                                             Filtrar por</label>
-                                        <select class="text-center text-dark selectpicker show-tick" 
+                                        <select class="text-center text-dark selectpicker show-tick"
                                             data-style="btn btn-sm btn-success btn-round" name="document" id="document"
                                             onchange="$(this).closest('form').submit()" data-size="5" data-width="fit">
-                                            <option style="background: #fff ; color: black;" selected> 
-                                            Selecciona una Opción</option>
+                                            <option style="background: #fff ; color: black;" selected>
+                                                Selecciona una Opción</option>
                                             <option value="residencyRequest" style="background: #fff ; color: black;"
                                                 @if (request('document') === 'residencyRequest') selected @endif>PETICIÓN DE RESIDENCIA
                                             </option>
@@ -107,7 +107,7 @@
                                                 <td class="text-center"> {{ $student->sex_text }} </td>
                                                 <td class="text-center"> {{ $student->account_number }} </td>
                                                 <td class="text-center"> {{ $student->career->name }} </td>
-                                                <td class="td-actions text-nowrap">
+                                                <td class="td-actions text-nowrap text-center">
                                                     <a href="{{ route('students.show', $student) }}"
                                                         class="btn btn-sm btn-info" title="Ver detalles">
                                                         <i class="material-icons">details</i>

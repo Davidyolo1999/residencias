@@ -264,7 +264,7 @@
                 <div class="w-2/5 p-4 text-black">
                     <p class="mb-10 text-lg">UMB</p>
 
-                    <p>Copyright © 2022 by David Florentino Benito</p>
+                    <p>© 2022, David Florentino Benito | Todos los derechos reservados.</p>
                 </div>
 
                 {{-- Socials --}}

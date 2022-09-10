@@ -463,14 +463,14 @@
                     </div>
                     <div class="modal-body">
                         @csrf
-                        <div class="form-group">
+                        <div class="form-group has-warning">
                             <label for="corrections">Correciones</label>
                             <textarea name="corrections" id="corrections" rows="5" class="form-control"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button class="btn btn-primary">Guardar</button>
+                        <button class="btn btn-success">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -492,14 +492,14 @@
                     </div>
                     <div class="modal-body">
                         @csrf
-                        <div class="form-group">
+                        <div class="form-group has-warning">
                             <label for="corrections">Correciones</label>
                             <textarea name="corrections" id="corrections" rows="5" class="form-control"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button class="btn btn-primary">Guardar</button>
+                        <button class="btn btn-success">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -520,14 +520,14 @@
                     </div>
                     <div class="modal-body">
                         @csrf
-                        <div class="form-group">
+                        <div class="form-group has-warning">
                             <label for="corrections">Correciones</label>
                             <textarea name="corrections" id="corrections" rows="5" class="form-control"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button class="btn btn-primary">Guardar</button>
+                        <button class="btn btn-success">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -548,14 +548,14 @@
                     </div>
                     <div class="modal-body">
                         @csrf
-                        <div class="form-group">
+                        <div class="form-group has-warning">
                             <label for="corrections">Correciones</label>
                             <textarea name="corrections" id="corrections" rows="5" class="form-control"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button class="btn btn-primary">Guardar</button>
+                        <button class="btn btn-success">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -576,14 +576,14 @@
                     </div>
                     <div class="modal-body">
                         @csrf
-                        <div class="form-group">
+                        <div class="form-group has-warning">
                             <label for="corrections">Correciones</label>
                             <textarea name="corrections" id="corrections" rows="5" class="form-control"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button class="btn btn-primary">Guardar</button>
+                        <button class="btn btn-success">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -604,14 +604,14 @@
                     </div>
                     <div class="modal-body">
                         @csrf
-                        <div class="form-group">
+                        <div class="form-group has-warning">
                             <label for="corrections">Correciones</label>
                             <textarea name="corrections" id="corrections" rows="5" class="form-control"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button class="btn btn-primary">Guardar</button>
+                        <button class="btn btn-success">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -632,14 +632,14 @@
                     </div>
                     <div class="modal-body">
                         @csrf
-                        <div class="form-group">
+                        <div class="form-group has-warning">
                             <label for="corrections">Correciones</label>
                             <textarea name="corrections" id="corrections" rows="5" class="form-control"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button class="btn btn-primary">Guardar</button>
+                        <button class="btn btn-success">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -660,14 +660,14 @@
                     </div>
                     <div class="modal-body">
                         @csrf
-                        <div class="form-group">
+                        <div class="form-group has-warning">
                             <label for="corrections">Correciones</label>
                             <textarea name="corrections" id="corrections" rows="5" class="form-control"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button class="btn btn-primary">Guardar</button>
+                        <button class="btn btn-success">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -688,14 +688,14 @@
                     </div>
                     <div class="modal-body">
                         @csrf
-                        <div class="form-group">
+                        <div class="form-group has-warning">
                             <label for="corrections">Correciones</label>
                             <textarea name="corrections" id="corrections" rows="5" class="form-control"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button class="btn btn-primary">Guardar</button>
+                        <button class="btn btn-success">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -716,14 +716,14 @@
                     </div>
                     <div class="modal-body">
                         @csrf
-                        <div class="form-group">
+                        <div class="form-group has-warning">
                             <label for="corrections">Correciones</label>
                             <textarea name="corrections" id="corrections" rows="5" class="form-control"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button class="btn btn-primary">Guardar</button>
+                        <button class="btn btn-success">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -744,14 +744,14 @@
                     </div>
                     <div class="modal-body">
                         @csrf
-                        <div class="form-group">
+                        <div class="form-group has-warning">
                             <label for="corrections">Correciones</label>
                             <textarea name="corrections" id="corrections" rows="5" class="form-control"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button class="btn btn-primary">Guardar</button>
+                        <button class="btn btn-success">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -773,18 +773,18 @@
                     <div class="modal-body">
                         @csrf
                         @method('PUT')
-                        <div class="form-group">
+                        <div class="form-group has-warning">
                             <label for="qualification">Calificacion</label>
                             <input type="number" class="form-control" min="0" max="100" id="qualification" name="qualification">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group has-warning">
                             <label for="qualification_text">Calificación en letras</label>
                             <input type="text" class="form-control" maxlength="255" id="qualification_text" name="qualification_text">
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button class="btn btn-primary">Guardar</button>
+                        <button class="btn btn-success">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -812,7 +812,7 @@
                                     {{ $question->name }}
                                 </label>
                             </div>
-                            <div class="form-group mb-4">
+                            <div class="form-group mb-4 has-warning">
                                 <input
                                     type="text"
                                     class="form-control"
@@ -822,13 +822,13 @@
                                 />
                             </div>
                             @foreach ($question->children as $childQuestion)
-                                <div class="form-group pl-3 pb-0">
+                                <div class="form-group pl-3 pb-0 has-warning">
                                     <label>
                                         <input type="checkbox" value="on" name="questions[{{ $childQuestion->id }}]" @if($childQuestion->is_fulfilled) checked @endif>
                                         {{ $childQuestion->name }}
                                     </label>
                                 </div>
-                                <div class="form-group mb-4 pl-3">
+                                <div class="form-group mb-4 pl-3 has-warning">
                                     <input
                                         type="text"
                                         class="form-control"
@@ -842,7 +842,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button class="btn btn-primary">Guardar</button>
+                        <button class="btn btn-success">Guardar</button>
                     </div>
                 </form>
             </div>
