@@ -41,10 +41,10 @@ class ResidencyRequestController extends Controller
             ]);
         }
 
-        if ($student->career_percentage < 85) {
+        if ($student->career_percentage < 75) {
             return back()->with('alert', [
                 'type' => 'danger',
-                'message' => 'El estudiante debe tener al menos el 85% de la carrera aprovada.',
+                'message' => 'El estudiante debe tener al menos el 75% de créditos del Plan de Estudios.',
             ]);
         }
         
@@ -58,14 +58,14 @@ class ResidencyRequestController extends Controller
         if (!$student->project) {
             return redirect()->route('students.projectInfo')->with('alert', [
                 'type' => 'danger',
-                'message' => 'El estudiante debe cargar la data del proyecto',
+                'message' => 'El estudiante debe cargar la información del proyecto',
             ]);
         }
 
         if (!$student->company) {
             return redirect()->route('students.companyInfo')->with('alert', [
                 'type' => 'danger',
-                'message' => 'El estudiante debe cargar la data de la compañia externa',
+                'message' => 'El estudiante debe cargar la información de la compañia externa',
             ]);
         }
 

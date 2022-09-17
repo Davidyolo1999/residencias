@@ -188,7 +188,7 @@
             </tr>
             <tr>
                 <td height="4%" class="tc">Fecha de Inicio:</td>
-                <td style="text-align:center;">{{ $project->start_date->format('d-m-Y') }}</td>
+                <td style="text-align:center;">{{ $student->project->start_date_formatted }}</td>
                 <td width="20%" class="tc">Fecha de Término:</td>
                 <td style="text-align:center;">{{ $project->end_date->format('d-m-Y') }}</td>
             </tr>

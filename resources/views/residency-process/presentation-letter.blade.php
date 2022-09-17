@@ -140,21 +140,6 @@
         durante un período mínimo de cuatro meses y máximo de seis.
         <br>
         <br>
-        En este sentido, el proyecto se realizará a distancia en atención a las políticas de salud emitidas por las
-        instancias federal y
-        estatal con motivo de la pandemia causada por el coronavirus SARS-COV2 (enfermedad denominada como COVID 19).
-        Por lo tanto,
-
-        @if ($student->sex == 'm')
-            el
-        @else
-            la
-        @endif
-
-        C. <b>{{ $student->full_name }}</b> no asistirá en ningún momento, ni bajo cualquier circunstancia, a las
-        instalaciones de la institución que usted representa.
-        <br>
-        <br>
         En espera de su amable respuesta, agradezco de antemano su fina atención a la presente; sabedor de su gran apoyo
         e
         impulso a la juventud en pro del desarrollo de nuestro país.
@@ -207,5 +192,4 @@
         </table>
     </div>
 </body>
-
 </html>

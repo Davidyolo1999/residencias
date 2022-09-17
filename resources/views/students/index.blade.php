@@ -27,13 +27,13 @@
                                 </div>
 
                                 <form action="{{ route('students.index') }}">
-                                    <div class="form-group text-center text-dark">
+                                    <div class="form-group text-center text-dark search">
                                         <label for="document" class="text-white">
-
                                             Filtrar por</label>
                                         <select class="text-center text-dark selectpicker show-tick"
                                             data-style="btn btn-sm btn-success btn-round" name="document" id="document"
                                             onchange="$(this).closest('form').submit()" data-size="5" data-width="fit">
+                                            
                                             <option style="background: #fff ; color: black;" selected>
                                                 Selecciona una Opción</option>
                                             <option value="residencyRequest" style="background: #fff ; color: black;"
@@ -112,6 +112,10 @@
                                                         class="btn btn-sm btn-info" title="Ver detalles">
                                                         <i class="material-icons">details</i>
                                                     </a>
+                                                    <a href="{{ route('students.personalInformation', $student) }}"
+                                                        class="btn btn-sm btn-dark" title="Generar Pdf" target="_blank">
+                                                        <i class="material-icons">picture_as_pdf</i>
+                                                    </a>
 
                                                     @can('update', $student)
                                                         <a href="{{ route('students.edit', $student) }}"
@@ -157,7 +161,7 @@
             Swal.fire({
                 title: '¿Está seguro?',
                 text: "Esta acción es irreversible",
-                type: 'warning',
+                icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
@@ -168,5 +172,9 @@
                 }
             })
         }))
+        
+        $(document).ready(function(){
+        $('.search select').selectpicker();
+        })
     </script>
 @endpush

@@ -12,6 +12,7 @@ use App\Http\Controllers\CorrectionsController;
 use App\Http\Controllers\ExternalAdvisorsController;
 use App\Http\Controllers\LocationsController;
 use App\Http\Controllers\PaperStructureController;
+use App\Http\Controllers\PersonalInformationController;
 use App\Http\Controllers\PreliminaryLetterController;
 use App\Http\Controllers\PresentationLetterController;
 use App\Http\Controllers\QualificationLetterController;
@@ -81,6 +82,8 @@ Route::middleware('auth')->group(function() {
         Route::put('/{student}', [StudentsController::class, 'update'])->name('update')->can('update','student');
         Route::put('/{student}/password', [StudentsController::class, 'updatePassword'])->name('updatePassword')->can('update','student');
         Route::get('/residency-process', [ResidencyProcessController::class, 'residencyProcess'])->name('residencyProcess')->can('view-residency-info');
+        Route::get('/{student}/registration-in-the-system', [PersonalInformationController::class, 'personalInformation'])->name('personalInformation');
+
         // Residency request
         Route::post('/residency-process/residency-request', [ResidencyRequestController::class, 'residencyRequest'])->name('residencyRequest');
         Route::put('/residency-process/residency-request/corrections/mark-as-solved', [ResidencyRequestController::class, 'residencyRequestMarkCorrectionsAsSolved'])->name('residencyRequestMarkCorrectionsAsSolved');

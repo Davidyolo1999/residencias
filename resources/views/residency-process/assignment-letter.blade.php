@@ -117,12 +117,18 @@
 
     <main>
         <p class="document-name letra">ASIGNACIÓN DE ASESOR INTERNO</p>
-        <div class="request-date letra mayus"><b>{{ $assignmentLetter->request_date_formatted }}</b> </div>
+        <div class="request-date letra mayus"><b>Fecha: {{ $assignmentLetter->request_date_formatted }}</b> </div>
 
         <p class="letra">
         <table cellspacing="0" border="0" class="table">
             <tr>
-                <td colspan="4"><b>Nombre del (a) Alumno(a):</b> {{ $student->full_name }} </td>
+                <td colspan="4"><b>
+                @if ($student->sex == 'm')
+                    Nombre del Alumno:
+                @else
+                    Nombre de la Alumna:
+                @endif
+                </b> {{ $student->full_name }} </td>
             </tr>
             <tr>
                 <td><b>No. de Cuenta:</b> </td>
@@ -134,8 +140,13 @@
         <p class="presente letra"><b>P R E S E N T E:</b></p>
         </p>
         <p class="note letra">
-            Por medio del presente le informo que el Profesor <b>{{ $student->teacher->full_name }}</b>
-            será su asesor interno en la Residencia Profesional que realizará en el
+            Por medio del presente le informo que 
+            @if ($student->teacher->sex == 'm')
+                el Profesor <b>{{ $student->teacher->full_name }}</b> será su asesor interno
+                @else
+                la Profesora <b>{{ $student->teacher->full_name }}</b> será su asesora interna
+                @endif
+            en la Residencia Profesional que realizará en
             <b>{{ $externalCompany->business_name }}</b>,
             con el proyecto titulado <b>{{ $student->project->title }}</b>.
         </p>
@@ -169,7 +180,7 @@
         <br>
         <br>
         <br>
-        <div class="c"> C.c.p. <b>{{ $student->teacher->full_name }} </b> .- Para su conocimiento.
+        <div class="c"> C.c.p. <b>{{ $student->teacher->full_name }}</b>.- Para su conocimiento.
         </div>
         <div class="c1"> Expediente/Minutario</b> </div>
     </main>

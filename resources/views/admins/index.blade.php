@@ -97,7 +97,7 @@
             Swal.fire({
                 title: '¿Está seguro?',
                 text: "Esta acción es irreversible",
-                type: 'warning',
+                icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',

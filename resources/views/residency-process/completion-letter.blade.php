@@ -82,11 +82,11 @@
 </head>
 
 <body>
-
+    <div class="document-name letra" style="color: red;">(Hoja membretada de la empresa)</div>
     <p class="document-name letra">CARTA DE TERMINACIÓN</p>
     <br>
-    <div class="request-date letra mayus"><b>(Número de oficio de la empresa)</b> </div>
-    <div class="request-date letra mayus"><b>{{ $completionLetter->request_date_formatted }}</b> </div>
+    <div class="request-date letra"><b style="color: red;">(Número de oficio de la empresa)</b> </div>
+    <div class="request-date letra"><b style="color: red;">Fecha: {{ $completionLetter->request_date_formatted }}</b> </div>
 
     <p class="mayus letra"> <b>
             <table cellspacing="0" border="0" width="100%">
@@ -118,7 +118,7 @@
         denominado: {{ $student->project->title }}. Cubrió un total de 640 hrs. en un horario
         de <b>{{ $student->project->schedule }}</b>, el cual inició el día
         <b>{{ $student->project->start_date_formatted }} </b> y concluyó el día
-        <b>{{ $student->project->end_date_formatted }}</b>.
+        <b>{{ $student->project->end_date_formatted }}.</b>
     </p>
 
     <p class="note letra">

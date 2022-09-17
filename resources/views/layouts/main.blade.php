@@ -19,8 +19,8 @@
     <link href="{{ asset('material') }}/css/material-dashboard.css?v=2.1.1" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="{{ asset('material') }}/demo/demo.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
-
+    <link href="{{ asset('material') }}/demo/bootstrap-select.min.css" rel="stylesheet" />
+    
     </head>
     <body class="{{ $class ?? '' }}">
         @auth()
@@ -75,7 +75,9 @@
         <!-- Material Dashboard DEMO methods, don't include it in your project! -->
         <script src="{{ asset('material') }}/demo/demo.js"></script>
         <script src="{{ asset('material') }}/js/settings.js"></script>
+        <script src="{{ asset('material') }}/demo/bootstrap-select.min.js"></script>
         <script src="{{ asset('js/app.js') }}"></script>
         @stack('js')
+        
     </body>
 </html>

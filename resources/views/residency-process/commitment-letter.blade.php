@@ -110,7 +110,7 @@
             alumna
         @endif
         de nuestra casa de estudios de la
-        <b>{{ $student->career->name }}</b> , quien
+        <b>{{ $student->career->name }}</b>, quien
         desea realizar su Residencia Profesional por Proyecto.
         <br>
         <br>

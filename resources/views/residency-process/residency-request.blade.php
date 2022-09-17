@@ -97,7 +97,7 @@
             <tr>
                 <td class="tc">Carrera:</td>
                 <td class="letra">&nbsp;{{ $student->career->name }}</td>
-                <td width="13%" class="tc">No. Cuenta</td>
+                <td width="13%" class="tc">No. de Cuenta</td>
                 <td width="15%" class="tc letra">&nbsp;{{ $student->account_number }}</td>
             </tr>
         </tbody>
@@ -144,17 +144,6 @@
             </tr>
         </tbody>
     </table>
-
-    <p class="note letra">
-        El Proyecto en cita se realizará a distancia en atención a las políticas de
-        salud emitidas por las instancias federal y estatal con motivo de la
-        pandemia causada por el coronavirus SARS-COV2 (enfermedad
-        denominada como COVID 19), por lo que no asistiré en ningún momento
-        y bajo cualquier circunstancia a la institución. Asumo la responsabilidad
-        total y absoluta en relación a mi estado de salud en el caso de
-        contravenir lo señalado, deslindado de cualquier situación a la
-        Universidad.
-    </p>
 
     <div class="footer letra">
         <p class="student-signature">{{ $student->first_name }} {{ $student->fathers_last_name }} {{ $student->mothers_last_name }}</p>

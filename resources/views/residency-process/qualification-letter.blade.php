@@ -59,7 +59,7 @@
         'title' => 'ACTA DE CALIFICACIÓN DE RESIDENCIAS PROFESIONALES',
     ])
     <br>
-    <p class="request-date letra mayus"><b>{{ $qualificationLetter->request_date_formatted }}</b></p>
+    <p class="request-date letra"><b>Villa Victoria, México a {{ $qualificationLetter->request_date_formatted }}</b></p>
     
     <table border="1" cellspacing="0" width="100%" class="letra">
         <tr>
