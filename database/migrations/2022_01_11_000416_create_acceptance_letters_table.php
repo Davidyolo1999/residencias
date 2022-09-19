@@ -16,12 +16,17 @@ class CreateAcceptanceLettersTable extends Migration
     {
         Schema::create('acceptance_letters', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id')->unique();
-            $table->string('signed_document');
+            $table->dateTime('request_date');
+            $table->string('signed_document')->nullable();
             $table->string('status')->default(DocumentStatus::STATUS_PROCESSING);
+            $table->unsignedBigInteger('user_id')->unique();
+            $table->unsignedBigInteger('project_id');
+            $table->unsignedBigInteger('company_id');
             $table->timestamps();
 
             $table->foreign('user_id')->references('user_id')->on('students')->onDelete('CASCADE');
+            $table->foreign('project_id')->references('id')->on('projects')->onDelete('CASCADE');
+            $table->foreign('company_id')->references('id')->on('companies')->onDelete('CASCADE');
         });
     }
 

@@ -85,7 +85,7 @@ class ResidencyRequestController extends Controller
             'configuration' => $configuration,
         ]);
 
-        $customReportName = 'Solicitud de Residencias Profesionales-'.$student->full_name.'_'.Carbon::now()->format('d-m-Y').'.pdf'; 
+        $customReportName = 'Solicitud de Residencias Profesionales-'.$student->full_name.'-'.Carbon::now()->format('d-m-Y').'.pdf'; 
         return $pdf->stream($customReportName);
     }
 
@@ -96,7 +96,7 @@ class ResidencyRequestController extends Controller
         if (!$residencyRequest) {
             return back()->with('alert', [
                 'type' => 'danger',
-                'message' => 'La petición de residencia debe estar en proceso para poder ser revisada',
+                'message' => 'La solicitud de residencia debe estar en proceso para poder ser revisada',
             ]);
         }
 
@@ -138,7 +138,7 @@ class ResidencyRequestController extends Controller
         if (!$residencyRequest->needsCorrections()) {
             return back()->with('alert', [
                 'type' => 'danger',
-                'message' => 'La petición de residencia no necesita correciones',
+                'message' => 'La solicitud de residencia no necesita correciones',
             ]);
         }
 
@@ -161,7 +161,7 @@ class ResidencyRequestController extends Controller
         if (!$residencyRequest) {
             return back()->with('alert', [
                 'type' => 'danger',
-                'message' => 'La petición de residencia debe estar en proceso para porder ser revisada',
+                'message' => 'La solicitud de residencia debe estar en proceso para porder ser revisada',
             ]);
         }
 
@@ -171,7 +171,7 @@ class ResidencyRequestController extends Controller
 
         return back()->with('alert', [
             'type' => 'success',
-            'message' => 'La petición de residencia ha sido aprovada',
+            'message' => 'La solicitud de residencia ha sido aprobada',
         ]);
     }
 
@@ -182,7 +182,7 @@ class ResidencyRequestController extends Controller
         if (!$residencyRequest) {
             return back()->with('alert', [
                 'type' => 'danger',
-                'message' => 'La petición de residencia debe aprovada',
+                'message' => 'La solicitud de residencia debe estar aprobada',
             ]);
         }
 
@@ -208,7 +208,7 @@ class ResidencyRequestController extends Controller
         if (!$residencyRequest) {
             return back()->with('alert', [
                 'type' => 'danger',
-                'message' => 'La petición de residencia debe aprovada',
+                'message' => 'La solicitud de residencia debe estar aprobada',
             ]);
         }
 

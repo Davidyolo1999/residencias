@@ -29,7 +29,7 @@
                     {{-- PASSWORD --}}
                     <div class="row mb-3">
                         <div class="col-md-3">
-                            <label for="password" class="d-block">Contraseña:</label>
+                            <label for="password" class="d-block letter text-dark">Contraseña:</label>
                         </div>
                         <div class="col-md-9">
                             <div class="input-group input-group-dynamic has-warning">
@@ -45,7 +45,7 @@
                     {{-- PASSWORD CONFIRMATION --}}
                     <div class="row mb-3">
                         <div class="col-md-3">
-                            <label for="password_confirmation" class="d-block">Confirmar Contraseña:</label>
+                            <label for="password_confirmation" class="d-block letter text-dark">Confirmar Contraseña:</label>
                         </div>
                         <div class="col-md-9">
                             <div class="input-group input-group-dynamic has-warning">

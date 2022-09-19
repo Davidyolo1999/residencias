@@ -38,6 +38,12 @@ class AssignmentLetterController extends Controller
                 'message' => 'Debe estar aprobada la carta de aceptaciòn',
             ]);
         }
+        if (!$student->approvedPresentationletter->signed_document){
+            return redirect()->route('students.residencyProcess')->with('alert', [
+                'type' => 'danger',
+                'message' => 'Aún no se ha cargado el documento final de la carta de presentación',
+            ]);
+        }
 
         $assignmentLetter = $student->assignmentLetter->exists
             ? $student->assignmentLetter

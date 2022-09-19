@@ -31,7 +31,7 @@
                     <div class="row mb-3">
                         {{-- CURP --}}
                         <div class="col-md-12">
-                            <p class="mb-0"><b>CURP:</b></p>
+                            <p class="mb-0 letter"><b>CURP:</b></p>
                             {{ $user->student->curp }}
                         </div>
                     </div>
@@ -39,17 +39,17 @@
                     <div class="row mb-3">
                         {{-- NAMES --}}
                         <div class="col-md-4">
-                            <p class="mb-0"><b>Nombre(s):</b></p>
+                            <p class="mb-0 letter"><b>Nombre(s):</b></p>
                             {{ $user->student->first_name }}
                         </div>
                         {{-- FATHER'S LAST NAME --}}
                         <div class="col-md-4">
-                            <p class="mb-0"><b>Apellido Paterno:</b></p>
+                            <p class="mb-0 letter"><b>Apellido Paterno:</b></p>
                             {{ $user->student->fathers_last_name }}
                         </div>
                         {{-- MOTHERS'S LAST NAME --}}
                         <div class="col-md-4">
-                            <p class="mb-0"><b>Apellido Materno:</b></p>
+                            <p class="mb-0 letter"><b>Apellido Materno:</b></p>
                             {{ $user->student->mothers_last_name }}
                         </div>
                     </div>
@@ -57,17 +57,17 @@
                     <div class="row mb-3">
                         {{-- SEX --}}
                         <div class="col-md-4">
-                            <p class="mb-0"><b>Sexo:</b></p>
+                            <p class="mb-0 letter"><b>Sexo:</b></p>
                             {{ $user->student->sex_text }}
                         </div>
                         {{-- CAREER --}}
                         <div class="col-md-4">
-                            <p class="mb-0"><b>Carrera:</b></p>
+                            <p class="mb-0 letter"><b>Carrera:</b></p>
                             {{ $user->student->career->name }}
                         </div>
                         {{-- ACCOUNT NUMBER --}}
                         <div class="col-md-4">
-                            <p class="mb-0"><b>Número de Cuenta:</b></p>
+                            <p class="mb-0 letter"><b>Número de Cuenta:</b></p>
                             {{ $user->student->account_number }}
                         </div>
                     </div>
@@ -75,17 +75,17 @@
                     <div class="row mb-3">
                         {{-- IS ENROLLED --}}
                         <div class="col-md-4">
-                            <p class="mb-0"><b>Inscrito:</b></p>
+                            <p class="mb-0 letter"><b>Inscrito:</b></p>
                             {{ $user->student->is_enrolled ? 'Si' : 'No' }}
                         </div>
                         {{-- IS SOCIAL SERVICE CONCLUDED --}}
                         <div class="col-md-4">
-                            <p class="mb-0"><b>Servicio Social Concluido:</b></p>
+                            <p class="mb-0 letter"><b>Servicio Social Concluido:</b></p>
                             {{ $user->student->is_social_service_concluded ? 'Si' : 'No' }}
                         </div>
                         {{-- CAREER PERCENTAGE --}}
                         <div class="col-md-4">
-                            <p class="mb-0"><b>Porcentaje de la Carrera:</b></p>
+                            <p class="mb-0 letter"><b>Porcentaje de la Carrera:</b></p>
                             {{ $user->student->career_percentage }}%
                         </div>
                     </div>
@@ -93,7 +93,7 @@
                     <div class="row mb-3">
                         {{-- STATE --}}
                         <div class="col-md-4">
-                            <p class="mb-0"><b>Estado:</b></p>
+                            <p class="mb-0 letter"><b>Estado:</b></p>
                             <select class="form-control" name="state_id" id="state_id">
                                 <option value="" selected disabled>Seleccione una Opción</option>
                                 @foreach ($states as $state)
@@ -107,7 +107,7 @@
                         </div>
                         {{-- MUNICIPALITY --}}
                         <div class="col-md-4">
-                            <p class="mb-0"><b>Municipio:</b></p>
+                            <p class="mb-0 letter"><b>Municipio:</b></p>
                             <select class="form-control" name="municipality_id" id="municipality_id">
                                 <option value="" selected disabled>Seleccione una Opción</option>
                             </select>
@@ -117,7 +117,7 @@
                         </div>
                         {{-- LOCALITY --}}
                         <div class="col-md-4">
-                            <p class="mb-0"><b>Localidad:</b></p>
+                            <p class="mb-0 letter"><b>Localidad:</b></p>
                             <select class="form-control" name="locality_id" id="locality_id">
                                 <option value="" selected disabled>Seleccione una Opción</option>
                             </select>
@@ -127,7 +127,7 @@
                     <div class="row mb-3">
                         {{-- PHONE NUMBER --}}
                         <div class="col-md-4 has-warning">
-                            <p class="mb-0"><b>Teléfono:</b></p>
+                            <p class="mb-0 letter"><b>Teléfono:</b></p>
                             <input type="text" class="form-control" name="phone_number"
                                 value="{{ $user->student->phone_number }}">
                         </div>

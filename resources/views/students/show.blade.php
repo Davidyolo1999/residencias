@@ -204,13 +204,7 @@
                 {{-- Carta de aceptación --}}
                 <div class="row">
                     <div class="col-md-6">
-                        <a
-                            href="{{ route('students.acceptanceLetterDownloadSignedDoc', $student) }}"
-                            class="btn btn-block btn-{{ $student->acceptanceLetter->btn_color }}"
-                            target="_blank"
-                        >
-                            Carta de aceptación
-                        </a>
+                        @include('residency-process.partials.acceptance-letter-btn')
                     </div>
                     <div class="col-md-3">
                         <form action="{{ route('students.acceptanceLetterMarkAsApproved', $student) }}" method="POST">
@@ -362,8 +356,8 @@
                 </div>
                 {{-- Carta de cumplimiento end --}}
 
-                 {{-- Acta de calificación --}}
-                 <div class="row">
+                {{-- Acta de calificación --}}
+                <div class="row">
                     <div class="col-md-6">
                         @include('residency-process.partials.qualification-letter-btn')
                     </div>
@@ -389,7 +383,6 @@
                     </div>
                 </div>
                 {{-- Acta de calificación end --}}
-             
 
             {{--  Carta de Término --}}
                 <div class="row">
@@ -773,13 +766,18 @@
                     <div class="modal-body">
                         @csrf
                         @method('PUT')
+                        <p class="description text-center">Calificación mínima aprobatoria 70</p>
                         <div class="form-group has-warning">
-                            <label for="qualification">Calificacion</label>
-                            <input type="number" class="form-control" min="0" max="100" id="qualification" name="qualification">
+                            <div class="mb-0">
+                            <label for="qualification" class="d-block text-dark letter">Calificacion</label>
+                            </div>
+                            <input placeholder="Ejemplo: 100" type="number" class="form-control" min="0" max="100" id="qualification" name="qualification">
                         </div>
                         <div class="form-group has-warning">
-                            <label for="qualification_text">Calificación en letras</label>
-                            <input type="text" class="form-control" maxlength="255" id="qualification_text" name="qualification_text">
+                            <div class="mb-0">
+                            <label for="qualification_text" class="d-block text-dark letter">Calificación en letras</label>
+                            </div>
+                            <input placeholder="Ejemplo: Cien" type="text" class="form-control" maxlength="255" id="qualification_text" name="qualification_text">
                         </div>
                     </div>
                     <div class="modal-footer">

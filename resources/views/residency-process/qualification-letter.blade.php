@@ -63,7 +63,13 @@
     
     <table border="1" cellspacing="0" width="100%" class="letra">
         <tr>
-            <td colspan="2">Nombre del Alumno (a): {{ $student->full_name }} </td>
+            <td colspan="2">
+        @if ($student->sex == 'm')
+        Nombre del Alumno:
+        @else
+        Nombre de la alumna:
+        @endif
+        {{ $student->full_name }} </td>
             <td class="tc">No. de Cuenta: {{ $student->account_number }}</td>
         </tr>
         <tr>
@@ -74,8 +80,8 @@
             <td colspan="3" style="text-align: justify;">Nombre del Proyecto: {{ $project->title }}</td>
         </tr>
         <tr>
-            <td align="center">Fecha de Inicio <br> {{ $project->start_date->format('d-m-Y') }}</td>
-            <td align="center">Fecha de Terminación <br> {{ $project->start_date->format('d-m-Y') }}</td>
+            <td align="center">Fecha de Inicio <br> {{ $student->project->start_date_formatted }}</td>
+            <td align="center">Fecha de Terminación <br> {{ $student->project->end_date_formatted }}</td>
             <td align="center">No. de Control: <br> RPA/
                 {{ $student->career->abreviation }}/{{ str_pad($student->user_id, 4, '0', STR_PAD_LEFT) }}/{{ date('Y') }}
             </td>

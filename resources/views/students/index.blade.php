@@ -90,7 +90,6 @@
                                             <th class="text-center">Nombre </th>
                                             <th class="text-center">Apellido Paterno </th>
                                             <th class="text-center">Apellido Materno </th>
-                                            <th class="text-center">Sexo </th>
                                             <th class="text-center">Matrícula </th>
                                             <th class="text-center">Carrera </th>
                                             <th class="text-center">Acciones</th>
@@ -104,7 +103,6 @@
                                                 <td class="text-center"> {{ $student->first_name }} </td>
                                                 <td class="text-center"> {{ $student->fathers_last_name }} </td>
                                                 <td class="text-center"> {{ $student->mothers_last_name }} </td>
-                                                <td class="text-center"> {{ $student->sex_text }} </td>
                                                 <td class="text-center"> {{ $student->account_number }} </td>
                                                 <td class="text-center"> {{ $student->career->name }} </td>
                                                 <td class="td-actions text-nowrap text-center">

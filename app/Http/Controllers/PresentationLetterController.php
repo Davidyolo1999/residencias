@@ -36,7 +36,7 @@ class PresentationLetterController extends Controller
         if (!$student->approvedResidencyRequest){
             return redirect()->route('students.residencyProcess')->with('alert', [
                 'type' => 'danger',
-                'message' => 'Debe estar aprobado la peticion de residencia',
+                'message' => 'Debe estar aprobada la solicitud de residencia',
             ]);
         }
 

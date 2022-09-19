@@ -115,20 +115,26 @@
 
                 {{-- Carta de aceptación --}}
                 <div class="row">
-                    <div class="col-md-8">
-                        @if (!$student->acceptanceLetter->exists)
-                            <button class="btn btn-block btn-info" data-target="#acceptanceLetterUploadDocModal"
-                                data-toggle="modal" @if (!$student->approvedCommitmentletter) disabled @endif>
-                                Cargar carta de aceptación
-                            </button>
-                        @else
-                            <a href="{{ route('students.acceptanceLetterDownloadSignedDoc', $student) }}"
-                                class="btn btn-block btn-{{ $student->acceptanceLetter->btn_color }}" target="_blank">
-                                Carta de aceptación
-                            </a>
-                        @endif
+                    <div class="col-md-6">
+                        @include('residency-process.partials.acceptance-letter-btn')
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-2">
+                        <button class="btn btn-block btn-info" data-target="#acceptanceLetterUploadDocModal"
+                            data-toggle="modal" @if ($student->acceptanceLetter->signed_document) disabled @endif>
+                            Cargar documento
+                        </button>
+                    </div>
+                    <div class="col-md-2">
+                        <a @if ($student->acceptanceLetter->signed_document)
+                            href="{{ route('students.acceptanceLetterDownloadSignedDoc', $student) }}"
+                            @endif
+                            class="btn btn-block btn-success @if (!$student->acceptanceLetter->signed_document) disabled @endif"
+                            target="_blank"
+                            >
+                            Ver documento
+                        </a>
+                    </div>
+                    <div class="col-md-2">
                         <button class="btn btn-block btn-warning" data-toggle="modal"
                             data-target="#acceptanceLetterCorrectionsModal">
                             Ver correcciones

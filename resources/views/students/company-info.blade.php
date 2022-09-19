@@ -29,62 +29,186 @@
                     @method('PUT')
 
                     {{-- BUSINESS NAME --}}
-                    <x-inputs.text-field-row name="business_name" label="Razón Social:"
-                        placeholder="Ingresé la Razón Social" :default-value="$company->business_name" />
+                    <div class="form-group  has-warning mb-3">
+                        <div class="mb-0">
+                            <label for="business_name" class="d-block text-dark letter">Razón Social:</label>
+
+                        </div>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    name="business_name"
+                                    id="business_name"
+                                    value="{{ old('business_name', $company->business_name) }}"
+                                    placeholder="Ingresé la Razón Social" autofocus
+                                >
+                            @error('business_name')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                    </div>
 
                     {{-- ADDRESS NAME --}}
-                    <div class="row mb-3">
-                        <div class="col-md-3">
-                            <label for="address_name" class="d-block">Dirección:</label>
+                    <div class="form-group  has-warning mb-3">
+                        <div class="mb-0">
+                            <label for="address_name" class="d-block text-dark letter">Dirección:</label>
+
                         </div>
-                        <div class="col-md-9">
-                            <div class="input-group input-group-dynamic has-warning">
-                                <textarea class="form-control text-justify" name="address_name" placeholder="Ingresé la Dirección" id="address_name"
-                                    rows="3">{{ old('address_name', $company->address_name) }}</textarea>
+                        <div class="input-group input-group-dynamic has-warning">
+                            <textarea class="form-control text-justify" name="address_name" placeholder="Ingresé la Dirección" id="address_name"
+                                rows="2">{{ old('address_name', $company->address_name) }}</textarea>
+                        </div>
+                        @error('address_name')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <div class="form-row">
+                        {{-- PERSON NAME IN CHARGE --}}
+                        <div class="form-group col-md-6 has-warning">
+                            <div class="mb-0">
+                            <label for="person_in_charge" class="d-block text-dark letter">Encargado:</label>
                             </div>
-                            @error('address_name')
+                                <input
+                                    type="text"
+                                    class="form-control text-center"
+                                    name="person_in_charge"
+                                    id="person_in_charge"
+                                    placeholder="Ingresé la Persona Encargada"
+                                    value="{{ old('person_in_charge', $company->person_in_charge) }}"
+                                >
+                            @error('person_in_charge')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        {{-- PERSON IN CHARGE POSITION --}}
+                        <div class="form-group col-md-6 has-warning">
+                            <div class="mb-0">
+                            <label for="person_in_charge_position" class="d-block text-dark letter">Cargo:</label>
+                            </div>
+                                <input
+                                    type="text"
+                                    class="form-control text-center"
+                                    name="person_in_charge_position"
+                                    id="person_in_charge_position"
+                                    placeholder="Ingresé el Cargo"
+                                    value="{{ old('person_in_charge_position', $company->person_in_charge_position) }}"
+                                >
+                            @error('person_in_charge_position')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
                     </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4 has-warning">
+                                <div class="mb-0">
+                                <label for="email" class="d-block text-dark letter">E-mail:</label>
+                                </div>
+                                    <input
+                                        type="email"
+                                        class="form-control text-center"
+                                        name="email"
+                                        id="email"
+                                        placeholder="Ingresé el E-mail"
+                                        value="{{ old('email', $company->email) }}"
+                                    >
+                                @error('email')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
 
-                    {{-- PERSON NAME IN CHARGE --}}
-                    <x-inputs.text-field-row name="person_in_charge" label="Encargado:"
-                        placeholder="Ingresé la Persona Encargada" :default-value="$company->person_in_charge" />
-
-                    {{-- PERSON IN CHARGE POSITION --}}
-                    <x-inputs.text-field-row name="person_in_charge_position" label="Cargo:" placeholder="Ingresé el Cargo"
-                        :default-value="$company->person_in_charge_position" />
-
-                    {{-- E-MAIL --}}
-                    <x-inputs.text-field-row name="email" type="email" label="E-mail:" placeholder="Ingresé el E-mail"
-                        :default-value="$company->email" />
-
-                    {{-- OFFICE PHONE NUMBER --}}
-                    <x-inputs.text-field-row name="office_phone_number" label="Teléfono Oficina:"
-                        placeholder="Ingresé el Teléfono Oficina" :default-value="$company->office_phone_number" />
-
-                    {{-- PERSONAL PHONE NUMBER --}}
-                    <x-inputs.text-field-row name="personal_phone_number" label="Teléfono Celular:"
-                        placeholder="Ingresé el Teléfono Celular" :default-value="$company->personal_phone_number" />
-
-                    {{-- COMMERCIAL BUSINESS --}}
-                    <x-inputs.text-field-row name="commercial_business" label="Giro Comercial:"
-                        placeholder="Ingresé el Giro Comercial" :default-value="$company->commercial_business" />
-
-                    {{-- DEPARTMENT REQUESTING PROJECT --}}
-                    <x-inputs.text-field-row name="Department_requesting_project" label="Departamento Solicitante del Proyecto:"
-                        placeholder="Ingresé el Departamento Solicitante del Proyecto" :default-value="$company->Department_requesting_project" />
-
-                    {{-- ZIP CODE --}}
-                    <x-inputs.text-field-row name="zip_code" label="Código Postal:" placeholder="Ingresé el Código Postal"
-                        :default-value="$company->zip_code" />
+                            <div class="form-group col-md-4 has-warning mb-3">
+                                <div class="mb-0">
+                                    <label for="office_phone_number" class="d-block text-dark letter">Teléfono Oficina:</label>
+                                </div>
+                                    <input
+                                        type="text"
+                                        class="form-control text-center"
+                                        name="office_phone_number"
+                                        id="office_phone_number"
+                                        value="{{ old('office_phone_number', $company->office_phone_number) }}"
+                                        placeholder="Ingresé el Teléfono Oficina"
+                                    >
+                                @error('office_phone_number')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                            {{-- PERSONAL PHONE NUMBER --}}
+                            <div class="form-group col-md-4 has-warning ml-auto">
+                                <div class="mb-0">
+                                <label for="personal_phone_number" class="d-block text-dark letter">Teléfono Celular:</label>
+                            </div>
+                                    <input
+                                        type="text"
+                                        class="form-control text-center"
+                                        name="personal_phone_number"
+                                        id="personal_phone_number"
+                                        placeholder="Ingresé el Teléfono Celular"
+                                        value="{{ old('personal_phone_number', $company->personal_phone_number) }}"
+                                    >
+                                @error('personal_phone_number')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            {{-- COMMERCIAL BUSINESS --}}
+                            <div class="form-group col-md-4 has-warning">
+                                <div class="mb-0">
+                                <label for="commercial_business" class="d-block text-dark letter">Giro Comercial:</label>
+                                </div>
+                                    <input
+                                        type="text"
+                                        class="form-control text-center"
+                                        name="commercial_business"
+                                        id="commercial_business"
+                                        placeholder="Ingresé el Giro Comercial"
+                                        value="{{ old('commercial_business', $company->commercial_business) }}"
+                                    >
+                                @error('commercial_business')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                            {{-- DEPARTMENT REQUESTING PROJECT --}}
+                            <div class="form-group col-md-4 has-warning">
+                                <div class="mb-0">
+                                <label for="Department_requesting_project" class="d-block text-dark letter">Departamento Solicitante del Proyecto:</label>
+                                </div>
+                                    <input
+                                        type="text"
+                                        class="form-control text-center"
+                                        name="Department_requesting_project"
+                                        id="Department_requesting_project"
+                                        placeholder="Ingresé el Departamento Solicitante del Proyecto" 
+                                        value="{{ old('Department_requesting_project', $company->Department_requesting_project) }}"
+                                    >
+                                @error('Department_requesting_project')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                            {{-- ZIP CODE --}}
+                            <div class="form-group col-md-4 has-warning">
+                                <div class="mb-0">
+                                <label for="zip_code" class="d-block text-dark letter">Código Postal:</label>
+                                </div>
+                                    <input
+                                        type="text"
+                                        class="form-control text-center"
+                                        name="zip_code"
+                                        id="zip_code"
+                                        placeholder="Ingresé el Código Postal" 
+                                        value="{{ old('zip_code', $company->zip_code) }}"
+                                    >
+                                @error('zip_code')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                        </div>
 
                     <div class="text-right">
                         <button class="btn  btn-success"><i class="material-icons">save</i><b> Guardar</b></button>
                     </div>
                 </form>
             </div>
+            
         </div>
     </div>
             </div>

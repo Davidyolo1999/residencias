@@ -47,7 +47,7 @@
                     {{-- GENERAL OBJECTIVE --}}
                     <div class="row mb-3">
                         <div class="col-md-3">
-                            <label for="general_objective" class="d-block">Objetivo General:</label>
+                            <label for="general_objective" class="d-block letter text-dark">Objetivo General:</label>
                         </div>
                         <div class="col-md-9">
                             <div class="input-group input-group-dynamic has-warning">
@@ -63,7 +63,7 @@
                     {{-- SPECIFIC OBJECTIVES --}}
                     <div class="row mb-3">
                         <div class="col-md-3">
-                            <label for="">Objetivos Específicos:</label>
+                            <label for="" class="letter text-dark">Objetivos Específicos:</label>
                         </div>
                         <div class="col-md-9" id="specific-obj-container">
                             @if ($project->specificObjectives->isNotEmpty())
@@ -108,7 +108,7 @@
                     {{-- JUSTIFICATION --}}
                     <div class="row mb-3">
                         <div class="col-md-3">
-                            <label for="justification" class="d-block">Justificación:</label>
+                            <label for="justification" class="d-block letter text-dark">Justificación:</label>
                         </div>
                         <div class="col-md-9">
                             <div class="input-group input-group-dynamic has-warning">

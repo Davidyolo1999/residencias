@@ -35,53 +35,166 @@ Unidad',
                                 @method('PUT')
 
                                 {{-- UNIT --}}
-                                <x-inputs.text-field-row name="unit" label="Unidad de Estudios:"
-                                    placeholder="Ingresé la Unidad" :default-value="$configuration->unit" />
+                                    <div class="form-group  has-warning mb-3">
+                                        <div class="mb-0">
+                                            <label for="unit" class="d-block text-dark letter">Unidad de Estudios:</label>
+                
+                                        </div>
+                                                <input
+                                                    type="text"
+                                                    class="form-control"
+                                                    name="unit"
+                                                    id="unit"
+                                                    value="{{ old('unit', $configuration->unit) }}"
+                                                    placeholder="Ingresé nombre de la unidad de estudios" autofocus
+                                                >
+                                            @error('unit')
+                                                <small class="text-danger">{{ $message }}</small>
+                                            @enderror
+                                    </div>
 
                                 {{-- ADDRESS --}}
-                                <div class="row mb-3">
-                                    <div class="col-md-3">
-                                        <label for="address" class="d-block">Dirección:</label>
+                                <div class="form-group  has-warning mb-3">
+                                    <div class="mb-0">
+                                        <label for="address" class="d-block text-dark letter">Dirección:</label>
+            
                                     </div>
-                                    <div class="col-md-9">
-                                        <div class="input-group input-group-dynamic has-warning">
-                                            <textarea class="form-control text-justify" name="address" placeholder="Ingresé la Direccion" id="address"
-                                                rows="3">{{ old('address', $configuration->address) }}</textarea>
+                                    <div class="input-group input-group-dynamic has-warning">
+                                        <textarea class="form-control text-justify" name="address" placeholder="Ingresé la Dirección" id="address"
+                                            rows="2">{{ old('address', $configuration->address) }}</textarea>
+                                    </div>
+                                    @error('address')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="form-row">
+                                    {{-- PERSON NAME IN CHARGE --}}
+                                    <div class="form-group col-md-6 has-warning">
+                                        <div class="mb-0">
+                                        <label for="person_in_charge" class="d-block text-dark letter">Encargado:</label>
                                         </div>
-                                        @error('address')
+                                            <input
+                                                type="text"
+                                                class="form-control text-center"
+                                                name="person_in_charge"
+                                                id="person_in_charge"
+                                                placeholder="Ingresé la Persona Encargada"
+                                                value="{{ old('person_in_charge', $configuration->person_in_charge) }}"
+                                            >
+                                        @error('person_in_charge')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                    {{-- PERSON IN CHARGE POSITION --}}
+                                    <div class="form-group col-md-6 has-warning">
+                                        <div class="mb-0">
+                                        <label for="person_in_charge_position" class="d-block text-dark letter">Cargo:</label>
+                                        </div>
+                                            <input
+                                                type="text"
+                                                class="form-control text-center"
+                                                name="person_in_charge_position"
+                                                id="person_in_charge_position"
+                                                placeholder="Ingresé el Cargo"
+                                                value="{{ old('person_in_charge_position', $configuration->person_in_charge_position) }}"
+                                            >
+                                        @error('person_in_charge_position')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
                                 </div>
 
-                                {{-- PERSON NAME IN CHARGE --}}
-                                <x-inputs.text-field-row name="person_in_charge" label="Encargado:"
-                                    placeholder="Ingresé la Persona Encargada" :default-value="$configuration->person_in_charge" />
-
-                                {{-- PERSON NAME IN CHARGE POSITION --}}
-                                <x-inputs.text-field-row name="person_in_charge_position" label="Cargo:"
-                                    placeholder="Ingresé el Cargo" :default-value="$configuration->person_in_charge_position" />
-
                                 {{-- PERSON IN CHARGE POSITION ABBREVIATION --}}
-                                <x-inputs.text-field-row name="person_in_charge_position_abbreviation"
-                                    label="Cargo Abreviado:" placeholder="Ingresé el Cargo Abreviado" :default-value="$configuration->person_in_charge_position_abbreviation" />
+                                <div class="form-row">
+                                    <div class="form-group col-md-6 has-warning">
+                                        <div class="mb-0">
+                                        <label for="person_in_charge_position_abbreviation" class="d-block text-dark letter">Cargo Abreviado:</label>
+                                        </div>
+                                            <input
+                                                type="text"
+                                                class="form-control text-center"
+                                                name="person_in_charge_position_abbreviation"
+                                                id="person_in_charge_position_abbreviation"
+                                                placeholder="Ingresé el Cargo Abreviado"
+                                                value="{{ old('person_in_charge_position_abbreviation', $configuration->person_in_charge_position_abbreviation) }}"
+                                            >
+                                        @error('person_in_charge_position_abbreviation')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
 
                                 {{-- E-MAIL --}}
-                                <x-inputs.text-field-row name="email" label="E-mail:" type="email"
-                                    placeholder="Ingresé el E-mail" :default-value="$configuration->email" />
+                                    <div class="form-group col-md-4 has-warning">
+                                        <div class="mb-0">
+                                        <label for="email" class="d-block text-dark letter">E-mail:</label>
+                                        </div>
+                                            <input
+                                                type="email"
+                                                class="form-control text-center"
+                                                name="email"
+                                                id="email"
+                                                placeholder="Ingresé el E-mail"
+                                                value="{{ old('email', $configuration->email) }}"
+                                            >
+                                        @error('email')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                </div>
 
-                                {{-- OFFICE PHONE NUMBER --}}
-                                <x-inputs.text-field-row name="office_phone_number" label="Teléfono Oficina:"
-                                    placeholder="Ingresé el Teléfono Oficina" :default-value="$configuration->office_phone_number" />
-
+                                <div class="form-row">
+                                <div class="form-group col-md-4 has-warning mb-3">
+                                    <div class="mb-0">
+                                        <label for="office_phone_number" class="d-block text-dark letter">Teléfono Oficina:</label>
+                                    </div>
+                                        <input
+                                            type="text"
+                                            class="form-control text-center"
+                                            name="office_phone_number"
+                                            id="office_phone_number"
+                                            placeholder="Ingresé el Teléfono Oficina"
+                                            value="{{ old('office_phone_number', $configuration->office_phone_number) }}"
+                                            
+                                        >
+                                    @error('office_phone_number')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
                                 {{-- PERSONAL PHONE NUMBER --}}
-                                <x-inputs.text-field-row name="personal_phone_number" label="Teléfono Celular:"
-                                    placeholder="Ingresé el Teléfono Celular" :default-value="$configuration->personal_phone_number" />
-
+                                <div class="form-group col-md-4 has-warning ml-auto">
+                                    <div class="mb-0">
+                                    <label for="personal_phone_number" class="d-block text-dark letter">Teléfono Celular:</label>
+                                    </div>
+                                        <input
+                                            type="text"
+                                            class="form-control text-center"
+                                            name="personal_phone_number"
+                                            id="personal_phone_number"
+                                            placeholder="Ingresé el Teléfono Celular"
+                                            value="{{ old('personal_phone_number', $configuration->personal_phone_number) }}"
+                                        >
+                                    @error('personal_phone_number')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
                                 {{-- INSTITUTION CODE --}}
-                                <x-inputs.text-field-row name="institution_code" label="Clave de Institución:"
-                                    placeholder="Ingresé la Clave de Institución" :default-value="$configuration->institution_code" />
-
+                                <div class="form-group col-md-4 has-warning ml-auto">
+                                    <div class="mb-0">
+                                    <label for="institution_code" class="d-block text-dark letter">Clave de Institución:</label>
+                                    </div>
+                                        <input
+                                            type="text"
+                                            class="form-control text-center"
+                                            name="institution_code"
+                                            id="institution_code"
+                                            placeholder="Ingresé la Clave de Institución"
+                                            value="{{ old('institution_code', $configuration->institution_code) }}"
+                                        >
+                                    @error('institution_code')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                </div>
                                 <div class="float-right">
                                     <button class="btn btn-success"><i class="material-icons">save</i><b>
                                             Guardar</b></button>
