@@ -65,7 +65,7 @@
                         <div class="col-md-3">
                             <label for="" class="letter text-dark">Objetivos Específicos:</label>
                         </div>
-                        <div class="col-md-9" id="specific-obj-container">
+                        <div class="col-md-9 td-actions" id="specific-obj-container">
                             @if ($project->specificObjectives->isNotEmpty())
                                 @foreach ($project->specificObjectives as $obj)
                                     <div class="d-flex">
@@ -73,8 +73,8 @@
                                             <input type="text" class="form-control" name="specific_objectives[]"
                                                 placeholder="Ingresé el Objetivo" value="{{ $obj->name }}">
                                         </div>
-                                        <button type="button" class="btn btn-danger btn-sm btn-remove-obj">
-                                            <i class="fa fa-trash"></i>
+                                        <button type="button" title="Eliminar" class="btn btn-danger btn-sm btn-remove-obj">
+                                            <i class="material-icons">delete</i>
                                         </button>
                                     </div>
                                 @endforeach
@@ -84,14 +84,14 @@
                                         <input type="text" class="form-control" name="specific_objectives[]"
                                             placeholder="Ingresé el Objetivo">
                                     </div>
-                                    <button type="button" class="btn btn-danger btn-sm btn-remove-obj">
-                                        <i class="fa fa-trash"></i>
+                                    <button type="button" title="Eliminar" class="btn btn-danger btn-sm btn-remove-obj">
+                                        <i class="material-icons">delete</i>
                                     </button>
                                 </div>
                             @endif
 
                             <button type="button" class="btn btn-success btn-sm" id="btn-add-specific-obj">
-                                <i class="fa fa-plus"></i>
+                                <i class="material-icons">add</i>
                                 <span class="d-inline-block ml-2">Agregar Objetivo Específico</span>
                             </button>
                             <div>
@@ -160,8 +160,8 @@
                             placeholder="Ingresé el Objetivo"
                         >
                     </div>
-                    <button type="button" class="btn btn-danger btn-sm btn-remove-obj">
-                        <i class="fa fa-trash"></i>
+                    <button title="Eliminar" type="button" class="btn btn-danger btn-sm btn-remove-obj">
+                        <i class="material-icons">delete</i>
                     </button>
                 </div>
             `);

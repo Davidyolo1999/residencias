@@ -37,7 +37,7 @@
                                             <option style="background: #fff ; color: black;" selected>
                                                 Selecciona una Opción</option>
                                             <option value="residencyRequest" style="background: #fff ; color: black;"
-                                                @if (request('document') === 'residencyRequest') selected @endif>PETICIÓN DE RESIDENCIA
+                                                @if (request('document') === 'residencyRequest') selected @endif>SOLICITUD DE RESIDENCIA
                                             </option>
                                             <option value="presentationLetter" style="background: #fff ; color: black;"
                                                 @if (request('document') === 'presentationLetter') selected @endif>CARTA DE PRESENTACIÓN
@@ -54,7 +54,7 @@
                                             <option value="preliminaryLetter" style="background: #fff ; color: black;"
                                                 @if (request('document') === 'preliminaryLetter') selected @endif>ANTEPROYECTO</option>
                                             <option value="paperStructure" style="background: #fff ; color: black;"
-                                                @if (request('document') === 'paperStructure') selected @endif>ESTRUCTURA DEL INFORME
+                                                @if (request('document') === 'paperStructure') selected @endif>INFORME
                                                 FINAL</option>
                                             <option value="complianceLetter" style="background: #fff ; color: black;"
                                                 @if (request('document') === 'complianceLetter') selected @endif>CÉDULA DE CUMPLIMIENTO
@@ -67,6 +67,9 @@
                                             <option value="submissionLetter" style="background: #fff ; color: black;"
                                                 @if (request('document') === 'submissionLetter') selected @endif>CARTA DE ENTREGA DE
                                                 PROYECTO</option>
+                                            <option value="authorizationLetter" style="background: #fff ; color: black;"
+                                                @if (request('document') === 'authorizationLetter') selected @endif>AUTORIZACIÓN USO DE
+                                                INFORMACIÓN</option>
                                         </select>
                                     </div>
                                 </form>

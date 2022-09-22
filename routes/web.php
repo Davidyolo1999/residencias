@@ -4,6 +4,7 @@ use App\Http\Controllers\AcceptanceLetterController;
 use App\Http\Controllers\AdminsController;
 use App\Http\Controllers\AssignmentLetterController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AuthorizationLetterController;
 use App\Http\Controllers\CommitmentLetterController;
 use App\Http\Controllers\CompletionLetterController;
 use App\Http\Controllers\ComplianceLetterController;
@@ -161,7 +162,13 @@ Route::middleware('auth')->group(function() {
         Route::put('/{student}/submission-letter/mark-as-approved', [SubmissionLetterController::class, 'submissionLetterMarkAsApproved'])->name('submissionLetterMarkAsApproved');
         Route::put('/{student}/submission-letter/signed-document', [SubmissionLetterController::class, 'submissionLetterUploadSignedDoc'])->name('submissionLetterUploadSignedDoc');
         Route::get('/{student}/submission-letter/signed-document', [SubmissionLetterController::class, 'submissionLetterDownloadSignedDoc'])->name('submissionLetterDownloadSignedDoc');
-
+        //Authorization Letter
+        Route::post('/residency-process/authorization-letter', [AuthorizationLetterController::class, 'authorizationLetter'])->name('authorizationLetter');
+        Route::post('/{student}/authorization-letter/corrections', [AuthorizationLetterController::class, 'authorizationLetterCorrections'])->name('authorizationLetterCorrections');
+        Route::put('/residency-process/authorization-letter/corrections/mark-as-solved', [AuthorizationLetterController::class, 'authorizationLetterMarkCorrectionsAsSolved'])->name('authorizationLetterMarkCorrectionsAsSolved');
+        Route::put('/{student}/authorization-letter/mark-as-approved', [AuthorizationLetterController::class, 'authorizationLetterMarkAsApproved'])->name('authorizationLetterMarkAsApproved');
+        Route::put('/{student}/authorization-letter/signed-document', [AuthorizationLetterController::class, 'authorizationLetterUploadSignedDoc'])->name('authorizationLetterUploadSignedDoc');
+        Route::get('/{student}/authorization-letter/signed-document', [AuthorizationLetterController::class, 'authorizationLetterDownloadSignedDoc'])->name('authorizationLetterDownloadSignedDoc');
     });
 
     Route::post('/corrections/{correctionId}/mark-as-solved', [CorrectionsController::class, 'markAsSolved'])->name('corrections.markAsSolved');

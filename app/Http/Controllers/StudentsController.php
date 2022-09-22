@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateStudentCompanyInfoRequest;
 use App\Http\Requests\UpdateStudentPersonalInfo;
 use App\Http\Requests\UpdateStudentProjectInfoRequest;
 use App\Http\Requests\UpdateStudentRequest;
+use App\Models\AuthorizationLetter;
 use App\Models\Career;
 use App\Models\Company;
 use App\Models\ExternalAdvisor;
@@ -36,7 +37,8 @@ class StudentsController extends Controller
         'complianceLetter'=>'qualificationLetter',
         'qualificationLetter'=>'completionLetter',
         'completionLetter'=>'submissionLetter',
-        'submissionLetter'=> null,
+        'submissionLetter'=> 'authorizationLetter',
+        'authorizationLetter' => null,
     ];
     public function index(Request $request)
     {

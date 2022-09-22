@@ -201,6 +201,20 @@ class Student extends Model
     {
         return $this->hasOne(SubmissionLetter::class, 'user_id')->where('status', DocumentStatus::STATUS_APPROVED);
     }
+    public function authorizationLetter()
+    {
+        return $this->hasOne(AuthorizationLetter::class, 'user_id')->withDefault();
+    }
+
+    public function inProcessAuthorizationLetter()
+    {
+        return $this->hasOne(AuthorizationLetter::class, 'user_id')->where('status', DocumentStatus::STATUS_PROCESSING);
+    }
+    
+    public function approvedAuthorizationLetter()
+    {
+        return $this->hasOne(AuthorizationLetter::class, 'user_id')->where('status', DocumentStatus::STATUS_APPROVED);
+    }
 
     public function company()
     {
