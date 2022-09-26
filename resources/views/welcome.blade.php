@@ -17,6 +17,21 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
     <style>
+      html,
+      body {
+        position: relative;
+        height: 100%;
+      }
+
+      body {
+        background: #eee;
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        color: #000;
+        margin: 0;
+        padding: 0;
+      }
+
         .swiper {
             width: 100%;
             height: 100%;
@@ -35,46 +50,31 @@
         }
 
         .swiper-slide {
+            text-align: center;
             font-size: 18px;
-            color: #fff;
-            -webkit-box-sizing: border-box;
-            box-sizing: border-box;
-            padding: 40px 60px;
+            background: #fff;
+
+            /* Center slide text vertically */
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
         }
 
-        .parallax-bg {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 130%;
-            height: 100%;
-            -webkit-background-size: cover;
-            background-size: cover;
-            background-position: center;
-        }
-
-        .swiper-slide .title {
-            font-size: 41px;
-            font-weight: 300;
-        }
-
-        .swiper-slide .subtitle {
-            font-size: 21px;
-        }
-
-        .swiper-slide .text {
-            font-size: 14px;
-            max-width: 400px;
-            line-height: 1.3;
-        }
-
-        .img {
-            max-width: 100%;
-            height: auto;
-            box-sizing: border-box;
-            border: 0;
-            vertical-align: middle;
-        }
+        .swiper-slide img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
 
     </style>
 </head>
@@ -103,92 +103,32 @@
 
         {{-- Right side --}}
         <div class="w-3/5 p-12">
-            <div style="--swiper-navigation-color: orange; --swiper-pagination-color: orange"
-                class="swiper mySwiper rounded">
-                <div class="parallax-bg" style="background-image: url({{ asset('img/students.jpg') }});"
-                    data-swiper-parallax="-23%"></div>
+            <div class="swiper mySwiper rounded">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
-                        <div class="title" data-swiper-parallax="-300"></div>
-
-
-                        <br>
-                        <br>
-
-                        <div class="subtitle text-white text-8x1 not-italic font-bold" data-swiper-parallax="-200">¿Cuál
-                            es la Residencia Profesional?</div>
-                        <br>
-                        <div class="text-9x1  text-white font-sans md:font-arial font-bold text-justify"
-                            data-swiper-parallax="-100">
-
-                            <br>
-                            Las Residencias profesionales son una estrategia educativa de carácter curricular,
-                            que permite al estudiante emprender un proyecto teórico-práctico, analítico,
-                            reflexivo, crítico y profesional; para resolver un problema específico de la
-                            realidad social y productiva, para fortalecer y aplicar sus competencias ...
-                        </div>
+                        
+                            <img src="{{ asset('img/inicio.png') }}">
                     </div>
                     <div class="swiper-slide">
-                        <div class="title" data-swiper-parallax="-300"></div>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-
-                        <div class="subtitle text-white text-8x1 not-italic font-bold" data-swiper-parallax="-200">
-                            Beneficios que obtienen los alumnos con
-                            las Residencias Profesionales:</div> <br>
-                        <div class="text-9x1  text-white font-sans md:font-arial font-bold text-justify"
-                            data-swiper-parallax="-100">
-
-
-                            <ol>
-                                <li>1. Retroalimentar y desarrollar conocimientos al participar en un proceso de
-                                    aprendizaje/trabajo en que se aplican los conocimientos a la vez que se adquieren
-                                    experiencias</li>
-                                <li>2. Interactuar con profesionistas experimentados de los que se va a aprender más.
-                                </li>
-                                <li>3. Conocer y manejar tecnología, métodos, sistemas y procedimientos de trabajos
-                                    actualizados y acordes con su profesión.</li>
-                                <li>4. Ser un profesionista competitivo, identificado con la realidad y la problemática
-                                    a
-                                    la
-                                    que se tendrá que enfrentar.</li>
-                                <li>5. Disponer de una alternativa más para obtener el título profesional.</li>
-                            </ol>
-
-                        </div>
+                        <img src="{{ asset('img/b1.png') }}">
                     </div>
                     <div class="swiper-slide">
-                        <div class="subtitle text-white text-8x1 not-italic font-bold" data-swiper-parallax="-200">
-                            Requisitos para realizar las Residencias
-                            Profesionales:</div>
-                        <div class="text-9x1  text-white font-sans md:font-arial font-bold text-justify"
-                            data-swiper-parallax="-100">
-                            <br>
-                            <ol>
-                                <li>
-                                    1. Haber aprobado el 80% de los créditos de su carrera.
-                                </li>
-                                <li> 2. Estar inscrito actualmente en el Instituto Haber seleccionado su tema de
-                                    proyecto y
-                                    que éste debidamente avalado por la academia.</li>
-                                <li> 3. Disponer de constancia de su situación académica emitida por el Departamento de
-                                    Control Escolar.</li>
-                                <li>
-                                    4. Haber concluido el servicio social</li>
-                            </ol>
-                        </div>
+                        <img src="{{ asset('img/b2.png') }}">
                     </div>
+                    <div class="swiper-slide">
+                        <img src="{{ asset('img/b3.png') }}">
+                    </div>
+                    
+                    <div class="swiper-slide">
+                        <img src="{{ asset('img/b4.png') }}"></div>
+
                 </div>
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>
                 <div class="swiper-pagination"></div>
             </div>
+
+        </div>
         </div>
     </header>
 
@@ -239,17 +179,17 @@
                             Oferta Educativa</a></h1>
                 </div>
                 <div class="principales">
-                    <a class="flex items-center justify-center" href="https://sidiumb.umb.mx" target="_blank">
+                    <a class="flex items-center justify-center" href="http://sidiumb.umb.edu.mx:8088/" target="_blank">
                         <img src="{{ asset('img/SIDIUMB 03.png') }}" alt="" class="h-171 w-52">
                     </a>
-                    <h1><a href="https://sidiumb.umb.mx" target="_blank">SIDIUMB</a></h1>
+                    <h1><a href="http://sidiumb.umb.edu.mx:8088/" target="_blank">SIDIUMB</a></h1>
 
                 </div>
                 <div class="center principales">
                     <a class="flex items-center justify-center" href="https://sfpya.edomexico.gob.mx/recaudacion/" target="_blank">
                         <img src="{{ asset('img/tarifas y pagos UMB 04.png') }}" alt="" class="h-171 w-52">
                     </a>
-                    <h1><a href="https://sidiumb.umb.mx" target="_blank">Tarifas y Pagos
+                    <h1><a href="https://sfpya.edomexico.gob.mx/recaudacion/" target="_blank">Tarifas y Pagos
                             UMB</a></h1>
                 </div>
 
@@ -273,7 +213,7 @@
 
                     <ul class="space-y-4 text-black">
                         <li class="flex items-center space-x-4"><i class="fab fa-facebook-square"></i>
-                            <span>Facebook</span>
+                            <a href="https://www.facebook.com/UMBVillaVictoria" target="_blank"> <span>Facebook</span></a>
                         </li>
                         <li class="flex items-center space-x-4"><i class="fab fa-twitter"></i> <span>Twitter</span></li>
                         <li class="flex items-center space-x-4"><i class="fab fa-instagram"></i> <span>Instagram</span>
@@ -297,7 +237,8 @@
                     <p class="mb-10 text-lg">Acerca de la UMB</p>
 
                     <ul class="space-y-4">
-                        <li>Ver más</li>
+                        <a href="https://umb.edomex.gob.mx/" target="_blank"><li>Ver más</li></a>
+                        
                     </ul>
                 </div>
             </div>
@@ -308,9 +249,13 @@
     <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
 
     <script>
-        var swiper = new Swiper(".mySwiper", {
-            speed: 600,
-            parallax: true,
+      var swiper = new Swiper(".mySwiper", {
+            spaceBetween: 30,
+            centeredSlides: true,
+            autoplay: {
+                delay: 7000,
+                disableOnInteraction: false,
+            },
             pagination: {
                 el: ".swiper-pagination",
                 clickable: true,
