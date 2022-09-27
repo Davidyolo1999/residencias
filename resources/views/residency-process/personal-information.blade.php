@@ -67,7 +67,7 @@
 
         <tr>
             <td  width="30%" align="center"><b>Fecha de Registro:</b></td>
-            <td align="center"> {{\Carbon\Carbon::parse($student->user->created_at)->format('d-M-Y')}}</td>
+            <td align="center"> {{\Carbon\Carbon::parse($student->user->created_at)->format('d-M-Y g:i:s a')}}</td>
         </tr>
         <tr>
             <td align="center"><b>Usuario:</b></td>

@@ -58,7 +58,7 @@
     <div class="document-name letra"></div>
     <br>
     <br>
-    <div class="request-date letra"><b>Villa Victoria, Edo. Méx. a {{ $authorizationLetter->request_date_formatted }}</b> </div>
+    <div class="request-date letra"><b style="color: red;">Municipio</b><b>, Edo. Méx. a  {{ $authorizationLetter->request_date_formatted }}</b> </div>
     <br>
     <div class="request-date letra"><b>ASUNTO:</b> <b style="text-decoration: underline;">Autorización de uso de información</b> </div>
     <br>

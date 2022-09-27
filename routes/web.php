@@ -11,6 +11,7 @@ use App\Http\Controllers\ComplianceLetterController;
 use App\Http\Controllers\ConfigurationController;
 use App\Http\Controllers\CorrectionsController;
 use App\Http\Controllers\ExternalAdvisorsController;
+use App\Http\Controllers\ExternalQualificationLetterController;
 use App\Http\Controllers\LocationsController;
 use App\Http\Controllers\PaperStructureController;
 use App\Http\Controllers\PersonalInformationController;
@@ -24,6 +25,7 @@ use App\Http\Controllers\SubmissionLetterController;
 use App\Http\Controllers\TeachersController;
 use App\Models\Admin;
 use App\Models\ExternalAdvisor;
+use App\Models\ExternalQualificationLetter;
 use App\Models\Student;
 use App\Models\Teacher;
 use Illuminate\Support\Facades\Route;
@@ -169,7 +171,16 @@ Route::middleware('auth')->group(function() {
         Route::put('/{student}/authorization-letter/mark-as-approved', [AuthorizationLetterController::class, 'authorizationLetterMarkAsApproved'])->name('authorizationLetterMarkAsApproved');
         Route::put('/{student}/authorization-letter/signed-document', [AuthorizationLetterController::class, 'authorizationLetterUploadSignedDoc'])->name('authorizationLetterUploadSignedDoc');
         Route::get('/{student}/authorization-letter/signed-document', [AuthorizationLetterController::class, 'authorizationLetterDownloadSignedDoc'])->name('authorizationLetterDownloadSignedDoc');
-    });
+        //External Qualification Letter
+        Route::post('/residency-process/external-qualification-letter', [ExternalQualificationLetterController::class, 'externalQualificationLetter'])->name('externalQualificationLetter');
+        Route::post('/{student}/external-qualification-letter/corrections', [ExternalQualificationLetterController::class, 'externalQualificationLetterCorrections'])->name('externalQualificationLetterCorrections');
+        Route::put('/residency-process/external-qualification-letter/corrections/mark-as-solved', [ExternalQualificationLetterController::class, 'externalQualificationLetterMarkCorrectionsAsSolved'])->name('externalQualificationLetterMarkCorrectionsAsSolved');
+        Route::put('/{student}/external-qualification-letter/mark-as-approved', [ExternalQualificationLetterController::class, 'externalQualificationLetterMarkAsApproved'])->name('externalQualificationLetterMarkAsApproved');
+        Route::put('/{student}/external-qualification-letter/signed-document', [ExternalQualificationLetterController::class, 'externalQualificationLetterUploadSignedDoc'])->name('externalQualificationLetterUploadSignedDoc');
+        Route::get('/{student}/external-qualification-letter/signed-document', [ExternalQualificationLetterController::class, 'externalQualificationLetterDownloadSignedDoc'])->name('externalQualificationLetterDownloadSignedDoc');
+
+
+    }); 
 
     Route::post('/corrections/{correctionId}/mark-as-solved', [CorrectionsController::class, 'markAsSolved'])->name('corrections.markAsSolved');
         

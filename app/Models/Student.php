@@ -215,6 +215,20 @@ class Student extends Model
     {
         return $this->hasOne(AuthorizationLetter::class, 'user_id')->where('status', DocumentStatus::STATUS_APPROVED);
     }
+    public function externalQualificationLetter()
+    {
+        return $this->hasOne(externalQualificationLetter::class, 'user_id')->withDefault();
+    }
+
+    public function inProcessExternalQualificationLetter()
+    {
+        return $this->hasOne(externalQualificationLetter::class, 'user_id')->where('status', DocumentStatus::STATUS_PROCESSING);
+    }
+    
+    public function approvedExternalQualificationLetter()
+    {
+        return $this->hasOne(externalQualificationLetter::class, 'user_id')->where('status', DocumentStatus::STATUS_APPROVED);
+    }
 
     public function company()
     {
