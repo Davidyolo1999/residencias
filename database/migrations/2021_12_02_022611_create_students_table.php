@@ -21,6 +21,7 @@ class CreateStudentsTable extends Migration
             $table->string('account_number', 8);
             $table->char('sex');
             $table->string('curp', 18);
+            $table->string('rpa');
             $table->double('career_percentage');
             $table->string('phone_number', 10);
             $table->boolean('is_enrolled');

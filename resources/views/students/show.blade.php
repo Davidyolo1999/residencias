@@ -25,9 +25,14 @@
             <div class="card-body">
                 <div class="row mb-3">
                     {{-- CURP --}}
-                    <div class="col-md-12">
+                    <div class="col-md-4">
                         <p class="mb-0"><b>CURP:</b></p>
                         {{ $student->curp }}
+                    </div>
+                    {{-- RPA --}}
+                    <div class="col-md-4">
+                        <p class="mb-0"><b>RPA:</b></p>
+                        {{ $student->rpa }}
                     </div>
                 </div>
 

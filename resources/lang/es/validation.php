@@ -179,6 +179,7 @@ return [
         'career' => 'carrera',
         'charge' => 'cargo',
         'sex' => 'sexo',
+        'rpa' => 'rpa',
         'start_date'=>'fecha de inicio',
         'end_date'=>'fecha de término',
         

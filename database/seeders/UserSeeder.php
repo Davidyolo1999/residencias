@@ -74,6 +74,7 @@ class UserSeeder extends Seeder
             'curp' => 'FOBD990707HMCLNV06',
             'career_percentage' => 90,
             'phone_number' => '4261249733',
+            'rpa' => 'RPA/LI/0004/2022',
             'is_enrolled' => true,
             'is_social_service_concluded' => true,
             'career_id' => 1,

@@ -82,8 +82,8 @@
         <tr>
             <td align="center">Fecha de Inicio <br> {{ $student->project->start_date_formatted }}</td>
             <td align="center">Fecha de Terminación <br> {{ $student->project->end_date_formatted }}</td>
-            <td align="center">No. de Control: <br> RPA/
-                {{ $student->career->abreviation }}/{{ str_pad($student->user_id, 4, '0', STR_PAD_LEFT) }}/{{ date('Y') }}
+            <td align="center">No. de Control: <br>
+                {{ $student->rpa}}
             </td>
         </tr>
         <tr>

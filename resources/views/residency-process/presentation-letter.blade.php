@@ -96,8 +96,8 @@
 
 <body>
     @include('residency-process.partials.header', ['title' => 'CARTA PRESENTACIÓN'])
-    <div class="request-date letra"><b>No. RPA/
-            {{ $student->career->abreviation }}/{{ str_pad($student->user_id, 4, '0', STR_PAD_LEFT) }}/{{ date('Y') }}</b>
+    <div class="request-date letra"><b>No.
+            {{ $student->rpa}}</b>
     </div>
     <div class="request-date letra mayus"><b>{{ $presentationLetter->request_date_formatted }}</b></div>
 

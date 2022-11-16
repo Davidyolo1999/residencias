@@ -30,9 +30,14 @@
                     @method('PUT')
                     <div class="row mb-3">
                         {{-- CURP --}}
-                        <div class="col-md-12">
+                        <div class="col-md-4">
                             <p class="mb-0 letter"><b>CURP:</b></p>
                             {{ $user->student->curp }}
+                        </div>
+                        {{-- RPA --}}
+                        <div class="col-md-4">
+                            <p class="mb-0 letter"><b>RPA:</b></p>
+                            {{ $user->student->rpa }}
                         </div>
                     </div>
 

@@ -140,6 +140,13 @@
                         placeholder="Ingresé Número de Cuenta"
                         :default-value="$student->account_number"
                     />
+                    {{-- RPA --}}
+                    <x-inputs.text-field-row
+                        name="rpa"
+                        label="RPA:"
+                        placeholder="Ingresé el RPA"
+                        :default-value="$student->rpa"
+                    />
 
                     {{-- SEX --}}
                     <div class="row mb-3">

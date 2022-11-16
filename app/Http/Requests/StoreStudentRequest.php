@@ -33,6 +33,7 @@ class StoreStudentRequest extends FormRequest
             'mothers_last_name' => 'required|max:255',
             'account_number' => 'required|max:8|min:8|unique:students,account_number',
             'sex' => 'required|in:m,f',
+            'rpa' => 'required|unique:students,rpa',
             'curp' => 'required|max:18|min:18|unique:students,curp',
             'career_percentage' => 'required|numeric|min:0|max:100',
             'phone_number' => 'required|numeric|digits:10',

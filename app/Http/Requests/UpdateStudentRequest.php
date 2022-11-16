@@ -32,6 +32,7 @@ class UpdateStudentRequest extends FormRequest
             'mothers_last_name' => 'required|max:255',
             'account_number' => ['required', 'max:8', 'min:8', Rule::unique('students', 'account_number')->ignore($this->student->user_id, 'user_id')],
             'sex' => 'required|in:m,f',
+            'rpa' => ['required', Rule::unique('students', 'rpa')->ignore($this->student->user_id, 'user_id')],
             'curp' => ['required', 'max:18', 'min:18', Rule::unique('students', 'curp')->ignore($this->student->user_id, 'user_id')],
             'career_percentage' => 'required|numeric|min:0|max:100',
             'phone_number' => 'required|numeric|digits:10',

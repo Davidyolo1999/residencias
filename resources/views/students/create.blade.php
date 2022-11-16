@@ -133,6 +133,12 @@
                         label="Número de Cuenta:"
                         placeholder="Ingresé Número de Cuenta"
                     />
+                    {{-- RPA --}}
+                    <x-inputs.text-field-row
+                        name="rpa"
+                        label="RPA:"
+                        placeholder="Ejemplo: RPA/LI/0001/2022"
+                    />
 
                     {{-- SEX --}}
                     <div class="row mb-3">
