@@ -3,9 +3,11 @@
 namespace App\Providers;
 
 use App\Models\Admin;
+use App\Models\Period;
 use App\Models\Teacher;
 use App\Models\User;
 use App\Policies\AdminPolicy;
+use App\Policies\PeriodPolicy;
 use App\Policies\StudentPolicy;
 use App\Policies\TeacherPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -23,6 +25,7 @@ class AuthServiceProvider extends ServiceProvider
         Admin::class => AdminPolicy::class,
         Student::class => StudentPolicy::class,
         Teacher::class => TeacherPolicy::class,
+        Period::class => PeriodPolicy::class
     ];
 
     /**
@@ -49,6 +52,5 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('view-residency-info', function (User $user) {
             return $user->role === User::STUDENT_ROLE;
         });
-
     }
 }
