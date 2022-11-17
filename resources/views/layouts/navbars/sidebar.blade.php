@@ -100,7 +100,7 @@
                 </li>
             @endcan
 
-            @can('index', App\Models\Admin::class)
+            @can('index', App\Models\Period::class)
                 <li class="nav-item{{ $activePage == 'periods' ? ' active' : '' }}">
                     <a class="nav-link" href="{{ route('periods.index') }}">
                         <i class="material-icons">manage_accounts</i>
