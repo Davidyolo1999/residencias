@@ -13,6 +13,7 @@ use App\Models\Company;
 use App\Models\Configuration;
 use App\Models\ExternalAdvisor;
 use App\Models\Location;
+use App\Models\Period;
 use App\Models\Project;
 use App\Models\Student;
 use App\Models\Teacher;
@@ -50,6 +51,15 @@ class StudentsController extends Controller
         $students = Student::query()
             ->withEmail()
             ->with('career')
+            ->when($request->period_id, function ($query, $periodId) {
+
+                $period = Period::where('id', $periodId)->first();
+
+                if ($period) {
+                    $query->whereBetween('users.created_at', [$period->start, $period->end]);
+                }
+            })
+            ->when($request->career_id, fn ($query, $carrerId) => $query->where('career_id', $carrerId))
             ->when($user->role === User::TEACHER_ROLE, fn ($query) => $query->where('teacher_id', $user->id))
             ->when($user->role === User::EXTERNAL_ADVISOR_ROLE, fn ($query) => $query->where('external_advisor_id', $user->id))
             ->when($request->document && array_key_exists($request->document, self::$documents), function ($query) use ($request) {
@@ -63,6 +73,8 @@ class StudentsController extends Controller
 
         return view('students.index', [
             'students' => $students,
+            'careers' => Career::all(),
+            'periods' => Period::all()
         ]);
     }
 

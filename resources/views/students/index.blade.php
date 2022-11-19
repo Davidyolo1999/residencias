@@ -26,15 +26,61 @@
                                     <p class="card-category text-white"><b>Lista de Estudiantes</b> </p>
                                 </div>
 
-                                <form action="{{ route('students.index') }}">
+                                <form action="{{ route('students.index') }}" class="form-row">
+                                    <div class="form-group text-center text-dark search mx-2">
+                                        <label for="period_id" class="text-white">
+                                            Periodo:
+                                        </label>
+                                        <select 
+                                            class="text-center text-dark selectpicker show-tick" 
+                                            data-style="btn btn-sm btn-success btn-round"
+                                            name="period_id" 
+                                            id="period_id" 
+                                            onchange="$(this).closest('form').submit()" 
+                                            data-size="5" 
+                                            data-width="fit"
+                                         >
+                                             <option style="background: #fff ; color: black;" value="">
+                                                Selecciona una Opción
+                                            </option>
+                                            @foreach ($periods as $period)
+                                            <option @if (request('period_id') == $period->id) selected @endif style="background: #fff ; color: black;" value="{{$period->id}}" >
+                                                {{$period->name}}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group text-center text-dark search mx-2">
+                                        <label for="career_id" class="text-white">
+                                            Licenciatura:
+                                        </label>
+                                        <select 
+                                            class="text-center text-dark selectpicker show-tick" 
+                                            data-style="btn btn-sm btn-success btn-round"
+                                            name="career_id" 
+                                            id="career_id" 
+                                            onchange="$(this).closest('form').submit()" 
+                                            data-size="5" 
+                                            data-width="fit"
+                                         >
+                                             <option style="background: #fff ; color: black;" value="">
+                                                Selecciona una Opción
+                                            </option>
+                                            @foreach ($careers as $career)
+                                            <option @if (request('career_id') == $career->id) selected @endif style="background: #fff ; color: black;" value="{{$career->id}}">
+                                                {{$career->name}}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                     <div class="form-group text-center text-dark search">
                                         <label for="document" class="text-white">
-                                            Filtrar por</label>
+                                            Documento:
+                                        </label>
                                         <select class="text-center text-dark selectpicker show-tick"
                                             data-style="btn btn-sm btn-success btn-round" name="document" id="document"
-                                            onchange="$(this).closest('form').submit()" data-size="5" data-width="fit">
-                                            
-                                            <option style="background: #fff ; color: black;" selected>
+                                            onchange="$(this).closest('form').submit()" data-size="5" data-width="fit">                                            
+                                            <option style="background: #fff ; color: black;" selected value="">
                                                 Selecciona una Opción</option>
                                             <option value="residencyRequest" style="background: #fff ; color: black;"
                                                 @if (request('document') === 'residencyRequest') selected @endif>SOLICITUD DE RESIDENCIA
@@ -95,6 +141,7 @@
                                             <th class="text-center">Apellido Materno </th>
                                             <th class="text-center">Matrícula </th>
                                             <th class="text-center">Carrera </th>
+                                            <th class="text-center">Fecha de creación </th>
                                             <th class="text-center">Acciones</th>
                                         </tr>
                                     </thead>
@@ -108,6 +155,7 @@
                                                 <td class="text-center"> {{ $student->mothers_last_name }} </td>
                                                 <td class="text-center"> {{ $student->account_number }} </td>
                                                 <td class="text-center"> {{ $student->career->name }} </td>
+                                                <td class="text-center"> {{ $student->created_at->format('d-m-Y') }} </td>
                                                 <td class="td-actions text-nowrap text-center">
                                                     <a href="{{ route('students.show', $student) }}"
                                                         class="btn btn-sm btn-info" title="Ver detalles">
