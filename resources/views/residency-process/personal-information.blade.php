@@ -75,7 +75,7 @@
         </tr>
         <tr>
             <td align="center"><b>Contraseña:</b></td>
-            <td align="center">{{$student->user->password}}</td>
+            <td align="center">{{$password}}</td>
         </tr>
     </table>
 </body>

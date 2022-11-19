@@ -39,6 +39,7 @@ class UserSeeder extends Seeder
             'state_id' => 1,
             'municipality_id' => 2,
             'locality_id' => 3,
+            'career_id' => 1
         ]);
 
         $externalAdvisorUser = User::factory()->create([

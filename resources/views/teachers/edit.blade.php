@@ -67,6 +67,32 @@
                         </div>
                     </div>
 
+                    {{-- CAREER --}}
+                    <div class="row mb-3">
+                        <div class="col-md-3">
+                            <label for="career" class="d-block">Licenciatura:</label>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="input-group input-group-dynamic">
+                                <select
+                                    class="form-control"
+                                    name="career_id"
+                                    id="career"
+                                >
+                                    <option value="" disabled>Seleccione una Opción</option>
+                                    @foreach ($careers as $career)
+                                        <option value="{{$career->id}}" @if (old('career_id', $teacher->career_id) === $career->id) selected @endif>
+                                            {{$career->name}}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            @error('career_id')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                    </div>
+
                     {{-- CURP --}}
                     <x-inputs.text-field-row
                         name="curp"

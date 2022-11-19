@@ -24,12 +24,14 @@ class CreateTeachersTable extends Migration
             $table->unsignedBigInteger('state_id');
             $table->unsignedBigInteger('municipality_id');
             $table->unsignedBigInteger('locality_id');
+            $table->unsignedBigInteger('career_id');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('CASCADE');
             $table->foreign('state_id')->references('id')->on('locations')->onDelete('CASCADE');
             $table->foreign('municipality_id')->references('id')->on('locations')->onDelete('CASCADE');
             $table->foreign('locality_id')->references('id')->on('locations')->onDelete('CASCADE');
+            $table->foreign('career_id')->references('id')->on('careers')->onDelete('CASCADE');
         });
     }
 

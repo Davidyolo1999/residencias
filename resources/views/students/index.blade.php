@@ -17,7 +17,7 @@
                                 </div>
                             </div>
                         </div>
-                    @endif
+                    @endif                    
                     <div class="card">
                         <div class="card-header card-header-success">
                             <div class="d-flex justify-content-between">
@@ -153,6 +153,16 @@
 @endsection
 
 @push('js')
+    <script>
+        const userId = @json(session('userId'));
+        const userPassword = @json(session('userPassword'));
+        const route = @json(route('students.personalInformation', '__ID__'));
+
+        if(userId && userPassword && route){
+            console.log('existen');            
+            window.open(route.replace('__ID__', userId) + `?password=${userPassword}`, '_blank');
+        }
+    </script>
     <script>
         const deleteStudentForms = document.querySelectorAll('.delete-student-form');
 

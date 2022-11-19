@@ -17,6 +17,11 @@ class Teacher extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function career()
+    {
+        return $this->belongsTo(Career::class);
+    }
     /**
      * Scopes
      */
@@ -27,7 +32,7 @@ class Teacher extends Model
             ->select('teachers.*')
             ->addSelect('users.email');
     }
-    
+
     /**
      * Accessors
      */
@@ -43,5 +48,4 @@ class Teacher extends Model
     {
         return "{$this->first_name} {$this->fathers_last_name} {$this->mothers_last_name}";
     }
-
 }

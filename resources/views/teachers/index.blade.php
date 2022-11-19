@@ -39,6 +39,7 @@
                                 <th> Apellido Materno </th>
                                 <th> Sexo </th>
                                 <th> CURP </th>
+                                <th> Licenciatura </th>
                                 <th> Acciones</th>
                             </tr>
                         </thead>
@@ -52,6 +53,7 @@
                                     <td>{{ $teacher->mothers_last_name }} </td>
                                     <td>{{ $teacher->sex_text }} </td>
                                     <td>{{ $teacher->curp }} </td>
+                                    <td>{{ $teacher->career->name ?? '--' }} </td>
                                     <td class="td-actions text-nowrap">
                                         <a href="" class="btn btn-sm btn-info" title="Ver detalles">
                                             <i class="material-icons">details</i>

@@ -10,6 +10,7 @@ use App\Http\Requests\UpdateStudentRequest;
 use App\Models\AuthorizationLetter;
 use App\Models\Career;
 use App\Models\Company;
+use App\Models\Configuration;
 use App\Models\ExternalAdvisor;
 use App\Models\Location;
 use App\Models\Project;
@@ -22,6 +23,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use Barryvdh\DomPDF\Facade as PDF;
+use Carbon\Carbon;
 use Throwable;
 
 class StudentsController extends Controller
@@ -29,15 +32,15 @@ class StudentsController extends Controller
     protected static $documents = [
         'residencyRequest' => 'presentationLetter',
         'presentationLetter' => 'commitmentLetter',
-        'commitmentLetter'=>'acceptanceLetter',
-        'acceptanceLetter'=>'assignmentLetter',
-        'assignmentLetter'=>'preliminaryLetter',
-        'preliminaryLetter'=>'paperStructure',
-        'paperStructure'=>'complianceLetter',
-        'complianceLetter'=>'qualificationLetter',
-        'qualificationLetter'=>'completionLetter',
-        'completionLetter'=>'submissionLetter',
-        'submissionLetter'=> 'authorizationLetter',
+        'commitmentLetter' => 'acceptanceLetter',
+        'acceptanceLetter' => 'assignmentLetter',
+        'assignmentLetter' => 'preliminaryLetter',
+        'preliminaryLetter' => 'paperStructure',
+        'paperStructure' => 'complianceLetter',
+        'complianceLetter' => 'qualificationLetter',
+        'qualificationLetter' => 'completionLetter',
+        'completionLetter' => 'submissionLetter',
+        'submissionLetter' => 'authorizationLetter',
         'authorizationLetter' => null,
     ];
     public function index(Request $request)
@@ -47,14 +50,14 @@ class StudentsController extends Controller
         $students = Student::query()
             ->withEmail()
             ->with('career')
-            ->when($user->role === User::TEACHER_ROLE, fn($query) => $query->where('teacher_id', $user->id))
-            ->when($user->role === User::EXTERNAL_ADVISOR_ROLE, fn($query) => $query->where('external_advisor_id', $user->id))
-            ->when($request->document && array_key_exists($request->document, self::$documents), function($query) use ($request) {
+            ->when($user->role === User::TEACHER_ROLE, fn ($query) => $query->where('teacher_id', $user->id))
+            ->when($user->role === User::EXTERNAL_ADVISOR_ROLE, fn ($query) => $query->where('external_advisor_id', $user->id))
+            ->when($request->document && array_key_exists($request->document, self::$documents), function ($query) use ($request) {
                 $nextDocument = self::$documents[$request->document];
-                
+
                 return $query
                     ->whereHas($request->document)
-                    ->when($nextDocument !== null, fn($query) => $query->whereDoesntHave($nextDocument));
+                    ->when($nextDocument !== null, fn ($query) => $query->whereDoesntHave($nextDocument));
             })
             ->paginate();
 
@@ -85,6 +88,7 @@ class StudentsController extends Controller
         DB::beginTransaction();
 
         try {
+
             $user = User::create($request->userData());
 
             $user->student()->create($request->studentData());
@@ -99,12 +103,15 @@ class StudentsController extends Controller
             ]);
         }
 
-        return redirect()->route('students.index')->with('alert', [
-            'type' => 'success',
-            'message' => 'El estudiante se agrego correctamente',
-        ]);
+        return redirect()->route('students.index')
+            ->with('alert', [
+                'type' => 'success',
+                'message' => 'El estudiante se agrego correctamente',
+            ])
+            ->with('userPassword', $request->password)
+            ->with('userId', $user->id);
     }
-    
+
     public function edit(Student $student)
     {
         return view('students.edit', [
@@ -115,18 +122,18 @@ class StudentsController extends Controller
             'states' => Location::with(['locations.locations'])->state()->get(),
         ]);
     }
-    
+
     public function update(UpdateStudentRequest $request, Student $student)
     {
         DB::beginTransaction();
-        
+
         try {
             $student->update($request->studentData());
 
             $student->user->update($request->userData());
 
             DB::commit();
-        } catch(Throwable $t) {            
+        } catch (Throwable $t) {
             DB::rollBack();
 
             return back()->with('alert', [
@@ -196,9 +203,9 @@ class StudentsController extends Controller
     {
         $project = Project::firstWhere('user_id', Auth::id()) ?? new Project();
 
-        return view('students.project-info',[
-            'project'=> $project,
-        ] );
+        return view('students.project-info', [
+            'project' => $project,
+        ]);
     }
 
     public function updateProjectInfo(UpdateStudentProjectInfoRequest $request)
@@ -217,9 +224,9 @@ class StudentsController extends Controller
 
         if ($request->activity_schedule_image) {
             $path = $request->activity_schedule_image->store('public/project');
-    
+
             $data['activity_schedule_image'] = $path;
-        }        
+        }
 
         $project->fill(Arr::except($data, 'specific_objectives'));
 
@@ -227,15 +234,15 @@ class StudentsController extends Controller
 
         try {
             $project->specificObjectives()->delete();
-            
+
             $project->save();
-            
-            $mappedObjectives = array_map(fn($obj) => ['name' => $obj], $request->specific_objectives);
-            
+
+            $mappedObjectives = array_map(fn ($obj) => ['name' => $obj], $request->specific_objectives);
+
             $project->specificObjectives()->createMany($mappedObjectives);
 
             DB::commit();
-        } catch(Throwable $t) {
+        } catch (Throwable $t) {
             dd($t->getMessage());
             DB::rollBack();
 
@@ -243,14 +250,14 @@ class StudentsController extends Controller
                 'type' => 'danger',
                 'message' => 'Ha ocurrido un error, intente más tarde',
             ]);
-        }        
+        }
 
         return redirect()->route('students.projectInfo')->with('alert', [
             'type' => 'success',
             'message' => 'La información se actualizo correctamente',
         ]);
     }
-    
+
     public function destroy(Student $student)
     {
         User::destroy($student->user_id);
@@ -269,9 +276,9 @@ class StudentsController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect()->route('students.index')->with('alert',[
+        return redirect()->route('students.index')->with('alert', [
             'type' => 'success',
-            'message' =>'la contraseña ha sido actualizada',
+            'message' => 'la contraseña ha sido actualizada',
         ]);
     }
 }

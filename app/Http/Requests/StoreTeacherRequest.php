@@ -34,6 +34,10 @@ class StoreTeacherRequest extends FormRequest
             'sex' => 'required|in:m,f',
             'curp' => 'required|max:18|unique:teachers,curp',
             'phone_number' => 'required|numeric|digits:10',
+            'career_id' => [
+                'required',
+                Rule::exists('careers', 'id')
+            ],
             'state_id' => [
                 'required',
                 Rule::exists('locations', 'id')->whereNull('parent_id'),
@@ -46,6 +50,7 @@ class StoreTeacherRequest extends FormRequest
                 'required',
                 Rule::exists('locations', 'id')->where('parent_id', $this->municipality_id),
             ],
+
             'password' => 'required|min:6|confirmed',
         ];
     }

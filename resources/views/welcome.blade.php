@@ -17,20 +17,20 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
     <style>
-      html,
-      body {
-        position: relative;
-        height: 100%;
-      }
+        html,
+        body {
+            position: relative;
+            height: 100%;
+        }
 
-      body {
-        background: #eee;
-        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-        font-size: 14px;
-        color: #000;
-        margin: 0;
-        padding: 0;
-      }
+        body {
+            background: #eee;
+            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            color: #000;
+            margin: 0;
+            padding: 0;
+        }
 
         .swiper {
             width: 100%;
@@ -70,44 +70,46 @@
         }
 
         .swiper-slide img {
-        display: block;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
     </style>
 </head>
 
 <body class="antialiased">
     {{-- Header --}}
-    <header class="flex min-h-screen bg-white">
+    <header class="grid grid-cols-1 lg:grid-cols-2 min-h-screen bg-white">
         {{-- Left side --}}
-        <div class="w-2/5 p-12 text-white">
-            <img src="{{ asset('img/o.jpg') }}" alt="UMB" class="mb-12 rounded-full border-black border-4">
-            <h1 class="mb-3 text-8xl font-semibold text-lime-500">UMB</h1>
-            <p class="text-xl text-black">Unidad de Estudios Superiores Villa Victoria</p>
-
-
-
+        <div class="p-12 text-white text-center lg:text-left space-y-4">
+            <img src="{{ asset('img/o.jpg') }}" alt="UMB" class="m-auto lg:m-0 mb-12 rounded-full border-black border-4">
+            <h2 class="mb-3 text-8xl font-semibold text-lime-500">
+                UMB
+            </h2>
+            <p class="text-xl text-black">
+                Unidad de Estudios Superiores Villa Victoria
+            </p>
             <div class="text-center">
-                <p class="text-4xl text-black">Residencias Profesionales</p>
+                <h1 class="text-4xl text-black">
+                    Residencias Profesionales
+                </h1>
                 <br>
                 <br>
-                <a href="{{ route('login') }}"
-                    class="mt-6 p-4 inline-block rounded bg-green-500 text-lg font-semibold">
+                <a href="{{ route('login') }}" class="mt-6 p-4 inline-block rounded bg-green-500 text-lg font-semibold">
                     <i class="fas fa-user inline-block"></i>
-                    Iniciar sesión</a>
+                    Iniciar sesión
+                </a>
             </div>
         </div>
 
         {{-- Right side --}}
-        <div class="w-3/5 p-12">
+        <div class="p-12">
             <div class="swiper mySwiper rounded">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
-                        
-                            <img src="{{ asset('img/inicio.png') }}">
+
+                        <img src="{{ asset('img/inicio.png') }}">
                     </div>
                     <div class="swiper-slide">
                         <img src="{{ asset('img/b1.png') }}">
@@ -118,22 +120,21 @@
                     <div class="swiper-slide">
                         <img src="{{ asset('img/b3.png') }}">
                     </div>
-                    
+
                     <div class="swiper-slide">
-                        <img src="{{ asset('img/b4.png') }}"></div>
+                        <img src="{{ asset('img/b4.png') }}">
+                    </div>
 
                 </div>
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>
                 <div class="swiper-pagination"></div>
             </div>
-
-        </div>
-        </div>
+        </div>        
     </header>
 
     <main class="py-16 bg-gray-900 text-white">
-        <h2 class="mb-10 text-6xl font-semibold text-center">Recuerda Que…</h2>
+        <h2 class="mb-10 text-2xl lg:text-6xl font-semibold text-center">Recuerda Que…</h2>
 
         <div class="container mx-auto px-12">
             <p class="mb-6 text-2xl">La residencia profesional solo se puede cursar una sola vez.</p>
@@ -159,38 +160,49 @@
         </div>
 
 
-        <h2 class="my-10 text-6xl font-semibold text-center">Más Información</h2>
+        <h2 class="my-10 text-2xl lg:text-6xl font-semibold text-center">Más Información</h2>
 
         <div class="container mx-auto text-2xl font-bold">
-            <div class="flex justify-between">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
                 <div class="principales">
                     <a class="flex items-center justify-center" href="//umb.edomex.gob.mx/directorio" target="_blank">
-                        <img src="{{ asset('img/unidades de estudio superiores 01.png') }}" alt=""
-                            class="h-171 w-52">
+                        <img src="{{ asset('img/unidades de estudio superiores 01.png') }}" alt="" class="h-171 w-52">
                     </a>
-                    <h1><a href="//umb.edomex.gob.mx/directorio" target="_blank">Unidades de
-                            Estudios Superiores</a></h1>
+                    <h3>
+                        <a href="//umb.edomex.gob.mx/directorio" target="_blank">
+                            Unidades de Estudios Superiores
+                        </a>
+                    </h3>
                 </div>
                 <div class="principales">
                     <a class="flex items-center justify-center" href="//umb.edomex.gob.mx/modelo_oferta" target="_blank">
                         <img src="{{ asset('img/modelo y oferta educativa 02.png') }}" alt="" class="h-171 w-52">
                     </a>
-                    <h1><a href="//umb.edomex.gob.mx/modelo_oferta" target="_blank">Modelo y
-                            Oferta Educativa</a></h1>
+                    <h3>
+                        <a href="//umb.edomex.gob.mx/modelo_oferta" target="_blank">
+                            Modelo y Oferta Educativa
+                        </a>
+                    </h3>
                 </div>
                 <div class="principales">
                     <a class="flex items-center justify-center" href="http://sidiumb.umb.edu.mx:8088/" target="_blank">
                         <img src="{{ asset('img/SIDIUMB 03.png') }}" alt="" class="h-171 w-52">
                     </a>
-                    <h1><a href="http://sidiumb.umb.edu.mx:8088/" target="_blank">SIDIUMB</a></h1>
-
+                    <h3>
+                        <a href="http://sidiumb.umb.edu.mx:8088/" target="_blank">
+                            SIDIUMB
+                        </a>
+                    </h3>
                 </div>
                 <div class="center principales">
                     <a class="flex items-center justify-center" href="https://sfpya.edomexico.gob.mx/recaudacion/" target="_blank">
                         <img src="{{ asset('img/tarifas y pagos UMB 04.png') }}" alt="" class="h-171 w-52">
                     </a>
-                    <h1><a href="https://sfpya.edomexico.gob.mx/recaudacion/" target="_blank">Tarifas y Pagos
-                            UMB</a></h1>
+                    <h3>
+                        <a href="https://sfpya.edomexico.gob.mx/recaudacion/" target="_blank">
+                            Tarifas y Pagos UMB
+                        </a>
+                    </h3>
                 </div>
 
             </div>
@@ -199,46 +211,53 @@
 
     <footer class="py-12 bg-white">
         <div class="container mx-auto">
-            <div class="flex text-white">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 text-white">
                 {{-- Info --}}
-                <div class="w-2/5 p-4 text-black">
+                <div class="p-4 text-black text-center lg:text-left">
                     <p class="mb-10 text-lg">UMB</p>
-
                     <p>© 2022, David Florentino Benito | Todos los derechos reservados.</p>
                 </div>
 
                 {{-- Socials --}}
-                <div class="w-1/5 p-4 text-black">
+                <div class="p-4 text-black text-center lg:text-left">
                     <p class="mb-10 text-lg">Redes Sociales</p>
-
                     <ul class="space-y-4 text-black">
-                        <li class="flex items-center space-x-4"><i class="fab fa-facebook-square"></i>
-                            <a href="https://www.facebook.com/UMBVillaVictoria" target="_blank"> <span>Facebook</span></a>
+                        <li class="flex items-center space-x-4 justify-center lg:justify-start">
+                            <i class="fab fa-facebook-square"></i>
+                            <a href="https://www.facebook.com/UMBVillaVictoria" target="_blank">
+                                <span>Facebook</span>
+                            </a>
                         </li>
-                        <li class="flex items-center space-x-4"><i class="fab fa-twitter"></i> <span>Twitter</span></li>
-                        <li class="flex items-center space-x-4"><i class="fab fa-instagram"></i> <span>Instagram</span>
+                        <li class="flex items-center space-x-4 justify-center lg:justify-start">
+                            <i class="fab fa-twitter"></i> <span>Twitter</span>
                         </li>
-                        <li class="flex items-center space-x-4"><i class="fab fa-youtube"></i> <span>Youtube</span></li>
+                        <li class="flex items-center space-x-4 justify-center lg:justify-start">
+                            <i class="fab fa-instagram"></i> <span>Instagram</span>
+                        </li>
+                        <li class="flex items-center space-x-4 justify-center lg:justify-start">
+                            <i class="fab fa-youtube"></i> <span>Youtube</span>
+                        </li>
                     </ul>
                 </div>
 
                 {{-- Another info --}}
 
-                <div class="w-1/5 p-4 text-black">
+                <div class="p-4 text-black text-center lg:text-left">
                     <p class="mb-10 text-lg">Información</p>
-
                     <ul class="space-y-4">
                         <li>Politica de Privacidad</li>
                         <li>Trabaja con Nosotros</li>
                     </ul>
                 </div>
                 {{-- Payment methods --}}
-                <div class="w-1/5 p-4 text-black">
+                <div class="p-4 text-black text-center lg:text-left">
                     <p class="mb-10 text-lg">Acerca de la UMB</p>
-
                     <ul class="space-y-4">
-                        <a href="https://umb.edomex.gob.mx/" target="_blank"><li>Ver más</li></a>
-                        
+                        <li>
+                            <a href="https://umb.edomex.gob.mx/" target="_blank">
+                                Ver más
+                            </a>                            
+                        </li>                        
                     </ul>
                 </div>
             </div>
@@ -249,7 +268,7 @@
     <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
 
     <script>
-      var swiper = new Swiper(".mySwiper", {
+        var swiper = new Swiper(".mySwiper", {
             spaceBetween: 30,
             centeredSlides: true,
             autoplay: {

@@ -344,7 +344,46 @@
     <script>
         const states = @json($states);
 
+        const teachers = @json($teachers);
+
+        const currentCareerId = @json(old('career_id', $student->career_id));
+
         $(() => {
+
+            if(currentCareerId){
+                const teachersFiltered = teachers.map((teacher) => {
+                        if(teacher?.career_id === currentCareerId){
+                            return `<option value="${teacher.id}" ${teacher.id == @json(old('teacher_id')) ? 'selected' : ''}>${teacher.first_name} ${teacher.fathers_last_name} ${teacher.mothers_last_name}</option>`
+                        }
+                        return '';
+                    })
+                    .join('');
+
+                    $('#teacher_id').html(`
+                    <option value="" selected disabled>Seleccione una opción</option>
+                    ${teachersFiltered}
+                `);
+            }
+
+
+            $('#career_id').change((e) => {
+                const careerId = Number(e.target.value);                
+                if(careerId){
+                    const teachersFiltered = teachers.map((teacher) => {
+                        if(teacher?.career_id === careerId){
+                            return `<option value="${teacher.id}" ${teacher.id == @json(old('teacher_id')) ? 'selected' : ''}>${teacher.first_name} ${teacher.fathers_last_name} ${teacher.mothers_last_name}</option>`
+                        }
+                        return '';
+                    })
+                    .join('');
+
+                    $('#teacher_id').html(`
+                    <option value="" selected disabled>Seleccione una opción</option>
+                    ${teachersFiltered}
+                `);
+                }
+            })
+
             $('#state_id').change((e) => {
                 const stateId = Number(e.target.value);
                 const state = states.find((state) => state.id === stateId);
