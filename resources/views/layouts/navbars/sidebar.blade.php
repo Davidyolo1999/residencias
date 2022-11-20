@@ -82,11 +82,20 @@
             </li>
             @endcan
             
+            @can('index', App\Models\Period::class)
+            <li class="nav-item{{ $activePage == 'periods' ? ' active' : '' }}">
+                <a class="nav-link" href="{{ route('periods.index') }}">
+                    <i class="material-icons">manage_accounts</i>
+                    Periodos
+                </a>
+            </li>
+            @endcan
+
             @can('index', App\Models\Admin::class)
                 <li class="nav-item{{ $activePage == 'configurations' ? ' active' : '' }}">
                     <a class="nav-link" href="{{ route('configurations.unitInfo') }}">
                         <i class="material-icons">domain_add</i>
-                         Configuración General
+                        Configuración General
                     </a>
                 </li>
             @endcan
@@ -95,20 +104,10 @@
                 <li class="nav-item{{ $activePage == 'admins' ? ' active' : '' }}">
                     <a class="nav-link" href="{{ route('admins.index') }}">
                         <i class="material-icons">manage_accounts</i>
-                         Administradores
+                        Administradores
                     </a>
                 </li>
             @endcan
-
-            @can('index', App\Models\Period::class)
-                <li class="nav-item{{ $activePage == 'periods' ? ' active' : '' }}">
-                    <a class="nav-link" href="{{ route('periods.index') }}">
-                        <i class="material-icons">manage_accounts</i>
-                         Periodos
-                    </a>
-                </li>
-            @endcan
-
 
             @can('index', App\Models\Student::class)
                 <li class="nav-item{{ $activePage == 'students' ? ' active' : '' }}">

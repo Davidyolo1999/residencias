@@ -75,9 +75,9 @@
                                     name="career_id"
                                     id="career"
                                 >
-                                    <option value="" disabled>Seleccione una Opción</option>
+                                    <option value="" selected disabled>Seleccione una Opción</option>
                                     @foreach ($careers as $career)
-                                        <option value="{{$career->id}}" @if (old('career_id') === $career->id) selected @endif>
+                                        <option value="{{$career->id}}" @if (old('career_id') == $career->id) selected @endif>
                                             {{$career->name}}
                                         </option>
                                     @endforeach

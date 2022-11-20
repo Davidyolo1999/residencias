@@ -34,6 +34,11 @@
                         <p class="mb-0"><b>RPA:</b></p>
                         {{ $student->rpa }}
                     </div>
+                    {{-- Regulate --}}
+                    <div class="col-md-4">
+                        <p class="mb-0"><b>Regular:</b></p>
+                        {{ $student->regulate  ? 'Si' : 'No' }}
+                    </div>
                 </div>
 
                 <div class="row mb-3">

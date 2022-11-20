@@ -108,7 +108,6 @@
             <div class="swiper mySwiper rounded">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
-
                         <img src="{{ asset('img/inicio.png') }}">
                     </div>
                     <div class="swiper-slide">
@@ -120,11 +119,9 @@
                     <div class="swiper-slide">
                         <img src="{{ asset('img/b3.png') }}">
                     </div>
-
                     <div class="swiper-slide">
                         <img src="{{ asset('img/b4.png') }}">
                     </div>
-
                 </div>
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>
@@ -134,10 +131,10 @@
     </header>
 
     <main class="py-16 bg-gray-900 text-white">
-        <h2 class="mb-10 text-2xl lg:text-6xl font-semibold text-center">Recuerda Que…</h2>
+        <h2 class="mb-10 text-5xl lg:text-6xl font-semibold text-center">Recuerda Que…</h2>
 
         <div class="container mx-auto px-12">
-            <p class="mb-6 text-2xl">La residencia profesional solo se puede cursar una sola vez.</p>
+            <p class="mb-6 text-2xl text-justify">La residencia profesional solo se puede cursar una sola vez.</p>
 
             <p class="mb-6 text-2xl text-justify">Debes tener autorizado tu proyecto, estar reinscrito y abrir
                 expediente antes de iniciar actividades en la empresa.
@@ -160,10 +157,10 @@
         </div>
 
 
-        <h2 class="my-10 text-2xl lg:text-6xl font-semibold text-center">Más Información</h2>
+        <h2 class="my-10 text-5xl lg:text-6xl font-semibold text-center">Más Información</h2>
 
-        <div class="container mx-auto text-2xl font-bold">
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
+        <div class="container mx-auto text-xl font-bold">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
                 <div class="principales">
                     <a class="flex items-center justify-center" href="//umb.edomex.gob.mx/directorio" target="_blank">
                         <img src="{{ asset('img/unidades de estudio superiores 01.png') }}" alt="" class="h-171 w-52">
@@ -201,6 +198,27 @@
                     <h3>
                         <a href="https://sfpya.edomexico.gob.mx/recaudacion/" target="_blank">
                             Tarifas y Pagos UMB
+                        </a>
+                    </h3>
+                </div>
+                <div class="center principales">
+                    <a class="flex items-center justify-center" href="https://elibro.net/es/lc/umb/login_usuario/?next=/es/lc/umb/inicio/" target="_blank">
+                        <img src="{{ asset('img/bibliovirtual.png') }}" alt="" class="h-171 w-52">
+                    </a>
+                    <h3>
+                        <a href="https://elibro.net/es/lc/umb/login_usuario/?next=/es/lc/umb/inicio/" target="_blank">
+                            Biblioteca Virtual E-Libro
+                        </a>
+                    </h3>
+                </div>
+                <div class="center principales">
+                    <a class="flex items-center justify-center" href="https://umb.edomex.gob.mx/publicaciones" target="_blank">
+                        <img src="{{ asset('img/icon3.png') }}" alt="" class="h-171 w-52">
+                    </a>
+                    <h3>
+                        <a href="https://umb.edomex.gob.mx/publicaciones" target="_blank">
+                            
+                            INFOlibrí Rectoría
                         </a>
                     </h3>
                 </div>

@@ -78,6 +78,7 @@ class UserSeeder extends Seeder
             'rpa' => 'RPA/LI/0004/2022',
             'is_enrolled' => true,
             'is_social_service_concluded' => true,
+            'regulate' => true,
             'career_id' => 1,
             'teacher_id' => $teacherUser->id,
             'external_advisor_id' => $externalAdvisorUser->id,

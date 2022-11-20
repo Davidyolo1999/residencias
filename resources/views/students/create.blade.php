@@ -209,6 +209,20 @@
                             >
                         </div>
                     </div>
+                    {{-- REGULATE --}}
+                    <div class="row mb-3">
+                        <div class="col-md-3">
+                            <label for="regulate" class="d-block">Regular:</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input
+                                type="checkbox"
+                                id="regulate"
+                                name="regulate"
+                                @if (old('regulate')) checked @endif
+                            >
+                        </div>
+                    </div>
 
                     {{-- PHONE NUMBER --}}
                     <x-inputs.text-field-row

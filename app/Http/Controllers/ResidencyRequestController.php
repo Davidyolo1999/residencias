@@ -33,6 +33,12 @@ class ResidencyRequestController extends Controller
                 'message' => 'El estudiante debe estar inscrito',
             ]);
         }
+        if (!$student->regulate) {
+            return back()->with('alert', [
+                'type' => 'danger',
+                'message' => 'El estudiante debe ser regular',
+            ]);
+        }
 
         if (!$student->is_social_service_concluded) {
             return back()->with('alert', [
@@ -55,17 +61,17 @@ class ResidencyRequestController extends Controller
             ]);
         }
 
-        if (!$student->project) {
-            return redirect()->route('students.projectInfo')->with('alert', [
-                'type' => 'danger',
-                'message' => 'El estudiante debe cargar la información del proyecto',
-            ]);
-        }
-
         if (!$student->company) {
             return redirect()->route('students.companyInfo')->with('alert', [
                 'type' => 'danger',
                 'message' => 'El estudiante debe cargar la información de la compañia externa',
+            ]);
+        }
+
+        if (!$student->project) {
+            return redirect()->route('students.projectInfo')->with('alert', [
+                'type' => 'danger',
+                'message' => 'El estudiante debe cargar la información del proyecto',
             ]);
         }
 

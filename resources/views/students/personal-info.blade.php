@@ -39,6 +39,11 @@
                             <p class="mb-0 letter"><b>RPA:</b></p>
                             {{ $user->student->rpa }}
                         </div>
+                        {{-- Regulate --}}
+                        <div class="col-md-4">
+                            <p class="mb-0 letter"><b>Regular:</b></p>
+                            {{ $user->student->regulate ? 'Si' : 'No' }}
+                        </div>
                     </div>
 
                     <div class="row mb-3">

@@ -52,7 +52,7 @@
                                     </div>
                                     <div class="form-group text-center text-dark search mx-2">
                                         <label for="career_id" class="text-white">
-                                            Licenciatura:
+                                            Carrera:
                                         </label>
                                         <select 
                                             class="text-center text-dark selectpicker show-tick" 
