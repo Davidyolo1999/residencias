@@ -26,7 +26,7 @@ class CreateStudentsTable extends Migration
             $table->string('phone_number', 10);
             $table->boolean('is_enrolled');
             $table->boolean('is_social_service_concluded');
-            $table->boolean('regulate');
+            $table->boolean('regulate')->default(false);
             $table->unsignedBigInteger('career_id');
             $table->unsignedBigInteger('teacher_id');
             $table->unsignedBigInteger('external_advisor_id');

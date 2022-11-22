@@ -338,7 +338,7 @@
                 if(careerId){
                     const teachersFiltered = teachers.map((teacher) => {
                         if(teacher?.career_id === careerId){
-                            return `<option value="${teacher.id}" ${teacher.id == @json(old('teacher_id')) ? 'selected' : ''}>${teacher.first_name} ${teacher.fathers_last_name} ${teacher.mothers_last_name}</option>`
+                            return `<option value="${teacher.user_id}" ${teacher.user_id == @json(old('teacher_id')) ? 'selected' : ''}>${teacher.first_name} ${teacher.fathers_last_name} ${teacher.mothers_last_name}</option>`
                         }
                         return '';
                     })
