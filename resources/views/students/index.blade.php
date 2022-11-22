@@ -141,6 +141,7 @@
                                             <th class="text-center">Apellido Materno </th>
                                             <th class="text-center">Matrícula </th>
                                             <th class="text-center">Carrera </th>
+                                            <th class="text-center">Regular </th>
                                             <th class="text-center">Fecha de creación </th>
                                             <th class="text-center">Acciones</th>
                                         </tr>
@@ -155,6 +156,7 @@
                                                 <td class="text-center"> {{ $student->mothers_last_name }} </td>
                                                 <td class="text-center"> {{ $student->account_number }} </td>
                                                 <td class="text-center"> {{ $student->career->name }} </td>
+                                                <td class="text-center"> {{ $student->regulate ? 'SI' : 'NO' }} </td>
                                                 <td class="text-center"> {{ $student->created_at->format('d-m-Y') }} </td>
                                                 <td class="td-actions text-nowrap text-center">
                                                     <a href="{{ route('students.show', $student) }}"

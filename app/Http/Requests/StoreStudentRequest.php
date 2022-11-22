@@ -38,7 +38,10 @@ class StoreStudentRequest extends FormRequest
             'career_percentage' => 'required|numeric|min:0|max:100',
             'phone_number' => 'required|numeric|digits:10',
             'career_id' => 'required|exists:careers,id',
-            'teacher_id' => 'required|exists:teachers,user_id',
+            'teacher_id' => [
+                'required',
+                'exists:App\Models\Teacher,user_id'
+            ],
             'external_advisor_id' => 'required|exists:external_advisors,user_id',
             'state_id' => [
                 'required',
