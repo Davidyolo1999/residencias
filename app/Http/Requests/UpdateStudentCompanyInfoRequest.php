@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Company;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateStudentCompanyInfoRequest extends FormRequest
 {
@@ -34,6 +36,10 @@ class UpdateStudentCompanyInfoRequest extends FormRequest
             'commercial_business' => 'required|max:255',
             'Department_requesting_project' => 'required|max:255',
             'zip_code' => 'required|max:10',
+            'sector' => [
+                'required',
+                Rule::in([Company::PUBLIC, Company::PRIVATED, Company::SOCIAL, Company::EDUCATIONAL])
+            ]
         ];
     }
 }

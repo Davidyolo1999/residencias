@@ -222,8 +222,15 @@ class StudentsController extends Controller
     {
         $project = Project::firstWhere('user_id', Auth::id()) ?? new Project();
 
+
+        $period = Period::whereBetween('start', [$project->start_date, $project->end_date])
+            ->orWhereBetween('end', [$project->start_date, $project->end_date])
+            ->first();
+
+
         return view('students.project-info', [
             'project' => $project,
+            'period' => $period
         ]);
     }
 

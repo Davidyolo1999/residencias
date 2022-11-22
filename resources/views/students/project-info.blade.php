@@ -21,7 +21,7 @@
 
         <div class="card">
             <div class="card-header card-header-success">
-                <h3 class="card-title text-white"><b>Información del Proyecto</b> </h3>
+                <h3 class="card-title text-white"><b>Información del Proyecto. @if ($period) Periodo: {{$period->name}} @endif</b> </h3>
             </div>
             <div class="card-body">
 

@@ -25,11 +25,11 @@ class CreateCompaniesTable extends Migration
             $table->string('commercial_business');
             $table->string('Department_requesting_project');
             $table->string('zip_code', 10);
+            $table->string('sector');
             $table->unsignedBigInteger('user_id')->unique();
             $table->timestamps();
 
             $table->foreign('user_id')->references('user_id')->on('students')->onDelete('CASCADE');
-
         });
     }
 
