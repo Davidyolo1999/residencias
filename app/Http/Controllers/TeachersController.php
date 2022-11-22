@@ -16,9 +16,17 @@ use Throwable;
 
 class TeachersController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $teachers = Teacher::query()
+            ->when($request->search, fn ($query, $search) => $query->orWhere('user_id', 'like', "%$search%"))
+            ->when($request->search, fn ($query, $search) => $query->orWhereRelation('user', 'email', 'like', "%$search%"))
+            ->when($request->search, fn ($query, $search) => $query->orWhere('first_name', 'like', "%$search%"))
+            ->when($request->search, fn ($query, $search) => $query->orWhere('fathers_last_name', 'like', "%$search%"))
+            ->when($request->search, fn ($query, $search) => $query->orWhere('mothers_last_name', 'like', "%$search%"))
+            ->when($request->search, fn ($query, $search) => $query->orWhere('sex', 'like', "%$search%"))
+            ->when($request->search, fn ($query, $search) => $query->orWhere('curp', 'like', "%$search%"))
+            ->when($request->search, fn ($query, $search) => $query->orWhereRelation('career', 'name', 'like', "%$search%"))
             ->withEmail()
             ->paginate();
 

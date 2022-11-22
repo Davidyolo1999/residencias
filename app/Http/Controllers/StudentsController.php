@@ -59,6 +59,13 @@ class StudentsController extends Controller
                     $query->whereBetween('users.created_at', [$period->start, $period->end]);
                 }
             })
+            ->when($request->search, fn ($query, $search) => $query->orWhere('user_id', 'like', "%$search%"))
+            ->when($request->search, fn ($query, $search) => $query->orWhereRelation('user', 'email', 'like', "%$search%"))
+            ->when($request->search, fn ($query, $search) => $query->orWhere('first_name', 'like', "%$search%"))
+            ->when($request->search, fn ($query, $search) => $query->orWhere('fathers_last_name', 'like', "%$search%"))
+            ->when($request->search, fn ($query, $search) => $query->orWhere('mothers_last_name', 'like', "%$search%"))
+            ->when($request->search, fn ($query, $search) => $query->orWhere('account_number', 'like', "%$search%"))
+            ->when($request->search, fn ($query, $search) => $query->orWhereRelation('career', 'name', 'like', "%$search%"))
             ->when($request->career_id, fn ($query, $carrerId) => $query->where('career_id', $carrerId))
             ->when($user->role === User::TEACHER_ROLE, fn ($query) => $query->where('teacher_id', $user->id))
             ->when($user->role === User::EXTERNAL_ADVISOR_ROLE, fn ($query) => $query->where('external_advisor_id', $user->id))

@@ -13,9 +13,13 @@ use Throwable;
 
 class AdminsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $admins = User::query()
+            ->when($request->search, fn ($query, $search) => $query->orWhere('id', 'like', "%$search%"))
+            ->when($request->search, fn ($query, $search) => $query->orWhere('email', 'like', "%$search%"))
+            ->when($request->search, fn ($query, $search) => $query->orWhereRelation('admin', 'first_name', 'like', "%$search%"))
+            ->when($request->search, fn ($query, $search) => $query->orWhereRelation('admin', 'last_name', 'like', "%$search%"))
             ->with(['admin'])
             ->isAdmin()
             ->paginate();
@@ -40,7 +44,7 @@ class AdminsController extends Controller
             $user->admin()->create($request->adminData());
 
             DB::commit();
-        } catch(Throwable $t) {
+        } catch (Throwable $t) {
             DB::rollBack();
 
             return back()->with('alert', [
@@ -54,7 +58,7 @@ class AdminsController extends Controller
             'message' => 'El administrador se agrego correctamente',
         ]);
     }
-    
+
     public function destroy(Admin $admin)
     {
         User::destroy($admin->user_id);
@@ -64,7 +68,7 @@ class AdminsController extends Controller
             'message' => 'El administrador ha sido eliminado',
         ]);
     }
-    
+
     public function edit(Admin $admin)
     {
         return view('admins.edit', [
@@ -75,14 +79,14 @@ class AdminsController extends Controller
     public function update(UpdateAdminRequest $request, Admin $admin)
     {
         DB::beginTransaction();
-        
+
         try {
             $admin->update($request->adminData());
 
             $admin->user->update($request->userData());
 
             DB::commit();
-        } catch(Throwable $t) {            
+        } catch (Throwable $t) {
             DB::rollBack();
 
             return back()->with('alert', [
@@ -105,9 +109,9 @@ class AdminsController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect()->route('admins.index')->with('alert',[
+        return redirect()->route('admins.index')->with('alert', [
             'type' => 'success',
-            'message' =>'la contraseña ha sido actualizada',
+            'message' => 'la contraseña ha sido actualizada',
         ]);
     }
 }

@@ -20,14 +20,15 @@
                     @endif                    
                     <div class="card">
                         <div class="card-header card-header-success">
-                            <div class="d-flex justify-content-between">
-                                <div>
+                            <div class="row justify-content-between">
+                                <div class="col-md-12">
                                     <h4 class="card-title text-white"><b>Estudiantes</b> </h4>
                                     <p class="card-category text-white"><b>Lista de Estudiantes</b> </p>
                                 </div>
 
-                                <form action="{{ route('students.index') }}" class="form-row">
-                                    <div class="form-group text-center text-dark search mx-2">
+                                <form action="{{ route('students.index') }}" class="col-md-12">
+                                    <div class="form-row">
+                                    <div class="form-group text-center text-dark search col-md-4">
                                         <label for="period_id" class="text-white">
                                             Periodo:
                                         </label>
@@ -50,7 +51,7 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="form-group text-center text-dark search mx-2">
+                                    <div class="form-group text-center text-dark search col-md-4">
                                         <label for="career_id" class="text-white">
                                             Carrera:
                                         </label>
@@ -73,7 +74,7 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="form-group text-center text-dark search">
+                                    <div class="form-group text-center text-dark search col-md-4">
                                         <label for="document" class="text-white">
                                             Documento:
                                         </label>
@@ -118,6 +119,13 @@
                                                 INFORMACIÓN</option>
                                         </select>
                                     </div>
+                                    <div class="form-group text-center text-dark search col-md-12">
+                                        <label for="period_id" class="text-white">
+                                            Buscar:
+                                        </label>
+                                        <input type="text" class="form-control" name="search" value="{{request('search')}}">
+                                    </div>
+                                    </div>                                    
                                 </form>
 
                             </div>
