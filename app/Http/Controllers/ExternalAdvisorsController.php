@@ -14,10 +14,17 @@ use Throwable;
 
 class ExternalAdvisorsController extends Controller
 {
-    
-    public function index()
+
+    public function index(Request $request)
     {
         $externaladvisors = ExternalAdvisor::query()
+            ->when($request->search, fn ($query, $search) => $query->orWhere('user_id', 'like', "%$search%"))
+            ->when($request->search, fn ($query, $search) => $query->orWhereRelation('user', 'email', 'like', "%$search%"))
+            ->when($request->search, fn ($query, $search) => $query->orWhere('first_name', 'like', "%$search%"))
+            ->when($request->search, fn ($query, $search) => $query->orWhere('fathers_last_name', 'like', "%$search%"))
+            ->when($request->search, fn ($query, $search) => $query->orWhere('mothers_last_name', 'like', "%$search%"))
+            ->when($request->search, fn ($query, $search) => $query->orWhere('sex', 'like', "%$search%"))
+            ->when($request->search, fn ($query, $search) => $query->orWhere('curp', 'like', "%$search%"))
             ->withEmail()
             ->paginate();
 
@@ -44,8 +51,7 @@ class ExternalAdvisorsController extends Controller
             $user->externalAdvisor()->create($request->externalAdvisorData());
 
             DB::commit();
-
-        } catch(Throwable $t) {
+        } catch (Throwable $t) {
             DB::rollBack();
 
             return back()->with('alert', [
@@ -80,16 +86,15 @@ class ExternalAdvisorsController extends Controller
 
     public function update(UpdateExternalAdvisorRequest $request, ExternalAdvisor $externaladvisor)
     {
-          DB::beginTransaction();
-        
+        DB::beginTransaction();
+
         try {
             $externaladvisor->update($request->externalAdvisorData());
 
             $externaladvisor->user->update($request->userData());
 
             DB::commit();
-
-        } catch(Throwable $t) {
+        } catch (Throwable $t) {
 
             DB::rollBack();
 
@@ -113,10 +118,9 @@ class ExternalAdvisorsController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect()->route('externalAdvisor.index')->with('alert',[
+        return redirect()->route('externalAdvisor.index')->with('alert', [
             'type' => 'success',
-            'message' =>'la contraseña ha sido actualizada',
+            'message' => 'la contraseña ha sido actualizada',
         ]);
     }
-
 }

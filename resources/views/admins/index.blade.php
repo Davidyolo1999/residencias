@@ -22,8 +22,20 @@
 
         <div class="card">
             <div class="card-header card-header-success ">
-                <h4 class="card-title text-white"> <b>Administradores</b> </h4>
-                <p class="card-category text-white"><b>Lista de Administradores</b> </p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4 class="card-title text-white"> <b>Administradores</b> </h4>
+                        <p class="card-category text-white"><b>Lista de Administradores</b> </p>
+                    </div>
+                    <form class="col-md-6">                        
+                        <div class="form-group text-center text-dark search col-md-12">
+                            <label for="period_id" class="text-white">
+                                Buscar:
+                            </label>
+                            <input type="text" class="form-control" name="search" value="{{request('search')}}">
+                        </div>
+                    </form>
+                </div>
             </div>
             <div class="card-body">
                 <div class="text-right ">
