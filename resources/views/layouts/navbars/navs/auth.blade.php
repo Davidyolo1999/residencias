@@ -47,6 +47,9 @@
                         </p>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
+                        @if (auth()->user()->teacher || auth()->user()->externalAdvisor)
+                            <a class="dropdown-item" href="{{ route('profile') }}">{{ __('Mi perfil') }}</a>
+                        @endif                                                
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ __('Cerrar Sesión') }}</a>

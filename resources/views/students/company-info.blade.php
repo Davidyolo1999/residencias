@@ -168,6 +168,34 @@ Empresa'])
                                     @enderror
                                 </div>
                             </div>
+                            <div class="form-row align-items-end">                                
+                                <div class="col-md-6">
+                                    <label for="number_of_agreement" class="text-dark letter">Numero de convenio</label>
+                                    <input
+                                        type="text" 
+                                        class="form-control" 
+                                        name="number_of_agreement" 
+                                        id="number_of_agreement"
+                                        value="{{old('number_of_agreement', $company->number_of_agreement ?? '')}}"
+                                    >
+                                    @error('number_of_agreement')
+                                    <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="date" class="text-dark letter">Fecha</label>
+                                    <input
+                                        type="date" 
+                                        class="form-control" 
+                                        name="date"
+                                        id="date"
+                                        value="{{old('date', $company->date ? $company->date->format('Y-m-d') : '')}}"
+                                    >
+                                    @error('date')
+                                    <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
                             <div class="form-row">
                                 {{-- SECTOR --}}
                                 <div class="form-group col-md-4 has-warning">

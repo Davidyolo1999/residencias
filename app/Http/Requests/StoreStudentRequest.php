@@ -43,18 +43,6 @@ class StoreStudentRequest extends FormRequest
                 'exists:App\Models\Teacher,user_id'
             ],
             'external_advisor_id' => 'required|exists:external_advisors,user_id',
-            'state_id' => [
-                'required',
-                Rule::exists('locations', 'id')->whereNull('parent_id'),
-            ],
-            'municipality_id' => [
-                'required',
-                Rule::exists('locations', 'id')->where('parent_id', $this->state_id),
-            ],
-            'locality_id' => [
-                'required',
-                Rule::exists('locations', 'id')->where('parent_id', $this->municipality_id),
-            ],
             'password' => 'required|min:6|confirmed',
         ];
     }

@@ -231,72 +231,6 @@
                         placeholder="Ingresé Número de Teléfono"
                     />
 
-                    {{-- State --}}
-                    <div class="row mb-3">
-                        <div class="col-md-3">
-                            <label for="state_id" class="d-block">Estado:</label>
-                        </div>
-                        <div class="col-md-9">
-                            <div class="input-group input-group-dynamic">
-                                <select
-                                    class="form-control"
-                                    name="state_id"
-                                    id="state_id"
-                                >
-                                    <option value="" selected disabled>Seleccione una Opción</option>
-                                    @foreach ($states as $state)
-                                        <option value="{{ $state->id }}" @if ($state->id == old('state_id')) selected @endif>{{ $state->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            @error('state_id')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
-                    </div>
-
-                    {{-- MUNCIPALITY --}}
-                    <div class="row mb-3">
-                        <div class="col-md-3">
-                            <label for="municipality_id" class="d-block">Municipio:</label>
-                        </div>
-                        <div class="col-md-9">
-                            <div class="input-group input-group-dynamic">
-                                <select
-                                    class="form-control"
-                                    name="municipality_id"
-                                    id="municipality_id"
-                                >
-                                    <option value="" selected disabled>Seleccione una opción</option>
-                                </select>
-                            </div>
-                            @error('municipality_id')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
-                    </div>
-
-                    {{-- LOCALITY --}}
-                    <div class="row mb-3">
-                        <div class="col-md-3">
-                            <label for="locality_id" class="d-block">Localidad:</label>
-                        </div>
-                        <div class="col-md-9">
-                            <div class="input-group input-group-dynamic">
-                                <select
-                                    class="form-control"
-                                    name="locality_id"
-                                    id="locality_id"
-                                >
-                                    <option value="" selected disabled>Seleccione una Opción</option>
-                                </select>
-                            </div>
-                            @error('locality_id')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
-                    </div>
-
                     {{-- PASSWORD --}}
                     <x-inputs.text-field-row
                         name="password"
@@ -350,46 +284,7 @@
                 `);
 
                 }
-            })
-
-            $('#state_id').change((e) => {
-                const stateId = Number(e.target.value);
-                const state = states.find((state) => state.id === stateId);
-
-                if (!state) return;
-
-                const municipalities = state
-                    .locations
-                    .map((municipality) => `<option value="${municipality.id}" ${municipality.id == @json(old('municipality_id')) ? 'selected' : ''}>${municipality.name}</option>`)
-                    .join('');
-
-                $('#municipality_id').html(`
-                    <option value="" selected disabled>Seleccione una opción</option>
-                    ${municipalities}
-                `);
-            }).trigger('change');
-
-            $('#municipality_id').change((e) => {
-                const stateId = Number($('#state_id').val());
-                const municipalityId = Number(e.target.value);
-                const state = states.find((state) => state.id === stateId);
-
-                if (!state) return;
-
-                const municipality = state.locations.find((municipality) => municipality.id === municipalityId);
-
-                if (!municipality) return;
-
-                const localities = municipality
-                    .locations
-                    .map((locality) => `<option value="${locality.id}" ${locality.id == @json(old('locality_id')) ? 'selected' : ''}>${locality.name}</option>`)
-                    .join('');
-
-                $('#locality_id').html(`
-                    <option value="" selected disabled>Seleccione una opción</option>
-                    ${localities}
-                `);
-            }).trigger('change');
+            })            
         });
     </script>
 @endpush

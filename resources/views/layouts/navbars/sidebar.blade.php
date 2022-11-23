@@ -12,8 +12,6 @@
     </div>
     <div class="sidebar-wrapper">
         <ul class="nav">
-            
-
             {{-- PERFIL --}}
             @can('view-personal-info')
             <li class="nav-item">

@@ -1,4 +1,4 @@
-@extends('layouts.main', ['activePage' => 'profile', 'title' => __(''), 'titlePage' => 'Estudiantes'])
+@extends('layouts.main', ['activePage' => 'profile', 'title' => __(''), 'titlePage' => 'Mi perfil'])
 
 @section('content')
     <div class="content">
@@ -25,42 +25,25 @@
                 <h3 class="card-title text-white"><b> Información Personal</b></h3>
             </div>
             <div class="card-body">
-                <form action="{{ route('students.updatePersonalInfo') }}" method="POST">
+                <form action="{{ route('updateProfile') }}" method="POST">
                     @csrf
-                    @method('PUT')
-                    <div class="row mb-3">
-                        {{-- CURP --}}
-                        <div class="col-md-4">
-                            <p class="mb-0 letter"><b>CURP:</b></p>
-                            {{ $user->student->curp }}
-                        </div>
-                        {{-- RPA --}}
-                        <div class="col-md-4">
-                            <p class="mb-0 letter"><b>RPA:</b></p>
-                            {{ $user->student->rpa }}
-                        </div>
-                        {{-- Regulate --}}
-                        <div class="col-md-4">
-                            <p class="mb-0 letter"><b>Regular:</b></p>
-                            {{ $user->student->regulate ? 'Si' : 'No' }}
-                        </div>
-                    </div>
+                    @method('PUT')                    
 
                     <div class="row mb-3">
                         {{-- NAMES --}}
                         <div class="col-md-4">
                             <p class="mb-0 letter"><b>Nombre(s):</b></p>
-                            {{ $user->student->first_name }}
+                            {{ $first_name }}
                         </div>
                         {{-- FATHER'S LAST NAME --}}
                         <div class="col-md-4">
                             <p class="mb-0 letter"><b>Apellido Paterno:</b></p>
-                            {{ $user->student->fathers_last_name }}
+                            {{ $fathers_last_name }}
                         </div>
                         {{-- MOTHERS'S LAST NAME --}}
                         <div class="col-md-4">
                             <p class="mb-0 letter"><b>Apellido Materno:</b></p>
-                            {{ $user->student->mothers_last_name }}
+                            {{ $mothers_last_name }}
                         </div>
                     </div>
 
@@ -68,37 +51,25 @@
                         {{-- SEX --}}
                         <div class="col-md-4">
                             <p class="mb-0 letter"><b>Sexo:</b></p>
-                            {{ $user->student->sex_text }}
+                            {{ $sex_text }}
                         </div>
-                        {{-- CAREER --}}
+                        {{-- CURP --}}
                         <div class="col-md-4">
-                            <p class="mb-0 letter"><b>Carrera:</b></p>
-                            {{ $user->student->career->name }}
+                            <p class="mb-0 letter"><b>CURP:</b></p>
+                            {{ $curp }}
                         </div>
-                        {{-- ACCOUNT NUMBER --}}
-                        <div class="col-md-4">
-                            <p class="mb-0 letter"><b>Número de Cuenta:</b></p>
-                            {{ $user->student->account_number }}
+                        {{-- PHONE NUMBER --}}
+                        <div class="col-md-4 has-warning">
+                            <p class="mb-0 letter"><b>Teléfono:</b></p>
+                            <input type="text" class="form-control" name="phone_number"
+                                value="{{old('phone_number', $phone_number)}}">
+                                @error('phone_number')
+                                    <p class="text-danger">
+                                        {{$message}}
+                                    </p>
+                                @enderror
                         </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        {{-- IS ENROLLED --}}
-                        <div class="col-md-4">
-                            <p class="mb-0 letter"><b>Inscrito:</b></p>
-                            {{ $user->student->is_enrolled ? 'Si' : 'No' }}
-                        </div>
-                        {{-- IS SOCIAL SERVICE CONCLUDED --}}
-                        <div class="col-md-4">
-                            <p class="mb-0 letter"><b>Servicio Social Concluido:</b></p>
-                            {{ $user->student->is_social_service_concluded ? 'Si' : 'No' }}
-                        </div>
-                        {{-- CAREER PERCENTAGE --}}
-                        <div class="col-md-4">
-                            <p class="mb-0 letter"><b>Porcentaje de la Carrera:</b></p>
-                            {{ $user->student->career_percentage }}%
-                        </div>
-                    </div>
+                    </div>                    
 
                     <div class="row mb-3">
                         {{-- STATE --}}
@@ -107,7 +78,7 @@
                             <select class="form-control" name="state_id" id="state_id">
                                 <option value="" selected disabled>Seleccione una Opción</option>
                                 @foreach ($states as $state)
-                                    <option value="{{ $state->id }}" @if ($state->id == old('state_id', $user->student->state->id ?? '')) selected @endif>{{ $state->name }}
+                                    <option value="{{ $state->id }}" @if ($state->id == old('state_id', $state_id ?? '')) selected @endif>{{ $state->name }}
                                     </option>
                                 @endforeach
                             </select>
@@ -131,17 +102,38 @@
                             <select class="form-control" name="locality_id" id="locality_id">
                                 <option value="" selected disabled>Seleccione una Opción</option>
                             </select>
+                            @error('locality_id')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
                         </div>
                     </div>
 
+                    @if (auth()->user()->isExternalAdvisor())
                     <div class="row mb-3">
-                        {{-- PHONE NUMBER --}}
+                        {{-- CAREER --}}
                         <div class="col-md-4 has-warning">
-                            <p class="mb-0 letter"><b>Teléfono:</b></p>
-                            <input type="text" class="form-control" name="phone_number"
-                                value="{{ $user->student->phone_number }}">
+                            <p class="mb-0 letter"><b>Carrera:</b></p>
+                            <input type="text" class="form-control" name="career"
+                                value="{{ old('career', $career) }}">
+                                @error('career')
+                                    <p class="text-danger">
+                                        {{$message}}
+                                    </p>
+                                @enderror
+                        </div>
+                        {{-- CHARGE --}}
+                        <div class="col-md-4 has-warning">
+                            <p class="mb-0 letter"><b>Cargo:</b></p>
+                            <input type="text" class="form-control" name="charge"
+                                value="{{ old('charge', $charge) }}">
+                                @error('charge')
+                                    <p class="text-danger">
+                                        {{$message}}
+                                    </p>
+                                @enderror
                         </div>
                     </div>
+                    @endif                    
 
                     <div class="text-right">
                         <button class="btn  btn-success"><i class="material-icons">save</i><b> Guardar</b></button>
@@ -169,7 +161,7 @@
                 const municipalities = state
                     .locations
                     .map((municipality) =>
-                        `<option value="${municipality.id}" ${municipality.id == @json(old('municipality_id', $user->student->municipality->id ?? '')) ? 'selected' : ''}>${municipality.name}</option>`
+                        `<option value="${municipality.id}" ${municipality.id == @json(old('municipality_id', $municipality_id ?? '')) ? 'selected' : ''}>${municipality.name}</option>`
                         )
                     .join('');
 
@@ -194,7 +186,7 @@
                 const localities = municipality
                     .locations
                     .map((locality) =>
-                        `<option value="${locality.id}" ${locality.id == @json(old('locality_id', $user->student->locality->id ?? '')) ? 'selected' : ''}>${locality.name}</option>`
+                        `<option value="${locality.id}" ${locality.id == @json(old('locality_id', $locality_id ?? '')) ? 'selected' : ''}>${locality.name}</option>`
                         )
                     .join('');
 

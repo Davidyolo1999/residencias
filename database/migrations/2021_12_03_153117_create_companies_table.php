@@ -26,6 +26,8 @@ class CreateCompaniesTable extends Migration
             $table->string('Department_requesting_project');
             $table->string('zip_code', 10);
             $table->string('sector');
+            $table->string('number_of_agreement')->nullable();
+            $table->date('date')->nullable();
             $table->unsignedBigInteger('user_id')->unique();
             $table->timestamps();
 

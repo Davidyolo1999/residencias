@@ -9,6 +9,8 @@ class Company extends Model
 {
     use HasFactory;
 
+    protected $dates = ['date'];
+
     public const PUBLIC = 'publico';
     public const PRIVATED = 'privado';
     public const EDUCATIONAL = 'educativo';

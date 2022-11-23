@@ -87,6 +87,11 @@ class User extends Authenticatable
         return $this->role === self::TEACHER_ROLE;
     }
 
+    public function isExternalAdvisor()
+    {
+        return $this->role === self::EXTERNAL_ADVISOR_ROLE;
+    }
+
     public function isAdmin()
     {
         return $this->role === self::ADMIN_ROLE;

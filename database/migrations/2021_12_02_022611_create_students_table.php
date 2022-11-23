@@ -30,9 +30,9 @@ class CreateStudentsTable extends Migration
             $table->unsignedBigInteger('career_id');
             $table->unsignedBigInteger('teacher_id');
             $table->unsignedBigInteger('external_advisor_id');
-            $table->unsignedBigInteger('state_id');
-            $table->unsignedBigInteger('municipality_id');
-            $table->unsignedBigInteger('locality_id');
+            $table->unsignedBigInteger('state_id')->nullable();
+            $table->unsignedBigInteger('municipality_id')->nullable();
+            $table->unsignedBigInteger('locality_id')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('CASCADE');

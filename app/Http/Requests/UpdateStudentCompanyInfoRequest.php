@@ -36,6 +36,11 @@ class UpdateStudentCompanyInfoRequest extends FormRequest
             'commercial_business' => 'required|max:255',
             'Department_requesting_project' => 'required|max:255',
             'zip_code' => 'required|max:10',
+            'date' => [
+                'nullable',
+                'date'
+            ],
+            'number_of_agreement' => 'nullable|max:255',
             'sector' => [
                 'required',
                 Rule::in([Company::PUBLIC, Company::PRIVATED, Company::SOCIAL, Company::EDUCATIONAL])
