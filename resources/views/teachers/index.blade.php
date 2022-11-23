@@ -27,7 +27,7 @@
                         <p class="card-category text-white"><b>Lista de Profesores</b> </p>
                     </div>
                     <form class="col-md-6">                        
-                        <div class="form-group text-center text-dark search col-md-12">
+                        <div class="form-group text-center text-dark has-white search col-md-12">
                             <label for="period_id" class="text-white">
                                 Buscar:
                             </label>

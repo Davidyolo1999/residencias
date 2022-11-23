@@ -174,7 +174,8 @@ Empresa'])
                                     <div class="mb-0">
                                         <label for="sector" class="d-block text-dark letter">Sector:</label>
                                     </div>
-                                    <select name="sector" id="sector" class="form-control">                                        
+                                    <select name="sector" id="sector" class="form-control">
+                                        <option value="" selected disabled class="text-center">Seleccione una Opción</option>                                        
                                         <option value="publico" @if (old('sector', $company->sector) === 'publico') selected @endif>Publico</option>
                                         <option value="privado" @if (old('sector', $company->sector) === 'privado') selected @endif>Privado</option>
                                         <option value="educativo" @if (old('sector', $company->sector) === 'educativo') selected @endif>Educativo</option>

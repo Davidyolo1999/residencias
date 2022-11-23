@@ -28,11 +28,11 @@
                         <p class="card-category text-white"><b>Lista de Administradores</b> </p>
                     </div>
                     <form class="col-md-6">                        
-                        <div class="form-group text-center text-dark search col-md-12">
+                        <div class="form-group text-center text-dark has-white search col-md-12">
                             <label for="period_id" class="text-white">
                                 Buscar:
                             </label>
-                            <input type="text" class="form-control" name="search" value="{{request('search')}}">
+                            <input type="text" class="form-control" autofocus name="search" value="{{request('search')}}">
                         </div>
                     </form>
                 </div>

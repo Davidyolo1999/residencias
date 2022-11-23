@@ -119,11 +119,11 @@
                                                 INFORMACIÓN</option>
                                         </select>
                                     </div>
-                                    <div class="form-group text-center text-dark search col-md-12">
+                                    <div class="form-group text-center text-dark has-white search col-md-12">
                                         <label for="period_id" class="text-white">
                                             Buscar:
                                         </label>
-                                        <input type="text" class="form-control" name="search" value="{{request('search')}}">
+                                        <input type="text" autofocus class="form-control" name="search" value="{{request('search')}}">
                                     </div>
                                     </div>                                    
                                 </form>

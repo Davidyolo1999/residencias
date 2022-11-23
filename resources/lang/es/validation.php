@@ -182,6 +182,9 @@ return [
         'rpa' => 'rpa',
         'start_date'=>'fecha de inicio',
         'end_date'=>'fecha de término',
+        'schedule'=> 'horario',
+        'title' => 'título',
+        'general_objective' => 'objetivo general',
         
     ],
 
