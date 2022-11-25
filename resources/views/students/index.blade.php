@@ -132,32 +132,38 @@
                         </div>
                         <div class="card-body">
                             <div class="text-right mb-4">
-                                @can('create', App\Models\Student::class)
-                                    <a href="{{ route('students.create') }}" class="btn btn-sm btn-warning btn-round"><i
-                                            class="material-icons">person_add</i> Nuevo</a>
-                                @endcan
                                 <div class="dropdown d-inline">
-                                    <button class="btn btn-sm btn-round btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                      Exportar
+                                    <button class="btn btn-sm btn-round btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i
+                                        class="material-icons">save</i> Exportar
                                     </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                      <form action="{{ route('students.excel') }}" class="dropdown-item">
-                                        <input type="submit" value="Alumnos" style="background: none; border: none; cursor: pointer;">
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" >
+                                    <form action="{{ route('students.excel') }}" class="dropdown-item" style="background: #fff ; color: black;" >
+                                        <i
+                                        class="material-icons">download</i>
+                                        <input type="submit" value="Inf. Preliminar" style="background: none; border: none; cursor: pointer;">
                                         <input type="hidden" name="document" value="{{request('document')}}">
                                         <input type="hidden" name="career_id" value="{{request('career_id')}}">
                                         <input type="hidden" name="period_id" value="{{request('period_id')}}">
                                         <input type="hidden" name="search" value="{{request('search')}}">
-                                      </form>
-                                      <form action="{{ route('students.excel') }}" class="dropdown-item">
-                                        <input type="submit" value="Residencias" style="background: none; border: none; cursor: pointer;">
+                                    </form>
+                                    <form action="{{ route('students.excel') }}" class="dropdown-item" style="background: #fff ; color: black;">
+                                        <i
+                                        class="material-icons">download</i>
+                                        <input type="submit" value="Inf. General" style="background: none; border: none; cursor: pointer;">
                                         <input type="hidden" name="document" value="{{request('document')}}">
                                         <input type="hidden" name="career_id" value="{{request('career_id')}}">
                                         <input type="hidden" name="period_id" value="{{request('period_id')}}">
                                         <input type="hidden" name="search" value="{{request('search')}}">
                                         <input type="hidden" name="notes" value="true">
-                                      </form>
+                                        <input type="hidden" name="covenants" value="true">
+                                    </form>
                                     </div>
                                 </div>
+                                @can('create', App\Models\Student::class)
+                                <a href="{{ route('students.create') }}" class="btn btn-sm btn-outline-warning btn-round"><i
+                                        class="material-icons">person_add</i> Nuevo</a>
+                            @endcan
                             </div>
 
                             <div class="table-responsive">
@@ -171,7 +177,6 @@
                                             <th class="text-center">Apellido Materno </th>
                                             <th class="text-center">Matrícula </th>
                                             <th class="text-center">Carrera </th>
-                                            <th class="text-center">Regular </th>
                                             <th class="text-center">Fecha de creación </th>
                                             <th class="text-center">Acciones</th>
                                         </tr>
@@ -186,7 +191,6 @@
                                                 <td class="text-center"> {{ $student->mothers_last_name }} </td>
                                                 <td class="text-center"> {{ $student->account_number }} </td>
                                                 <td class="text-center"> {{ $student->career->name }} </td>
-                                                <td class="text-center"> {{ $student->regulate ? 'SI' : 'NO' }} </td>
                                                 <td class="text-center"> {{ $student->created_at->format('d-m-Y') }} </td>
                                                 <td class="td-actions text-nowrap text-center">
                                                     <a href="{{ route('students.show', $student) }}"

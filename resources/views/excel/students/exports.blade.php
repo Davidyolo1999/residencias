@@ -3,9 +3,9 @@
     <tr>
         <th style="background-color: #92d050; border: 1px solid black; text-align: center;" rowspan="2">No.</th>
         <th style="background-color: #92d050; border: 1px solid black; text-align: center;" rowspan="2">UES</th>
-        <th style="background-color: #92d050; border: 1px solid black; text-align: center;" rowspan="2">Matrícula</th>
-        <th style="background-color: #92d050; border: 1px solid black; text-align: center;" colspan="2">Sexo</th>
-        <th style="background-color: #92d050; border: 1px solid black; text-align: center;" rowspan="2">Nombre del alumno</th>
+        <th style="background-color: #92d050; border: 1px solid black; text-align: center;" rowspan="2">MATRÍCULA</th>
+        <th style="background-color: #92d050; border: 1px solid black; text-align: center;" colspan="2">SEXO</th>
+        <th style="background-color: #92d050; border: 1px solid black; text-align: center;" rowspan="2">NOMBRE DEL ALUMNO <br>Nombre(s)/Paterno/Materno </th>
         <th style="background-color: #92d050; border: 1px solid black; text-align: center;" rowspan="2">INGENIERÍA / LICENCIATURA</th>
         <th style="background-color: #92d050; border: 1px solid black; text-align: center;" rowspan="2">NOMBRE DEL PROYECTO DE RESIDENCIAS PROFESIONALES</th>
         <th style="background-color: #92d050; border: 1px solid black; text-align: center;" rowspan="2">NOMBRE DEL ASESOR INTERNO</th>
@@ -16,7 +16,10 @@
         <th style="background-color: #92d050; border: 1px solid black; text-align: center;" rowspan="2">INICIO DE RESIDENCIAS  (FECHA)</th>
         <th style="background-color: #92d050; border: 1px solid black; text-align: center;" rowspan="2">TÉRMINO DE RESIDENCIAS (FECHA)</th>
         @if ($withNotes)
-        <th style="background-color: #92d050; border: 1px solid black; text-align: center;" rowspan="2">CALIFICACION OBTENIDA</th>
+        <th style="background-color: #92d050; border: 1px solid black; text-align: center;" rowspan="2">CALIFICACIÓN OBTENIDA</th>
+        @endif
+        @if ($covenants)
+        <th style="background-color: #92d050; border: 1px solid black; text-align: center;" rowspan="2">CONVENIOS <br> Núm. Convenio, Fecha de Convenio</th>
         @endif
         <th style="background-color: #92d050; border: 1px solid black; text-align: center;" colspan="4">SECTOR</th>
     </tr>
@@ -32,74 +35,79 @@
     <tbody>
         @foreach($students as $student)
             <tr>
-                <td style="text-align: center; border: 1px solid black;">{{$loop->index + 1}}</td>
-                <td style="text-align: center; border: 1px solid black;">
+                <td style="background-color: #ffff00; text-align: center; border: 1px solid black;">{{$loop->index + 1}}</td>
+                <td style="background-color: #ffff00; text-align: center; border: 1px solid black;">
                     {{$configuration->unit}}
                 </td>
-                <td style="text-align: center; border: 1px solid black;">
+                <td style="background-color: #ffff00; text-align: center; border: 1px solid black;">
                     {{$student->account_number}}
                 </td>
-                <td style="text-align: center; border: 1px solid black;">
-                    @if ($student->sex == 'f')
+                <td style="background-color: #ffff00; text-align: center; border: 1px solid black;">
+                    @if ($student->sex === 'm')
                         X
                     @endif
                 </td>
-                <td style="text-align: center; border: 1px solid black;">
-                    @if ($student->sex == 'm')
+                <td style="background-color: #ffff00; text-align: center; border: 1px solid black;">
+                    @if ($student->sex === 'f')
                         X
                     @endif
                 </td>
-                <td style="text-align: center; border: 1px solid black;">
+                <td style="background-color: #ffff00; text-align: center; border: 1px solid black;">
                     {{$student->first_name}} {{$student->fathers_last_name}} {{$student->mothers_last_name}}
                 </td>
-                <td style="text-align: center; border: 1px solid black;">
+                <td style="background-color: #ffff00; text-align: center; border: 1px solid black;">
                     {{$student->career->name ?? '--'}}
                 </td>
-                <td style="text-align: center; border: 1px solid black;">
-                    {{$student->project->name ?? '--'}}
+                <td style="background-color: #ffff00; text-align: center; border: 1px solid black;">
+                    {{$student->project->title ?? '--'}}
                 </td>
-                <td style="text-align: center; border: 1px solid black;">
-                    {{$student->teacher->name ?? '--'}}
+                <td style="background-color: #ffff00; text-align: center; border: 1px solid black;">
+                    {{$student->teacher->first_name ?? '--'}} {{$student->teacher->fathers_last_name ?? '--'}} {{$student->teacher->mothers_last_name ?? '--'}}
                 </td>
-                <td style="text-align: center; border: 1px solid black;">
-                    {{$student->externalAdvisor->name ?? '--'}}
+                <td style="background-color: #ffff00; text-align: center; border: 1px solid black;">
+                    {{$student->externalAdvisor->first_name ?? '--'}} {{$student->externalAdvisor->fathers_last_name ?? '--'}} {{$student->externalAdvisor->mothers_last_name ?? '--'}}
                 </td>
-                <td style="text-align: center; border: 1px solid black;">
+                <td style="background-color: #ffff00; text-align: center; border: 1px solid black;">
                     {{$student->company->business_name ?? '--'}}
                 </td>
-                <td style="text-align: center; border: 1px solid black;">
+                <td style="background-color: #ffff00; text-align: center; border: 1px solid black;">
                     {{$student->company->person_in_charge ?? '--'}}
                 </td>
-                <td style="text-align: center; border: 1px solid black;">
-                    {{$student->company ? $student->company->address_name : '' }} {{$student->company ? $student->company->zip_code : '' }} {{$student->company ? $student->company->office_phone_number : '' }}                    
+                <td style="background-color: #ffff00; text-align: center; border: 1px solid black;">
+                    {{$student->company ? $student->company->address_name : '' }}, C.P. {{$student->company ? $student->company->zip_code : '' }}, TE. {{$student->company ? $student->company->office_phone_number : '' }}, E-mail: {{$student->company ? $student->company->email : '' }}                    
                 </td>
-                <td style="text-align: center; border: 1px solid black;">
+                <td style="background-color: #ffff00; text-align: center; border: 1px solid black;">
                     {{$student->project->start_date->format('d/m/Y') ?? '--'}}
                 </td>
-                <td style="text-align: center; border: 1px solid black;">
+                <td style="background-color: #ffff00; text-align: center; border: 1px solid black;">
                     {{$student->project->end_date->format('d/m/Y') ?? '--'}}
                 </td>
                 @if ($withNotes)
-                    <td style="text-align: center; border: 1px solid black;">
+                    <td style="background-color: #ffff00; text-align: center; border: 1px solid black;">
                         {{$student->qualificationLetter->qualification ?? '--'}}
                     </td>
                 @endif
-                <td style="text-align: center; border: 1px solid black;">
+                @if ($covenants)
+                    <td style="background-color: #ffff00; text-align: center; border: 1px solid black;">
+                        N.C {{$student->company->number_of_agreement ?? '--'}}, F.C {{$student->company->date->format('d/m/Y') ?? '--'}}
+                    </td>
+                @endif
+                <td style="background-color: #ffff00; text-align: center; border: 1px solid black;">
                     @if ($student->company->sector === 'educativo')
                         X
                     @endif
                 </td>
-                <td style="text-align: center; border: 1px solid black;">
+                <td style="background-color: #ffff00; text-align: center; border: 1px solid black;">
                     @if ($student->company->sector === 'publico')
                         X
                     @endif
                 </td>
-                <td style="text-align: center; border: 1px solid black;">
+                <td style="background-color: #ffff00; text-align: center; border: 1px solid black;">
                     @if ($student->company->sector === 'privado')
                         X
                     @endif
                 </td>
-                <td style="text-align: center; border: 1px solid black;">
+                <td style="background-color: #ffff00; text-align: center; border: 1px solid black;">
                     @if ($student->company->sector === 'social')
                         X
                     @endif

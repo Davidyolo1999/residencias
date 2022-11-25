@@ -25,6 +25,7 @@ use Illuminate\Validation\ValidationException;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\StudentsExport;
 use App\Models\Configuration;
+use Carbon\Carbon;
 use Throwable;
 
 class StudentsController extends Controller
@@ -120,8 +121,9 @@ class StudentsController extends Controller
             ->get();
 
         $configuration = Configuration::first();
-
-        return Excel::download(new StudentsExport($students, $configuration, $request->notes ? true : false), 'invoices.xlsx');
+        
+        $reportName = 'BASE DE DATOS RESIDENCIAS PROFESIONALES-' .Carbon::now()->format('d-m-Y').'-'. uniqid() . '.xlsx';
+        return Excel::download(new StudentsExport($students, $configuration, $request->notes ? true : false, $request->covenants ? true : false), $reportName );
     }
 
     public function create()
