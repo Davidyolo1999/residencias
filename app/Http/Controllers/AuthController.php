@@ -62,8 +62,8 @@ class AuthController extends Controller
         $state_id = auth()->user()->teacher->state_id ?? auth()->user()->externalAdvisor->state_id;
         $municipality_id = auth()->user()->teacher->municipality_id ?? auth()->user()->externalAdvisor->municipality_id;
         $locality_id = auth()->user()->teacher->locality_id ?? auth()->user()->externalAdvisor->locality_id;
-        $career = auth()->user()->externalAdvisor->career;
-        $charge = auth()->user()->externalAdvisor->charge;
+        $career = auth()->user()->externalAdvisor->career ?? '';
+        $charge = auth()->user()->externalAdvisor->charge ?? '';
 
 
         $states = Location::with(['locations.locations'])->state()->get();

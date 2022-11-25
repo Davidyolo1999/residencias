@@ -85,6 +85,8 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('/students')->name('students.')->group(function () {
         Route::get('/', [StudentsController::class, 'index'])->name('index')->can('index', Student::class);
+        Route::get('/excel', [StudentsController::class, 'excel'])->name('excel')->can('index', Student::class);
+        Route::get('/residencies-excel', [StudentsController::class, 'residenciesExcel'])->name('residenciesExcel')->can('index', Student::class);
         Route::get('/create', [StudentsController::class, 'create'])->name('create')->can('create', Student::class);
         Route::post('/', [StudentsController::class, 'store'])->name('store')->can('create', Student::class);
         Route::get('/{student}', [StudentsController::class, 'show'])->name('show')->where('student', '[0-9]+')->can('show', 'student');
@@ -162,6 +164,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/{student}/qualification-letter/corrections', [QualificationLetterController::class, 'qualificationLetterCorrections'])->name('qualificationLetterCorrections');
         Route::put('/residency-process/qualification-letter/corrections/mark-as-solved', [QualificationLetterController::class, 'qualificationLetterMarkCorrectionsAsSolved'])->name('qualificationLetterMarkCorrectionsAsSolved');
         Route::put('/{student}/qualification-letter/mark-as-approved', [QualificationLetterController::class, 'qualificationLetterMarkAsApproved'])->name('qualificationLetterMarkAsApproved');
+        Route::put('/{student}/qualification-letter/modified', [QualificationLetterController::class, 'qualificationLetterModify'])->name('qualificationLetterModify');
         Route::put('/{student}/qualification-letter/signed-document', [QualificationLetterController::class, 'qualificationLetterUploadSignedDoc'])->name('qualificationLetterUploadSignedDoc');
         Route::get('/{student}/qualification-letter/signed-document', [QualificationLetterController::class, 'qualificationLetterDownloadSignedDoc'])->name('qualificationLetterDownloadSignedDoc');
         //Completion Letter

@@ -24,7 +24,7 @@ class QualificationLetterController extends Controller
             ->where('user_id', $userId)
             ->firstOrFail();
 
-        $configuration= Configuration::firstOrfail();
+        $configuration = Configuration::firstOrfail();
 
 
         if (!$student->qualificationLetter->exists && Auth::id() !== $student->user_id) {
@@ -34,14 +34,14 @@ class QualificationLetterController extends Controller
             ]);
         }
 
-        if (!$student->approvedComplianceletter){
+        if (!$student->approvedComplianceletter) {
             return redirect()->route('students.residencyProcess')->with('alert', [
                 'type' => 'danger',
                 'message' => 'Debe estar aprobada la cédula de cumplimiento',
             ]);
         }
 
-        if (!$student->approvedComplianceletter->signed_document){
+        if (!$student->approvedComplianceletter->signed_document) {
             return redirect()->route('students.residencyProcess')->with('alert', [
                 'type' => 'danger',
                 'message' => 'Aún no se ha cargado el documento final de la cédula de cumplimiento',
@@ -56,15 +56,15 @@ class QualificationLetterController extends Controller
                 'company_id' => $student->company->id,
             ]);
 
-        $pdf = PDF::loadView('residency-process.qualification-letter',[
-            'student'=>$student,
+        $pdf = PDF::loadView('residency-process.qualification-letter', [
+            'student' => $student,
             'externalCompany' => $student->company,
             'project' => $student->project,
-            'qualificationLetter'=> $qualificationLetter,
+            'qualificationLetter' => $qualificationLetter,
             'configuration' => $configuration,
         ]);
 
-        $customReportName = 'Acta de Calificación de Residencias Profesionales-'.$student->full_name.'_'.Carbon::now()->format('d-m-Y').'.pdf'; 
+        $customReportName = 'Acta de Calificación de Residencias Profesionales-' . $student->full_name . '_' . Carbon::now()->format('d-m-Y') . '.pdf';
         return $pdf->stream($customReportName);
     }
 
@@ -93,8 +93,7 @@ class QualificationLetterController extends Controller
             $qualificationLetter->corrections()->create(['content' => $data['corrections']]);
 
             DB::commit();
-
-        } catch(Throwable $t) {
+        } catch (Throwable $t) {
 
             DB::rollBack();
 
@@ -127,7 +126,7 @@ class QualificationLetterController extends Controller
 
         $qualificationLetter->save();
 
-        $qualificationLetter->corrections->each(fn($correction) => $correction->update(['is_solved' => true]));
+        $qualificationLetter->corrections->each(fn ($correction) => $correction->update(['is_solved' => true]));
 
         return back()->with('alert', [
             'type' => 'success',
@@ -159,6 +158,30 @@ class QualificationLetterController extends Controller
         return back()->with('alert', [
             'type' => 'success',
             'message' => 'La carta de calificación ha sido aprovada',
+        ]);
+    }
+
+    public function qualificationLetterModify(Request $request, Student $student)
+    {
+        $data = $request->validate([
+            'qualification' => 'required|integer|min:0|max:100',
+            'qualification_text' => 'required|max:255',
+        ]);
+
+        $qualificationLetter = $student->qualificationLetter;
+
+        if (!$qualificationLetter) {
+            return back()->with('alert', [
+                'type' => 'danger',
+                'message' => 'La carta de calificación no existe.',
+            ]);
+        }
+
+        $qualificationLetter->update($data);
+
+        return back()->with('alert', [
+            'type' => 'success',
+            'message' => 'La carta de calificación ha sido actualizada.',
         ]);
     }
 

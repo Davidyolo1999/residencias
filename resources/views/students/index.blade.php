@@ -131,11 +131,33 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <div class="text-right">
+                            <div class="text-right mb-4">
                                 @can('create', App\Models\Student::class)
                                     <a href="{{ route('students.create') }}" class="btn btn-sm btn-warning btn-round"><i
                                             class="material-icons">person_add</i> Nuevo</a>
                                 @endcan
+                                <div class="dropdown d-inline">
+                                    <button class="btn btn-sm btn-round btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      Exportar
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                      <form action="{{ route('students.excel') }}" class="dropdown-item">
+                                        <input type="submit" value="Alumnos" style="background: none; border: none; cursor: pointer;">
+                                        <input type="hidden" name="document" value="{{request('document')}}">
+                                        <input type="hidden" name="career_id" value="{{request('career_id')}}">
+                                        <input type="hidden" name="period_id" value="{{request('period_id')}}">
+                                        <input type="hidden" name="search" value="{{request('search')}}">
+                                      </form>
+                                      <form action="{{ route('students.excel') }}" class="dropdown-item">
+                                        <input type="submit" value="Residencias" style="background: none; border: none; cursor: pointer;">
+                                        <input type="hidden" name="document" value="{{request('document')}}">
+                                        <input type="hidden" name="career_id" value="{{request('career_id')}}">
+                                        <input type="hidden" name="period_id" value="{{request('period_id')}}">
+                                        <input type="hidden" name="search" value="{{request('search')}}">
+                                        <input type="hidden" name="notes" value="true">
+                                      </form>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="table-responsive">

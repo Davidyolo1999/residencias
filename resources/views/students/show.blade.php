@@ -373,12 +373,16 @@
                     </div>
                     <div class="col-md-3">
                         <button
-                            class="btn btn-block btn-success"
-                            @if (!$student->inProcessQualificationLetter) disabled @endif
+                            class="btn btn-block btn-success"                            
                             data-toggle="modal"
+                            @if (!$student->inProcessQualificationLetter && !$student->qualificationLetter) disabled @endif
                             data-target="#qualificationLetterApprovalModal"
                         >
-                            Aprobar documento
+                            @if (!$student->qualificationLetter)
+                                Aprobar Documento 
+                            @else
+                                Modificar
+                            @endif                            
                         </button>
                     </div>
                     <div class="col-md-3">
@@ -873,7 +877,7 @@
     <div class="modal" tabindex="-1" id="qualificationLetterApprovalModal">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form action="{{ route('students.qualificationLetterMarkAsApproved', [$student]) }}" method="POST">
+                <form action="{{ route(!$student->qualificationLetter ? 'students.qualificationLetterMarkAsApproved' : 'students.qualificationLetterModify', [$student]) }}" method="POST">
                     <div class="modal-header">
                         <h5 class="modal-title">Aprobar documento</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
