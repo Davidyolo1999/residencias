@@ -24,8 +24,8 @@ class CreateStudentsTable extends Migration
             $table->string('rpa');
             $table->double('career_percentage');
             $table->string('phone_number', 10);
-            $table->boolean('is_enrolled');
-            $table->boolean('is_social_service_concluded');
+            $table->boolean('is_enrolled')->default(false);
+            $table->boolean('is_social_service_concluded')->default(false);
             $table->boolean('regulate')->default(false);
             $table->unsignedBigInteger('career_id');
             $table->unsignedBigInteger('teacher_id');

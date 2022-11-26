@@ -51,7 +51,9 @@ class UpdateStudentRequest extends FormRequest
         return array_merge(
             Arr::except($this->validated(), ['email']),
             [
-                'regulate' => $this->regulate ? true : false
+                'regulate' => $this->regulate ? true : false,
+                'is_social_service_concluded' => $this->is_social_service_concluded ? true : false,
+                'is_enrolled' => $this->is_enrolled ? true : false
             ]
         );
     }
