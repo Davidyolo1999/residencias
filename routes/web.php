@@ -85,8 +85,7 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('/students')->name('students.')->group(function () {
         Route::get('/', [StudentsController::class, 'index'])->name('index')->can('index', Student::class);
-        Route::get('/excel', [StudentsController::class, 'excel'])->name('excel')->can('index', Student::class);
-        Route::get('/residencies-excel', [StudentsController::class, 'residenciesExcel'])->name('residenciesExcel')->can('index', Student::class);
+        Route::get('/excel', [StudentsController::class, 'excel'])->name('excel')->can('export', Student::class);
         Route::get('/create', [StudentsController::class, 'create'])->name('create')->can('create', Student::class);
         Route::post('/', [StudentsController::class, 'store'])->name('store')->can('create', Student::class);
         Route::get('/{student}', [StudentsController::class, 'show'])->name('show')->where('student', '[0-9]+')->can('show', 'student');

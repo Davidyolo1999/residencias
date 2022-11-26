@@ -132,6 +132,7 @@
                         </div>
                         <div class="card-body">
                             <div class="text-right mb-4">
+                                @can('export', App\Models\Student::class)
                                 <div class="dropdown d-inline">
                                     <button class="btn btn-sm btn-round btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i
@@ -160,6 +161,7 @@
                                     </form>
                                     </div>
                                 </div>
+                                @endcan
                                 @can('create', App\Models\Student::class)
                                 <a href="{{ route('students.create') }}" class="btn btn-sm btn-outline-warning btn-round"><i
                                         class="material-icons">person_add</i> Nuevo</a>
