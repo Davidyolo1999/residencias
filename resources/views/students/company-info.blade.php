@@ -1,5 +1,4 @@
-@extends('layouts.main', ['activePage' => 'company-info', 'title' => __(''), 'titlePage' => 'Información de la
-Empresa'])
+@extends('layouts.main', ['activePage' => 'company-info', 'title' => __(''), 'titlePage' => 'Información de la Empresa'])
 
 @section('content')
 <div class="content">
@@ -168,8 +167,12 @@ Empresa'])
                                     @enderror
                                 </div>
                             </div>
-                            <div class="form-row align-items-end">                                
-                                <div class="col-md-6">
+                            <div class="form-row align-items-end mb-2">                                
+                                <div class="col-md-4">
+                                    <label for="have_agreement_check" class="text-dark letter d-block">Posee numero de convenio</label>
+                                    <input type="checkbox" @if (old('number_of_agreement', $company->number_of_agreement) || old('date', $company->date ? $company->date->format('Y-m-d') : '')) checked @endif name="have_agreement" id="have_agreement_check">
+                                </div>
+                                <div class="col-md-4" id="number_of_agreement_column" @if (!old('number_of_agreement', $company->number_of_agreement) && !old('date', $company->date ? $company->date->format('Y-m-d') : '')) style="display: none" @endif>
                                     <label for="number_of_agreement" class="text-dark letter">Numero de convenio</label>
                                     <input
                                         type="text" 
@@ -182,7 +185,7 @@ Empresa'])
                                     <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4" id="date_column" @if (!old('number_of_agreement', $company->number_of_agreement) && !old('date', $company->date ? $company->date->format('Y-m-d') : '')) style="display: none" @endif>
                                     <label for="date" class="text-dark letter">Fecha</label>
                                     <input
                                         type="date" 
@@ -227,3 +230,36 @@ Empresa'])
     </div>
 </div>
 @endsection
+
+@push('js')
+    <script>
+        const checkbox = document.getElementById('have_agreement_check');
+
+        var numberOfAgreement = @json(old('number_of_agreement', $company->number_of_agreement ?? ''));
+        var date = @json(old('date', $company->date ? $company->date->format('Y-m-d') : ''));
+
+        if(checkbox){
+            checkbox.addEventListener('change', (e) => {                
+                var dateColumn = document.getElementById('date_column');
+                var numberOfAgreementColumn = document.getElementById('number_of_agreement_column');
+
+                var dateInput = document.getElementById('date');
+                var numberOfAgreementInput = document.getElementById('number_of_agreement');
+
+                if(e.target.checked){                    
+                    dateInput.value = date;
+                    numberOfAgreementInput.value = numberOfAgreement;
+                    dateColumn.style.display = 'block';
+                    numberOfAgreementColumn.style.display = 'block';                    
+                }else{
+                    
+                    dateInput.value = '';
+                    numberOfAgreementInput.value = '';
+
+                    dateColumn.style.display = 'none';
+                    numberOfAgreementColumn.style.display = 'none';
+                }
+            });
+        }
+    </script>
+@endpush

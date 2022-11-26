@@ -99,17 +99,17 @@
                     {{-- STATE --}}
                     <div class="col-md-4">
                         <p class="mb-0"><b>Estado:</b></p>
-                        {{ $student->state->name }}
+                        {{ $student->state->name ?? '--' }}
                     </div>
                     {{-- MUNICIPALITY --}}
                     <div class="col-md-4">
                         <p class="mb-0"><b>Municipio:</b></p>
-                        {{ $student->municipality->name }}
+                        {{ $student->municipality->name ?? '--' }}
                     </div>
                     {{-- LOCALITY --}}
                     <div class="col-md-4">
                         <p class="mb-0"><b>Localidad:</b></p>
-                        {{ $student->locality->name }}
+                        {{ $student->locality->name ?? '--' }}
                     </div>
                 </div>
 
@@ -432,11 +432,11 @@
                             @if (!$student->inProcessQualificationLetter && !$student->qualificationLetter) disabled @endif
                             data-target="#qualificationLetterApprovalModal"
                         >
-                            @if (!$student->qualificationLetter)
+                            @if (!$student->qualificationLetter->qualification && !$student->qualificationLetter->qualification_text)
                                 Aprobar Documento 
                             @else
                                 Modificar
-                            @endif                            
+                            @endif                                                                                                            
                         </button>
                     </div>
                     <div class="col-md-3">
@@ -879,7 +879,7 @@
     <div class="modal" tabindex="-1" id="qualificationLetterApprovalModal">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form action="{{ route(!$student->qualificationLetter ? 'students.qualificationLetterMarkAsApproved' : 'students.qualificationLetterModify', [$student]) }}" method="POST">
+                <form action="{{ route(!$student->qualificationLetter->qualification_text && !$student->qualificationLetter->qualification ? 'students.qualificationLetterMarkAsApproved' : 'students.qualificationLetterModify', [$student]) }}" method="POST">
                     <div class="modal-header">
                         <h5 class="modal-title">Aprobar documento</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -894,13 +894,30 @@
                             <div class="mb-0">
                             <label for="qualification" class="d-block text-dark letter">Calificacion</label>
                             </div>
-                            <input placeholder="Ejemplo: 100" type="number" class="form-control" min="0" max="100" id="qualification" name="qualification">
+                            <input 
+                                placeholder="Ejemplo: 100" 
+                                type="number" 
+                                class="form-control" 
+                                min="0" 
+                                max="100" 
+                                id="qualification" 
+                                name="qualification"
+                                value="{{$student->qualificationLetter->qualification ?? ''}}"
+                            >
                         </div>
                         <div class="form-group has-warning">
                             <div class="mb-0">
                             <label for="qualification_text" class="d-block text-dark letter">Calificación en letras</label>
                             </div>
-                            <input placeholder="Ejemplo: Cien" type="text" class="form-control" maxlength="255" id="qualification_text" name="qualification_text">
+                            <input 
+                                placeholder="Ejemplo: Cien"
+                                type="text"
+                                class="form-control"
+                                maxlength="255"
+                                id="qualification_text"
+                                name="qualification_text"
+                                value="{{$student->qualificationLetter->qualification_text ?? ''}}"
+                            >
                         </div>
                     </div>
                     <div class="modal-footer">

@@ -74,13 +74,13 @@
                     {{$student->company->person_in_charge ?? '--'}}
                 </td>
                 <td style="background-color: #ffff00; text-align: center; border: 1px solid black;">
-                    {{$student->company ? $student->company->address_name : '' }}, C.P. {{$student->company ? $student->company->zip_code : '' }}, TE. {{$student->company ? $student->company->office_phone_number : '' }}, E-mail: {{$student->company ? $student->company->email : '' }}                    
+                    {{$student->company ? $student->company->address_name : '' }} {{$student->company ? ", C.P. {$student->company->zip_code}" : '' }} {{$student->company ? ", TE. {$student->company->office_phone_number}" : '' }} {{$student->company ? ", E-mail: {$student->company->email}" : '' }}                    
                 </td>
                 <td style="background-color: #ffff00; text-align: center; border: 1px solid black;">
-                    {{$student->project->start_date->format('d/m/Y') ?? '--'}}
+                    {{$student->project ? $student->project->start_date->format('d/m/Y') : '--'}}
                 </td>
                 <td style="background-color: #ffff00; text-align: center; border: 1px solid black;">
-                    {{$student->project->end_date->format('d/m/Y') ?? '--'}}
+                    {{$student->project ? $student->project->end_date->format('d/m/Y') : '--'}}
                 </td>
                 @if ($withNotes)
                     <td style="background-color: #ffff00; text-align: center; border: 1px solid black;">
@@ -93,22 +93,22 @@
                     </td>
                 @endif
                 <td style="background-color: #ffff00; text-align: center; border: 1px solid black;">
-                    @if ($student->company->sector === 'educativo')
+                    @if ($student->company && $student->company->sector === 'educativo')
                         X
                     @endif
                 </td>
                 <td style="background-color: #ffff00; text-align: center; border: 1px solid black;">
-                    @if ($student->company->sector === 'publico')
+                    @if ($student->company && $student->company->sector === 'publico')
                         X
                     @endif
                 </td>
                 <td style="background-color: #ffff00; text-align: center; border: 1px solid black;">
-                    @if ($student->company->sector === 'privado')
+                    @if ($student->company && $student->company->sector === 'privado')
                         X
                     @endif
                 </td>
                 <td style="background-color: #ffff00; text-align: center; border: 1px solid black;">
-                    @if ($student->company->sector === 'social')
+                    @if ($student->company && $student->company->sector === 'social')
                         X
                     @endif
                 </td>

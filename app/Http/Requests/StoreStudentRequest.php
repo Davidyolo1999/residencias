@@ -63,6 +63,7 @@ class StoreStudentRequest extends FormRequest
             [
                 'is_enrolled' => $this->filled('is_enrolled'),
                 'is_social_service_concluded' => $this->filled('is_social_service_concluded'),
+                'regulate' => $this->regulate ? true : false
             ]
         );
     }

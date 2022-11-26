@@ -48,6 +48,11 @@ class UpdateStudentRequest extends FormRequest
 
     public function studentData()
     {
-        return Arr::except($this->validated(), ['email']);
+        return array_merge(
+            Arr::except($this->validated(), ['email']),
+            [
+                'regulate' => $this->regulate ? true : false
+            ]
+        );
     }
 }
