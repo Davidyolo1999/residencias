@@ -121,9 +121,9 @@ class StudentsController extends Controller
             ->get();
 
         $configuration = Configuration::first();
-        
-        $reportName = 'BASE DE DATOS RESIDENCIAS PROFESIONALES-' .Carbon::now()->format('d-m-Y').'-'. uniqid() . '.xlsx';
-        return Excel::download(new StudentsExport($students, $configuration, $request->notes ? true : false, $request->covenants ? true : false), $reportName );
+
+        $reportName = 'BASE DE DATOS RESIDENCIAS PROFESIONALES-' . Carbon::now()->format('d-m-Y') . '-' . uniqid() . '.xlsx';
+        return Excel::download(new StudentsExport($students, $configuration, $request->notes ? true : false, $request->covenants ? true : false), $reportName);
     }
 
     public function create()
@@ -323,6 +323,37 @@ class StudentsController extends Controller
             'type' => 'success',
             'message' => 'La información se actualizo correctamente',
         ]);
+    }
+
+    public function viewProjectProgress(Request $request, Project $project)
+    {
+        return view('students.project-info', [
+            'progress' => $project->progress
+        ]);
+    }
+
+    public function loadProjectProgress(Request $request, Project $project)
+    {
+        return view('students.load-project-progress', [
+            'project' => $project
+        ]);
+    }
+
+    public function storeProjectProgress(Request $request)
+    {
+    }
+
+    public function editProjectProgress(Request $request, Project $project, $progress)
+    {
+        return view('students.edit-project-progress', [
+            'project' => $project,
+            'progress' => $progress
+        ]);
+    }
+
+    public function updateProjectProgress(Request $request)
+    {
+        # code...
     }
 
     public function destroy(Student $student)

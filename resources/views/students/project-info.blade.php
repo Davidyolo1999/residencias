@@ -21,7 +21,25 @@
 
         <div class="card">
             <div class="card-header card-header-success">
-                <h3 class="card-title text-white"><b>Información del Proyecto. @if ($period) Periodo: {{$period->name}} @endif</b> </h3>
+                <div class="container">
+                    <div class="row container">
+                        <div class="col-md-8">
+                            <h3 class="card-title text-white"><b>Información del Proyecto. @if ($period) Periodo: {{$period->name}} @endif</b> </h3>
+                        </div>
+                        @if ($project->title)
+                        <div class="col-md-2">
+                            <a href="{{route('students.viewProjectProgress', $project)}}" class="btn btn-primary">
+                                Ver Avances
+                            </a>
+                        </div>
+                        <div class="col-md-2">
+                            <a href="{{route('students.loadProjectProgress', $project)}}" class="btn btn-primary">
+                                Cargar Avances
+                            </a>
+                        </div>                    
+                        @endif
+                    </div>
+                </div>                
             </div>
             <div class="card-body">
 

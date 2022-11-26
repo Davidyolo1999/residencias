@@ -95,6 +95,11 @@ Route::middleware('auth')->group(function () {
         Route::put('/company-info', [StudentsController::class, 'updateCompanyInfo'])->name('updateCompanyInfo');
         Route::get('/project-info', [StudentsController::class, 'projectInfo'])->name('projectInfo')->can('view-project-info');
         Route::put('/project-info', [StudentsController::class, 'updateProjectInfo'])->name('updateProjectInfo');
+        Route::get('/project-info/{project}/view-progress', [StudentsController::class, 'viewProjectProgress'])->name('viewProjectProgress');
+        Route::get('/project-info/{project}/load-progress', [StudentsController::class, 'loadProjectProgress'])->name('loadProjectProgress');
+        Route::get('/project-info/{project}/edit-progress/{progress}', [StudentsController::class, 'editProjectProgress'])->name('editProjectProgress');
+        Route::post('/project-info/load-progress', [StudentsController::class, 'storeProjectProgress'])->name('storeProjectProgress');
+        Route::put('/project-info/update-progress/{progress}', [StudentsController::class, 'updateProjectProgress'])->name('updateProjectProgress');
         Route::delete('/{student}', [StudentsController::class, 'destroy'])->name('destroy')->can('destroy', 'student');
         Route::get('/{student}/edit', [StudentsController::class, 'edit'])->name('edit')->can('update', 'student');
         Route::put('/{student}', [StudentsController::class, 'update'])->name('update')->can('update', 'student');
