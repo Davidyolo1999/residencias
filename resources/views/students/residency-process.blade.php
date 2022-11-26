@@ -143,6 +143,41 @@
                 </div>
                 {{-- Carta de aceptación end --}}
 
+                {{-- Autorización de uso de Información --}}
+                <div class="row">
+                    <div class="col-md-6">
+                        @include('residency-process.partials.authorization-letter-btn')
+                    </div>
+                    <div class="col-md-2">
+                        <button 
+                            class="btn btn-block btn-info" 
+                            data-target="#authorizationLetterUploadDocModal"
+                            data-toggle="modal" @if ($student->authorizationLetter->signed_document) disabled @endif>
+                            Cargar documento
+                        </button>
+                    </div>
+                    <div class="col-md-2">
+                        <a 
+                            @if ($student->authorizationLetter->signed_document)
+                            href="{{ route('students.authorizationLetterDownloadSignedDoc', $student) }}"
+                            @endif
+                            class="btn btn-block btn-success @if (!$student->authorizationLetter->signed_document) disabled @endif"
+                            target="_blank"
+                            >
+                            Ver documento
+                        </a>
+                    </div>
+                    <div class="col-md-2">
+                        <button 
+                        class="btn btn-block btn-warning" 
+                        data-toggle="modal"
+                        data-target="#authorizationLetterCorrectionsModal">
+                            Ver correcciones
+                        </button>
+                    </div>
+                </div>
+                {{-- Autorización de uso de Información end --}}
+
                 {{-- Carta de asignación --}}
                 <div class="row">
                     <div class="col-md-6">
@@ -257,6 +292,41 @@
                 </div>
                 {{-- Cédula de cumplimiento RP end --}}
 
+                {{-- Carta Evaluación Externo  --}}
+                <div class="row">
+                    <div class="col-md-6">
+                        @include('residency-process.partials.external-qualifiquation-letter-btn')
+                    </div>
+                    <div class="col-md-2">
+                        <button 
+                            class="btn btn-block btn-info" 
+                            data-target="#externalQualificationLetterUploadDocModal"
+                            data-toggle="modal" @if ($student->externalQualificationLetter->signed_document) disabled @endif>
+                            Cargar documento
+                        </button>
+                    </div>
+                    <div class="col-md-2">
+                        <a 
+                            @if ($student->externalQualificationLetter->signed_document)
+                            href="{{ route('students.externalQualificationLetterDownloadSignedDoc', $student) }}"
+                            @endif
+                            class="btn btn-block btn-success @if (!$student->externalQualificationLetter->signed_document) disabled @endif"
+                            target="_blank"
+                            >
+                            Ver documento
+                        </a>
+                    </div>
+                    <div class="col-md-2">
+                        <button 
+                        class="btn btn-block btn-warning" 
+                        data-toggle="modal"
+                        data-target="#externalQualificationLetterCorrectionsModal">
+                            Ver correcciones
+                        </button>
+                    </div>
+                </div>
+                {{-- Carta Evaluación Externo end --}}
+
                 {{-- Acta de calificación --}}
                 <div class="row">
                     <div class="col-md-6">
@@ -358,75 +428,6 @@
                     </div>
                 </div>
                 {{-- Carta de Entrega de Proyecto end --}}
-
-                {{-- Autorización de uso de Información --}}
-                <div class="row">
-                    <div class="col-md-6">
-                        @include('residency-process.partials.authorization-letter-btn')
-                    </div>
-                    <div class="col-md-2">
-                        <button 
-                            class="btn btn-block btn-info" 
-                            data-target="#authorizationLetterUploadDocModal"
-                            data-toggle="modal" @if ($student->authorizationLetter->signed_document) disabled @endif>
-                            Cargar documento
-                        </button>
-                    </div>
-                    <div class="col-md-2">
-                        <a 
-                            @if ($student->authorizationLetter->signed_document)
-                            href="{{ route('students.authorizationLetterDownloadSignedDoc', $student) }}"
-                            @endif
-                            class="btn btn-block btn-success @if (!$student->authorizationLetter->signed_document) disabled @endif"
-                            target="_blank"
-                            >
-                            Ver documento
-                        </a>
-                    </div>
-                    <div class="col-md-2">
-                        <button 
-                        class="btn btn-block btn-warning" 
-                        data-toggle="modal"
-                        data-target="#authorizationLetterCorrectionsModal">
-                            Ver correcciones
-                        </button>
-                    </div>
-                </div>
-                {{-- Autorización de uso de Información end --}}
-                {{-- Carta Evaluación Externo  --}}
-                <div class="row">
-                    <div class="col-md-6">
-                        @include('residency-process.partials.external-qualifiquation-letter-btn')
-                    </div>
-                    <div class="col-md-2">
-                        <button 
-                            class="btn btn-block btn-info" 
-                            data-target="#externalQualificationLetterUploadDocModal"
-                            data-toggle="modal" @if ($student->externalQualificationLetter->signed_document) disabled @endif>
-                            Cargar documento
-                        </button>
-                    </div>
-                    <div class="col-md-2">
-                        <a 
-                            @if ($student->externalQualificationLetter->signed_document)
-                            href="{{ route('students.externalQualificationLetterDownloadSignedDoc', $student) }}"
-                            @endif
-                            class="btn btn-block btn-success @if (!$student->externalQualificationLetter->signed_document) disabled @endif"
-                            target="_blank"
-                            >
-                            Ver documento
-                        </a>
-                    </div>
-                    <div class="col-md-2">
-                        <button 
-                        class="btn btn-block btn-warning" 
-                        data-toggle="modal"
-                        data-target="#externalQualificationLetterCorrectionsModal">
-                            Ver correcciones
-                        </button>
-                    </div>
-                </div>
-                {{-- Carta Evaluación Externo end --}}
             </div>
         </div>
     </div>

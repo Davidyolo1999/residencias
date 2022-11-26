@@ -32,16 +32,16 @@ class AssignmentLetterController extends Controller
             ]);
         }
 
-        if (!$student->approvedAcceptanceletter){
+        if (!$student->approvedAuthorizationLetter){
             return redirect()->route('students.residencyProcess')->with('alert', [
                 'type' => 'danger',
-                'message' => 'Debe estar aprobada la carta de aceptaciòn',
+                'message' => 'Debe estar aprobada la carta de uso de información',
             ]);
         }
-        if (!$student->approvedPresentationletter->signed_document){
+        if (!$student->approvedAuthorizationletter->signed_document){
             return redirect()->route('students.residencyProcess')->with('alert', [
                 'type' => 'danger',
-                'message' => 'Aún no se ha cargado el documento final de la carta de presentación',
+                'message' => 'Aún no se ha cargado el documento final de la carta de uso de información',
             ]);
         }
 

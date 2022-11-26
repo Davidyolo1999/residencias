@@ -32,17 +32,17 @@ class ExternalQualificationLetterController extends Controller
             ]);
         }
 
-        if (!$student->approvedSubmissionletter) {
+        if (!$student->approvedComplianceletter) {
             return redirect()->route('students.residencyProcess')->with('alert', [
                 'type' => 'danger',
-                'message' => 'Debe estar aprobado el uso de autorización de uso de Información',
+                'message' => 'Debe estar aprobada la cédula de cumplimiento',
             ]);
         }
 
-        if (!$student->approvedSubmissionletter->signed_document){
+        if (!$student->approvedComplianceletter->signed_document) {
             return redirect()->route('students.residencyProcess')->with('alert', [
                 'type' => 'danger',
-                'message' => 'Aún no se ha cargado el documento final de autorización de uso de Información',
+                'message' => 'Aún no se ha cargado el documento final de la cédula de cumplimiento',
             ]);
         }
 

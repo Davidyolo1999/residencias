@@ -95,6 +95,9 @@
                                             <option value="acceptanceLetter" style="background: #fff ; color: black;"
                                                 @if (request('document') === 'acceptanceLetter') selected @endif>CARTA DE ACEPTACIÓN
                                             </option>
+                                            <option value="authorizationLetter" style="background: #fff ; color: black;"
+                                            @if (request('document') === 'authorizationLetter') selected @endif>AUTORIZACIÓN USO DE
+                                            INFORMACIÓN</option>
                                             <option value="assignmentLetter" style="background: #fff ; color: black;"
                                                 @if (request('document') === 'assignmentLetter') selected @endif>CARTA DE ASIGNACIÓN
                                             </option>
@@ -114,9 +117,6 @@
                                             <option value="submissionLetter" style="background: #fff ; color: black;"
                                                 @if (request('document') === 'submissionLetter') selected @endif>CARTA DE ENTREGA DE
                                                 PROYECTO</option>
-                                            <option value="authorizationLetter" style="background: #fff ; color: black;"
-                                                @if (request('document') === 'authorizationLetter') selected @endif>AUTORIZACIÓN USO DE
-                                                INFORMACIÓN</option>
                                         </select>
                                     </div>
                                     <div class="form-group text-center text-dark has-white search col-md-12">

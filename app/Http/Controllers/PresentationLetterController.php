@@ -43,7 +43,7 @@ class PresentationLetterController extends Controller
         if (!$student->approvedResidencyRequest->signed_document){
             return redirect()->route('students.residencyProcess')->with('alert', [
                 'type' => 'danger',
-                'message' => 'Aún no se ha cargado el documento final de la petición de residencia',
+                'message' => 'Aún no se ha cargado el documento final de la solicitud de residencia',
             ]);
         }
 

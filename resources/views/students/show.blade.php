@@ -238,6 +238,33 @@
                 </div>
                 {{-- Carta de aceptación end --}}
 
+                {{--  Carta Autorización de uso de Información --}}
+                <div class="row">
+                    <div class="col-md-6">
+                        @include('residency-process.partials.authorization-letter-btn')
+                    </div>
+                    <div class="col-md-3">
+                        <form action="{{ route('students.authorizationLetterMarkAsApproved', $student) }}" method="POST">
+                            @method('PUT')
+                            @csrf
+                            <button class="btn btn-block btn-success"@if (!$student->inProcessAuthorizationLetter) disabled @endif>
+                                Aprobar documento
+                            </button>
+                        </form>
+                    </div>
+                    <div class="col-md-3">
+                        <button
+                            class="btn btn-block btn-danger"
+                            data-toggle="modal"
+                            data-target="#authorizationLetterCorrectionsModal"
+                            @if (!$student->inProcessAuthorizationLetter) disabled @endif
+                        >
+                            Enviar correcciones
+                        </button>
+                    </div>
+                </div>
+                {{-- Carta Autorización de uso de Información  end --}}
+
                 {{-- Carta de asignación --}}
                 <div class="row">
                     <div class="col-md-6">
@@ -366,6 +393,33 @@
                 </div>
                 {{-- Carta de cumplimiento end --}}
 
+                {{--  Formato Evaluación Externo --}}
+                <div class="row">
+                    <div class="col-md-6">
+                        @include('residency-process.partials.external-qualifiquation-letter-btn')
+                    </div>
+                    <div class="col-md-3">
+                        <form action="{{ route('students.externalQualificationLetterMarkAsApproved', $student) }}" method="POST">
+                            @method('PUT')
+                            @csrf
+                            <button class="btn btn-block btn-success"@if (!$student->inProcessExternalQualificationLetter) disabled @endif>
+                                Aprobar documento
+                            </button>
+                        </form>
+                    </div>
+                    <div class="col-md-3">
+                        <button
+                            class="btn btn-block btn-danger"
+                            data-toggle="modal"
+                            data-target="#externalQualificationLetterCorrectionsModal"
+                            @if (!$student->inProcessExternalQualificationLetter) disabled @endif
+                        >
+                            Enviar correcciones
+                        </button>
+                    </div>
+                </div>
+                {{-- Formato Evalución Externo  end --}}
+                
                 {{-- Acta de calificación --}}
                 <div class="row">
                     <div class="col-md-6">
@@ -451,58 +505,6 @@
                     </div>
                 </div>
                 {{-- Carta de Entrega de Proyecto end --}}
-                {{--  Carta Autorización de uso de Información --}}
-                <div class="row">
-                    <div class="col-md-6">
-                        @include('residency-process.partials.authorization-letter-btn')
-                    </div>
-                    <div class="col-md-3">
-                        <form action="{{ route('students.authorizationLetterMarkAsApproved', $student) }}" method="POST">
-                            @method('PUT')
-                            @csrf
-                            <button class="btn btn-block btn-success"@if (!$student->inProcessAuthorizationLetter) disabled @endif>
-                                Aprobar documento
-                            </button>
-                        </form>
-                    </div>
-                    <div class="col-md-3">
-                        <button
-                            class="btn btn-block btn-danger"
-                            data-toggle="modal"
-                            data-target="#authorizationLetterCorrectionsModal"
-                            @if (!$student->inProcessAuthorizationLetter) disabled @endif
-                        >
-                            Enviar correcciones
-                        </button>
-                    </div>
-                </div>
-                {{-- Carta Autorización de uso de Información  end --}}
-                {{--  Formato Evaluación Externo --}}
-                <div class="row">
-                    <div class="col-md-6">
-                        @include('residency-process.partials.external-qualifiquation-letter-btn')
-                    </div>
-                    <div class="col-md-3">
-                        <form action="{{ route('students.externalQualificationLetterMarkAsApproved', $student) }}" method="POST">
-                            @method('PUT')
-                            @csrf
-                            <button class="btn btn-block btn-success"@if (!$student->inProcessExternalQualificationLetter) disabled @endif>
-                                Aprobar documento
-                            </button>
-                        </form>
-                    </div>
-                    <div class="col-md-3">
-                        <button
-                            class="btn btn-block btn-danger"
-                            data-toggle="modal"
-                            data-target="#externalQualificationLetterCorrectionsModal"
-                            @if (!$student->inProcessExternalQualificationLetter) disabled @endif
-                        >
-                            Enviar correcciones
-                        </button>
-                    </div>
-                </div>
-                {{-- Formato Evalución Externo  end --}}
             </div>
         </div>
     </div>
