@@ -56,7 +56,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($externaladvisors as $externaladvisor)
+                            @forelse ($externaladvisors as $externaladvisor)
                                 <tr class="text-dark text-center">
                                     <td>{{ $externaladvisor->user_id }}</td>
                                     <td>{{ $externaladvisor->email }}</td>
@@ -82,7 +82,11 @@
                                         </form>
                                     </td>
                                 </tr>
-                            @endforeach
+                                @empty
+                                <tr>
+                                    <td colspan="8" class="text-center text-danger">Sin registros</td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

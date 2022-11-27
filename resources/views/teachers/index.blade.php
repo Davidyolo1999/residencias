@@ -56,7 +56,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($teachers as $teacher)
+                            @forelse ($teachers as $teacher)
                                 <tr class="text-dark text-center">
                                     <td>{{ $teacher->user_id }} </td>
                                     <td>{{ $teacher->email }} </td>
@@ -86,7 +86,11 @@
                                         </form>
                                     </td>
                                 </tr>
-                            @endforeach
+                                @empty
+                                <tr>
+                                    <td colspan="9" class="text-center text-danger">Sin registros</td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

@@ -184,7 +184,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($students as $student)
+                                        @forelse ($students as $student)
                                             <tr>
                                                 <td class="text-center"> {{ $student->user_id }} </td>
                                                 <td class="text-center"> {{ $student->email }} </td>
@@ -223,7 +223,11 @@
                                                     @endcan
                                                 </td>
                                             </tr>
-                                        @endforeach
+                                            @empty
+                                            <tr>
+                                                <td colspan="9" class="text-center text-danger">Sin registros</td>
+                                            </tr>
+                                        @endforelse
                                     </tbody>
                                 </table>
                             </div>
