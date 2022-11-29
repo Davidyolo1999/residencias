@@ -185,6 +185,7 @@ return [
         'schedule'=> 'horario',
         'title' => 'título',
         'general_objective' => 'objetivo general',
+        'description' => 'descripción',
         
     ],
 

@@ -61,7 +61,7 @@
             width: 20%;
         }
 
-        .title-td,
+        
         .head-td {
             border-bottom: 1px solid black;
             text-transform: uppercase;
@@ -82,6 +82,13 @@
             padding-top: 15px;
             padding-bottom: 15px;
         }
+        
+        .justify {
+            text-align: justify;
+        }
+        .center{
+            text-align: center;
+        }
     </style>
 </head>
 
@@ -89,58 +96,57 @@
     @include('residency-process.partials.header', [
     'title' => 'REVISIÓN DE AVANCES DE RESIDENCIAS PROFESIONALES',
     ])
-    <br><br>
+    <br>
     <table class="table">
         <tbody>
             <tr>
                 <td class="title-td">
-                    NOMBRE DEL ASESOR
+                    NOMBRE DEL ASESOR:
                 </td>
                 <td class="head-td">
-                    {{$teacher->first_name ?? ''}} {{$teacher->fathers_last_name ?? ''}} {{$teacher->mothers_last_name
+                    &nbsp;{{$teacher->first_name ?? ''}} {{$teacher->fathers_last_name ?? ''}} {{$teacher->mothers_last_name
                     ?? ''}}
                 </td>
                 <td class="title-td">
-                    FECHA DE INICIO
+                    FECHA DE INICIO:
                 </td>
-                <td class="head-td" style="width: 20%;">
+                <td class="head-td center" style="width: 20%;">
                     {{$project->start_date->format('d')}} de {{$project->start_date->format('F')}}
                     {{$project->start_date->format('Y')}}
                 </td>
             </tr>
             <tr>
                 <td class="title-td">
-                    NOMBRE DEL ALUMNO
+                    NOMBRE DEL ALUMNO:
                 </td>
                 <td class="head-td">
-                    {{$student->first_name ?? ''}} {{$stident->fathers_last_name ?? ''}} {{$student->mothers_last_name
+                    &nbsp;{{$student->first_name ?? ''}} {{$student->fathers_last_name ?? ''}} {{$student->mothers_last_name
                     ?? ''}}
                 </td>
                 <td class="title-td">
-                    FECHA DE TÉRMINO
+                    FECHA DE TÉRMINO:
                 </td>
-                <td class="head-td" style="width: 15%;">
+                <td class="head-td center" style="width: 15%;">
                     {{$project->end_date->format('d')}} de {{$project->end_date->format('F')}}
                     {{$project->end_date->format('Y')}}
                 </td>
             </tr>
             <tr>
                 <td class="title-td">
-                    NOMBRE DEL PROYECTO
+                    NOMBRE DEL PROYECTO:
                 </td>
-                <td class="head-td">
+                <td class="head-td justify">
                     {{$project->title ?? ''}}
                 </td>
-                <td class="title-td">
-                    MODALIDAD
+                <td class="title-td" style="text-align: justify;">
+                    MODALIDAD*:
                 </td>
-                <td class="head-td" style="width: 15%;">
+                <td class="head-td center" style="width: 15%;">
                     PROYECTO
                 </td>
             </tr>
         </tbody>
     </table>
-    <br>
     <br>
     <table class="table" border="0" style="text-align: center;">
         <tbody>
@@ -176,7 +182,6 @@
             @endforeach
         </tbody>
     </table>
-
     <div class="footer">
         <table class="debajo" border="0" align="center">
             <tr>
@@ -186,7 +191,7 @@
                     </b>
                 </td>
                 <td width="5"></td>
-                <td align="right" style="font-size: 8px;">
+                <td align="left" style="font-size: 8px;">
                     <b>UNIVERSIDAD MEXIQUENSE DEL BICENTENARIO</b>
                 </td>
             </tr>

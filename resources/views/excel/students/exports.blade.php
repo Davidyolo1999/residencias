@@ -89,7 +89,7 @@
                 @endif
                 @if ($covenants)
                     <td style="background-color: #ffff00; text-align: center; border: 1px solid black;">
-                        N.C {{$student->company ? $student->company->number_of_agreement : '--'}}, F.C {{$student->company ? $student->company->date->format('d/m/Y') : '--'}}
+                        {{$student->company ? "N.C {$student->company->number_of_agreement}" : '--'}} {{$student->company ? ", F.C {$student->company->date->format('d/m/Y')}" : '--'}}
                     </td>
                 @endif
                 <td style="background-color: #ffff00; text-align: center; border: 1px solid black;">

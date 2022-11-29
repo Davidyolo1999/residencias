@@ -24,16 +24,16 @@
                         <div class="container">
                             <div class="row container">
                                 <div class="col-md-8">
-                                    <h3 class="card-title text-white"><b>Avances del proyecto: "{{$project->title}}"</b></h3>
+                                    <h5 class="card-title text-white"><b>Avances del proyecto: "{{$project->title}}"</b></h5>
                                 </div>
                                 @if ($project->title)
                                 <div class="col-md-2">
-                                    <a href="{{route('students.projectInfo', $project)}}" class="btn btn-sm btn-primary">
+                                    <a href="{{route('students.projectInfo', $project)}}" class="btn btn-sm btn-round btn-secondary">
                                         Volver al detalle
                                     </a>
                                 </div>
                                 <div class="col-md-2">
-                                    <a href="{{route('students.loadProjectProgress', $project)}}" class="btn btn-sm btn-primary">
+                                    <a href="{{route('students.loadProjectProgress', $project)}}" class="btn btn-sm btn-round btn-secondary">
                                         Cargar Avances
                                     </a>
                                 </div>
@@ -47,9 +47,9 @@
                                 <button class="btn btn-sm btn-round btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="material-icons">save</i> Exportar
                                 </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" >
-                                    <a href="{{ route('students.exportProjectProgress', $project) }}" class="dropdown-item" style="background: #fff ; color: black; cursor: pointer;">
-                                        <i class="material-icons">download</i>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a href="{{ route('students.exportProjectProgress', $project) }}" target="_blank" class="dropdown-item" style="background: #fff ; color: black; cursor: pointer;">
+                                        <i class="material-icons">picture_as_pdf</i>
                                         Avances
                                     </a>
                                 </div>
@@ -60,7 +60,7 @@
                                 <thead>
                                     <tr>
                                         <th>
-                                            Numero
+                                            Número
                                         </th>
                                         <th>
                                             Descripción
@@ -85,14 +85,14 @@
                                         <td>
                                             {{$progress->created_at->format('d/m/Y')}}
                                         </td>
-                                        <td class="text-right">
+                                        <td class="text-right td-actions">
                                             <a href="{{ route('students.editProjectProgress', [$project, $progress]) }}" class="btn btn-sm btn-info btn-success" title="Editar">
                                                 <i class="material-icons">edit</i>
                                             </a>
                                             <form
                                                 action="{{ route('students.deleteProjectProgress', $progress) }}"
                                                 method="POST"
-                                                class="d-inline-block delete-admin-form"
+                                                class="d-inline-block delete-progress-form"
                                             >
                                                 @csrf
                                                 @method('DELETE')
@@ -114,3 +114,26 @@
 </div>
 
 @endsection
+@push('js')
+    <script>
+        const deleteProgressForms = document.querySelectorAll('.delete-progress-form');
+
+        deleteProgressForms.forEach(form => form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            Swal.fire({
+                title: '¿Está seguro?',
+                text: "Esta acción es irreversible",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, eliminarlo!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.submit();
+                }
+            })
+        }))
+    </script>
+@endpush
