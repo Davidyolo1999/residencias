@@ -98,8 +98,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/project-info/{project}/view-progress', [StudentsController::class, 'viewProjectProgress'])->name('viewProjectProgress');
         Route::get('/project-info/{project}/load-progress', [StudentsController::class, 'loadProjectProgress'])->name('loadProjectProgress');
         Route::get('/project-info/{project}/edit-progress/{progress}', [StudentsController::class, 'editProjectProgress'])->name('editProjectProgress');
+        Route::get('/project-info/{project}/export-progress', [StudentsController::class, 'exportProjectProgress'])->name('exportProjectProgress');
         Route::post('/project-info/load-progress', [StudentsController::class, 'storeProjectProgress'])->name('storeProjectProgress');
         Route::put('/project-info/update-progress/{progress}', [StudentsController::class, 'updateProjectProgress'])->name('updateProjectProgress');
+        Route::delete('/project-info/{progress}', [StudentsController::class, 'deleteProjectProgress'])->name('deleteProjectProgress');
         Route::delete('/{student}', [StudentsController::class, 'destroy'])->name('destroy')->can('destroy', 'student');
         Route::get('/{student}/edit', [StudentsController::class, 'edit'])->name('edit')->can('update', 'student');
         Route::put('/{student}', [StudentsController::class, 'update'])->name('update')->can('update', 'student');

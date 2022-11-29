@@ -9,11 +9,11 @@ use Illuminate\Support\Facades\Storage;
 class Project extends Model
 {
     use HasFactory;
-    
-    protected $guarded=[];
+
+    protected $guarded = [];
 
     protected $dates = ['start_date', 'end_date'];
-    
+
     /**
      * Relationships
      */
@@ -21,7 +21,17 @@ class Project extends Model
     {
         return $this->hasMany(SpecificObjective::class);
     }
-    
+
+    public function projectProgress()
+    {
+        return $this->hasMany(ProjectProgress::class, 'project_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
     /**
      * Accessors
      */
@@ -38,5 +48,10 @@ class Project extends Model
     public function getEndDateFormattedAttribute()
     {
         return "{$this->end_date->day} de {$this->end_date->monthName} de {$this->end_date->year}";
+    }
+
+    public function getStudentAttribute()
+    {
+        return $this->user->student ?? null;
     }
 }

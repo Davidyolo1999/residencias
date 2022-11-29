@@ -24,7 +24,11 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\StudentsExport;
+use App\Http\Requests\StoreProjectProgressRequest;
+use App\Http\Requests\UpdateProjectProgressRequest;
 use App\Models\Configuration;
+use App\Models\ProjectProgress;
+use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
 use Throwable;
 
@@ -327,9 +331,26 @@ class StudentsController extends Controller
 
     public function viewProjectProgress(Request $request, Project $project)
     {
-        return view('students.project-info', [
-            'progress' => $project->progress
+        return view('students.view-project-progress', [
+            'project' => $project
         ]);
+    }
+
+    public function exportProjectProgress(Project $project)
+    {
+        $configuration = Configuration::firstOrfail();
+
+
+        $pdf = PDF::loadView('students.project-progress-pdf', [
+            'student' => $project->student,
+            'project' => $project,
+            'configuration' => $configuration,
+            'teacher' => Teacher::findOrFail($project->student->teacher_id),
+        ])->setPaper('a4', 'landscape');
+
+        $customReportName = "REVISIÓN DE AVANCES DE RESIDENCIAS PROFESIONALES-{$project->student->full_name}-" . Carbon::now()->format('d-m-Y') . '.pdf';
+
+        return $pdf->stream($customReportName);
     }
 
     public function loadProjectProgress(Request $request, Project $project)
@@ -339,11 +360,17 @@ class StudentsController extends Controller
         ]);
     }
 
-    public function storeProjectProgress(Request $request)
+    public function storeProjectProgress(StoreProjectProgressRequest $request)
     {
+        ProjectProgress::create($request->validated());
+
+        return back()->with('alert', [
+            'type' => 'success',
+            'message' => 'El avance se ha guardado exitosamente.',
+        ]);
     }
 
-    public function editProjectProgress(Request $request, Project $project, $progress)
+    public function editProjectProgress(Request $request, Project $project, ProjectProgress $progress)
     {
         return view('students.edit-project-progress', [
             'project' => $project,
@@ -351,9 +378,24 @@ class StudentsController extends Controller
         ]);
     }
 
-    public function updateProjectProgress(Request $request)
+    public function updateProjectProgress(UpdateProjectProgressRequest $request, ProjectProgress $progress)
     {
-        # code...
+        $progress->update($request->validated());
+
+        return back()->with('alert', [
+            'type' => 'success',
+            'message' => 'El avance se ha actualizado exitosamente.',
+        ]);
+    }
+
+    public function deleteProjectProgress(ProjectProgress $progress)
+    {
+        $progress->delete();
+
+        return back()->with('alert', [
+            'type' => 'success',
+            'message' => 'El avance se ha eliminado exitosamente.',
+        ]);
     }
 
     public function destroy(Student $student)

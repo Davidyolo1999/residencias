@@ -21,7 +21,27 @@
 
                 <div class="card">
                     <div class="card-header card-header-success">
-                        <h3 class="card-title text-white"><b>Cargar Avances del Proyecto.</h3>
+                        <div class="container">
+                            <div class="row container" style="justify-content: space-between;">
+                                <div class="col-md-6">
+                                    <h3 class="card-title text-white">Cargar Avances del Proyecto.</h3>
+                                </div>
+                                @if ($project->title)
+                                <div class="col-md-2">
+                                    <a href="{{route('students.projectInfo', $project)}}"
+                                        class="btn btn-sm btn-primary">
+                                        Volver al detalle
+                                    </a>
+                                </div>
+                                <div class="col-md-2">
+                                    <a href="{{route('students.viewProjectProgress', $project)}}"
+                                        class="btn btn-sm btn-primary">
+                                        Ver Avances
+                                    </a>
+                                </div>                                
+                                @endif
+                            </div>
+                        </div>                        
                     </div>
                     <div class="card-body">
                         <form action="{{ route('students.storeProjectProgress') }}" method="post"
@@ -42,6 +62,11 @@
                                     <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
+                                @error('project_id')
+                                <p class="text-danger">
+                                    {{$message}}
+                                </p>
+                                @enderror                                
                             </div>
                             <div class="text-right">
                                 <button class="btn  btn-success">

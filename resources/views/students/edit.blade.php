@@ -293,6 +293,8 @@
     <script>
         const currentCareerId = @json(old('career_id', $student->career_id));
 
+        const teachers = @json($teachers);
+
         $(() => {
 
             if(currentCareerId){

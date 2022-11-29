@@ -429,7 +429,7 @@
                         <button
                             class="btn btn-block btn-success"                            
                             data-toggle="modal"
-                            @if (!$student->inProcessQualificationLetter && !$student->qualificationLetter) disabled @endif
+                            @if (!$student->inProcessQualificationLetter && !$student->qualificationLetter->qualification_text) disabled @endif
                             data-target="#qualificationLetterApprovalModal"
                         >
                             @if (!$student->qualificationLetter->qualification && !$student->qualificationLetter->qualification_text)

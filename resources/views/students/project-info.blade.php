@@ -28,12 +28,12 @@
                         </div>
                         @if ($project->title)
                         <div class="col-md-2">
-                            <a href="{{route('students.viewProjectProgress', $project)}}" class="btn btn-primary">
+                            <a href="{{route('students.viewProjectProgress', $project)}}" class="btn btn-sm btn-primary">
                                 Ver Avances
                             </a>
                         </div>
                         <div class="col-md-2">
-                            <a href="{{route('students.loadProjectProgress', $project)}}" class="btn btn-primary">
+                            <a href="{{route('students.loadProjectProgress', $project)}}" class="btn btn-sm btn-primary">
                                 Cargar Avances
                             </a>
                         </div>                    
