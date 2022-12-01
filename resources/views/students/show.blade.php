@@ -398,16 +398,16 @@
                     <div class="col-md-6">
                         @include('residency-process.partials.external-qualifiquation-letter-btn')
                     </div>
-                    <div class="col-md-3">
+                    <div class="@if(auth()->user()->isExternalAdvisor()) col-md-2 @else col-md-3 @endIf">
                         <form action="{{ route('students.externalQualificationLetterMarkAsApproved', $student) }}" method="POST">
                             @method('PUT')
                             @csrf
-                            <button class="btn btn-block btn-success"@if (!$student->inProcessExternalQualificationLetter) disabled @endif>
+                            <button class="btn btn-block btn-success" @if (!$student->inProcessExternalQualificationLetter) disabled @endif>
                                 Aprobar documento
                             </button>
                         </form>
                     </div>
-                    <div class="col-md-3">
+                    <div class="@if(auth()->user()->isExternalAdvisor()) col-md-2 @else col-md-3 @endIf">
                         <button
                             class="btn btn-block btn-danger"
                             data-toggle="modal"
@@ -417,6 +417,16 @@
                             Enviar correcciones
                         </button>
                     </div>
+                    @if(auth()->user()->isExternalAdvisor())
+                    <div class="col-md-2">
+                        <button data-toggle="modal"
+                            data-target="#externalQualificationLetterAnswersModal" 
+                            class="btn btn-block btn-info" @if (!$student->inProcessExternalQualificationLetter) disabled @endif
+                        >
+                            Responder Preguntas
+                        </button>    
+                    </div>                    
+                    @endIf
                 </div>
                 {{-- Formato Evalución Externo  end --}}
                 
@@ -847,6 +857,7 @@
         </div>
     </div>
     {{-- AUTHORIZATION LETTER CORRECTIONS MODAL END --}}
+    
     {{-- EXTERNAL QUALIFICATION LETTER CORRECTIONS MODAL --}}
     <div class="modal" tabindex="-1" id="externalQualificationLetterCorrectionsModal">
         <div class="modal-dialog">
@@ -874,6 +885,95 @@
         </div>
     </div>
     {{-- EXTERNAL QUALIFICATION LETTER CORRECTIONS MODAL END --}}
+
+    {{-- EXTERNAL QUALIFICATION LETTER ANSWERS MODAL --}}
+    <div class="modal" tabindex="-1" id="externalQualificationLetterAnswersModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="{{ route('students.externalQualificationLetterAnswers', $student) }}" method="POST">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Enviar Respuestas</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        @csrf
+                        <div class="form-group">
+                            <label class="text-warning">
+                                1.- ¿Cómo evalúa la disposición del residente ante la asignación de una actividad encomendada?
+                            </label>
+                            <select name="first_answer" id="first_answer" class="form-control">
+                                <option value="excelente">excelente</option>
+                                <option value="bueno">bueno</option>
+                                <option value="regular">regular</option>
+                                <option value="malo">malo</option>
+                                <option value="deficiente">deficiente</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="text-warning">
+                                2.- ¿Cómo califica la actitud mostrada del residente durante su estancia dentro de la organización?
+                            </label>
+                            <select name="second_answer" id="second_answer" class="form-control">
+                                <option value="excelente">excelente</option>
+                                <option value="bueno">bueno</option>
+                                <option value="regular">regular</option>
+                                <option value="malo">malo</option>
+                                <option value="deficiente">deficiente</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="text-warning">
+                                3.- Evalúe los valores (responsabilidad, respeto y honestidad) mostrados por el residente.
+                            </label>
+                            <select name="third_answer" id="third_answer" class="form-control">
+                                <option value="excelente">excelente</option>
+                                <option value="bueno">bueno</option>
+                                <option value="regular">regular</option>
+                                <option value="malo">malo</option>
+                                <option value="deficiente">deficiente</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="text-warning">
+                                4.- Evalúe la disposición del residente ante el trabajo en equipo.
+                            </label>
+                            <select name="fourth_answer" id="fourth_answer" class="form-control">
+                                <option value="excelente">excelente</option>
+                                <option value="bueno">bueno</option>
+                                <option value="regular">regular</option>
+                                <option value="malo">malo</option>
+                                <option value="deficiente">deficiente</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="text-warning">
+                                5.- Evalúe la aplicación de conocimientos de su formación profesional.
+                            </label>
+                            <select name="fifth_answer" id="fifth_answer" class="form-control">
+                                <option value="excelente">excelente</option>
+                                <option value="bueno">bueno</option>
+                                <option value="regular">regular</option>
+                                <option value="malo">malo</option>
+                                <option value="deficiente">deficiente</option>
+                            </select>
+                        </div>
+                        <br>
+                        <div class="form-group has-warning">
+                            <label for="observations">Observaciones</label>
+                            <textarea name="observations" id="observations" rows="5" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button class="btn btn-success">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{-- EXTERNAL QUALIFICATION LETTER ANSWERS MODAL END --}}
 
     {{-- QUALIFICATION LETTER APPROVAL MODAL --}}
     <div class="modal" tabindex="-1" id="qualificationLetterApprovalModal">

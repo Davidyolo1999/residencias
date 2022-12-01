@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enum\DocumentStatus;
+use App\Http\Requests\StoreExternalQualificationLetterAnswersRequest;
 use App\Models\Configuration;
 use App\Models\ExternalQualificationLetter;
 use App\Models\Student;
@@ -23,7 +24,7 @@ class ExternalQualificationLetterController extends Controller
             ->withEmail()
             ->where('user_id', $userId)
             ->firstOrFail();
-            $configuration = Configuration::firstOrfail();
+        $configuration = Configuration::firstOrfail();
 
         if (!$student->externalQualificationLetter->exists && Auth::id() !== $student->user_id) {
             return back()->with('alert', [
@@ -55,14 +56,14 @@ class ExternalQualificationLetterController extends Controller
             ]);
 
         $pdf = PDF::loadView('residency-process.external-qualification-letter', [
-            'student'=>$student,
+            'student' => $student,
             'externalCompany' => $student->company,
             'project' => $student->project,
-            'externalQualificationLetter'=> $externalQualificationLetter,
-            'configuration'=>$configuration,
+            'externalQualificationLetter' => $externalQualificationLetter,
+            'configuration' => $configuration,
         ]);
 
-        $customReportName = 'Formato Evaluación Externo-'.$student->full_name.'_'.Carbon::now()->format('d-m-Y').'.pdf'; 
+        $customReportName = 'Formato Evaluación Externo-' . $student->full_name . '_' . Carbon::now()->format('d-m-Y') . '.pdf';
         return $pdf->stream($customReportName);
     }
     public function externalQualificationLetterCorrections(Request $request, Student $student)
@@ -90,8 +91,7 @@ class ExternalQualificationLetterController extends Controller
             $externalQualificationLetter->corrections()->create(['content' => $data['corrections']]);
 
             DB::commit();
-
-        } catch(Throwable $t) {
+        } catch (Throwable $t) {
 
             DB::rollBack();
 
@@ -103,7 +103,26 @@ class ExternalQualificationLetterController extends Controller
 
         return back()->with('alert', [
             'type' => 'success',
-            'message' => 'Las correciones fueron envias correctamente',
+            'message' => 'Las correciones fueron enviadas correctamente',
+        ]);
+    }
+
+    public function externalQualificationLetterAnswers(StoreExternalQualificationLetterAnswersRequest $request, Student $student)
+    {
+        $externalQualificationLetter = $student->inProcessExternalQualificationLetter;
+
+        if (!$externalQualificationLetter) {
+            return back()->with('alert', [
+                'type' => 'danger',
+                'message' => 'El formato evaluación externo debe estar en proceso para poder ser revisada',
+            ]);
+        }
+
+        $externalQualificationLetter->update($request->validated());
+
+        return back()->with('alert', [
+            'type' => 'success',
+            'message' => 'Las repuestas fueron enviadas correctamente',
         ]);
     }
 
@@ -124,7 +143,7 @@ class ExternalQualificationLetterController extends Controller
 
         $externalQualificationLetter->save();
 
-        $externalQualificationLetter->corrections->each(fn($correction) => $correction->update(['is_solved' => true]));
+        $externalQualificationLetter->corrections->each(fn ($correction) => $correction->update(['is_solved' => true]));
 
         return back()->with('alert', [
             'type' => 'success',
@@ -140,6 +159,19 @@ class ExternalQualificationLetterController extends Controller
             return back()->with('alert', [
                 'type' => 'danger',
                 'message' => 'El formato evaluación externo debe estar en proceso para poder ser revisado',
+            ]);
+        }
+
+        if (
+            !$externalQualificationLetter->first_answer ||
+            !$externalQualificationLetter->second_answer ||
+            !$externalQualificationLetter->third_answer ||
+            !$externalQualificationLetter->fourth_answer ||
+            !$externalQualificationLetter->fifth_answer
+        ) {
+            return back()->with('alert', [
+                'type' => 'danger',
+                'message' => 'El asesor externo debe responder las preguntas antes de aprobar.',
             ]);
         }
 

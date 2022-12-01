@@ -110,47 +110,147 @@
             </tr>
             <tr>
                 <td height="4%">1. ¿Cómo evalúa la disposición del residente ante la asignación de una actividad encomendada?</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td style="text-align: center;">
+                    @if ($student->externalQualificationLetter && $student->externalQualificationLetter->first_answer === App\Models\ExternalQualificationLetter::RESPONSE_TYPE[0])
+                        X
+                    @endif
+                </td>
+                <td style="text-align: center;">
+                    @if ($student->externalQualificationLetter && $student->externalQualificationLetter->first_answer === App\Models\ExternalQualificationLetter::RESPONSE_TYPE[1])
+                        X
+                    @endif
+                </td>
+                <td style="text-align: center;">
+                    @if ($student->externalQualificationLetter && $student->externalQualificationLetter->first_answer === App\Models\ExternalQualificationLetter::RESPONSE_TYPE[2])
+                        X
+                    @endif
+                </td>
+                <td style="text-align: center;">
+                    @if ($student->externalQualificationLetter && $student->externalQualificationLetter->first_answer === App\Models\ExternalQualificationLetter::RESPONSE_TYPE[3])
+                        X
+                    @endif
+                </td>
+                <td style="text-align: center;">
+                    @if ($student->externalQualificationLetter && $student->externalQualificationLetter->first_answer === App\Models\ExternalQualificationLetter::RESPONSE_TYPE[4])
+                        X
+                    @endif
+                </td>
             </tr>
             <tr>
                 <td height="4%">2. ¿Cómo califica la actitud mostrada del residente durante su estancia dentro de la organización?</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td style="text-align: center;">
+                    @if ($student->externalQualificationLetter && $student->externalQualificationLetter->second_answer === App\Models\ExternalQualificationLetter::RESPONSE_TYPE[0])
+                        X
+                    @endif
+                </td>
+                <td style="text-align: center;">
+                    @if ($student->externalQualificationLetter && $student->externalQualificationLetter->second_answer === App\Models\ExternalQualificationLetter::RESPONSE_TYPE[1])
+                        X
+                    @endif
+                </td>
+                <td style="text-align: center;">
+                    @if ($student->externalQualificationLetter && $student->externalQualificationLetter->second_answer === App\Models\ExternalQualificationLetter::RESPONSE_TYPE[2])
+                        X
+                    @endif
+                </td>
+                <td style="text-align: center;">
+                    @if ($student->externalQualificationLetter && $student->externalQualificationLetter->second_answer === App\Models\ExternalQualificationLetter::RESPONSE_TYPE[3])
+                        X
+                    @endif
+                </td>
+                <td style="text-align: center;">
+                    @if ($student->externalQualificationLetter && $student->externalQualificationLetter->second_answer === App\Models\ExternalQualificationLetter::RESPONSE_TYPE[4])
+                        X
+                    @endif
+                </td>
             </tr>
             <tr>
                 <td height="4%">3. Evalúe los valores (responsabilidad, respeto y honestidad) mostrados por el residente.</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td style="text-align: center;">
+                    @if ($student->externalQualificationLetter && $student->externalQualificationLetter->third_answer === App\Models\ExternalQualificationLetter::RESPONSE_TYPE[0])
+                        X
+                    @endif
+                </td>
+                <td style="text-align: center;">
+                    @if ($student->externalQualificationLetter && $student->externalQualificationLetter->third_answer === App\Models\ExternalQualificationLetter::RESPONSE_TYPE[1])
+                        X
+                    @endif
+                </td>
+                <td style="text-align: center;">
+                    @if ($student->externalQualificationLetter && $student->externalQualificationLetter->third_answer === App\Models\ExternalQualificationLetter::RESPONSE_TYPE[2])
+                        X
+                    @endif
+                </td>
+                <td style="text-align: center;">
+                    @if ($student->externalQualificationLetter && $student->externalQualificationLetter->third_answer === App\Models\ExternalQualificationLetter::RESPONSE_TYPE[3])
+                        X
+                    @endif
+                </td>
+                <td style="text-align: center;">
+                    @if ($student->externalQualificationLetter && $student->externalQualificationLetter->third_answer === App\Models\ExternalQualificationLetter::RESPONSE_TYPE[4])
+                        X
+                    @endif
+                </td>
             </tr>
             <tr>
                 <td height="4%">4. Evalúe la disposición del residente ante el trabajo en equipo.</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td style="text-align: center;">
+                    @if ($student->externalQualificationLetter && $student->externalQualificationLetter->fourth_answer === App\Models\ExternalQualificationLetter::RESPONSE_TYPE[0])
+                        X
+                    @endif
+                </td>
+                <td style="text-align: center;">
+                    @if ($student->externalQualificationLetter && $student->externalQualificationLetter->fourth_answer === App\Models\ExternalQualificationLetter::RESPONSE_TYPE[1])
+                        X
+                    @endif
+                </td>
+                <td style="text-align: center;">
+                    @if ($student->externalQualificationLetter && $student->externalQualificationLetter->fourth_answer === App\Models\ExternalQualificationLetter::RESPONSE_TYPE[2])
+                        X
+                    @endif
+                </td>
+                <td style="text-align: center;">
+                    @if ($student->externalQualificationLetter && $student->externalQualificationLetter->fourth_answer === App\Models\ExternalQualificationLetter::RESPONSE_TYPE[3])
+                        X
+                    @endif
+                </td>
+                <td style="text-align: center;">
+                    @if ($student->externalQualificationLetter && $student->externalQualificationLetter->fourth_answer === App\Models\ExternalQualificationLetter::RESPONSE_TYPE[4])
+                        X
+                    @endif
+                </td>
             </tr>
             <tr>
                 <td height="4%">5. Evalúe la aplicación de conocimientos de su formación profesional.</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td style="text-align: center;">
+                    @if ($student->externalQualificationLetter && $student->externalQualificationLetter->fifth_answer === App\Models\ExternalQualificationLetter::RESPONSE_TYPE[0])
+                        X
+                    @endif
+                </td>
+                <td style="text-align: center;">
+                    @if ($student->externalQualificationLetter && $student->externalQualificationLetter->fifth_answer === App\Models\ExternalQualificationLetter::RESPONSE_TYPE[1])
+                        X
+                    @endif
+                </td>
+                <td style="text-align: center;">
+                    @if ($student->externalQualificationLetter && $student->externalQualificationLetter->fifth_answer === App\Models\ExternalQualificationLetter::RESPONSE_TYPE[2])
+                        X
+                    @endif
+                </td>
+                <td style="text-align: center;">
+                    @if ($student->externalQualificationLetter && $student->externalQualificationLetter->fifth_answer === App\Models\ExternalQualificationLetter::RESPONSE_TYPE[3])
+                        X
+                    @endif
+                </td>
+                <td style="text-align: center;">
+                    @if ($student->externalQualificationLetter && $student->externalQualificationLetter->fifth_answer === App\Models\ExternalQualificationLetter::RESPONSE_TYPE[4])
+                        X
+                    @endif
+                </td>
             </tr>
         </table>
         <p class="note letra">
-            Observaciones:
+            Observaciones: {{$student->externalQualificationLetter ? $student->externalQualificationLetter->observations : '--'}}
         </p>
 
         <div class="footer letra">

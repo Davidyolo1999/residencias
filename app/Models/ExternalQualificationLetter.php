@@ -10,6 +10,8 @@ class ExternalQualificationLetter extends Model
 {
     use HasFactory, ResidencyProcessDocument;
 
+    public const RESPONSE_TYPE = ['excelente', 'bueno', 'regular', 'malo', 'deficiente'];
+
     protected $guarded = [];
 
     protected $dates = ['request_date'];

@@ -18,6 +18,12 @@ class CreateExternalQualificationLettersTable extends Migration
             $table->id();
             $table->dateTime('request_date');
             $table->string('signed_document')->nullable();
+            $table->string('first_answer')->nullable();
+            $table->string('second_answer')->nullable();
+            $table->string('third_answer')->nullable();
+            $table->string('fourth_answer')->nullable();
+            $table->string('fifth_answer')->nullable();
+            $table->string('observations')->nullable();
             $table->string('status')->default(DocumentStatus::STATUS_PROCESSING);
             $table->unsignedBigInteger('user_id')->unique();
             $table->unsignedBigInteger('project_id');
