@@ -36,6 +36,9 @@
                                 <div class="col-md-2">
                                     <a href="{{route('students.viewProjectProgress', $project)}}"
                                         class="btn btn-sm btn-round btn-secondary">
+                                        <span class="material-icons">
+                                            format_list_bulleted
+                                            </span>
                                         Ver Avances
                                     </a>
                                 </div>                                

@@ -78,7 +78,13 @@
         <script src="{{ asset('material') }}/js/settings.js"></script>
         <script src="{{ asset('material') }}/demo/bootstrap-select.min.js"></script>
         <script src="{{ asset('js/app.js') }}"></script>
+        
         @stack('js')
         
     </body>
+    <script>
+        $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
 </html>

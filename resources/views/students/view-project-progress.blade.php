@@ -34,6 +34,9 @@
                                 </div>
                                 <div class="col-md-2">
                                     <a href="{{route('students.loadProjectProgress', $project)}}" class="btn btn-sm btn-round btn-secondary">
+                                        <span class="material-icons">
+                                            upload
+                                            </span>
                                         Cargar Avances
                                     </a>
                                 </div>
