@@ -195,7 +195,6 @@ Route::middleware('auth')->group(function () {
         Route::put('/{student}/authorization-letter/signed-document', [AuthorizationLetterController::class, 'authorizationLetterUploadSignedDoc'])->name('authorizationLetterUploadSignedDoc');
         Route::get('/{student}/authorization-letter/signed-document', [AuthorizationLetterController::class, 'authorizationLetterDownloadSignedDoc'])->name('authorizationLetterDownloadSignedDoc');
         //External Qualification Letter
-
         Route::post('/residency-process/external-qualification-letter', [ExternalQualificationLetterController::class, 'externalQualificationLetter'])->name('externalQualificationLetter');
         Route::post('/{student}/external-qualification-letter/corrections', [ExternalQualificationLetterController::class, 'externalQualificationLetterCorrections'])->name('externalQualificationLetterCorrections');
         Route::post('/{student}/external-qualification-letter/answers', [ExternalQualificationLetterController::class, 'externalQualificationLetterAnswers'])->name('externalQualificationLetterAnswers');

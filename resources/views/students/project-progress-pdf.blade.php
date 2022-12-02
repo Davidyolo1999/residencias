@@ -111,8 +111,7 @@
                     FECHA DE INICIO:
                 </td>
                 <td class="head-td center" style="width: 20%;">
-                    {{$project->start_date->format('d')}} de {{$project->start_date->format('F')}}
-                    {{$project->start_date->format('Y')}}
+                    {{$project->start_date_formatted }}
                 </td>
             </tr>
             <tr>
@@ -127,8 +126,7 @@
                     FECHA DE TÉRMINO:
                 </td>
                 <td class="head-td center" style="width: 15%;">
-                    {{$project->end_date->format('d')}} de {{$project->end_date->format('F')}}
-                    {{$project->end_date->format('Y')}}
+                    {{$project->end_date_formatted }}
                 </td>
             </tr>
             <tr>

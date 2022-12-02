@@ -398,7 +398,8 @@
                     <div class="col-md-6">
                         @include('residency-process.partials.external-qualifiquation-letter-btn')
                     </div>
-                    <div class="@if(auth()->user()->isExternalAdvisor()) col-md-2 @else col-md-3 @endIf">
+                    @if(auth()->user()->isTeacher() || auth()->user()->isAdmin())
+                    <div class="col-md-3">
                         <form action="{{ route('students.externalQualificationLetterMarkAsApproved', $student) }}" method="POST">
                             @method('PUT')
                             @csrf
@@ -407,7 +408,7 @@
                             </button>
                         </form>
                     </div>
-                    <div class="@if(auth()->user()->isExternalAdvisor()) col-md-2 @else col-md-3 @endIf">
+                    <div class="col-md-3">
                         <button
                             class="btn btn-block btn-danger"
                             data-toggle="modal"
@@ -417,8 +418,8 @@
                             Enviar correcciones
                         </button>
                     </div>
-                    @if(auth()->user()->isExternalAdvisor())
-                    <div class="col-md-2">
+                    @else
+                    <div class="col-md-6">
                         <button data-toggle="modal"
                             data-target="#externalQualificationLetterAnswersModal" 
                             class="btn btn-block btn-info" @if (!$student->inProcessExternalQualificationLetter) disabled @endif
@@ -900,70 +901,86 @@
                     <div class="modal-body">
                         @csrf
                         <div class="form-group">
-                            <label class="text-warning">
-                                1.- ¿Cómo evalúa la disposición del residente ante la asignación de una actividad encomendada?
+                            <label class="text-dark">
+                            <b>1.- ¿Cómo evalúa la disposición del residente ante la asignación de una actividad encomendada?</b> 
                             </label>
                             <select name="first_answer" id="first_answer" class="form-control">
-                                <option value="excelente">excelente</option>
-                                <option value="bueno">bueno</option>
-                                <option value="regular">regular</option>
-                                <option value="malo">malo</option>
-                                <option value="deficiente">deficiente</option>
+                                <option value="" selected disabled>Seleccione una Opción</option>    
+                                <option value="excelente" @if (old('first_answer', $student->externalQualificationLetter->first_answer) === 'excelente') selected @endif>Excelente</option>
+                                <option value="bueno"@if (old('first_answer', $student->externalQualificationLetter->first_answer) === 'bueno') selected @endif>Bueno</option>
+                                <option value="regular"@if (old('first_answer', $student->externalQualificationLetter->first_answer)  === 'regular') selected @endif>Regular</option>
+                                <option value="malo"@if (old('first_answer', $student->externalQualificationLetter->first_answer) === 'malo') selected @endif>Malo</option>
+                                <option value="deficiente"@if (old('first_answer', $student->externalQualificationLetter->first_answer) === 'deficiente') selected @endif>Deficiente</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label class="text-warning">
-                                2.- ¿Cómo califica la actitud mostrada del residente durante su estancia dentro de la organización?
+                            <label class="text-dark">
+                            <b> 2.- ¿Cómo califica la actitud mostrada del residente durante su estancia dentro de la organización?</b> 
                             </label>
                             <select name="second_answer" id="second_answer" class="form-control">
-                                <option value="excelente">excelente</option>
-                                <option value="bueno">bueno</option>
-                                <option value="regular">regular</option>
-                                <option value="malo">malo</option>
-                                <option value="deficiente">deficiente</option>
+                                <option value="" selected disabled>Seleccione una Opción</option>    
+                                <option value="excelente" @if (old('second_answer', $student->externalQualificationLetter->second_answer) === 'excelente') selected @endif>Excelente</option>
+                                <option value="bueno"@if (old('second_answer', $student->externalQualificationLetter->second_answer) === 'bueno') selected @endif>Bueno</option>
+                                <option value="regular"@if (old('second_answer', $student->externalQualificationLetter->second_answer)  === 'regular') selected @endif>Regular</option>
+                                <option value="malo"@if (old('second_answer', $student->externalQualificationLetter->second_answer) === 'malo') selected @endif>Malo</option>
+                                <option value="deficiente"@if (old('second_answer', $student->externalQualificationLetter->second_answer) === 'deficiente') selected @endif>Deficiente</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label class="text-warning">
-                                3.- Evalúe los valores (responsabilidad, respeto y honestidad) mostrados por el residente.
+                            <label class="text-dark">
+                            <b> 3.- Evalúe los valores (responsabilidad, respeto y honestidad) mostrados por el residente.</b> 
                             </label>
                             <select name="third_answer" id="third_answer" class="form-control">
-                                <option value="excelente">excelente</option>
-                                <option value="bueno">bueno</option>
-                                <option value="regular">regular</option>
-                                <option value="malo">malo</option>
-                                <option value="deficiente">deficiente</option>
+                                <option value="" selected disabled>Seleccione una Opción</option>    
+                                <option value="excelente" @if (old('third_answer', $student->externalQualificationLetter->third_answer) === 'excelente') selected @endif>Excelente</option>
+                                <option value="bueno"@if (old('third_answer', $student->externalQualificationLetter->third_answer) === 'bueno') selected @endif>Bueno</option>
+                                <option value="regular"@if (old('third_answer', $student->externalQualificationLetter->third_answer)  === 'regular') selected @endif>Regular</option>
+                                <option value="malo"@if (old('third_answer', $student->externalQualificationLetter->third_answer) === 'malo') selected @endif>Malo</option>
+                                <option value="deficiente"@if (old('third_answer', $student->externalQualificationLetter->third_answer) === 'deficiente') selected @endif>Deficiente</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label class="text-warning">
-                                4.- Evalúe la disposición del residente ante el trabajo en equipo.
+                            <label class="text-dark">
+                            <b> 4.- Evalúe la disposición del residente ante el trabajo en equipo.</b> 
                             </label>
                             <select name="fourth_answer" id="fourth_answer" class="form-control">
-                                <option value="excelente">excelente</option>
-                                <option value="bueno">bueno</option>
-                                <option value="regular">regular</option>
-                                <option value="malo">malo</option>
-                                <option value="deficiente">deficiente</option>
+                                <option value="" selected disabled>Seleccione una Opción</option>    
+                                <option value="excelente" @if (old('fourth_answer', $student->externalQualificationLetter->fourth_answer) === 'excelente') selected @endif>Excelente</option>
+                                <option value="bueno"@if (old('fourth_answer', $student->externalQualificationLetter->fourth_answer) === 'bueno') selected @endif>Bueno</option>
+                                <option value="regular"@if (old('fourth_answer', $student->externalQualificationLetter->fourth_answer)  === 'regular') selected @endif>Regular</option>
+                                <option value="malo"@if (old('fourth_answer', $student->externalQualificationLetter->fourth_answer) === 'malo') selected @endif>Malo</option>
+                                <option value="deficiente"@if (old('fourth_answer', $student->externalQualificationLetter->fourth_answer) === 'deficiente') selected @endif>Deficiente</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label class="text-warning">
-                                5.- Evalúe la aplicación de conocimientos de su formación profesional.
+                            <label class="text-dark">
+                                <b> 5.- Evalúe la aplicación de conocimientos de su formación profesional.</b>
                             </label>
                             <select name="fifth_answer" id="fifth_answer" class="form-control">
-                                <option value="excelente">excelente</option>
-                                <option value="bueno">bueno</option>
-                                <option value="regular">regular</option>
-                                <option value="malo">malo</option>
-                                <option value="deficiente">deficiente</option>
+                                <option value="" selected disabled>Seleccione una Opción</option>   
+                                <option value="excelente" @if (old('fifth_answer', $student->externalQualificationLetter->fifth_answer) === 'excelente') selected @endif>Excelente</option>
+                                <option value="bueno"@if (old('fifth_answer', $student->externalQualificationLetter->fifth_answer) === 'bueno') selected @endif>Bueno</option>
+                                <option value="regular"@if (old('fifth_answer', $student->externalQualificationLetter->fifth_answer)  === 'regular') selected @endif>Regular</option>
+                                <option value="malo"@if (old('fifth_answer', $student->externalQualificationLetter->fifth_answer) === 'malo') selected @endif>Malo</option>
+                                <option value="deficiente"@if (old('fifth_answer', $student->externalQualificationLetter->fifth_answer) === 'deficiente') selected @endif>Deficiente</option>
                             </select>
                         </div>
                         <br>
-                        <div class="form-group has-warning">
-                            <label for="observations">Observaciones</label>
-                            <textarea name="observations" id="observations" rows="5" class="form-control"></textarea>
+                        <div class="">
+                            <div class="">
+                                <label for="observations" class="d-block letter text-dark">Observaciones:</label>
+                            </div>
+                            <div class="">
+                                <div class="input-group input-group-dynamic has-warning">
+                                    <textarea class="form-control text-justify" name="observations" id="observations"
+                                        rows="5"> {{ old('observations', $student->externalQualificationLetter->observations) }}</textarea>
+                                </div>
+                                @error('observations')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
                         </div>
+    
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -1036,7 +1053,7 @@
             <div class="modal-content">
                 <form action="{{ route('students.complianceLetterAnswerQuestions', $student) }}" method="POST">
                     <div class="modal-header">
-                        <h5 class="modal-title">Preguntas de carta de cumplimiento</h5>
+                        <h5 class="modal-title">Enviar Respuestas</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>

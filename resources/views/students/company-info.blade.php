@@ -169,11 +169,11 @@
                             </div>
                             <div class="form-row align-items-end mb-2 has-warning">                                
                                 <div class="col-md-4">
-                                    <label for="have_agreement_check" class="text-dark letter d-block">Posee numero de convenio</label>
+                                    <label for="have_agreement_check" class="text-dark letter d-block">Posee número de convenio</label>
                                     <input type="checkbox" @if (old('number_of_agreement', $company->number_of_agreement) || old('date', $company->date ? $company->date->format('Y-m-d') : '')) checked @endif name="have_agreement" id="have_agreement_check">
                                 </div>
                                 <div class="col-md-4" id="number_of_agreement_column" @if (!old('number_of_agreement', $company->number_of_agreement) && !old('date', $company->date ? $company->date->format('Y-m-d') : '')) style="display: none" @endif>
-                                    <label for="number_of_agreement" class="text-dark letter">Numero de convenio</label>
+                                    <label for="number_of_agreement" class="text-dark letter">Número de convenio</label>
                                     <input
                                         type="text" 
                                         class="form-control" 

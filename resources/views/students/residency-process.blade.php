@@ -334,7 +334,7 @@
                     </div>
                     <div class="col-md-2">
                         <button class="btn btn-block btn-info" data-target="#qualificationLetterUploadDocModal"
-                            data-toggle="modal" @if ($student->qualificationLetter->signed_document) disabled @endif>
+                            data-toggle="modal" @if ($student->qualificationLetter->signed_document || $student->qualificationLetter->qualification < 70) disabled @endif>
                             Cargar documento
                         </button>
                     </div>

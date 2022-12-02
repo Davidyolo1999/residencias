@@ -7,7 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>ANTEPROYECTO DE RESIDENCIAS PROFESIONALES</title>
     <link rel="stylesheet" href="{{ asset('css/document-header.css') }}">
-
     <style>
         .info {
             text-align: center;

@@ -39,7 +39,14 @@
             left: 0;
             height: 100px;
         }
-
+        .justify {
+            text-align: justify;
+        }
+        .table {
+            width: 100%;
+            padding: 0 1rem;
+            margin-bottom: 30px;
+        }
         .student-signature,
         .person-in-charge-signature {
             width: 40%;
@@ -49,7 +56,6 @@
             float: left;
             font-weight: bold;
         }
-
         .person-in-charge-signature {
             float: right;
         }
@@ -249,10 +255,14 @@
                 </td>
             </tr>
         </table>
-        <p class="note letra">
-            Observaciones: {{$student->externalQualificationLetter ? $student->externalQualificationLetter->observations : '--'}}
-        </p>
-
+        <table  border="0" cellspacing="0"  class="letra table" >
+            <tr>
+                <td>Observaciones: </td>
+            </tr>
+            <tr height="85%">
+                <td  class="justify"><u>{{$student->externalQualificationLetter ? $student->externalQualificationLetter->observations : '--'}}</u></td>
+            </tr>
+        </table>
         <div class="footer letra">
             <p class="student-signature">{{ $student->externalAdvisor->full_name }} <br>Asesor Externo</p>
             <p class="person-in-charge-signature">
