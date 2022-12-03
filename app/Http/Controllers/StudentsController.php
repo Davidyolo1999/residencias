@@ -54,10 +54,14 @@ class StudentsController extends Controller
     {
         $user = Auth::user();
 
+        $currentPeriodId = Period::whereRaw('? BETWEEN start AND end', [now()])->first()->id ?? null;
+        
+        $periodId = $request->period_id ?? $currentPeriodId;
+        
         $students = Student::query()
             ->withEmail()
             ->with('career')
-            ->when($request->period_id, function ($query, $periodId) {
+            ->when($periodId, function ($query, $periodId) {
 
                 $period = Period::where('id', $periodId)->first();
 
@@ -87,7 +91,8 @@ class StudentsController extends Controller
         return view('students.index', [
             'students' => $students,
             'careers' => Career::all(),
-            'periods' => Period::all()
+            'periods' => Period::all(),
+            'periodId' => $periodId
         ]);
     }
 
@@ -95,10 +100,14 @@ class StudentsController extends Controller
     {
         $user = Auth::user();
 
+        $currentPeriodId = Period::whereRaw('? BETWEEN start AND end', [now()])->first()->id ?? null;
+        
+        $periodId = $request->period_id ?? $currentPeriodId;
+
         $students = Student::query()
             ->withEmail()
             ->with('career')
-            ->when($request->period_id, function ($query, $periodId) {
+            ->when($periodId, function ($query, $periodId) {
 
                 $period = Period::where('id', $periodId)->first();
 

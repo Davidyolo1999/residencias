@@ -44,7 +44,7 @@
                                                     Selecciona una Opción
                                                 </option>
                                                 @foreach ($periods as $period)
-                                                    <option @if (request('period_id') == $period->id) selected @endif
+                                                    <option @if ($periodId == $period->id) selected @endif
                                                         style="background: #fff ; color: black;"
                                                         value="{{ $period->id }}">
                                                         {{ $period->name }}
