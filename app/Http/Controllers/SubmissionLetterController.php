@@ -182,7 +182,7 @@ class SubmissionLetterController extends Controller
         return back()->with('alert', [
             'type' => 'success',
             'message' => 'El documento se subió con exitosamente',
-        ]);
+        ])->with('processFinished', true);
     }
 
     public function submissionLetterDownloadSignedDoc(Student $student)

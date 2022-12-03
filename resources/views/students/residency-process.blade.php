@@ -1245,5 +1245,18 @@
             </div>
         </div>
     @endif
+@endpush
 
+@push('js')
+    
+
+    @if (session('processFinished'))
+    <script>
+        Swal.fire(
+            'Terminación de residencias',
+            'Felicidades! Terminaste tu residencia profesional.',
+            'success'
+        )
+    </script>
+    @endif
 @endpush
