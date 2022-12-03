@@ -17,7 +17,7 @@
                                 </div>
                             </div>
                         </div>
-                    @endif                    
+                    @endif
                     <div class="card">
                         <div class="card-header card-header-success">
                             <div class="row justify-content-between">
@@ -25,147 +25,168 @@
                                     <h4 class="card-title text-white"><b>Estudiantes</b> </h4>
                                     <p class="card-category text-white"><b>Lista de Estudiantes</b> </p>
                                 </div>
-
-                                <form action="{{ route('students.index') }}" class="col-md-12">
-                                    <div class="form-row">
-                                    <div class="form-group text-center text-dark search col-md-4">
-                                        <label for="period_id" class="text-white">
-                                            Periodo:
-                                        </label>
-                                        <select 
-                                            class="text-center text-dark selectpicker show-tick" 
-                                            data-style="btn btn-sm btn-success btn-round"
-                                            name="period_id" 
-                                            id="period_id" 
-                                            onchange="$(this).closest('form').submit()" 
-                                            data-size="5" 
-                                            data-width="fit"
-                                         >
-                                             <option style="background: #fff ; color: black;" value="">
-                                                Selecciona una Opción
-                                            </option>
-                                            @foreach ($periods as $period)
-                                            <option @if (request('period_id') == $period->id) selected @endif style="background: #fff ; color: black;" value="{{$period->id}}" >
-                                                {{$period->name}}
-                                            </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="form-group text-center text-dark search col-md-4">
-                                        <label for="career_id" class="text-white">
-                                            Carrera:
-                                        </label>
-                                        <select 
-                                            class="text-center text-dark selectpicker show-tick" 
-                                            data-style="btn btn-sm btn-success btn-round"
-                                            name="career_id" 
-                                            id="career_id" 
-                                            onchange="$(this).closest('form').submit()" 
-                                            data-size="5" 
-                                            data-width="fit"
-                                         >
-                                             <option style="background: #fff ; color: black;" value="">
-                                                Selecciona una Opción
-                                            </option>
-                                            @foreach ($careers as $career)
-                                            <option @if (request('career_id') == $career->id) selected @endif style="background: #fff ; color: black;" value="{{$career->id}}">
-                                                {{$career->name}}
-                                            </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="form-group text-center text-dark search col-md-4">
-                                        <label for="document" class="text-white">
-                                            Documento:
-                                        </label>
-                                        <select class="text-center text-dark selectpicker show-tick"
-                                            data-style="btn btn-sm btn-success btn-round" name="document" id="document"
-                                            onchange="$(this).closest('form').submit()" data-size="5" data-width="fit">                                            
-                                            <option style="background: #fff ; color: black;" selected value="">
-                                                Selecciona una Opción</option>
-                                            <option value="residencyRequest" style="background: #fff ; color: black;"
-                                                @if (request('document') === 'residencyRequest') selected @endif>SOLICITUD DE RESIDENCIA
-                                            </option>
-                                            <option value="presentationLetter" style="background: #fff ; color: black;"
-                                                @if (request('document') === 'presentationLetter') selected @endif>CARTA DE PRESENTACIÓN
-                                            </option>
-                                            <option value="commitmentLetter" style="background: #fff ; color: black;"
-                                                @if (request('document') === 'commitmentLetter') selected @endif>CARTA DE COMPROMISO
-                                            </option>
-                                            <option value="acceptanceLetter" style="background: #fff ; color: black;"
-                                                @if (request('document') === 'acceptanceLetter') selected @endif>CARTA DE ACEPTACIÓN
-                                            </option>
-                                            <option value="authorizationLetter" style="background: #fff ; color: black;"
-                                            @if (request('document') === 'authorizationLetter') selected @endif>AUTORIZACIÓN USO DE
-                                            INFORMACIÓN</option>
-                                            <option value="assignmentLetter" style="background: #fff ; color: black;"
-                                                @if (request('document') === 'assignmentLetter') selected @endif>CARTA DE ASIGNACIÓN
-                                            </option>
-                                            <option value="preliminaryLetter" style="background: #fff ; color: black;"
-                                                @if (request('document') === 'preliminaryLetter') selected @endif>ANTEPROYECTO</option>
-                                            <option value="paperStructure" style="background: #fff ; color: black;"
-                                                @if (request('document') === 'paperStructure') selected @endif>INFORME
-                                                FINAL</option>
-                                            <option value="complianceLetter" style="background: #fff ; color: black;"
-                                                @if (request('document') === 'complianceLetter') selected @endif>CÉDULA DE CUMPLIMIENTO
-                                            </option>
-                                            <option value="qualificationLetter" style="background: #fff ; color: black;"
-                                                @if (request('document') === 'qualificationLetter') selected @endif>ACTA DE CALIFICACIÓN
-                                            </option>
-                                            <option value="completionLetter" style="background: #fff ; color: black;"
-                                                @if (request('document') === 'completionLetter') selected @endif>CARTA DE TÉRMINO</option>
-                                            <option value="submissionLetter" style="background: #fff ; color: black;"
-                                                @if (request('document') === 'submissionLetter') selected @endif>CARTA DE ENTREGA DE
-                                                PROYECTO</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group text-center text-dark has-white search col-md-12">
-                                        <label for="period_id" class="text-white">
-                                            Buscar:
-                                        </label>
-                                        <input type="text" autofocus class="form-control" name="search" value="{{request('search')}}">
-                                    </div>
-                                    </div>                                    
-                                </form>
-
                             </div>
                         </div>
                         <div class="card-body">
+                            <div class="row justify-content-between">
+                                <form action="{{ route('students.index') }}" class="col-md-12">
+                                    <div class="form-row">
+                                        <div class="form-group text-center text-dark search col-md-4">
+                                            <label for="period_id" class="text-dark"
+                                                style="font-size: 14px; color:#111111; font-weight: 400; font-family: ">
+                                                Periodo:
+                                            </label>
+                                            <select class="text-center text-dark selectpicker show-tick"
+                                                data-style="btn btn-sm btn-outline-success btn-round" name="period_id"
+                                                id="period_id" onchange="$(this).closest('form').submit()" data-size="5"
+                                                data-width="fit">
+                                                <option style="background: #fff ; color: black;" value="">
+                                                    Selecciona una Opción
+                                                </option>
+                                                @foreach ($periods as $period)
+                                                    <option @if (request('period_id') == $period->id) selected @endif
+                                                        style="background: #fff ; color: black;"
+                                                        value="{{ $period->id }}">
+                                                        {{ $period->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group text-center text-dark search col-md-4">
+                                            <label for="career_id" class="text-dark"
+                                                style="font-size: 14px; color:#111111; font-weight: 400; font-family:">
+                                                Carrera:
+                                            </label>
+                                            <select class="text-center text-dark selectpicker show-tick"
+                                                data-style="btn btn-sm btn-outline-success btn-round" name="career_id"
+                                                id="career_id" onchange="$(this).closest('form').submit()" data-size="5"
+                                                data-width="fit">
+                                                <option style="background: #fff ; color: black;" value="">
+                                                    Selecciona una Opción
+                                                </option>
+                                                @foreach ($careers as $career)
+                                                    <option @if (request('career_id') == $career->id) selected @endif
+                                                        style="background: #fff ; color: black;"
+                                                        value="{{ $career->id }}">
+                                                        {{ $career->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group text-center text-dark search col-md-4">
+                                            <label for="document" class="text-dark"
+                                                style="font-size: 14px; color:#111111; font-weight: 400; font-family:">
+                                                Documento:
+                                            </label>
+                                            <select class="text-center text-dark selectpicker show-tick"
+                                                data-style="btn btn-sm btn-outline-success btn-round" name="document"
+                                                id="document" onchange="$(this).closest('form').submit()" data-size="5"
+                                                data-width="fit">
+                                                <option style="background: #fff ; color: black;" selected value="">
+                                                    Selecciona una Opción</option>
+                                                <option value="residencyRequest" style="background: #fff ; color: black;"
+                                                    @if (request('document') === 'residencyRequest') selected @endif>SOLICITUD DE
+                                                    RESIDENCIA
+                                                </option>
+                                                <option value="presentationLetter" style="background: #fff ; color: black;"
+                                                    @if (request('document') === 'presentationLetter') selected @endif>CARTA DE PRESENTACIÓN
+                                                </option>
+                                                <option value="commitmentLetter" style="background: #fff ; color: black;"
+                                                    @if (request('document') === 'commitmentLetter') selected @endif>CARTA DE COMPROMISO
+                                                </option>
+                                                <option value="acceptanceLetter" style="background: #fff ; color: black;"
+                                                    @if (request('document') === 'acceptanceLetter') selected @endif>CARTA DE ACEPTACIÓN
+                                                </option>
+                                                <option value="authorizationLetter" style="background: #fff ; color: black;"
+                                                    @if (request('document') === 'authorizationLetter') selected @endif>AUTORIZACIÓN USO DE
+                                                    INFORMACIÓN</option>
+                                                <option value="assignmentLetter" style="background: #fff ; color: black;"
+                                                    @if (request('document') === 'assignmentLetter') selected @endif>CARTA DE ASIGNACIÓN
+                                                </option>
+                                                <option value="preliminaryLetter" style="background: #fff ; color: black;"
+                                                    @if (request('document') === 'preliminaryLetter') selected @endif>ANTEPROYECTO</option>
+                                                <option value="paperStructure" style="background: #fff ; color: black;"
+                                                    @if (request('document') === 'paperStructure') selected @endif>INFORME
+                                                    FINAL</option>
+                                                <option value="complianceLetter" style="background: #fff ; color: black;"
+                                                    @if (request('document') === 'complianceLetter') selected @endif>CÉDULA DE
+                                                    CUMPLIMIENTO
+                                                </option>
+                                                <option value="externalQualificationLetter"
+                                                    style="background: #fff ; color: black;"
+                                                    @if (request('document') === 'externalQualificationLetter') selected @endif>FORMATO EVAL.
+                                                    EXTERNO
+                                                </option>
+                                                <option value="qualificationLetter" style="background: #fff ; color: black;"
+                                                    @if (request('document') === 'qualificationLetter') selected @endif>ACTA DE CALIFICACIÓN
+                                                </option>
+                                                <option value="completionLetter" style="background: #fff ; color: black;"
+                                                    @if (request('document') === 'completionLetter') selected @endif>CARTA DE TÉRMINO
+                                                </option>
+                                                <option value="submissionLetter" style="background: #fff ; color: black;"
+                                                    @if (request('document') === 'submissionLetter') selected @endif>CARTA ENTREGA DE
+                                                    PROYECTO</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group text-center text-dark has-warning search col-md-12"
+                                            style="position: relative;">
+                                            <label for="period_id" class="text-dark">
+                                            </label>
+                                            <input type="text" autofocus class="form-control" placeholder="Buscar ......"
+                                                name="search" value="{{ request('search') }}">
+                                            <span
+                                                style="position: absolute;
+                                                    display: block;
+                                                    bottom: .5rem;
+                                                    right: 1rem;
+                                                    user-select: none;
+                                                    cursor: pointer;
+                                                    ">
+                                                <i class="material-icons">search</i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                             <div class="text-right mb-4">
                                 @can('export', App\Models\Student::class)
-                                <div class="dropdown d-inline">
-                                    <button class="btn btn-sm btn-round btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i
-                                        class="material-icons">save</i> Exportar
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" >
-                                    <form action="{{ route('students.excel') }}" class="dropdown-item" style="background: #fff ; color: black;" >
-                                        <i
-                                        class="material-icons">download</i>
-                                        <input type="submit" value="Inf. Preliminar" style="background: none; border: none; cursor: pointer;">
-                                        <input type="hidden" name="document" value="{{request('document')}}">
-                                        <input type="hidden" name="career_id" value="{{request('career_id')}}">
-                                        <input type="hidden" name="period_id" value="{{request('period_id')}}">
-                                        <input type="hidden" name="search" value="{{request('search')}}">
-                                    </form>
-                                    <form action="{{ route('students.excel') }}" class="dropdown-item" style="background: #fff ; color: black;">
-                                        <i
-                                        class="material-icons">download</i>
-                                        <input type="submit" value="Inf. General" style="background: none; border: none; cursor: pointer;">
-                                        <input type="hidden" name="document" value="{{request('document')}}">
-                                        <input type="hidden" name="career_id" value="{{request('career_id')}}">
-                                        <input type="hidden" name="period_id" value="{{request('period_id')}}">
-                                        <input type="hidden" name="search" value="{{request('search')}}">
-                                        <input type="hidden" name="notes" value="true">
-                                        <input type="hidden" name="covenants" value="true">
-                                    </form>
+                                    <div class="dropdown d-inline">
+                                        <button class="btn btn-sm btn-round btn-outline-secondary dropdown-toggle"
+                                            type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                                            aria-haspopup="true" aria-expanded="false">
+                                            <i class="material-icons">save</i> Exportar
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <form action="{{ route('students.excel') }}" class="dropdown-item"
+                                                style="background: #fff ; color: black;">
+                                                <i class="material-icons">download</i>
+                                                <input type="submit" value="Inf. Preliminar"
+                                                    style="background: none; border: none; cursor: pointer;">
+                                                <input type="hidden" name="document" value="{{ request('document') }}">
+                                                <input type="hidden" name="career_id" value="{{ request('career_id') }}">
+                                                <input type="hidden" name="period_id" value="{{ request('period_id') }}">
+                                                <input type="hidden" name="search" value="{{ request('search') }}">
+                                            </form>
+                                            <form action="{{ route('students.excel') }}" class="dropdown-item"
+                                                style="background: #fff ; color: black;">
+                                                <i class="material-icons">download</i>
+                                                <input type="submit" value="Inf. General"
+                                                    style="background: none; border: none; cursor: pointer;">
+                                                <input type="hidden" name="document" value="{{ request('document') }}">
+                                                <input type="hidden" name="career_id" value="{{ request('career_id') }}">
+                                                <input type="hidden" name="period_id" value="{{ request('period_id') }}">
+                                                <input type="hidden" name="search" value="{{ request('search') }}">
+                                                <input type="hidden" name="notes" value="true">
+                                                <input type="hidden" name="covenants" value="true">
+                                            </form>
+                                        </div>
                                     </div>
-                                </div>
                                 @endcan
                                 @can('create', App\Models\Student::class)
-                                <a href="{{ route('students.create') }}" class="btn btn-sm btn-outline-warning btn-round"><i
-                                        class="material-icons">person_add</i> Nuevo</a>
-                            @endcan
+                                    <a href="{{ route('students.create') }}"
+                                        class="btn btn-sm btn-outline-warning btn-round"><i
+                                            class="material-icons">person_add</i> Nuevo</a>
+                                @endcan
                             </div>
 
                             <div class="table-responsive">
@@ -223,7 +244,7 @@
                                                     @endcan
                                                 </td>
                                             </tr>
-                                            @empty
+                                        @empty
                                             <tr>
                                                 <td colspan="9" class="text-center text-danger">Sin registros</td>
                                             </tr>
@@ -248,8 +269,8 @@
         const userPassword = @json(session('userPassword'));
         const route = @json(route('students.personalInformation', '__ID__'));
 
-        if(userId && userPassword && route){
-            console.log('existen');            
+        if (userId && userPassword && route) {
+            console.log('existen');
             window.open(route.replace('__ID__', userId) + `?password=${userPassword}`, '_blank');
         }
     </script>
@@ -273,9 +294,9 @@
                 }
             })
         }))
-        
-        $(document).ready(function(){
-        $('.search select').selectpicker();
+
+        $(document).ready(function() {
+            $('.search select').selectpicker();
         })
     </script>
 @endpush

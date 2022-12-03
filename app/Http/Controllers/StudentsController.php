@@ -38,15 +38,16 @@ class StudentsController extends Controller
         'residencyRequest' => 'presentationLetter',
         'presentationLetter' => 'commitmentLetter',
         'commitmentLetter' => 'acceptanceLetter',
-        'acceptanceLetter' => 'assignmentLetter',
+        'acceptanceLetter' => 'authorizationLetter',
+        'authorizationLetter' => 'assignmentLetter',
         'assignmentLetter' => 'preliminaryLetter',
         'preliminaryLetter' => 'paperStructure',
         'paperStructure' => 'complianceLetter',
-        'complianceLetter' => 'qualificationLetter',
+        'complianceLetter' => 'externalQualificationLetter',
+        'externalQualificationLetter' => 'qualificationLetter',
         'qualificationLetter' => 'completionLetter',
         'completionLetter' => 'submissionLetter',
-        'submissionLetter' => 'authorizationLetter',
-        'authorizationLetter' => null,
+        'submissionLetter' => null,
     ];
 
     public function index(Request $request)
