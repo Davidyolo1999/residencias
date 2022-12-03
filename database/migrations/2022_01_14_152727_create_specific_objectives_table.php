@@ -16,7 +16,7 @@ class CreateSpecificObjectivesTable extends Migration
         Schema::create('specific_objectives', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('project_id')->constrained();
+            $table->foreignId('project_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
