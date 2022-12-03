@@ -207,7 +207,7 @@
                                     </div>
                                     <select name="sector" id="sector" class="form-control">
                                         <option value="" selected disabled class="text-center">Seleccione una Opción</option>                                        
-                                        <option value="publico" @if (old('sector', $company->sector) === 'publico') selected @endif>Publico</option>
+                                        <option value="publico" @if (old('sector', $company->sector) === 'publico') selected @endif>Público</option>
                                         <option value="privado" @if (old('sector', $company->sector) === 'privado') selected @endif>Privado</option>
                                         <option value="educativo" @if (old('sector', $company->sector) === 'educativo') selected @endif>Educativo</option>
                                         <option value="social" @if (old('sector', $company->sector) === 'social') selected @endif>Social</option>
