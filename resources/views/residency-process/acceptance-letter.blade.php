@@ -117,9 +117,11 @@
         se asignó como su asesor a <b style="color: red;">el/la nombre completo</b> y cubrirá un horario de <b style="color: red;">00:00 a 00:00 horas</b>, 
         los días <b style="color: red;">anotar los días</b>, en un periodo comprendido del <b style="color: red;">00</b> de <b style="color: red;">mes</b> de {{ date('Y') }} al <b style="color: red;">00</b> de <b style="color: red;">mes</b> de {{ date('Y') }}.
     </p>
+        @if ($student->company->number_of_agreement)
     <p class="note letra">Lo anterior, con el fin de dar cumplimiento al proyecto de Residencia Profesional, 
-        mismo que acordamos llevar a efecto en los términos del convenio número <b>(Núm. Convenio)</b> con fecha <b>(Fecha de Convenio)</b>. 
+        mismo que acordamos llevar a efecto en los términos del convenio número <b>{{$student->company && $student->company->number_of_agreement ? $student->company->number_of_agreement : '(Núm. Convenio)'}}</b> con fecha <b>{{$student->company && $student->company->date ? $student->company->date->format('d/m/Y') : '(Fecha de Convenio)'}}</b>. 
         <b style="color: red;">Solo si hay convenio-Si no borrar este párrafo.</b></p>
+        @endif 
         <p class="note letra">
             Sin más por el momento, reiteramos nuestro apoyo y colaboración
         @if ($student->sex == 'm')
