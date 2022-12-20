@@ -55,9 +55,9 @@ class StudentsController extends Controller
         $user = Auth::user();
 
         $currentPeriodId = Period::whereRaw('? BETWEEN start AND end', [now()])->first()->id ?? null;
-        
+
         $periodId = $request->period_id ?? $currentPeriodId;
-        
+
         $students = Student::query()
             ->withEmail()
             ->with('career')
@@ -69,13 +69,18 @@ class StudentsController extends Controller
                     $query->whereBetween('users.created_at', [$period->start, $period->end]);
                 }
             })
-            ->when($request->search, fn ($query, $search) => $query->orWhere('user_id', 'like', "%$search%"))
-            ->when($request->search, fn ($query, $search) => $query->orWhereRelation('user', 'email', 'like', "%$search%"))
-            ->when($request->search, fn ($query, $search) => $query->orWhere('first_name', 'like', "%$search%"))
-            ->when($request->search, fn ($query, $search) => $query->orWhere('fathers_last_name', 'like', "%$search%"))
-            ->when($request->search, fn ($query, $search) => $query->orWhere('mothers_last_name', 'like', "%$search%"))
-            ->when($request->search, fn ($query, $search) => $query->orWhere('account_number', 'like', "%$search%"))
-            ->when($request->search, fn ($query, $search) => $query->orWhereRelation('career', 'name', 'like', "%$search%"))
+            ->when($request->search, function ($query, $search) {
+                $query->where(function ($query) use ($search) {
+                    $query->orWhere('user_id', 'like', "%$search%")
+                        ->orWhereRelation('user', 'email', 'like', "%$search%")
+                        ->orWhere('first_name', 'like', "%$search%")
+                        ->orWhere('fathers_last_name', 'like', "%$search%")
+                        ->orWhere('mothers_last_name', 'like', "%$search%")
+                        ->orWhere('account_number', 'like', "%$search%")
+                        ->orWhereRelation('career', 'name', 'like', "%$search%")
+                        ->exists();
+                });
+            })
             ->when($request->career_id, fn ($query, $carrerId) => $query->where('career_id', $carrerId))
             ->when($user->role === User::TEACHER_ROLE, fn ($query) => $query->where('teacher_id', $user->id))
             ->when($user->role === User::EXTERNAL_ADVISOR_ROLE, fn ($query) => $query->where('external_advisor_id', $user->id))
@@ -101,7 +106,7 @@ class StudentsController extends Controller
         $user = Auth::user();
 
         $currentPeriodId = Period::whereRaw('? BETWEEN start AND end', [now()])->first()->id ?? null;
-        
+
         $periodId = $request->period_id ?? $currentPeriodId;
 
         $students = Student::query()
