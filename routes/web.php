@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminsController;
 use App\Http\Controllers\AssignmentLetterController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthorizationLetterController;
+use App\Http\Controllers\ChartsController;
 use App\Http\Controllers\CommitmentLetterController;
 use App\Http\Controllers\CompletionLetterController;
 use App\Http\Controllers\ComplianceLetterController;
@@ -43,6 +44,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/mi-perfil', [AuthController::class, 'profile'])->name('profile');
     Route::put('/actualizar-perfil', [AuthController::class, 'updateProfile'])->name('updateProfile');
+
+    Route::get('/graficos', [ChartsController::class, 'index'])->name('charts.index');
 
     Route::prefix('/admins')->name('admins.')->group(function () {
         Route::get('/', [AdminsController::class, 'index'])->name('index')->can('index', Admin::class);

@@ -139,6 +139,14 @@
                     </a>
                 </li>
             @endcan
+            @if (Auth::user()->isAdmin())
+            <li class="nav-item{{ $activePage == 'charts' ? ' active' : '' }}">
+                <a class="nav-link" href="{{ route('charts.index') }}">
+                    <i class="material-icons">people</i>
+                    Graficos
+                </a>
+            </li>
+            @endif
         </ul>        
     </div>
 </div>

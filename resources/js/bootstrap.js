@@ -1,6 +1,7 @@
 // window._ = require('lodash');
 import Swiper from 'swiper/bundle';
 import 'swiper/css/bundle';
+import ApexCharts from 'apexcharts'
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the
@@ -29,3 +30,4 @@ import 'swiper/css/bundle';
 // });
 window.Swal = require('sweetalert2');
 window.Swiper = Swiper;
+window.ApexCharts = ApexCharts;
