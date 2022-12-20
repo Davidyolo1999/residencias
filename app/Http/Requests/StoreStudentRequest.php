@@ -27,7 +27,7 @@ class StoreStudentRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|email|unique:users,email',
+        'email' => 'required|email|unique:users,email',
             'first_name' => 'required|max:255',
             'fathers_last_name' => 'required|max:255',
             'mothers_last_name' => 'required|max:255',

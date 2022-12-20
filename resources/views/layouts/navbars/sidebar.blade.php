@@ -131,22 +131,22 @@
                     </a>
                 </li>
             @endcan
+            @if (Auth::user()->isAdmin())
+            <li class="nav-item{{ $activePage == 'charts' ? ' active' : '' }}">
+                <a class="nav-link" href="{{ route('charts.index') }}">
+                    <i class="material-icons">data_usage</i>
+                    Estadística
+                </a>
+            </li>
+            @endif
             @can('index', App\Models\Admin::class)
                 <li class="nav-item{{ $activePage == 'locations' ? ' active' : '' }}">
                     <a class="nav-link" href="{{ route('locations.index') }}">
-                        <i class="material-icons">people</i>
+                        <i class="material-icons">location_on</i>
                         Ubicaciones
                     </a>
                 </li>
             @endcan
-            @if (Auth::user()->isAdmin())
-            <li class="nav-item{{ $activePage == 'charts' ? ' active' : '' }}">
-                <a class="nav-link" href="{{ route('charts.index') }}">
-                    <i class="material-icons">people</i>
-                    Graficos
-                </a>
-            </li>
-            @endif
         </ul>        
     </div>
 </div>

@@ -186,6 +186,9 @@ return [
         'title' => 'título',
         'general_objective' => 'objetivo general',
         'description' => 'descripción',
+        'name' => 'periodo',
+        'start' => 'inicia',
+        'end' => 'finaliza',
         
     ],
 
