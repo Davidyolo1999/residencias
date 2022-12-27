@@ -1,5 +1,8 @@
 <table>
     <thead>
+        <tr>
+            <td style="text-align: center; font-size: 30px;" colspan="20" > <h1>RESIDENCIAS PROFESIONALES PERIODO </h1></td>
+        </tr>
     <tr>
         <th style="background-color: #92d050; border: 1px solid black; text-align: center; vertical-align: middle;" rowspan="2"><b>No.</b> </th>
         <th style="background-color: #92d050; border: 1px solid black; text-align: center; vertical-align: middle;" rowspan="2"><b>UES</b></th>
