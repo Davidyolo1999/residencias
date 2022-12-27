@@ -108,13 +108,15 @@
                         <div class="col-md-9">
                             <div class="input-group input-group-dynamic">
                                 <select
-                                    class="form-control"
                                     name="external_advisor_id"
                                     id="external_advisor_id"
+                                    class="selectpicker form-control text-dark has-warning" data-live-search="true"
+                                    data-style="btn btn-sm btn-outline-success btn-round"
                                 >
-                                    <option value="" selected disabled>Seleccione una Opción</option>
+                                    <option style="background: #fff ; color: black;" value="" selected disabled>Seleccione una Opción</option>
                                     @foreach ($externalAdvisors as $externalAdvisor)
                                         <option
+                                        style="background: #fff ; color: black;"
                                             value="{{ $externalAdvisor->user_id }}"
                                             @if (old('external_advisor_id') == $externalAdvisor->user_id) selected @endif
                                         >{{ $externalAdvisor->full_name }}</option>
