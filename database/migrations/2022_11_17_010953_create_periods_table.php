@@ -18,6 +18,8 @@ class CreatePeriodsTable extends Migration
             $table->string('name');
             $table->date('start');
             $table->date('end');
+
+            /*From Configuration*/
             $table->string('unit');
             $table->string('address');
             $table->string('person_in_charge');
@@ -27,6 +29,8 @@ class CreatePeriodsTable extends Migration
             $table->string('office_phone_number');
             $table->string('personal_phone_number');
             $table->string('institution_code');
+
+
             $table->timestamps();
         });
     }
