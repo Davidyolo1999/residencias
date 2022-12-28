@@ -27,7 +27,7 @@
             </div>
             <div class="card-body">
                 <div class="text-right ">
-                    <a href="{{ route('periods.create') }}" class="btn btn-warning btn-sm btn-round"> <i class="material-icons">person_add</i>  Nuevo</a>
+                    <a href="{{ route('periods.create') }}" class="btn btn-warning btn-sm btn-round"> <i class="material-icons">today</i>  Nuevo</a>
                 </div>
 
                 <div class="table-responsive">

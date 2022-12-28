@@ -49,7 +49,7 @@
                     {{-- CARREER --}}
                     <div class="row mb-3">
                         <div class="col-md-3">
-                            <label for="career_id" class="d-block">Carrera:</label>
+                            <label for="career_id" class="d-block letter text-dark">Carrera:</label>
                         </div>
                         <div class="col-md-9">
                             <div class="input-group input-group-dynamic">
@@ -76,7 +76,7 @@
                     {{-- TEACHER --}}
                     <div class="row mb-3">
                         <div class="col-md-3">
-                            <label for="teacher_id" class="d-block">Asesor Interno:</label>
+                            <label for="teacher_id" class="d-block letter text-dark">Asesor Interno:</label>
                         </div>
                         <div class="col-md-9">
                             <div class="input-group input-group-dynamic">
@@ -103,7 +103,7 @@
                     {{-- EXTERNAL ADVISOR --}}
                     <div class="row mb-3">
                         <div class="col-md-3">
-                            <label for="external_advisor_id" class="d-block">Asesor Externo:</label>
+                            <label for="external_advisor_id" class="d-block letter text-dark">Asesor Externo:</label>
                         </div>
                         <div class="col-md-9">
                             <div class="input-group input-group-dynamic">
@@ -145,7 +145,7 @@
                     {{-- SEX --}}
                     <div class="row mb-3">
                         <div class="col-md-3">
-                            <label for="sex" class="d-block">Sexo:</label>
+                            <label for="sex" class="d-block letter text-dark">Sexo:</label>
                         </div>
                         <div class="col-md-9">
                             <div class="input-group input-group-dynamic">
@@ -185,7 +185,7 @@
                     {{-- ENROLLED --}}
                     <div class="row mb-3">
                         <div class="col-md-3">
-                            <label for="is_enrolled" class="d-block">Inscrito:</label>
+                            <label for="is_enrolled" class="d-block letter text-dark">Inscrito:</label>
                         </div>
                         <div class="col-md-9">
                             <input
@@ -200,7 +200,7 @@
                     {{-- SOCIAL SERVICE CONCLUDED --}}
                     <div class="row mb-3">
                         <div class="col-md-3">
-                            <label for="is_social_service_concluded" class="d-block">Servicio Social Concluido:</label>
+                            <label for="is_social_service_concluded" class="d-block letter text-dark">Servicio Social Concluido:</label>
                         </div>
                         <div class="col-md-9">
                             <input
@@ -214,7 +214,7 @@
                     {{-- REGULATE --}}
                     <div class="row mb-3">
                         <div class="col-md-3">
-                            <label for="regulate" class="d-block">Regular:</label>
+                            <label for="regulate" class="d-block letter text-dark">Regular:</label>
                         </div>
                         <div class="col-md-9">
                             <input
