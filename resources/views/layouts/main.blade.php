@@ -83,8 +83,14 @@
         
     </body>
     <script>
+        window.clickOnElement = (elementId) => {
+            const element = document.getElementById(elementId);            
+            if(element) {                
+                element.click();
+            } 
+        }
         $(document).ready(function(){
-            $('[data-toggle="tooltip"]').tooltip();
+            $('[data-toggle-second="tooltip"]').tooltip();
         });
     </script>
 </html>

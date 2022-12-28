@@ -1,4 +1,4 @@
-@if (!$existPeriod && Route::currentRouteName() !== 'periods.create' && Route::currentRouteName() !== 'periods.edit' &&  Auth::user()->isAdmin())
+@if (!$existPeriod && Route::currentRouteName() !== 'periods.create' && Route::currentRouteName() !== 'periods.edit' &&  Auth::user()->isAdmin() && Auth::user()->tutorial_complete)
 <div id="periods-modal-alert" style="
 position: fixed;
 display: flex;

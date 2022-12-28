@@ -31,7 +31,12 @@
                             <div class="row justify-content-between">
                                 <form action="{{ route('students.index') }}" class="col-md-12">
                                     <div class="form-row">
-                                        <div class="form-group text-center text-dark search col-md-4">
+                                        <div 
+                                            class="form-group text-center text-dark search col-md-4"
+                                            data-toggle-second="tooltip" 
+                                            data-placement="top"
+                                            title="Aca puedes filtrar los alumnos por el periodo."
+                                        >
                                             <label for="period_id" class="text-dark"
                                                 style="font-size: 14px; color:#111111; font-weight: 400; font-family: ">
                                                 Periodo:
@@ -39,7 +44,8 @@
                                             <select class="text-center text-dark selectpicker show-tick"
                                                 data-style="btn btn-sm btn-outline-success btn-round" name="period_id"
                                                 id="period_id" onchange="$(this).closest('form').submit()" data-size="5"
-                                                data-width="fit">
+                                                data-width="fit"                                                    
+                                                >
                                                 <option style="background: #fff ; color: black;" value="">
                                                     Selecciona una Opción
                                                 </option>
@@ -52,7 +58,12 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="form-group text-center text-dark search col-md-4">
+                                        <div                                         
+                                            class="form-group text-center text-dark search col-md-4"
+                                            data-toggle-second="tooltip" 
+                                            data-placement="top"
+                                            title="Aca puedes filtrar los alumnos por la carrera."
+                                        >
                                             <label for="career_id" class="text-dark"
                                                 style="font-size: 14px; color:#111111; font-weight: 400; font-family:">
                                                 Carrera:
@@ -73,7 +84,12 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="form-group text-center text-dark search col-md-4">
+                                        <div 
+                                            class="form-group text-center text-dark search col-md-4"
+                                            data-toggle-second="tooltip" 
+                                            data-placement="top"
+                                            title="Aca puedes filtrar los alumnos por el documento 😊."
+                                        >
                                             <label for="document" class="text-dark"
                                                 style="font-size: 14px; color:#111111; font-weight: 400; font-family:">
                                                 Documento:
@@ -153,7 +169,9 @@
                                     <div class="dropdown d-inline">
                                         <button class="btn btn-sm btn-round btn-outline-secondary dropdown-toggle"
                                             type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                                            aria-haspopup="true" aria-expanded="false">
+                                            aria-haspopup="true" aria-expanded="false"
+                                            data-toggle-second="tooltip" data-placement="left" title="Aca puedes exportar los alumnos."
+                                            >
                                             <i class="material-icons">save</i> Exportar
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -183,9 +201,16 @@
                                     </div>
                                 @endcan
                                 @can('create', App\Models\Student::class)
-                                    <a href="{{ route('students.create') }}"
-                                        class="btn btn-sm btn-outline-warning btn-round"><i
-                                            class="material-icons">person_add</i> Nuevo</a>
+                                    <a 
+                                        href="{{ route('students.create') }}"
+                                        class="btn btn-sm btn-outline-warning btn-round" 
+                                        data-toggle-second="tooltip" 
+                                        data-placement="left" 
+                                        title="Aca puedes crear un nuevo alumno 👨‍🎓."
+                                    >
+                                        <i class="material-icons">person_add</i> 
+                                        Nuevo
+                                    </a>
                                 @endcan
                             </div>
 
