@@ -45,7 +45,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/mi-perfil', [AuthController::class, 'profile'])->name('profile');
     Route::put('/actualizar-perfil', [AuthController::class, 'updateProfile'])->name('updateProfile');
 
-    Route::get('/graficos', [ChartsController::class, 'index'])->name('charts.index');
+    Route::get('/graphics', [ChartsController::class, 'index'])->name('charts.index');
 
     Route::prefix('/admins')->name('admins.')->group(function () {
         Route::get('/', [AdminsController::class, 'index'])->name('index')->can('index', Admin::class);

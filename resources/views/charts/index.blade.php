@@ -1,4 +1,4 @@
-@extends('layouts.main', ['activePage' => 'charts', 'title' => __(''), 'titlePage' => 'Graficos'])
+@extends('layouts.main', ['activePage' => 'charts', 'title' => __(''), 'titlePage' => 'Gráficos'])
 
 @section('content')
 <div class="content">
@@ -6,7 +6,7 @@
         <div class="col-md-6">
             <div class="card p-3">
               <h5>
-                Clasificación por género de los estudiantes que presentarón su servicio social:
+                Clasificación por género de los estudiantes que presentarón su residencia profesional:
               </h5>
               <form>
                 <div class="row mb-4 align-items-center">
@@ -34,7 +34,7 @@
                     </div>
                   </div>
                   <div class="col-md-4">
-                    <button class="btn btn-primary">
+                    <button class="btn btn-warning">
                       Enviar
                     </button>
                   </div>

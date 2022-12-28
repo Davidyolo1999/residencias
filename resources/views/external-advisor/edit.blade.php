@@ -38,7 +38,7 @@
                     {{-- SEX --}}
                     <div class="row mb-3">
                         <div class="col-md-3">
-                            <label for="sex" class="d-block">Sexo:</label>
+                            <label for="sex" class="d-block letter text-dark">Sexo:</label>
                         </div>
                         <div class="col-md-9">
                             <div class="input-group input-group-dynamic">
@@ -64,7 +64,7 @@
                     {{-- State --}}
                     <div class="row mb-3">
                         <div class="col-md-3">
-                            <label for="state_id" class="d-block">Estado:</label>
+                            <label for="state_id" class="d-block letter text-dark">Estado:</label>
                         </div>
                         <div class="col-md-9">
                             <div class="input-group input-group-dynamic">
@@ -85,7 +85,7 @@
                     {{-- MUNCIPALITY --}}
                     <div class="row mb-3">
                         <div class="col-md-3">
-                            <label for="municipality_id" class="d-block">Municipio:</label>
+                            <label for="municipality_id" class="d-block letter text-dark">Municipio:</label>
                         </div>
                         <div class="col-md-9">
                             <div class="input-group input-group-dynamic">
@@ -102,7 +102,7 @@
                     {{-- LOCALITY --}}
                     <div class="row mb-3">
                         <div class="col-md-3">
-                            <label for="locality_id" class="d-block">Localidad:</label>
+                            <label for="locality_id" class="d-block letter text-dark">Localidad:</label>
                         </div>
                         <div class="col-md-9">
                             <div class="input-group input-group-dynamic">

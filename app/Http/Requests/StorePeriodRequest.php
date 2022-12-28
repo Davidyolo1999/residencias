@@ -24,9 +24,9 @@ class StorePeriodRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'start' => 'required|date|before_or_equal:end',
-            'end' => 'required|date|after_or_equal:start'
+            'name' => 'required|unique:periods,name',
+            'start' => 'required|date|before_or_equal:end|unique:periods,start',
+            'end' => 'required|date|after_or_equal:start|unique:periods,end'
         ];
     }
 }
