@@ -45,11 +45,7 @@ class PeriodsController extends Controller
 
     public function update(Period $period, UpdatePeriodRequest $request)
     {
-        $period->name = $request->name;
-        $period->start = $request->start;
-        $period->end = $request->end;
-
-        $period->save();
+        $period->update($request->validated());
         
         return redirect()->route('periods.index')->with('alert', [
             'type' => 'success',

@@ -189,6 +189,11 @@ return [
         'name' => 'periodo',
         'start' => 'inicia',
         'end' => 'finaliza',
+        'address' => 'dirección',
+        'unit' => 'unidad',
+        'person_in_charge_position_abbreviation' => 'cargo abreviado',
+        'institution_code' => 'clave de institución',
+
         
     ],
 
