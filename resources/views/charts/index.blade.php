@@ -4,15 +4,17 @@
 <div class="content">
     <div class="row">
         <div class="col-md-6">
-            <div class="card p-3">
+            <div class="card p-3 letter">
               <h5>
-                Clasificación por género de los estudiantes que presentarón su residencia profesional:
+                <b>
+                Clasificación por Género de los Estudiantes que Presentarón su Residencia Profesional:
+              </b>
               </h5>
               <form>
                 <div class="row mb-4 align-items-center">
                   <div class="col-md-12">
                     <div class="form-group">
-                      <label for="">Carrera</label>
+                      <label for="" class="letter text-dark">Carrera</label>
                       <select name="career_id" class="form-control">
                         <option value="" selected>Seleccione una opción</option>
                         @foreach ($careers as $career)
@@ -22,14 +24,14 @@
                     </div>
                   </div>
                   <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="">Desde</label>
-                      <input type="date" value="{{request('start')}}" name="start" class="form-control">
+                    <div class="form-group has-warning">
+                      <label for="" class="letter text-dark">Desde</label>
+                      <input type="date" value="{{request('start')}}" name="start" class="form-control ">
                     </div>
                   </div>
                   <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="">Hasta</label>
+                    <div class="form-group has-warning">
+                      <label for="" class="letter text-dark">Hasta</label>
                       <input type="date" value="{{request('end')}}" name="end" class="form-control">
                     </div>
                   </div>

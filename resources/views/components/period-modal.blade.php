@@ -26,7 +26,7 @@ overflow-y: auto;
                 </button>
             </div>
             <div class="col-md-6">
-                <a href="{{route('periods.create')}}" class="btn btn-primary">
+                <a href="{{route('periods.create')}}" class="btn btn-success">
                     Ir a cargar periodo
                 </a>
             </div>

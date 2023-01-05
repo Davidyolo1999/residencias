@@ -20,89 +20,96 @@
                         </div>
                     @endif
 
-        <div class="card">
-            <div class="card-header card-header-success ">
-                <div class="row">
-                    <div class="col-md-6">
-                        <h4 class="card-title text-white"> <b>Administradores</b> </h4>
-                        <p class="card-category text-white"><b>Lista de Administradores</b> </p>
-                    </div>
-                    <form class="col-md-6">                        
-                        <div class="form-group text-center text-dark has-white search col-md-12">
-                            <label for="period_id" class="text-white">
-                                Buscar:
-                            </label>
-                            <input type="text" class="form-control" autofocus name="search" value="{{request('search')}}">
+                    <div class="card">
+                        <div class="card-header card-header-success ">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4 class="card-title text-white"> <b>Administradores</b> </h4>
+                                    <p class="card-category text-white"><b>Lista de Administradores</b> </p>
+                                </div>
+                                <form class="col-md-6">
+                                    <div class="form-group text-center text-dark has-white search col-md-12">
+                                        <label for="period_id" class="text-white">
+                                            Buscar:
+                                        </label>
+                                        <input type="text" class="form-control" autofocus name="search"
+                                            value="{{ request('search') }}">
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                    </form>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="text-right ">
-                    <a href="{{ route('admins.create') }}" class="btn btn-warning btn-sm btn-round"> <i class="material-icons">person_add</i>  Nuevo</a>
-                </div>
+                        <div class="card-body">
+                            <div class="text-right">
+                                <a href="{{ route('admins.create') }}" data-toggle-second="tooltip" data-placement="top"
+                                    title="Aquí puedes crear un nuevo administrador."
+                                    class="btn btn-warning btn-sm btn-round"> <i class="material-icons">person_add</i>
+                                    Nuevo</a>
+                            </div>
 
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead class="thead">
-                            <tr class="">
-                                <th class="text-center text-dark"># </th>
-                                <th class="text-center text-dark">E-mail </th>
-                                <th class="text-center text-dark">Nombre </th>
-                                <th class="text-center text-dark">Apellidos </th>
-                                <th class="text-center  text-dark">Acciones </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @forelse ($admins as $admin)
-                                <tr>
-                                    <td class="text-center"> {{ $admin->id }}</td>
-                                    <td class="text-center">{{ $admin->email }} </td>
-                                    <td class="text-center">{{ $admin->admin->first_name }} </td>
-                                    <td class="text-center">{{ $admin->admin->last_name }} </td>
-                                    <td class=" td-actions text-nowrap text-center ">
-                                        <a href="" class="btn btn-sm btn-info" title="Ver detalles">
-                                            <i class="material-icons">details</i>
-                                        </a>
-                                        <a href="{{ route('admins.edit', $admin) }}" class="btn btn-sm btn-info btn-success" title="Editar" >
-                                            <i class="material-icons">edit</i>
-                                        </a>
-                                        <form
-                                            action="{{ route('admins.destroy', $admin) }}"
-                                            method="POST"
-                                            class="d-inline-block delete-admin-form"
-                                        >
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="btn btn-sm btn-danger">
-                                                <i class="material-icons">delete</i>
-                                            </button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="5" class="text-center text-danger">Sin registros</td>
-                                </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead class="thead">
+                                        <tr class="">
+                                            <th class="text-center text-dark"># </th>
+                                            <th class="text-center text-dark">E-mail </th>
+                                            <th class="text-center text-dark">Nombre </th>
+                                            <th class="text-center text-dark">Apellidos </th>
+                                            <th class="text-center  text-dark">Acciones </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @forelse ($admins as $admin)
+                                            <tr>
+                                                <td class="text-center"> {{ $admin->id }}</td>
+                                                <td class="text-center">{{ $admin->email }} </td>
+                                                <td class="text-center">{{ $admin->admin->first_name }} </td>
+                                                <td class="text-center">{{ $admin->admin->last_name }} </td>
+                                                <td class=" td-actions text-nowrap text-center ">
+                                                    <a href="" class="btn btn-sm btn-info" title="Ver detalles">
+                                                        <i class="material-icons">details</i>
+                                                    </a>
+                                                    <a href="{{ route('admins.edit', $admin) }}"
+                                                        class="btn btn-sm btn-info btn-success" data-toggle-second="tooltip"
+                                                        data-placement="top"
+                                                        title="Aquí puedes editar la información del administrador."
+                                                        title="Editar">
+                                                        <i class="material-icons">edit</i>
+                                                    </a>
+                                                    <form action="{{ route('admins.destroy', $admin) }}" method="POST"
+                                                        data-toggle-second="tooltip" data-placement="top"
+                                                        title="Aquí puedes eliminar al administrador."
+                                                        class="d-inline-block delete-admin-form">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button class="btn btn-sm btn-danger">
+                                                            <i class="material-icons">delete</i>
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        @empty
+                                            <tr>
+                                                <td colspan="5" class="text-center text-danger">Sin registros</td>
+                                            </tr>
+                                        @endforelse
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            {{ $admins->links() }}
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="card-footer">
-                {{ $admins->links() }}
             </div>
         </div>
     </div>
-</div>
-</div>
-</div>
 @endsection
 
 @push('js')
-    <script>        
+    <script>
         const deleteAdminForms = document.querySelectorAll('.delete-admin-form');
-        
+
         deleteAdminForms.forEach(form => form.addEventListener('submit', function(e) {
             e.preventDefault();
 

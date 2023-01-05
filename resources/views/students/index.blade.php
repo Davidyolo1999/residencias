@@ -35,7 +35,7 @@
                                             class="form-group text-center text-dark search col-md-4"
                                             data-toggle-second="tooltip" 
                                             data-placement="top"
-                                            title="Aca puedes filtrar los alumnos por el periodo."
+                                            title="Aquí puedes filtrar los alumnos por el periodo."
                                         >
                                             <label for="period_id" class="text-dark"
                                                 style="font-size: 14px; color:#111111; font-weight: 400; font-family: ">
@@ -62,7 +62,7 @@
                                             class="form-group text-center text-dark search col-md-4"
                                             data-toggle-second="tooltip" 
                                             data-placement="top"
-                                            title="Aca puedes filtrar los alumnos por la carrera."
+                                            title="Aquí puedes filtrar los alumnos por la carrera."
                                         >
                                             <label for="career_id" class="text-dark"
                                                 style="font-size: 14px; color:#111111; font-weight: 400; font-family:">
@@ -88,7 +88,7 @@
                                             class="form-group text-center text-dark search col-md-4"
                                             data-toggle-second="tooltip" 
                                             data-placement="top"
-                                            title="Aca puedes filtrar los alumnos por el documento 😊."
+                                            title="Aquí puedes filtrar los alumnos por el documento 😊."
                                         >
                                             <label for="document" class="text-dark"
                                                 style="font-size: 14px; color:#111111; font-weight: 400; font-family:">
@@ -170,7 +170,7 @@
                                         <button class="btn btn-sm btn-round btn-outline-secondary dropdown-toggle"
                                             type="button" id="dropdownMenuButton" data-toggle="dropdown"
                                             aria-haspopup="true" aria-expanded="false"
-                                            data-toggle-second="tooltip" data-placement="left" title="Aca puedes exportar los alumnos."
+                                            data-toggle-second="tooltip" data-placement="left" title="Aquí puedes exportar los alumnos."
                                             >
                                             <i class="material-icons">save</i> Exportar
                                         </button>
@@ -206,7 +206,7 @@
                                         class="btn btn-sm btn-outline-warning btn-round" 
                                         data-toggle-second="tooltip" 
                                         data-placement="left" 
-                                        title="Aca puedes crear un nuevo alumno 👨‍🎓."
+                                        title="Aquí puedes crear un nuevo alumno 👨‍🎓."
                                     >
                                         <i class="material-icons">person_add</i> 
                                         Nuevo
@@ -242,6 +242,9 @@
                                                 <td class="text-center"> {{ $student->created_at->format('d-m-Y') }} </td>
                                                 <td class="td-actions text-nowrap text-center">
                                                     <a href="{{ route('students.show', $student) }}"
+                                                        data-toggle-second="tooltip" 
+                                                        data-placement="top"
+                                                        title="Aquí puedes ver los detalles generales del alumno."
                                                         class="btn btn-sm btn-info" title="Ver detalles">
                                                         <i class="material-icons">details</i>
                                                     </a>
@@ -252,6 +255,9 @@
 
                                                     @can('update', $student)
                                                         <a href="{{ route('students.edit', $student) }}"
+                                                            data-toggle-second="tooltip" 
+                                                            data-placement="top"
+                                                            title="Aquí puedes editar la información del alumno."
                                                             class="btn btn-sm btn-success" title="Editar">
                                                             <i class="material-icons">edit</i>
                                                         </a>
@@ -262,7 +268,12 @@
                                                             method="POST" class="d-inline-block delete-student-form">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button class="btn btn-sm btn-danger" title="Eliminar">
+                                                            <button 
+                                                                class="btn btn-sm btn-danger" 
+                                                                data-toggle-second="tooltip" 
+                                                                data-placement="top"
+                                                                title="Aquí puedes eliminar al alumno."
+                                                            >
                                                                 <i class="material-icons">delete</i>
                                                             </button>
                                                         </form>
