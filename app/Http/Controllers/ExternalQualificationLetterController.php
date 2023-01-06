@@ -24,7 +24,8 @@ class ExternalQualificationLetterController extends Controller
             ->withEmail()
             ->where('user_id', $userId)
             ->firstOrFail();
-        $configuration = Configuration::firstOrfail();
+
+        $configuration = $student->period;
 
         if (!$student->externalQualificationLetter->exists && Auth::id() !== $student->user_id) {
             return back()->with('alert', [

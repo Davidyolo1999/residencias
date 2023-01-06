@@ -25,7 +25,7 @@ class PreliminaryLetterController extends Controller
             ->where('user_id', $userId)
             ->firstOrFail();
 
-        $configuration = Configuration::firstOrFail();
+        $configuration = $student->period;
 
         if (!$student->preliminaryLetter->exists && Auth::id() !== $student->user_id) {
             return back()->with('alert', [
@@ -34,14 +34,14 @@ class PreliminaryLetterController extends Controller
             ]);
         }
 
-        if (!$student->approvedAssignmentletter){
+        if (!$student->approvedAssignmentletter) {
             return redirect()->route('students.residencyProcess')->with('alert', [
                 'type' => 'danger',
                 'message' => 'Debe estar aprobada la carta de asignación',
             ]);
         }
 
-        if (!$student->approvedAssignmentletter->signed_document){
+        if (!$student->approvedAssignmentletter->signed_document) {
             return redirect()->route('students.residencyProcess')->with('alert', [
                 'type' => 'danger',
                 'message' => 'Aún no se ha cargado el documento final de la asignación de asesor interno',
@@ -56,17 +56,16 @@ class PreliminaryLetterController extends Controller
                 'company_id' => $student->company->id,
             ]);
 
-        $pdf = PDF::loadView('residency-process.preliminary-letter',[
-            'student'=>$student,
+        $pdf = PDF::loadView('residency-process.preliminary-letter', [
+            'student' => $student,
             'externalCompany' => $student->company,
             'project' => $student->project,
-            'preliminaryLetter'=> $preliminaryLetter,
+            'preliminaryLetter' => $preliminaryLetter,
             'configuration' => $configuration,
         ]);
 
-        $customReportName = 'Anteproyecto de Residencias Profesionales-'.$student->full_name.'_'.Carbon::now()->format('d-m-Y').'.pdf'; 
+        $customReportName = 'Anteproyecto de Residencias Profesionales-' . $student->full_name . '_' . Carbon::now()->format('d-m-Y') . '.pdf';
         return $pdf->stream($customReportName);
-
     }
 
     public function preliminaryLetterCorrections(Request $request, Student $student)
@@ -94,7 +93,7 @@ class PreliminaryLetterController extends Controller
             $preliminaryLetter->corrections()->create(['content' => $data['corrections']]);
 
             DB::commit();
-        } catch(Throwable $t) {
+        } catch (Throwable $t) {
             DB::rollBack();
 
             return back()->with('alert', [
@@ -126,7 +125,7 @@ class PreliminaryLetterController extends Controller
 
         $preliminaryLetter->save();
 
-        $preliminaryLetter->corrections->each(fn($correction) => $correction->update(['is_solved' => true]));
+        $preliminaryLetter->corrections->each(fn ($correction) => $correction->update(['is_solved' => true]));
 
         return back()->with('alert', [
             'type' => 'success',
@@ -205,6 +204,4 @@ class PreliminaryLetterController extends Controller
 
         return response()->file(storage_path("app/{$preliminaryLetter->signed_document}"));
     }
-
-
 }

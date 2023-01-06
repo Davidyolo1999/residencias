@@ -14,7 +14,7 @@ use Carbon\Carbon;
 use Throwable;
 
 class AcceptanceLetterController extends Controller
-{   
+{
     public function acceptanceLetter(Request $request)
     {
         $userId = $request->user()->isStudent() ? Auth::id() : $request->user_id;
@@ -23,7 +23,8 @@ class AcceptanceLetterController extends Controller
             ->withEmail()
             ->where('user_id', $userId)
             ->firstOrFail();
-        $configuration=Configuration::firstOrfail();
+
+        $configuration = $student->period;
 
         if (!$student->acceptanceLetter->exists && Auth::id() !== $student->user_id) {
             return back()->with('alert', [
@@ -32,13 +33,13 @@ class AcceptanceLetterController extends Controller
             ]);
         }
 
-        if (!$student->approvedCommitmentletter){
+        if (!$student->approvedCommitmentletter) {
             return redirect()->route('students.residencyProcess')->with('alert', [
                 'type' => 'danger',
                 'message' => 'Debe estar aprobada la carta de compromiso',
             ]);
         }
-        if (!$student->approvedCommitmentletter->signed_document){
+        if (!$student->approvedCommitmentletter->signed_document) {
             return redirect()->route('students.residencyProcess')->with('alert', [
                 'type' => 'danger',
                 'message' => 'Aún no se ha cargado el documento final de la carta de compromiso',
@@ -54,15 +55,15 @@ class AcceptanceLetterController extends Controller
 
             ]);
 
-        $pdf = PDF::loadView('residency-process.acceptance-letter',[
-            'student'=>$student,
+        $pdf = PDF::loadView('residency-process.acceptance-letter', [
+            'student' => $student,
             'externalCompany' => $student->company,
             'project' => $student->project,
-            'acceptanceLetter'=> $acceptanceLetter,
-            'configuration'=> $configuration,
+            'acceptanceLetter' => $acceptanceLetter,
+            'configuration' => $configuration,
         ]);
 
-        $customReportName = 'Carta de Aceptación-'.$student->full_name.'_'.Carbon::now()->format('d-m-Y').'.pdf'; 
+        $customReportName = 'Carta de Aceptación-' . $student->full_name . '_' . Carbon::now()->format('d-m-Y') . '.pdf';
         return $pdf->stream($customReportName);
     }
 
@@ -142,7 +143,7 @@ class AcceptanceLetterController extends Controller
             $acceptanceLetter->corrections()->create(['content' => $data['corrections']]);
 
             DB::commit();
-        } catch(Throwable $t) {
+        } catch (Throwable $t) {
             DB::rollBack();
 
             return back()->with('alert', [
@@ -173,8 +174,8 @@ class AcceptanceLetterController extends Controller
         $acceptanceLetter->status = DocumentStatus::STATUS_PROCESSING;
 
         $acceptanceLetter->save();
-        
-        $acceptanceLetter->corrections->each(fn($correction) => $correction->update(['is_solved' => true]));
+
+        $acceptanceLetter->corrections->each(fn ($correction) => $correction->update(['is_solved' => true]));
 
         return back()->with('alert', [
             'type' => 'success',
@@ -202,7 +203,4 @@ class AcceptanceLetterController extends Controller
             'message' => 'La carta de aceptación ha sido aprovada',
         ]);
     }
-
-
-
 }

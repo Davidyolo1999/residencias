@@ -25,7 +25,7 @@ class ComplianceLetterController extends Controller
             ->where('user_id', $userId)
             ->firstOrFail();
 
-        $configuration = Configuration::firstOrfail();
+        $configuration = $student->period;
 
         if (!$student->complianceLetter->exists && Auth::id() !== $student->user_id) {
             return back()->with('alert', [
@@ -34,7 +34,7 @@ class ComplianceLetterController extends Controller
             ]);
         }
 
-        if (!$student->approvedPaperStructure){
+        if (!$student->approvedPaperStructure) {
             return redirect()->route('students.residencyProcess')->with('alert', [
                 'type' => 'danger',
                 'message' => 'Debe estar aprobada la estructura del informe final',
@@ -52,7 +52,7 @@ class ComplianceLetterController extends Controller
 
             $questions = collect(config('documents.complianceQuestions'));
 
-            $questions->each(function($questionData) use ($complianceLetter) {
+            $questions->each(function ($questionData) use ($complianceLetter) {
                 if (is_array($questionData)) {
                     [$parentQuestion, $childrenQuestions] = $questionData;
 
@@ -76,15 +76,15 @@ class ComplianceLetterController extends Controller
 
         $complianceLetter->load('parentQuestions.children');
 
-        $pdf = PDF::loadView('residency-process.compliance-letter',[
-            'student'=> $student,
+        $pdf = PDF::loadView('residency-process.compliance-letter', [
+            'student' => $student,
             'externalCompany' => $student->company,
             'project' => $student->project,
-            'complianceLetter'=> $complianceLetter,
+            'complianceLetter' => $complianceLetter,
             'configuration' => $configuration,
         ]);
 
-        $customReportName = 'Cédula de Cumplimiento de Residencias Profesionales-'.$student->full_name.'_'.Carbon::now()->format('d-m-Y').'.pdf'; 
+        $customReportName = 'Cédula de Cumplimiento de Residencias Profesionales-' . $student->full_name . '_' . Carbon::now()->format('d-m-Y') . '.pdf';
         return $pdf->stream($customReportName);
     }
 
@@ -96,7 +96,7 @@ class ComplianceLetterController extends Controller
                 'type' => 'danger',
             ]);
         }
-        
+
         if ($student->approvedComplianceLetter) {
             return back()->with('alert', [
                 'message' => 'No se pueden modificar las respuestas, la cédula de cumplimiento ya está aprovada.',
@@ -108,7 +108,7 @@ class ComplianceLetterController extends Controller
 
         $observations = $request->input('observations', []);
 
-        $student->complianceLetter->questions->each(function($question) use ($questions, $observations) {
+        $student->complianceLetter->questions->each(function ($question) use ($questions, $observations) {
             $question->is_fulfilled = ($questions[$question->id] ?? 'off') === 'on';
             $question->observation = $observations[$question->id];
             $question->save();
@@ -145,7 +145,7 @@ class ComplianceLetterController extends Controller
             $complianceLetter->corrections()->create(['content' => $data['corrections']]);
 
             DB::commit();
-        } catch(Throwable $t) {
+        } catch (Throwable $t) {
             DB::rollBack();
 
             return back()->with('alert', [
@@ -158,7 +158,6 @@ class ComplianceLetterController extends Controller
             'type' => 'success',
             'message' => 'Las correciones fueron envias correctamente',
         ]);
-
     }
 
     public function complianceLetterMarkCorrectionsAsSolved()
@@ -178,7 +177,7 @@ class ComplianceLetterController extends Controller
 
         $complianceLetter->save();
 
-        $complianceLetter->corrections->each(fn($correction) => $correction->update(['is_solved' => true]));
+        $complianceLetter->corrections->each(fn ($correction) => $correction->update(['is_solved' => true]));
 
         return back()->with('alert', [
             'type' => 'success',

@@ -24,7 +24,8 @@ class PresentationLetterController extends Controller
             ->withEmail()
             ->where('user_id', $userId)
             ->firstOrFail();
-        $configuration = Configuration::firstOrfail();
+
+        $configuration = $student->period;
 
         if (!$student->presentationLetter->exists && Auth::id() !== $student->user_id) {
             return back()->with('alert', [
@@ -33,14 +34,14 @@ class PresentationLetterController extends Controller
             ]);
         }
 
-        if (!$student->approvedResidencyRequest){
+        if (!$student->approvedResidencyRequest) {
             return redirect()->route('students.residencyProcess')->with('alert', [
                 'type' => 'danger',
                 'message' => 'Debe estar aprobada la solicitud de residencia',
             ]);
         }
 
-        if (!$student->approvedResidencyRequest->signed_document){
+        if (!$student->approvedResidencyRequest->signed_document) {
             return redirect()->route('students.residencyProcess')->with('alert', [
                 'type' => 'danger',
                 'message' => 'Aún no se ha cargado el documento final de la solicitud de residencia',
@@ -53,14 +54,14 @@ class PresentationLetterController extends Controller
                 'request_date' => now(),
             ]);
 
-        $pdf = PDF::loadView('residency-process.presentation-letter',[
-            'student'=>$student,
+        $pdf = PDF::loadView('residency-process.presentation-letter', [
+            'student' => $student,
             'externalCompany' => $student->company,
-            'presentationLetter'=>$presentationLetter,
-            'configuration'=>$configuration,
+            'presentationLetter' => $presentationLetter,
+            'configuration' => $configuration,
         ]);
 
-        $customReportName = 'Carta Presentación-'.$student->full_name.'_'.Carbon::now()->format('d-m-Y').'.pdf'; 
+        $customReportName = 'Carta Presentación-' . $student->full_name . '_' . Carbon::now()->format('d-m-Y') . '.pdf';
         return $pdf->stream($customReportName);
     }
 
@@ -121,7 +122,7 @@ class PresentationLetterController extends Controller
 
         $presentationLetter->save();
 
-        $presentationLetter->corrections->each(fn($correction) => $correction->update(['is_solved' => true]));
+        $presentationLetter->corrections->each(fn ($correction) => $correction->update(['is_solved' => true]));
 
         return back()->with('alert', [
             'type' => 'success',

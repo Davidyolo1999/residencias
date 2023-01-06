@@ -24,7 +24,8 @@ class SubmissionLetterController extends Controller
             ->withEmail()
             ->where('user_id', $userId)
             ->firstOrFail();
-            $configuration = Configuration::firstOrfail();
+
+        $configuration = $student->period;
 
         if (!$student->submissionLetter->exists && Auth::id() !== $student->user_id) {
             return back()->with('alert', [
@@ -40,7 +41,7 @@ class SubmissionLetterController extends Controller
             ]);
         }
 
-        if (!$student->approvedCompletionletter->signed_document){
+        if (!$student->approvedCompletionletter->signed_document) {
             return redirect()->route('students.residencyProcess')->with('alert', [
                 'type' => 'danger',
                 'message' => 'Aún no se ha cargado el documento final de la carta de término',
@@ -56,14 +57,14 @@ class SubmissionLetterController extends Controller
             ]);
 
         $pdf = PDF::loadView('residency-process.submission-letter', [
-            'student'=>$student,
+            'student' => $student,
             'externalCompany' => $student->company,
             'project' => $student->project,
-            'submissionLetter'=> $submissionLetter,
-            'configuration'=>$configuration,
+            'submissionLetter' => $submissionLetter,
+            'configuration' => $configuration,
         ]);
 
-        $customReportName = 'Constancia de Entrega de Proyecto-'.$student->full_name.'_'.Carbon::now()->format('d-m-Y').'.pdf'; 
+        $customReportName = 'Constancia de Entrega de Proyecto-' . $student->full_name . '_' . Carbon::now()->format('d-m-Y') . '.pdf';
         return $pdf->stream($customReportName);
     }
 
@@ -92,8 +93,7 @@ class SubmissionLetterController extends Controller
             $submissionLetter->corrections()->create(['content' => $data['corrections']]);
 
             DB::commit();
-
-        } catch(Throwable $t) {
+        } catch (Throwable $t) {
 
             DB::rollBack();
 
@@ -126,7 +126,7 @@ class SubmissionLetterController extends Controller
 
         $submissionLetter->save();
 
-        $submissionLetter->corrections->each(fn($correction) => $correction->update(['is_solved' => true]));
+        $submissionLetter->corrections->each(fn ($correction) => $correction->update(['is_solved' => true]));
 
         return back()->with('alert', [
             'type' => 'success',

@@ -105,17 +105,14 @@ class StudentsController extends Controller
     {
         $user = Auth::user();
 
-        $currentPeriodId = Period::whereRaw('? BETWEEN start AND end', [now()])->first()->id ?? null;
-
-        $periodId = $request->period_id ?? $currentPeriodId;
+        $period = $request->period_id
+            ? Period::where('id', $request->period_id)->first()
+            : Period::whereRaw('? BETWEEN start AND end', [now()])->first();
 
         $students = Student::query()
             ->withEmail()
             ->with('career')
-            ->when($periodId, function ($query, $periodId) {
-
-                $period = Period::where('id', $periodId)->first();
-
+            ->when($period, function ($query, $period) {
                 if ($period) {
                     $query->whereBetween('users.created_at', [$period->start, $period->end]);
                 }
@@ -139,7 +136,7 @@ class StudentsController extends Controller
             })
             ->get();
 
-        $configuration = Configuration::first();
+        $configuration = $period;
 
         $reportName = 'BASE DE DATOS RESIDENCIAS PROFESIONALES-' . Carbon::now()->format('d-m-Y') . '-' . uniqid() . '.xlsx';
         return Excel::download(new StudentsExport($students, $configuration, $request->notes ? true : false, $request->covenants ? true : false), $reportName);
@@ -353,7 +350,7 @@ class StudentsController extends Controller
 
     public function exportProjectProgress(Project $project)
     {
-        $configuration = Configuration::firstOrfail();
+        $configuration = $project->student->period;
 
 
         $pdf = PDF::loadView('students.project-progress-pdf', [

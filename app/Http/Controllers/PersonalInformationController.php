@@ -16,7 +16,7 @@ class PersonalInformationController extends Controller
 {
     public function personalInformation(Student $student, Request $request)
     {
-        $configuration = Configuration::firstOrfail();
+        $configuration = $student->period;
 
         $pdf = PDF::loadView('residency-process.personal-information', [
             'student' => $student,

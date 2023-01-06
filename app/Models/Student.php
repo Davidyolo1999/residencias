@@ -146,7 +146,7 @@ class Student extends Model
     {
         return $this->hasOne(ComplianceLetter::class, 'user_id')->withDefault();
     }
-    
+
     public function inProcessComplianceLetter()
     {
         return $this->hasOne(ComplianceLetter::class, 'user_id')->where('status', DocumentStatus::STATUS_PROCESSING);
@@ -166,7 +166,7 @@ class Student extends Model
     {
         return $this->hasOne(QualificationLetter::class, 'user_id')->where('status', DocumentStatus::STATUS_PROCESSING);
     }
-    
+
     public function approvedQualificationLetter()
     {
         return $this->hasOne(QualificationLetter::class, 'user_id')->where('status', DocumentStatus::STATUS_APPROVED);
@@ -181,7 +181,7 @@ class Student extends Model
     {
         return $this->hasOne(CompletionLetter::class, 'user_id')->where('status', DocumentStatus::STATUS_PROCESSING);
     }
-    
+
     public function approvedCompletionLetter()
     {
         return $this->hasOne(CompletionLetter::class, 'user_id')->where('status', DocumentStatus::STATUS_APPROVED);
@@ -196,7 +196,7 @@ class Student extends Model
     {
         return $this->hasOne(SubmissionLetter::class, 'user_id')->where('status', DocumentStatus::STATUS_PROCESSING);
     }
-    
+
     public function approvedSubmissionLetter()
     {
         return $this->hasOne(SubmissionLetter::class, 'user_id')->where('status', DocumentStatus::STATUS_APPROVED);
@@ -210,7 +210,7 @@ class Student extends Model
     {
         return $this->hasOne(AuthorizationLetter::class, 'user_id')->where('status', DocumentStatus::STATUS_PROCESSING);
     }
-    
+
     public function approvedAuthorizationLetter()
     {
         return $this->hasOne(AuthorizationLetter::class, 'user_id')->where('status', DocumentStatus::STATUS_APPROVED);
@@ -224,7 +224,7 @@ class Student extends Model
     {
         return $this->hasOne(externalQualificationLetter::class, 'user_id')->where('status', DocumentStatus::STATUS_PROCESSING);
     }
-    
+
     public function approvedExternalQualificationLetter()
     {
         return $this->hasOne(externalQualificationLetter::class, 'user_id')->where('status', DocumentStatus::STATUS_APPROVED);
@@ -284,5 +284,12 @@ class Student extends Model
     public function getPaddedIdAttribute()
     {
         return str_pad($this->user_id, 4, '0', STR_PAD_LEFT);
+    }
+
+    public function getPeriodAttribute()
+    {
+        $period = Period::whereRaw('? BETWEEN start AND end', [$this->created_at])->first();
+
+        return $period;
     }
 }

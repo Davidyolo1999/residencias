@@ -24,7 +24,7 @@ class QualificationLetterController extends Controller
             ->where('user_id', $userId)
             ->firstOrFail();
 
-        $configuration = Configuration::firstOrfail();
+        $configuration = $student->period;
 
 
         if (!$student->qualificationLetter->exists && Auth::id() !== $student->user_id) {

@@ -1,6 +1,6 @@
 <div>
-    <img src="{{ asset('img/escudo-mexico.jpg') }}" alt="" style="height: 80px;">
-    <img src="{{ asset('img/umb-logo.jpg') }}" alt="" style="height: 50px; float:right;">
+    <img src="{{ public_path('img/escudo-mexico.jpg') }}" alt="" style="height: 80px;">
+    <img src="{{ public_path('img/umb-logo.jpg') }}" alt="" style="height: 50px; float:right;">
 </div>
 
 <h1 class="title">UNIVERSIDAD MEXIQUENSE DEL BICENTENARIO</h1>

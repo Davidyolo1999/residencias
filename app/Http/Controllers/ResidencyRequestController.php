@@ -25,7 +25,8 @@ class ResidencyRequestController extends Controller
             ->with(['residencyRequest', 'project', 'company'])
             ->where('user_id', $userId)
             ->firstOrFail();
-        $configuration = Configuration::firstOrfail();
+
+        $configuration = $student->period;
 
         if (!$student->is_enrolled) {
             return back()->with('alert', [
@@ -53,7 +54,7 @@ class ResidencyRequestController extends Controller
                 'message' => 'El estudiante debe tener al menos el 75% de créditos del Plan de Estudios.',
             ]);
         }
-        
+
         if (!$student->residencyRequest->exists && Auth::id() !== $student->user_id) {
             return back()->with('alert', [
                 'type' => 'danger',
@@ -91,7 +92,7 @@ class ResidencyRequestController extends Controller
             'configuration' => $configuration,
         ]);
 
-        $customReportName = 'Solicitud de Residencias Profesionales-'.$student->full_name.'-'.Carbon::now()->format('d-m-Y').'.pdf'; 
+        $customReportName = 'Solicitud de Residencias Profesionales-' . $student->full_name . '-' . Carbon::now()->format('d-m-Y') . '.pdf';
         return $pdf->stream($customReportName);
     }
 
@@ -152,7 +153,7 @@ class ResidencyRequestController extends Controller
 
         $residencyRequest->save();
 
-        $residencyRequest->corrections->each(fn($correction) => $correction->update(['is_solved' => true]));
+        $residencyRequest->corrections->each(fn ($correction) => $correction->update(['is_solved' => true]));
 
         return back()->with('alert', [
             'type' => 'success',

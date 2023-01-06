@@ -24,7 +24,8 @@ class CompletionLetterController extends Controller
             ->withEmail()
             ->where('user_id', $userId)
             ->firstOrFail();
-            $configuration = Configuration::firstOrfail();
+
+        $configuration = $student->period;
 
         if (!$student->completionLetter->exists && Auth::id() !== $student->user_id) {
             return back()->with('alert', [
@@ -40,7 +41,7 @@ class CompletionLetterController extends Controller
             ]);
         }
 
-        if (!$student->approvedQualificationletter->signed_document){
+        if (!$student->approvedQualificationletter->signed_document) {
             return redirect()->route('students.residencyProcess')->with('alert', [
                 'type' => 'danger',
                 'message' => 'Aún no se ha cargado el documento final de la acta de calificación',
@@ -56,16 +57,15 @@ class CompletionLetterController extends Controller
             ]);
 
         $pdf = PDF::loadView('residency-process.completion-letter', [
-            'student'=>$student,
+            'student' => $student,
             'externalCompany' => $student->company,
             'project' => $student->project,
-            'completionLetter'=> $completionLetter,
-            'configuration'=>$configuration,
+            'completionLetter' => $completionLetter,
+            'configuration' => $configuration,
         ]);
 
-        $customReportName = 'Carta de Terminación-'.$student->full_name.'_'.Carbon::now()->format('d-m-Y').'.pdf'; 
+        $customReportName = 'Carta de Terminación-' . $student->full_name . '_' . Carbon::now()->format('d-m-Y') . '.pdf';
         return $pdf->stream($customReportName);
-
     }
     public function completionLetterCorrections(Request $request, Student $student)
     {
@@ -92,8 +92,7 @@ class CompletionLetterController extends Controller
             $completionLetter->corrections()->create(['content' => $data['corrections']]);
 
             DB::commit();
-
-        } catch(Throwable $t) {
+        } catch (Throwable $t) {
 
             DB::rollBack();
 
@@ -125,8 +124,8 @@ class CompletionLetterController extends Controller
         $completionLetter->status = DocumentStatus::STATUS_PROCESSING;
 
         $completionLetter->save();
-        
-        $completionLetter->corrections->each(fn($correction) => $correction->update(['is_solved' => true]));
+
+        $completionLetter->corrections->each(fn ($correction) => $correction->update(['is_solved' => true]));
 
 
         return back()->with('alert', [

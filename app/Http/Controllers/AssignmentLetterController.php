@@ -23,7 +23,8 @@ class AssignmentLetterController extends Controller
             ->withEmail()
             ->where('user_id', $userId)
             ->firstOrFail();
-        $configuration=Configuration::firstOrfail();
+
+        $configuration = $student->period;
 
         if (!$student->assignmentLetter->exists && Auth::id() !== $student->user_id) {
             return back()->with('alert', [
@@ -32,13 +33,13 @@ class AssignmentLetterController extends Controller
             ]);
         }
 
-        if (!$student->approvedAuthorizationLetter){
+        if (!$student->approvedAuthorizationLetter) {
             return redirect()->route('students.residencyProcess')->with('alert', [
                 'type' => 'danger',
                 'message' => 'Debe estar aprobada la carta de uso de información',
             ]);
         }
-        if (!$student->approvedAuthorizationletter->signed_document){
+        if (!$student->approvedAuthorizationletter->signed_document) {
             return redirect()->route('students.residencyProcess')->with('alert', [
                 'type' => 'danger',
                 'message' => 'Aún no se ha cargado el documento final de la carta de uso de información',
@@ -52,14 +53,14 @@ class AssignmentLetterController extends Controller
                 'company_id' => $student->company->id,
             ]);
 
-        $pdf = PDF::loadView('residency-process.assignment-letter',[
-            'student'=>$student,
+        $pdf = PDF::loadView('residency-process.assignment-letter', [
+            'student' => $student,
             'externalCompany' => $student->company,
-            'assignmentLetter'=> $assignmentLetter,
-            'configuration'=> $configuration,
+            'assignmentLetter' => $assignmentLetter,
+            'configuration' => $configuration,
         ]);
 
-        $customReportName = 'Asignación de Asesor Interno-'.$student->full_name.'_'.Carbon::now()->format('d-m-Y').'.pdf'; 
+        $customReportName = 'Asignación de Asesor Interno-' . $student->full_name . '_' . Carbon::now()->format('d-m-Y') . '.pdf';
         return $pdf->stream($customReportName);
     }
 
@@ -88,7 +89,7 @@ class AssignmentLetterController extends Controller
             $assignmentLetter->corrections()->create(['content' => $data['corrections']]);
 
             DB::commit();
-        } catch(Throwable $t) {
+        } catch (Throwable $t) {
             DB::rollBack();
 
             return back()->with('alert', [
@@ -120,7 +121,7 @@ class AssignmentLetterController extends Controller
 
         $assignmentLetter->save();
 
-        $assignmentLetter->corrections->each(fn($correction) => $correction->update(['is_solved' => true]));
+        $assignmentLetter->corrections->each(fn ($correction) => $correction->update(['is_solved' => true]));
 
         return back()->with('alert', [
             'type' => 'success',
