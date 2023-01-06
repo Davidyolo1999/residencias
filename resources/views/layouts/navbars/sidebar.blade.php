@@ -89,14 +89,14 @@
             </li>
             @endcan
 
-            @can('index', App\Models\Admin::class)
+            {{-- @can('index', App\Models\Admin::class)
                 <li class="nav-item{{ $activePage == 'configurations' ? ' active' : '' }}">
                     <a class="nav-link" href="{{ route('configurations.unitInfo') }}">
                         <i class="material-icons">domain_add</i>
                         Configuración General
                     </a>
                 </li>
-            @endcan
+            @endcan --}}
 
             @can('index', App\Models\Admin::class)
                 <li class="nav-item{{ $activePage == 'admins' ? ' active' : '' }}">
