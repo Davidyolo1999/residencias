@@ -49,12 +49,12 @@
                                             <tr>
                                                 <td class="text-center"> {{ $period->id }}</td>
                                                 <td class="text-center">{{ $period->name }} </td>
-                                                <td class="text-center">{{ $period->start->format('M Y') }} -
-                                                    {{ $period->end->format('M Y') }}</td>
+                                                <td class="text-center">{{ $period->start->format('d/m/Y') }} -
+                                                    {{ $period->end->format('d/m/Y') }}</td>
                                                 <td class=" td-actions text-nowrap text-center ">
                                                     <a href="{{ route('periods.edit', $period) }}"
                                                         data-toggle-second="tooltip" data-placement="top"
-                                                        title="Aquí puedes editar la información del asesor externo."
+                                                        title="Aquí puedes editar la información del periodo."
                                                         class="btn btn-sm btn-info btn-success" title="Editar">
                                                         <i class="material-icons">edit</i>
                                                     </a>

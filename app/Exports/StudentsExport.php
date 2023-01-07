@@ -58,10 +58,12 @@ class StudentsExport implements FromView, ShouldAutoSize, WithTitle, WithStyles,
             'D' => 4,
             'E' => 4,
             'C' => 15,
-            'R' => 12,
-            'S' => 12,
-            'T' => 12,
-            'U' => 12,
+            'P' => 20,
+            'Q' => 20,
+            'R' => 20,
+            'S' => 20,
+            'T' => 20,
+            'U' => 20,
         ];
     }
 }

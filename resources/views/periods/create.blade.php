@@ -35,7 +35,9 @@
                                                 Periodo:</label>
                                         </div>
                                         <input type="text" class="form-control text-center" name="name" id="name"
-                                            placeholder="Ingresé el nombre.">
+                                            placeholder="Ingresé el nombre" autofocus
+                                            value="{{ old('name')}}"
+                                            >
                                         @error('name')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
@@ -46,7 +48,9 @@
                                             <label for="start" class="d-block text-dark letter">Inicia:</label>
                                         </div>
                                         <input type="date" class="form-control text-center" name="start" id="start"
-                                            placeholder="Ingresé el nombre.">
+                                            placeholder="Ingresé el nombre."   value="{{ old('start')}}"
+                                        >
+                                            
                                         @error('start')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
@@ -57,7 +61,7 @@
                                             <label for="end" class="d-block text-dark letter">Finaliza:</label>
                                         </div>
                                         <input type="date" class="form-control text-center" name="end" id="end"
-                                            placeholder="Ingresé el nombre.">
+                                            placeholder="Ingresé el nombre." value="{{ old('end')}}">
                                         @error('end')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
@@ -70,7 +74,9 @@
 
                                     </div>
                                     <input type="text" class="form-control" name="unit" id="unit"
-                                        placeholder="Ingresé nombre de la unidad de estudios" autofocus>
+                                        placeholder="Ingresé nombre de la unidad de estudios"
+                                        value="{{ old('unit')}}"
+                                        >
                                     @error('unit')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
@@ -80,11 +86,10 @@
                                 <div class="form-group  has-warning mb-3">
                                     <div class="mb-0">
                                         <label for="address" class="d-block text-dark letter">Dirección:</label>
-
                                     </div>
                                     <div class="input-group input-group-dynamic has-warning">
                                         <textarea class="form-control text-justify" name="address" placeholder="Ingresé la Dirección" id="address"
-                                            rows="2"></textarea>
+                                            rows="2">{{ old('address')}}</textarea>
                                     </div>
                                     @error('address')
                                         <small class="text-danger">{{ $message }}</small>
@@ -98,7 +103,7 @@
                                                 class="d-block text-dark letter">Encargado:</label>
                                         </div>
                                         <input type="text" class="form-control text-center" name="person_in_charge"
-                                            id="person_in_charge" placeholder="Ingresé la Persona Encargada">
+                                            id="person_in_charge" placeholder="Ingresé la Persona Encargada" value="{{ old('person_in_charge')}}">
                                         @error('person_in_charge')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
@@ -111,7 +116,7 @@
                                         </div>
                                         <input type="text" class="form-control text-center"
                                             name="person_in_charge_position" id="person_in_charge_position"
-                                            placeholder="Ingresé el Cargo">
+                                            placeholder="Ingresé el Cargo" value="{{ old('person_in_charge_position')}}">
                                         @error('person_in_charge_position')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
@@ -129,7 +134,9 @@
                                         <input type="text" class="form-control text-center"
                                             name="person_in_charge_position_abbreviation"
                                             id="person_in_charge_position_abbreviation"
-                                            placeholder="Ingresé el Cargo Abreviado">
+                                            placeholder="Ingresé el Cargo Abreviado"
+                                            value="{{ old('person_in_charge_position_abbreviation')}}"
+                                            >
                                         @error('person_in_charge_position_abbreviation')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
@@ -141,7 +148,9 @@
                                             <label for="email" class="d-block text-dark letter">E-mail:</label>
                                         </div>
                                         <input type="email" class="form-control text-center" name="email"
-                                            id="email" placeholder="Ingresé el E-mail">
+                                            id="email" placeholder="Ingresé el E-mail"
+                                            value="{{ old('email')}}"
+                                            >
                                         @error('email')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
@@ -155,7 +164,9 @@
                                                 Oficina:</label>
                                         </div>
                                         <input type="text" class="form-control text-center" name="office_phone_number"
-                                            id="office_phone_number" placeholder="Ingresé el Teléfono Oficina">
+                                            id="office_phone_number" placeholder="Ingresé el Teléfono Oficina"
+                                            value="{{ old('office_phone_number')}}"
+                                            >
                                         @error('office_phone_number')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
@@ -168,7 +179,9 @@
                                         </div>
                                         <input type="text" class="form-control text-center"
                                             name="personal_phone_number" id="personal_phone_number"
-                                            placeholder="Ingresé el Teléfono Celular">
+                                            placeholder="Ingresé el Teléfono Celular"
+                                            value="{{ old('personal_phone_number')}}"
+                                            >
                                         @error('personal_phone_number')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
@@ -180,7 +193,9 @@
                                                 Institución:</label>
                                         </div>
                                         <input type="text" class="form-control text-center" name="institution_code"
-                                            id="institution_code" placeholder="Ingresé la Clave de Institución">
+                                            id="institution_code" placeholder="Ingresé la Clave de Institución"
+                                            value="{{ old('institution_code')}}"
+                                            >
                                         @error('institution_code')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
