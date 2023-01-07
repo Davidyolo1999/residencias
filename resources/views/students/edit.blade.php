@@ -55,7 +55,7 @@
                     {{-- CARREER --}}
                     <div class="row mb-3">
                         <div class="col-md-3">
-                            <label for="career_id" class="d-block">Carrera:</label>
+                            <label for="career_id" class="d-block letter text-dark">Carrera:</label>
                         </div>
                         <div class="col-md-9">
                             <div class="input-group input-group-dynamic">
@@ -82,7 +82,7 @@
                     {{-- TEACHER --}}
                     <div class="row mb-3">
                         <div class="col-md-3">
-                            <label for="teacher_id" class="d-block">Asesor Interno:</label>
+                            <label for="teacher_id" class="d-block letter text-dark">Asesor Interno:</label>
                         </div>
                         <div class="col-md-9">
                             <div class="input-group input-group-dynamic">
@@ -109,18 +109,20 @@
                     {{-- EXTERNAL ADVISOR --}}
                     <div class="row mb-3">
                         <div class="col-md-3">
-                            <label for="external_advisor_id" class="d-block">Asesor Externo:</label>
+                            <label for="external_advisor_id" class="d-block letter text-dark">Asesor Externo:</label>
                         </div>
                         <div class="col-md-9">
                             <div class="input-group input-group-dynamic">
                                 <select
-                                    class="form-control"
+                                class="selectpicker form-control text-dark has-warning" data-live-search="true"
+                                data-style="btn btn-sm btn-outline-success btn-round"
                                     name="external_advisor_id"
                                     id="external_advisor_id"
                                 >
-                                    <option value="" selected disabled>Seleccione una Opción</option>
+                                    <option style="background: #fff ; color: black;" value="" selected disabled>Seleccione una Opción</option>
                                     @foreach ($externalAdvisors as $externalAdvisor)
                                         <option
+                                        style="background: #fff ; color: black;"
                                             value="{{ $externalAdvisor->user_id }}"
                                             @if (old('external_advisor_id', $student->external_advisor_id) == $externalAdvisor->user_id) selected @endif
                                         >{{ $externalAdvisor->full_name }}</option>
@@ -140,11 +142,18 @@
                         placeholder="Ingresé Número de Cuenta"
                         :default-value="$student->account_number"
                     />
+                    {{-- RPA --}}
+                    <x-inputs.text-field-row
+                        name="rpa"
+                        label="RPA:"
+                        placeholder="Ingresé el RPA"
+                        :default-value="$student->rpa"
+                    />
 
                     {{-- SEX --}}
                     <div class="row mb-3">
                         <div class="col-md-3">
-                            <label for="sex" class="d-block">Sexo:</label>
+                            <label for="sex" class="d-block letter text-dark">Sexo:</label>
                         </div>
                         <div class="col-md-9">
                             <div class="input-group input-group-dynamic">
@@ -190,7 +199,7 @@
                     {{-- ENROLLED --}}
                     <div class="row mb-3">
                         <div class="col-md-3">
-                            <label for="is_enrolled" class="d-block">Inscrito:</label>
+                            <label for="is_enrolled" class="d-block letter text-dark">Inscrito:</label>
                         </div>
                         <div class="col-md-9">
                             <input
@@ -205,7 +214,7 @@
                     {{-- SOCIAL SERVICE CONCLUDED --}}
                     <div class="row mb-3">
                         <div class="col-md-3">
-                            <label for="is_social_service_concluded" class="d-block">Servicio Social Concluido:</label>
+                            <label for="is_social_service_concluded" class="d-block letter text-dark">Servicio Social Concluido:</label>
                         </div>
                         <div class="col-md-9">
                             <input
@@ -213,6 +222,20 @@
                                 id="is_social_service_concluded"
                                 name="is_social_service_concluded"
                                 @if (old('is_social_service_concluded', $student->is_social_service_concluded)) checked @endif
+                            >
+                        </div>
+                    </div>
+                    {{-- REGULATE --}}
+                    <div class="row mb-3">
+                        <div class="col-md-3">
+                            <label for="regulate" class="d-block letter text-dark">Regular:</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input
+                                type="checkbox"
+                                id="regulate"
+                                name="regulate"
+                                @if (old('regulate', $student->regulate)) checked @endif
                             >
                         </div>
                     </div>
@@ -225,76 +248,11 @@
                         :default-value="$student->phone_number"
 
                     />
-
-                    {{-- State --}}
-                    <div class="row mb-3">
-                        <div class="col-md-3">
-                            <label for="state_id" class="d-block">Estado:</label>
-                        </div>
-                        <div class="col-md-9">
-                            <div class="input-group input-group-dynamic">
-                                <select
-                                    class="form-control"
-                                    name="state_id"
-                                    id="state_id"
-                                >
-                                    <option value="" selected disabled>Seleccione una Opción</option>
-                                    @foreach ($states as $state)
-                                        <option value="{{ $state->id }}" @if ($state->id == old('state_id', $student->state_id)) selected @endif>{{ $state->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            @error('state_id')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
-                    </div>
-
-                    {{-- MUNCIPALITY --}}
-                    <div class="row mb-3">
-                        <div class="col-md-3">
-                            <label for="municipality_id" class="d-block">Municipio:</label>
-                        </div>
-                        <div class="col-md-9">
-                            <div class="input-group input-group-dynamic">
-                                <select
-                                    class="form-control"
-                                    name="municipality_id"
-                                    id="municipality_id"
-                                >
-                                    <option value="" selected disabled>Seleccione una Opción</option>
-                                </select>
-                            </div>
-                            @error('municipality_id')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
-                    </div>
-
-                    {{-- LOCALITY --}}
-                    <div class="row mb-3">
-                        <div class="col-md-3">
-                            <label for="locality_id" class="d-block">Localidad:</label>
-                        </div>
-                        <div class="col-md-9">
-                            <div class="input-group input-group-dynamic">
-                                <select
-                                    class="form-control"
-                                    name="locality_id"
-                                    id="locality_id"
-                                >
-                                    <option value="" selected disabled>Seleccione una Opción</option>
-                                </select>
-                            </div>
-                            @error('locality_id')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
-                    </div>
+                    
                     <div class="text-right">
-                        <a href="{{ route('students.index') }}" class="btn  btn-warning mr-3">
+                        <a href="{{ route('students.index') }}" class="btn  btn-warning btn-sm mr-3">
                             <i class="material-icons">cancel</i><b> Cancelar</b> </a>
-                        <button class="btn  btn-success"><i class="material-icons">save</i><b> Guardar</b></button>
+                        <button class="btn  btn-success btn-sm"><i class="material-icons">save</i><b> Guardar</b></button>
                     </div>
                 </form>
             </div>
@@ -323,9 +281,9 @@
                         type="password"
                     />
                     <div class="text-right">
-                        <a href="{{ route('students.index') }}" class="btn  btn-warning mr-3">
+                        <a href="{{ route('students.index') }}" class="btn btn-sm btn-warning mr-3">
                             <i class="material-icons">cancel</i><b> Cancelar</b> </a>
-                        <button class="btn  btn-success"><i class="material-icons">save</i><b> Guardar</b></button>
+                        <button class="btn  btn-success btn-sm"><i class="material-icons">save</i><b> Guardar</b></button>
                     </div>
                 </form>
             </div>
@@ -335,47 +293,45 @@
 
 @push('js')
     <script>
-        const states = @json($states);
+        const currentCareerId = @json(old('career_id', $student->career_id));
+
+        const teachers = @json($teachers);
 
         $(() => {
-            $('#state_id').change((e) => {
-                const stateId = Number(e.target.value);
-                const state = states.find((state) => state.id === stateId);
 
-                if (!state) return;
-
-                const municipalities = state
-                    .locations
-                    .map((municipality) => `<option value="${municipality.id}" ${municipality.id == @json(old('municipality_id', $student->municipality_id)) ? 'selected' : ''}>${municipality.name}</option>`)
+            if(currentCareerId){
+                const teachersFiltered = teachers.map((teacher) => {
+                        if(teacher?.career_id === currentCareerId){
+                            return `<option value="${teacher.user_id}" ${teacher.user_id == @json(old('teacher_id', $student->teacher_id)) ? 'selected' : ''}>${teacher.first_name} ${teacher.fathers_last_name} ${teacher.mothers_last_name}</option>`
+                        }
+                        return '';
+                    })
                     .join('');
 
-                $('#municipality_id').html(`
+                    $('#teacher_id').html(`
                     <option value="" selected disabled>Seleccione una opción</option>
-                    ${municipalities}
+                    ${teachersFiltered}
                 `);
-            }).trigger('change');
+            }
 
-            $('#municipality_id').change((e) => {
-                const stateId = Number($('#state_id').val());
-                const municipalityId = Number(e.target.value);
-                const state = states.find((state) => state.id === stateId);
 
-                if (!state) return;
-
-                const municipality = state.locations.find((municipality) => municipality.id === municipalityId);
-
-                if (!municipality) return;
-
-                const localities = municipality
-                    .locations
-                    .map((locality) => `<option value="${locality.id}" ${locality.id == @json(old('locality_id', $student->locality_id)) ? 'selected' : ''}>${locality.name}</option>`)
+            $('#career_id').change((e) => {
+                const careerId = Number(e.target.value);                
+                if(careerId){
+                    const teachersFiltered = teachers.map((teacher) => {
+                        if(teacher?.career_id === careerId){
+                            return `<option value="${teacher.user_id}" ${teacher.user_id == @json(old('teacher_id', $student->teacher_id)) ? 'selected' : ''}>${teacher.first_name} ${teacher.fathers_last_name} ${teacher.mothers_last_name}</option>`
+                        }
+                        return '';
+                    })
                     .join('');
 
-                $('#locality_id').html(`
+                    $('#teacher_id').html(`
                     <option value="" selected disabled>Seleccione una opción</option>
-                    ${localities}
+                    ${teachersFiltered}
                 `);
-            }).trigger('change');
+                }
+            })            
         });
     </script>
 @endpush

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTeacherRequest;
 use App\Http\Requests\UpdateTeacherRequest;
+use App\Models\Career;
 use App\Models\Location;
 use App\Models\Teacher;
 use App\Models\User;
@@ -15,9 +16,17 @@ use Throwable;
 
 class TeachersController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $teachers = Teacher::query()
+            ->when($request->search, fn ($query, $search) => $query->orWhere('user_id', 'like', "%$search%"))
+            ->when($request->search, fn ($query, $search) => $query->orWhereRelation('user', 'email', 'like', "%$search%"))
+            ->when($request->search, fn ($query, $search) => $query->orWhere('first_name', 'like', "%$search%"))
+            ->when($request->search, fn ($query, $search) => $query->orWhere('fathers_last_name', 'like', "%$search%"))
+            ->when($request->search, fn ($query, $search) => $query->orWhere('mothers_last_name', 'like', "%$search%"))
+            ->when($request->search, fn ($query, $search) => $query->orWhere('sex', 'like', "%$search%"))
+            ->when($request->search, fn ($query, $search) => $query->orWhere('curp', 'like', "%$search%"))
+            ->when($request->search, fn ($query, $search) => $query->orWhereRelation('career', 'name', 'like', "%$search%"))
             ->withEmail()
             ->paginate();
 
@@ -25,11 +34,12 @@ class TeachersController extends Controller
             'teachers' => $teachers,
         ]);
     }
-    
+
     public function create()
     {
         return view('teachers.create', [
             'states' => Location::with(['locations.locations'])->state()->get(),
+            'careers' => Career::all()
         ]);
     }
 
@@ -43,7 +53,7 @@ class TeachersController extends Controller
             $user->teacher()->create($request->teacherData());
 
             DB::commit();
-        } catch(Throwable $t) {
+        } catch (Throwable $t) {
             DB::rollBack();
 
             return back()->with('alert', [
@@ -73,20 +83,21 @@ class TeachersController extends Controller
         return view('teachers.edit', [
             'teacher' => $teacher,
             'states' => Location::with(['locations.locations'])->state()->get(),
+            'careers' => Career::all()
         ]);
     }
 
     public function update(UpdateTeacherRequest $request, Teacher $teacher)
     {
-          DB::beginTransaction();
-        
+        DB::beginTransaction();
+
         try {
             $teacher->update($request->teacherData());
 
             $teacher->user->update($request->userData());
 
             DB::commit();
-        } catch(Throwable $t) {            
+        } catch (Throwable $t) {
             DB::rollBack();
 
             return back()->with('alert', [
@@ -109,10 +120,9 @@ class TeachersController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect()->route('teachers.index')->with('alert',[
+        return redirect()->route('teachers.index')->with('alert', [
             'type' => 'success',
-            'message' =>'la contraseña ha sido actualizada',
+            'message' => 'la contraseña ha sido actualizada',
         ]);
     }
-
 }

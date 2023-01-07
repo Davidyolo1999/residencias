@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enum\DocumentStatus;
+use App\Models\Configuration;
 use App\Models\QualificationLetter;
 use App\Models\Student;
 use Illuminate\Http\Request;
@@ -10,6 +11,7 @@ use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Throwable;
+use Carbon\Carbon;
 
 class QualificationLetterController extends Controller
 {
@@ -22,6 +24,8 @@ class QualificationLetterController extends Controller
             ->where('user_id', $userId)
             ->firstOrFail();
 
+        $configuration = $student->period;
+
 
         if (!$student->qualificationLetter->exists && Auth::id() !== $student->user_id) {
             return back()->with('alert', [
@@ -30,17 +34,17 @@ class QualificationLetterController extends Controller
             ]);
         }
 
-        if (!$student->approvedComplianceletter){
+        if (!$student->approvedExternalQualificationLetter) {
             return redirect()->route('students.residencyProcess')->with('alert', [
                 'type' => 'danger',
-                'message' => 'Debe estar aprobada la cédula de cumplimiento',
+                'message' => 'Debe estar aprobada el formato evaluación externo',
             ]);
         }
 
-        if (!$student->approvedComplianceletter->signed_document){
+        if (!$student->approvedExternalQualificationLetter->signed_document) {
             return redirect()->route('students.residencyProcess')->with('alert', [
                 'type' => 'danger',
-                'message' => 'Aún no se ha cargado el documento final de la cédula de cumplimiento',
+                'message' => 'Aún no se ha cargado el documento final del formato evaluación externo',
             ]);
         }
 
@@ -52,14 +56,16 @@ class QualificationLetterController extends Controller
                 'company_id' => $student->company->id,
             ]);
 
-        $pdf = PDF::loadView('residency-process.qualification-letter',[
-            'student'=>$student,
+        $pdf = PDF::loadView('residency-process.qualification-letter', [
+            'student' => $student,
             'externalCompany' => $student->company,
             'project' => $student->project,
-            'qualificationLetter'=> $qualificationLetter,
+            'qualificationLetter' => $qualificationLetter,
+            'configuration' => $configuration,
         ]);
 
-        return $pdf->stream('qualification-letter');
+        $customReportName = 'Acta de Calificación de Residencias Profesionales-' . $student->full_name . '_' . Carbon::now()->format('d-m-Y') . '.pdf';
+        return $pdf->stream($customReportName);
     }
 
     public function qualificationLetterCorrections(Request $request, Student $student)
@@ -87,8 +93,7 @@ class QualificationLetterController extends Controller
             $qualificationLetter->corrections()->create(['content' => $data['corrections']]);
 
             DB::commit();
-
-        } catch(Throwable $t) {
+        } catch (Throwable $t) {
 
             DB::rollBack();
 
@@ -121,6 +126,8 @@ class QualificationLetterController extends Controller
 
         $qualificationLetter->save();
 
+        $qualificationLetter->corrections->each(fn ($correction) => $correction->update(['is_solved' => true]));
+
         return back()->with('alert', [
             'type' => 'success',
             'message' => 'Las correciones fueron verificadas',
@@ -151,6 +158,30 @@ class QualificationLetterController extends Controller
         return back()->with('alert', [
             'type' => 'success',
             'message' => 'La carta de calificación ha sido aprovada',
+        ]);
+    }
+
+    public function qualificationLetterModify(Request $request, Student $student)
+    {
+        $data = $request->validate([
+            'qualification' => 'required|integer|min:0|max:100',
+            'qualification_text' => 'required|max:255',
+        ]);
+
+        $qualificationLetter = $student->qualificationLetter;
+
+        if (!$qualificationLetter) {
+            return back()->with('alert', [
+                'type' => 'danger',
+                'message' => 'La carta de calificación no existe.',
+            ]);
+        }
+
+        $qualificationLetter->update($data);
+
+        return back()->with('alert', [
+            'type' => 'success',
+            'message' => 'La carta de calificación ha sido actualizada.',
         ]);
     }
 

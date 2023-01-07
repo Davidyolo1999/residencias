@@ -11,6 +11,7 @@ use App\Models\Career;
 use App\Models\Company;
 use App\Models\ExternalAdvisor;
 use App\Models\Location;
+use App\Models\Period;
 use App\Models\Project;
 use App\Models\Student;
 use App\Models\Teacher;
@@ -21,24 +22,124 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\StudentsExport;
+use App\Http\Requests\StoreProjectProgressRequest;
+use App\Http\Requests\UpdateProjectProgressRequest;
+use App\Models\Configuration;
+use App\Models\ProjectProgress;
+use Barryvdh\DomPDF\Facade as PDF;
+use Carbon\Carbon;
 use Throwable;
 
 class StudentsController extends Controller
 {
-    public function index()
+    protected static $documents = [
+        'residencyRequest' => 'presentationLetter',
+        'presentationLetter' => 'commitmentLetter',
+        'commitmentLetter' => 'acceptanceLetter',
+        'acceptanceLetter' => 'authorizationLetter',
+        'authorizationLetter' => 'assignmentLetter',
+        'assignmentLetter' => 'preliminaryLetter',
+        'preliminaryLetter' => 'paperStructure',
+        'paperStructure' => 'complianceLetter',
+        'complianceLetter' => 'externalQualificationLetter',
+        'externalQualificationLetter' => 'qualificationLetter',
+        'qualificationLetter' => 'completionLetter',
+        'completionLetter' => 'submissionLetter',
+        'submissionLetter' => null,
+    ];
+
+    public function index(Request $request)
     {
         $user = Auth::user();
+
+        $currentPeriodId = Period::whereRaw('? BETWEEN start AND end', [now()])->first()->id ?? null;
+
+        $periodId = $request->period_id ?? $currentPeriodId;
 
         $students = Student::query()
             ->withEmail()
             ->with('career')
-            ->when($user->role === User::TEACHER_ROLE, fn($query) => $query->where('teacher_id', $user->id))
-            ->when($user->role === User::EXTERNAL_ADVISOR_ROLE, fn($query) => $query->where('external_advisor_id', $user->id))
+            ->when($periodId, function ($query, $periodId) {
+
+                $period = Period::where('id', $periodId)->first();
+
+                if ($period) {
+                    $query->whereBetween('users.created_at', [$period->start, $period->end]);
+                }
+            })
+            ->when($request->search, function ($query, $search) {
+                $query->where(function ($query) use ($search) {
+                    $query->orWhere('user_id', 'like', "%$search%")
+                        ->orWhereRelation('user', 'email', 'like', "%$search%")
+                        ->orWhere('first_name', 'like', "%$search%")
+                        ->orWhere('fathers_last_name', 'like', "%$search%")
+                        ->orWhere('mothers_last_name', 'like', "%$search%")
+                        ->orWhere('account_number', 'like', "%$search%")
+                        ->orWhereRelation('career', 'name', 'like', "%$search%")
+                        ->exists();
+                });
+            })
+            ->when($request->career_id, fn ($query, $carrerId) => $query->where('career_id', $carrerId))
+            ->when($user->role === User::TEACHER_ROLE, fn ($query) => $query->where('teacher_id', $user->id))
+            ->when($user->role === User::EXTERNAL_ADVISOR_ROLE, fn ($query) => $query->where('external_advisor_id', $user->id))
+            ->when($request->document && array_key_exists($request->document, self::$documents), function ($query) use ($request) {
+                $nextDocument = self::$documents[$request->document];
+
+                return $query
+                    ->whereHas($request->document)
+                    ->when($nextDocument !== null, fn ($query) => $query->whereDoesntHave($nextDocument));
+            })
             ->paginate();
 
         return view('students.index', [
             'students' => $students,
+            'careers' => Career::all(),
+            'periods' => Period::all(),
+            'periodId' => $periodId
         ]);
+    }
+
+    public function excel(Request $request)
+    {
+        $user = Auth::user();
+
+        $period = $request->period_id
+            ? Period::where('id', $request->period_id)->first()
+            : Period::whereRaw('? BETWEEN start AND end', [now()])->first();
+
+        $students = Student::query()
+            ->withEmail()
+            ->with('career')
+            ->when($period, function ($query, $period) {
+                if ($period) {
+                    $query->whereBetween('users.created_at', [$period->start, $period->end]);
+                }
+            })
+            ->when($request->search, fn ($query, $search) => $query->orWhere('user_id', 'like', "%$search%"))
+            ->when($request->search, fn ($query, $search) => $query->orWhereRelation('user', 'email', 'like', "%$search%"))
+            ->when($request->search, fn ($query, $search) => $query->orWhere('first_name', 'like', "%$search%"))
+            ->when($request->search, fn ($query, $search) => $query->orWhere('fathers_last_name', 'like', "%$search%"))
+            ->when($request->search, fn ($query, $search) => $query->orWhere('mothers_last_name', 'like', "%$search%"))
+            ->when($request->search, fn ($query, $search) => $query->orWhere('account_number', 'like', "%$search%"))
+            ->when($request->search, fn ($query, $search) => $query->orWhereRelation('career', 'name', 'like', "%$search%"))
+            ->when($request->career_id, fn ($query, $carrerId) => $query->where('career_id', $carrerId))
+            ->when($user->role === User::TEACHER_ROLE, fn ($query) => $query->where('teacher_id', $user->id))
+            ->when($user->role === User::EXTERNAL_ADVISOR_ROLE, fn ($query) => $query->where('external_advisor_id', $user->id))
+            ->when($request->document && array_key_exists($request->document, self::$documents), function ($query) use ($request) {
+                $nextDocument = self::$documents[$request->document];
+
+                return $query
+                    ->whereHas($request->document)
+                    ->when($nextDocument !== null, fn ($query) => $query->whereDoesntHave($nextDocument));
+            })
+            ->get();
+
+        $configuration = $period;
+
+        $reportName = 'BASE DE DATOS RESIDENCIAS PROFESIONALES-' . Carbon::now()->format('d-m-Y') . '-' . uniqid() . '.xlsx';
+        return Excel::download(new StudentsExport($students, $configuration, $request->notes ? true : false, $request->covenants ? true : false), $reportName);
     }
 
     public function create()
@@ -63,6 +164,7 @@ class StudentsController extends Controller
         DB::beginTransaction();
 
         try {
+
             $user = User::create($request->userData());
 
             $user->student()->create($request->studentData());
@@ -77,12 +179,15 @@ class StudentsController extends Controller
             ]);
         }
 
-        return redirect()->route('students.index')->with('alert', [
-            'type' => 'success',
-            'message' => 'El estudiante se agrego correctamente',
-        ]);
+        return redirect()->route('students.index')
+            ->with('alert', [
+                'type' => 'success',
+                'message' => 'El estudiante se agrego correctamente',
+            ])
+            ->with('userPassword', $request->password)
+            ->with('userId', $user->id);
     }
-    
+
     public function edit(Student $student)
     {
         return view('students.edit', [
@@ -93,18 +198,18 @@ class StudentsController extends Controller
             'states' => Location::with(['locations.locations'])->state()->get(),
         ]);
     }
-    
+
     public function update(UpdateStudentRequest $request, Student $student)
     {
         DB::beginTransaction();
-        
+
         try {
             $student->update($request->studentData());
 
             $student->user->update($request->userData());
 
             DB::commit();
-        } catch(Throwable $t) {            
+        } catch (Throwable $t) {
             DB::rollBack();
 
             return back()->with('alert', [
@@ -174,9 +279,16 @@ class StudentsController extends Controller
     {
         $project = Project::firstWhere('user_id', Auth::id()) ?? new Project();
 
-        return view('students.project-info',[
-            'project'=> $project,
-        ] );
+
+        $period = Period::whereBetween('start', [$project->start_date, $project->end_date])
+            ->orWhereBetween('end', [$project->start_date, $project->end_date])
+            ->first();
+
+
+        return view('students.project-info', [
+            'project' => $project,
+            'period' => $period
+        ]);
     }
 
     public function updateProjectInfo(UpdateStudentProjectInfoRequest $request)
@@ -195,9 +307,9 @@ class StudentsController extends Controller
 
         if ($request->activity_schedule_image) {
             $path = $request->activity_schedule_image->store('public/project');
-    
+
             $data['activity_schedule_image'] = $path;
-        }        
+        }
 
         $project->fill(Arr::except($data, 'specific_objectives'));
 
@@ -205,15 +317,15 @@ class StudentsController extends Controller
 
         try {
             $project->specificObjectives()->delete();
-            
+
             $project->save();
-            
-            $mappedObjectives = array_map(fn($obj) => ['name' => $obj], $request->specific_objectives);
-            
+
+            $mappedObjectives = array_map(fn ($obj) => ['name' => $obj], $request->specific_objectives);
+
             $project->specificObjectives()->createMany($mappedObjectives);
 
             DB::commit();
-        } catch(Throwable $t) {
+        } catch (Throwable $t) {
             dd($t->getMessage());
             DB::rollBack();
 
@@ -221,14 +333,83 @@ class StudentsController extends Controller
                 'type' => 'danger',
                 'message' => 'Ha ocurrido un error, intente más tarde',
             ]);
-        }        
+        }
 
         return redirect()->route('students.projectInfo')->with('alert', [
             'type' => 'success',
             'message' => 'La información se actualizo correctamente',
         ]);
     }
-    
+
+    public function viewProjectProgress(Request $request, Project $project)
+    {
+        return view('students.view-project-progress', [
+            'project' => $project
+        ]);
+    }
+
+    public function exportProjectProgress(Project $project)
+    {
+        $configuration = $project->student->period;
+
+
+        $pdf = PDF::loadView('students.project-progress-pdf', [
+            'student' => $project->student,
+            'project' => $project,
+            'configuration' => $configuration,
+            'teacher' => Teacher::findOrFail($project->student->teacher_id),
+        ])->setPaper('a4', 'landscape');
+
+        $customReportName = "REVISIÓN DE AVANCES DE RESIDENCIAS PROFESIONALES-{$project->student->full_name}-" . Carbon::now()->format('d-m-Y') . '.pdf';
+
+        return $pdf->stream($customReportName);
+    }
+
+    public function loadProjectProgress(Request $request, Project $project)
+    {
+        return view('students.load-project-progress', [
+            'project' => $project
+        ]);
+    }
+
+    public function storeProjectProgress(StoreProjectProgressRequest $request)
+    {
+        ProjectProgress::create($request->validated());
+
+        return back()->with('alert', [
+            'type' => 'success',
+            'message' => 'El avance se ha guardado exitosamente.',
+        ]);
+    }
+
+    public function editProjectProgress(Request $request, Project $project, ProjectProgress $progress)
+    {
+        return view('students.edit-project-progress', [
+            'project' => $project,
+            'progress' => $progress
+        ]);
+    }
+
+    public function updateProjectProgress(UpdateProjectProgressRequest $request, ProjectProgress $progress)
+    {
+        $progress->update($request->validated());
+
+        return back()->with('alert', [
+            'type' => 'success',
+            'message' => 'El avance se ha actualizado exitosamente.',
+        ]);
+    }
+
+    public function deleteProjectProgress(ProjectProgress $progress)
+    {
+        $progress->delete();
+
+        return back()->with('alert', [
+            'type' => 'success',
+            'message' => 'El avance se ha eliminado exitosamente.',
+        ]);
+    }
+
     public function destroy(Student $student)
     {
         User::destroy($student->user_id);
@@ -247,9 +428,9 @@ class StudentsController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect()->route('students.index')->with('alert',[
+        return redirect()->route('students.index')->with('alert', [
             'type' => 'success',
-            'message' =>'la contraseña ha sido actualizada',
+            'message' => 'la contraseña ha sido actualizada',
         ]);
     }
 }

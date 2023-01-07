@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Carta de cumplimiento</title>
+    <title>CÉDULA DE CUMPLIMIENTO DE RESIDENCIAS PROFESIONALES</title>
     <link rel="stylesheet" href="{{ asset('css/document-header.css') }}">
     <style>
         @page {
@@ -56,7 +56,7 @@
         .subtitle {
             margin-top: 1;
             margin-bottom: 10px;
-            font-size: 1rem;
+            font-size: 14px;
         }
         .c {
             text-align: left;
@@ -64,6 +64,11 @@
             padding: 0 3rem;
             font-size: 0.7rem;
         }
+        .letra {
+            font-family: 'Gill Sans', 'Gill Sans MT';
+            font-size: 14px;
+        }
+
 
         .imagen{
             background-size: cover;
@@ -125,17 +130,17 @@
             <img src="{{ asset('img/encabezado3.jpg') }}" align="top" alt="" style="height: 65px;">
         </div>
 
-        <div class="green-border padding">
+        <div class="green-border padding letra">
             <h1 class="title no-m">UNIVERSIDAD MEXIQUENSE DEL BICENTENARIO</h1>
-            <h2 class="subtitle">DIRECCIÓN ACADÉMICA</h2>
+            <h2 class="subtitle">CÉDULA DE CUMPLIMIENTO DE RESIDENCIAS PROFESIONALES</h2>
 
             <div><b> Nombre del estudiante: </b>{{ $student->full_name }}</div>
             <div><b> Carrera: </b>{{ $student->career->name }}</div>
-            <div><b> Unidad de Estudios Superiores de adscripción: </b>Unidad de Estudios Superiores Villa Victoria</div>
+            <div><b> Unidad de Estudios Superiores de adscripción: </b>{{ $configuration->unit }}</div>
             <div><b> No. de Matricula: </b>{{ $student->account_number }}</div>
-            <div><b> Nombre del Proyecto: </b>{{ $project->title }}</div>
+            <div style="text-align: justify;"><b> Nombre del Proyecto: </b>{{ $project->title }}</div>
         </div>
-        <div class="green-border no-bt padding mb">
+        <div class="green-border no-bt padding mb letra">
             <div><b> Unidad de Estudios Superiores receptora: </b>{{ $externalCompany->business_name }}</div>
             <div><b> Nombre del asesor externo: </b>{{ $student->externalAdvisor->full_name }}</div>
             <div><b> Carrera: </b>{{ $student->externalAdvisor->career }}</div>

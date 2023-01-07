@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use Throwable;
 use App\Models\Student;
 use App\Enum\DocumentStatus;
+use App\Models\Configuration;
 use App\Models\PresentationLetter;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class PresentationLetterController extends Controller
 {
@@ -23,6 +25,8 @@ class PresentationLetterController extends Controller
             ->where('user_id', $userId)
             ->firstOrFail();
 
+        $configuration = $student->period;
+
         if (!$student->presentationLetter->exists && Auth::id() !== $student->user_id) {
             return back()->with('alert', [
                 'type' => 'danger',
@@ -30,17 +34,17 @@ class PresentationLetterController extends Controller
             ]);
         }
 
-        if (!$student->approvedResidencyRequest){
+        if (!$student->approvedResidencyRequest) {
             return redirect()->route('students.residencyProcess')->with('alert', [
                 'type' => 'danger',
-                'message' => 'Debe estar aprobado la peticion de residencia',
+                'message' => 'Debe estar aprobada la solicitud de residencia',
             ]);
         }
 
-        if (!$student->approvedResidencyRequest->signed_document){
+        if (!$student->approvedResidencyRequest->signed_document) {
             return redirect()->route('students.residencyProcess')->with('alert', [
                 'type' => 'danger',
-                'message' => 'Aún no se ha cargado el documento final de la petición de residencia',
+                'message' => 'Aún no se ha cargado el documento final de la solicitud de residencia',
             ]);
         }
 
@@ -50,13 +54,15 @@ class PresentationLetterController extends Controller
                 'request_date' => now(),
             ]);
 
-        $pdf = PDF::loadView('residency-process.presentation-letter',[
-            'student'=>$student,
+        $pdf = PDF::loadView('residency-process.presentation-letter', [
+            'student' => $student,
             'externalCompany' => $student->company,
-            'presentationLetter'=>$presentationLetter,
+            'presentationLetter' => $presentationLetter,
+            'configuration' => $configuration,
         ]);
 
-        return $pdf->stream('presentation-letter');
+        $customReportName = 'Carta Presentación-' . $student->full_name . '_' . Carbon::now()->format('d-m-Y') . '.pdf';
+        return $pdf->stream($customReportName);
     }
 
     public function presentatioLetterCorrections(Request $request, Student $student)
@@ -115,6 +121,8 @@ class PresentationLetterController extends Controller
         $presentationLetter->status = DocumentStatus::STATUS_PROCESSING;
 
         $presentationLetter->save();
+
+        $presentationLetter->corrections->each(fn ($correction) => $correction->update(['is_solved' => true]));
 
         return back()->with('alert', [
             'type' => 'success',

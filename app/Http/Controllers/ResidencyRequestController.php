@@ -11,6 +11,8 @@ use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ResidencyRequestUploadSignedDocRequest;
+use App\Models\Configuration;
+use Carbon\Carbon;
 
 class ResidencyRequestController extends Controller
 {
@@ -24,10 +26,18 @@ class ResidencyRequestController extends Controller
             ->where('user_id', $userId)
             ->firstOrFail();
 
+        $configuration = $student->period;
+
         if (!$student->is_enrolled) {
             return back()->with('alert', [
                 'type' => 'danger',
                 'message' => 'El estudiante debe estar inscrito',
+            ]);
+        }
+        if (!$student->regulate) {
+            return back()->with('alert', [
+                'type' => 'danger',
+                'message' => 'El estudiante debe ser regular',
             ]);
         }
 
@@ -38,13 +48,13 @@ class ResidencyRequestController extends Controller
             ]);
         }
 
-        if ($student->career_percentage < 85) {
+        if ($student->career_percentage < 75) {
             return back()->with('alert', [
                 'type' => 'danger',
-                'message' => 'El estudiante debe tener al menos el 85% de la carrera aprovada.',
+                'message' => 'El estudiante debe tener al menos el 75% de créditos del Plan de Estudios.',
             ]);
         }
-        
+
         if (!$student->residencyRequest->exists && Auth::id() !== $student->user_id) {
             return back()->with('alert', [
                 'type' => 'danger',
@@ -52,17 +62,17 @@ class ResidencyRequestController extends Controller
             ]);
         }
 
-        if (!$student->project) {
-            return redirect()->route('students.projectInfo')->with('alert', [
-                'type' => 'danger',
-                'message' => 'El estudiante debe cargar la data del proyecto',
-            ]);
-        }
-
         if (!$student->company) {
             return redirect()->route('students.companyInfo')->with('alert', [
                 'type' => 'danger',
-                'message' => 'El estudiante debe cargar la data de la compañia externa',
+                'message' => 'El estudiante debe cargar la información de la compañia externa',
+            ]);
+        }
+
+        if (!$student->project) {
+            return redirect()->route('students.projectInfo')->with('alert', [
+                'type' => 'danger',
+                'message' => 'El estudiante debe cargar la información del proyecto',
             ]);
         }
 
@@ -79,9 +89,11 @@ class ResidencyRequestController extends Controller
             'externalCompany' => $student->company,
             'project' => $student->project,
             'residencyRequest' => $residencyRequest,
+            'configuration' => $configuration,
         ]);
 
-        return $pdf->stream('residency-request.pdf');
+        $customReportName = 'Solicitud de Residencias Profesionales-' . $student->full_name . '-' . Carbon::now()->format('d-m-Y') . '.pdf';
+        return $pdf->stream($customReportName);
     }
 
     public function residencyRequestCorrections(Request $request, Student $student)
@@ -91,7 +103,7 @@ class ResidencyRequestController extends Controller
         if (!$residencyRequest) {
             return back()->with('alert', [
                 'type' => 'danger',
-                'message' => 'La petición de residencia debe estar en proceso para poder ser revisada',
+                'message' => 'La solicitud de residencia debe estar en proceso para poder ser revisada',
             ]);
         }
 
@@ -133,13 +145,15 @@ class ResidencyRequestController extends Controller
         if (!$residencyRequest->needsCorrections()) {
             return back()->with('alert', [
                 'type' => 'danger',
-                'message' => 'La petición de residencia no necesita correciones',
+                'message' => 'La solicitud de residencia no necesita correciones',
             ]);
         }
 
         $residencyRequest->status = DocumentStatus::STATUS_PROCESSING;
 
         $residencyRequest->save();
+
+        $residencyRequest->corrections->each(fn ($correction) => $correction->update(['is_solved' => true]));
 
         return back()->with('alert', [
             'type' => 'success',
@@ -154,7 +168,7 @@ class ResidencyRequestController extends Controller
         if (!$residencyRequest) {
             return back()->with('alert', [
                 'type' => 'danger',
-                'message' => 'La petición de residencia debe estar en proceso para porder ser revisada',
+                'message' => 'La solicitud de residencia debe estar en proceso para porder ser revisada',
             ]);
         }
 
@@ -164,7 +178,7 @@ class ResidencyRequestController extends Controller
 
         return back()->with('alert', [
             'type' => 'success',
-            'message' => 'La petición de residencia ha sido aprovada',
+            'message' => 'La solicitud de residencia ha sido aprobada',
         ]);
     }
 
@@ -175,7 +189,7 @@ class ResidencyRequestController extends Controller
         if (!$residencyRequest) {
             return back()->with('alert', [
                 'type' => 'danger',
-                'message' => 'La petición de residencia debe aprovada',
+                'message' => 'La solicitud de residencia debe estar aprobada',
             ]);
         }
 
@@ -201,7 +215,7 @@ class ResidencyRequestController extends Controller
         if (!$residencyRequest) {
             return back()->with('alert', [
                 'type' => 'danger',
-                'message' => 'La petición de residencia debe aprovada',
+                'message' => 'La solicitud de residencia debe estar aprobada',
             ]);
         }
 

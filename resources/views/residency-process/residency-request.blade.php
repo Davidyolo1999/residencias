@@ -67,89 +67,90 @@
         .person-in-charge-signature {
             float: right;
         }
+        .tc{
+            text-align: center;
+        }
+        .letra {
+            font-family: 'Gill Sans', 'Gill Sans MT';
+            font-size: 14px;
+        }
+        .mayus {
+            text-transform: uppercase;
+        }
     </style>
 </head>
 <body>
-    @include('residency-process.partials.header', ['title' => 'SOLICITUD DE RESIDENCIAS PROFESIONALES'])
+    @include('residency-process.partials.header', [
+        'title' => 'SOLICITUD DE RESIDENCIAS PROFESIONALES',
+        ])
 
-    <p class="request-date"><b>Fecha de solicitud:</b> {{ $residencyRequest->request_date_formatted }}.</p>
+    <p class="request-date letra mayus"><b>Fecha de solicitud:</b> {{ $residencyRequest->request_date_formatted }}</p>
 
-    <p class="table-title">DATOS DEL ALUMNO</p>
+    <p class="table-title letra">DATOS DEL ALUMNO</p>
 
-    <table border="2" cellspacing="0" cellpadding="2" class="table">
+    <table border="2" cellspacing="0" cellpadding="2" class="table letra">
         <tbody>
             <tr>
-                <td width="12%">Nombre:</td>
-                <td colspan="3">{{ $student->first_name }} {{ $student->fathers_last_name }} {{ $student->mothers_last_name }}</td>
+                <td width="12%" class="tc">Nombre:</td>
+                <td colspan="3" class="letra">&nbsp;{{ $student->first_name }} {{ $student->fathers_last_name }} {{ $student->mothers_last_name }}</td>
             </tr>
             <tr>
-                <td>Carrera:</td>
-                <td>{{ $student->career->name }}</td>
-                <td width="13%">No. Cuenta</td>
-                <td width="15%">{{ $student->account_number }}</td>
+                <td class="tc">Carrera:</td>
+                <td class="letra">&nbsp;{{ $student->career->name }}</td>
+                <td width="13%" class="tc">No. de Cuenta</td>
+                <td width="15%" class="tc letra">&nbsp;{{ $student->account_number }}</td>
             </tr>
         </tbody>
     </table>
 
-    <p class="table-title">DATOS DE LA EMPRESA</p>
+    <p class="table-title letra">DATOS DE LA EMPRESA</p>
 
-    <table border="2" cellspacing="0" cellpadding="1" class="table">
+    <table border="2" cellspacing="0" cellpadding="1" class="table letra">
         <tbody>
             <tr>
-                <td width="12%">Razón Social:</td>
-                <td colspan="3">{{ $externalCompany->business_name }}</td>
+                <td width="12%" class="tc">Razón Social:</td>
+                <td colspan="3" class="letra">&nbsp;{{ $externalCompany->business_name }} </td>
             </tr>
             <tr>
-                <td width="12%">Dirección:</td>
-                <td colspan="3">{{ $externalCompany->address_name }}</td>
+                <td width="12%" class="tc">Dirección:</td>
+                <td colspan="3" style="text-align: justify;" class="letra">{{ $externalCompany->address_name }}</td>
             </tr>
             <tr>
-                <td width="12%">Dirigir carta a:</td>
-                <td colspan="3">{{ $externalCompany->person_in_charge }}</td>
+                <td width="12%" class="tc">Dirigir Carta a:</td>
+                <td colspan="3" class="letra">&nbsp;{{ $externalCompany->person_in_charge }}</td>
             </tr>
             <tr>
-                <td>Cargo:</td>
-                <td>{{ $externalCompany->person_in_charge_position }}</td>
-                <td width="13%">E-mail:</td>
-                <td width="20%">{{ $externalCompany->email }}</td>
+                <td class="tc">Cargo:</td>
+                <td class="letra">&nbsp;{{ $externalCompany->person_in_charge_position }}</td>
+                <td width="13%" class="tc">E-mail:</td>
+                <td width="20%" class="tc letra"> {{ $externalCompany->email }}</td>
             </tr>
             <tr>
-                <td>Teléfono Oficina:</td>
-                <td>{{ $externalCompany->office_phone_number }}</td>
-                <td>Teléfono celular:</td>
-                <td width="20%">{{ $externalCompany->personal_phone_number }}</td>
+                <td class="tc">Teléfono Oficina:</td>
+                <td class="tc letra">{{ $externalCompany->office_phone_number }}</td>
+                <td class="tc">Teléfono celular:</td>
+                <td width="20%" class="tc letra">{{ $externalCompany->personal_phone_number }}</td>
             </tr>
         </tbody>
     </table>
 
-    <p class="table-title">DATOS DEL PROYECTO</p>
+    <p class="table-title letra">DATOS DEL PROYECTO</p>
 
-    <table border="2" cellspacing="0" cellpadding="2" class="table">
+    <table border="2" cellspacing="0" cellpadding="2" class="table letra">
         <tbody>
             <tr>
-                <td width="20%">Título del proyecto:</td>
-                <td>{{ $project->title }}</td>
+                <td width="20%" class="tc">Título del proyecto:</td>
+                <td class="tc letra">{{ $project->title }}</td>
             </tr>
         </tbody>
     </table>
 
-    <p class="note">
-        El Proyecto en cita se realizará a distancia en atención a las políticas de
-        salud emitidas por las instancias federal y estatal con motivo de la
-        pandemia causada por el coronavirus SARS-COV2 (enfermedad
-        denominada como COVID 19), por lo que no asistiré en ningún momento
-        y bajo cualquier circunstancia a la institución. Asumo la responsabilidad
-        total y absoluta en relación a mi estado de salud en el caso de
-        contravenir lo señalado, deslindado de cualquier situación a la
-        Universidad.
-    </p>
-
-    <div class="footer">
+    <div class="footer letra">
         <p class="student-signature">{{ $student->first_name }} {{ $student->fathers_last_name }} {{ $student->mothers_last_name }}</p>
         <p class="person-in-charge-signature">
-            LCDA. Brenda González Pacheco
+            {{ $configuration->person_in_charge }}
             <br>
-            Coordinadora de la UES Villa Victoria
+            {{ $configuration->person_in_charge_position_abbreviation }}
         </p>
     </div>
 </body>

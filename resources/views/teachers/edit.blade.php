@@ -47,7 +47,7 @@
                     {{-- SEX --}}
                     <div class="row mb-3">
                         <div class="col-md-3">
-                            <label for="sex" class="d-block">Sexo:</label>
+                            <label for="sex" class="d-block letter text-dark">Sexo:</label>
                         </div>
                         <div class="col-md-9">
                             <div class="input-group input-group-dynamic">
@@ -62,6 +62,32 @@
                                 </select>
                             </div>
                             @error('sex')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                    </div>
+
+                    {{-- CAREER --}}
+                    <div class="row mb-3">
+                        <div class="col-md-3">
+                            <label for="career" class="d-block letter text-dark">Licenciatura:</label>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="input-group input-group-dynamic">
+                                <select
+                                    class="form-control"
+                                    name="career_id"
+                                    id="career"
+                                >
+                                    <option value="" disabled>Seleccione una Opción</option>
+                                    @foreach ($careers as $career)
+                                        <option value="{{$career->id}}" @if (old('career_id', $teacher->career_id) === $career->id) selected @endif>
+                                            {{$career->name}}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            @error('career_id')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
@@ -86,7 +112,7 @@
                     {{-- State --}}
                     <div class="row mb-3">
                         <div class="col-md-3">
-                            <label for="state_id" class="d-block">Estado:</label>
+                            <label for="state_id" class="d-block letter text-dark">Estado:</label>
                         </div>
                         <div class="col-md-9">
                             <div class="input-group input-group-dynamic">
@@ -110,7 +136,7 @@
                     {{-- MUNCIPALITY --}}
                     <div class="row mb-3">
                         <div class="col-md-3">
-                            <label for="municipality_id" class="d-block">Municipio:</label>
+                            <label for="municipality_id" class="d-block letter text-dark">Municipio:</label>
                         </div>
                         <div class="col-md-9">
                             <div class="input-group input-group-dynamic">
@@ -131,7 +157,7 @@
                     {{-- LOCALITY --}}
                     <div class="row mb-3">
                         <div class="col-md-3">
-                            <label for="locality_id" class="d-block">Localidad:</label>
+                            <label for="locality_id" class="d-block letter text-dark">Localidad:</label>
                         </div>
                         <div class="col-md-9">
                             <div class="input-group input-group-dynamic">
@@ -149,43 +175,44 @@
                         </div>
                     </div>
                     <div class="text-right">
-                        <a href="{{ route('admins.index') }}" class="btn  btn-warning mr-3">
+                        <a href="{{ route('teachers.index') }}" class="btn btn-sm btn-warning mr-3">
                             <i class="material-icons">cancel</i><b> Cancelar</b> </a>
-                        <button class="btn  btn-success"><i class="material-icons">save</i><b> Guardar</b></button>
+                        <button class="btn btn-sm btn-success"><i class="material-icons">save</i><b> Guardar</b></button>
                     </div>
 
                 </form>
             </div>
 
-            <div class="card">
-                <div class="card-header card-header-success">
-                    <h4 class="card-title text-white"><b>Cambiar Contraseña</b></h4>
-                </div>
-                <div class="card-body">
-                    <form action="{{ route('teachers.updatePassword', $teacher) }}" method="POST">
-                        @csrf
-                        @method('PUT')
-                        {{-- PASSWORD --}}
-                        <x-inputs.text-field-row
-                            name="password"
-                            label="Contraseña Nueva:"
-                            placeholder="Ingresé la Contraseña Nueva"
-                            type="password"
-                        />
-                        {{-- CONFIRM PASSWORD --}}
-                        <x-inputs.text-field-row
-                            name="password_confirmation"
-                            label="Confirmar Contraseña:"
-                            placeholder="Confirme la Contraseña Nueva"
-                            type="password"
-                        />
-                        <div class="text-right">
-                            <a href="{{ route('admins.index') }}" class="btn  btn-warning mr-3">
-                                <i class="material-icons">cancel</i><b> Cancelar</b> </a>
-                            <button class="btn  btn-success"><i class="material-icons">save</i><b> Guardar</b></button>
-                        </div>
-                    </form>
-                </div>
+            
+        </div>
+        <div class="card">
+            <div class="card-header card-header-success">
+                <h4 class="card-title text-white"><b>Cambiar Contraseña</b></h4>
+            </div>
+            <div class="card-body">
+                <form action="{{ route('teachers.updatePassword', $teacher) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    {{-- PASSWORD --}}
+                    <x-inputs.text-field-row
+                        name="password"
+                        label="Contraseña Nueva:"
+                        placeholder="Ingresé la Contraseña Nueva"
+                        type="password"
+                    />
+                    {{-- CONFIRM PASSWORD --}}
+                    <x-inputs.text-field-row
+                        name="password_confirmation"
+                        label="Confirmar Contraseña:"
+                        placeholder="Confirme la Contraseña Nueva"
+                        type="password"
+                    />
+                    <div class="text-right">
+                        <a href="{{ route('teachers.index') }}" class="btn btn-sm btn-warning mr-3">
+                            <i class="material-icons">cancel</i><b> Cancelar</b> </a>
+                        <button class="btn btn-sm btn-success"><i class="material-icons">save</i><b> Guardar</b></button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

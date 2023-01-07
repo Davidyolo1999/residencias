@@ -39,6 +39,7 @@ class UserSeeder extends Seeder
             'state_id' => 1,
             'municipality_id' => 2,
             'locality_id' => 3,
+            'career_id' => 1
         ]);
 
         $externalAdvisorUser = User::factory()->create([
@@ -71,11 +72,13 @@ class UserSeeder extends Seeder
             'mothers_last_name' => 'Vargas',
             'account_number' => '21170146',
             'sex' => 'f',
-            'curp' => '12356456454564466',
+            'curp' => 'FOBD990707HMCLNV06',
             'career_percentage' => 90,
             'phone_number' => '4261249733',
+            'rpa' => 'RPA/LI/0004/2022',
             'is_enrolled' => true,
             'is_social_service_concluded' => true,
+            'regulate' => true,
             'career_id' => 1,
             'teacher_id' => $teacherUser->id,
             'external_advisor_id' => $externalAdvisorUser->id,

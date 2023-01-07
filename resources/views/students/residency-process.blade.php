@@ -115,20 +115,26 @@
 
                 {{-- Carta de aceptación --}}
                 <div class="row">
-                    <div class="col-md-8">
-                        @if (!$student->acceptanceLetter->exists)
-                            <button class="btn btn-block btn-info" data-target="#acceptanceLetterUploadDocModal"
-                                data-toggle="modal" @if (!$student->approvedCommitmentletter) disabled @endif>
-                                Cargar carta de aceptación
-                            </button>
-                        @else
-                            <a href="{{ route('students.acceptanceLetterDownloadSignedDoc', $student) }}"
-                                class="btn btn-block btn-{{ $student->acceptanceLetter->btn_color }}" target="_blank">
-                                Carta de aceptación
-                            </a>
-                        @endif
+                    <div class="col-md-6">
+                        @include('residency-process.partials.acceptance-letter-btn')
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-2">
+                        <button class="btn btn-block btn-info" data-target="#acceptanceLetterUploadDocModal"
+                            data-toggle="modal" @if ($student->acceptanceLetter->signed_document) disabled @endif>
+                            Cargar documento
+                        </button>
+                    </div>
+                    <div class="col-md-2">
+                        <a @if ($student->acceptanceLetter->signed_document)
+                            href="{{ route('students.acceptanceLetterDownloadSignedDoc', $student) }}"
+                            @endif
+                            class="btn btn-block btn-success @if (!$student->acceptanceLetter->signed_document) disabled @endif"
+                            target="_blank"
+                            >
+                            Ver documento
+                        </a>
+                    </div>
+                    <div class="col-md-2">
                         <button class="btn btn-block btn-warning" data-toggle="modal"
                             data-target="#acceptanceLetterCorrectionsModal">
                             Ver correcciones
@@ -136,6 +142,41 @@
                     </div>
                 </div>
                 {{-- Carta de aceptación end --}}
+
+                {{-- Autorización de uso de Información --}}
+                <div class="row">
+                    <div class="col-md-6">
+                        @include('residency-process.partials.authorization-letter-btn')
+                    </div>
+                    <div class="col-md-2">
+                        <button 
+                            class="btn btn-block btn-info" 
+                            data-target="#authorizationLetterUploadDocModal"
+                            data-toggle="modal" @if ($student->authorizationLetter->signed_document) disabled @endif>
+                            Cargar documento
+                        </button>
+                    </div>
+                    <div class="col-md-2">
+                        <a 
+                            @if ($student->authorizationLetter->signed_document)
+                            href="{{ route('students.authorizationLetterDownloadSignedDoc', $student) }}"
+                            @endif
+                            class="btn btn-block btn-success @if (!$student->authorizationLetter->signed_document) disabled @endif"
+                            target="_blank"
+                            >
+                            Ver documento
+                        </a>
+                    </div>
+                    <div class="col-md-2">
+                        <button 
+                        class="btn btn-block btn-warning" 
+                        data-toggle="modal"
+                        data-target="#authorizationLetterCorrectionsModal">
+                            Ver correcciones
+                        </button>
+                    </div>
+                </div>
+                {{-- Autorización de uso de Información end --}}
 
                 {{-- Carta de asignación --}}
                 <div class="row">
@@ -251,6 +292,41 @@
                 </div>
                 {{-- Cédula de cumplimiento RP end --}}
 
+                {{-- Carta Evaluación Externo  --}}
+                <div class="row">
+                    <div class="col-md-6">
+                        @include('residency-process.partials.external-qualifiquation-letter-btn')
+                    </div>
+                    <div class="col-md-2">
+                        <button 
+                            class="btn btn-block btn-info" 
+                            data-target="#externalQualificationLetterUploadDocModal"
+                            data-toggle="modal" @if ($student->externalQualificationLetter->signed_document) disabled @endif>
+                            Cargar documento
+                        </button>
+                    </div>
+                    <div class="col-md-2">
+                        <a 
+                            @if ($student->externalQualificationLetter->signed_document)
+                            href="{{ route('students.externalQualificationLetterDownloadSignedDoc', $student) }}"
+                            @endif
+                            class="btn btn-block btn-success @if (!$student->externalQualificationLetter->signed_document) disabled @endif"
+                            target="_blank"
+                            >
+                            Ver documento
+                        </a>
+                    </div>
+                    <div class="col-md-2">
+                        <button 
+                        class="btn btn-block btn-warning" 
+                        data-toggle="modal"
+                        data-target="#externalQualificationLetterCorrectionsModal">
+                            Ver correcciones
+                        </button>
+                    </div>
+                </div>
+                {{-- Carta Evaluación Externo end --}}
+
                 {{-- Acta de calificación --}}
                 <div class="row">
                     <div class="col-md-6">
@@ -258,7 +334,7 @@
                     </div>
                     <div class="col-md-2">
                         <button class="btn btn-block btn-info" data-target="#qualificationLetterUploadDocModal"
-                            data-toggle="modal" @if ($student->qualificationLetter->signed_document) disabled @endif>
+                            data-toggle="modal" @if ($student->qualificationLetter->signed_document || $student->qualificationLetter->qualification < 70) disabled @endif>
                             Cargar documento
                         </button>
                     </div>
@@ -405,16 +481,16 @@
                     <div class="modal-body">
                         @csrf
                         @method('PUT')
-
                         <div class="form-group">
                             <label for="signed_document_rr">Documento</label>
                             <input type="file" class="form-control" name="signed_document" id="signed_document_rr"
                                 accept="application/pdf" required>
                         </div>
+                        
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button class="btn btn-primary">Guardar</button>
+                        <button class="btn btn-success">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -437,15 +513,27 @@
                         @csrf
                         @method('PUT')
 
-                        <div class="form-group">
+                        <div class="form-group form-file-upload" >
                             <label for="signed_document_pl">Documento</label>
                             <input type="file" class="form-control" name="signed_document" id="signed_document_pl"
                                 accept="application/pdf" required>
                         </div>
+
+                        {{-- <div class="form-group form-file-upload form-file-multiple">
+                            <input type="file" id="document_input" class="inputFileHidden">
+                            <div class="input-group">
+                                <label for="document_input" class="form-control inputFileVisible">Cargar archivo</label>
+                                <span class="input-group-btn">
+                                    <label for="document_input" type="button" class="btn btn-fab btn-round btn-primary">
+                                        <i class="material-icons">attach_file</i>
+                                    </label>
+                                </span>
+                            </div>
+                        </div> --}}
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button class="btn btn-primary">Guardar</button>
+                        <button class="btn btn-success">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -475,7 +563,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button class="btn btn-primary">Guardar</button>
+                        <button class="btn btn-success">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -506,7 +594,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button class="btn btn-primary">Guardar</button>
+                        <button class="btn btn-success">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -536,7 +624,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button class="btn btn-primary">Guardar</button>
+                        <button class="btn btn-success">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -567,7 +655,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button class="btn btn-primary">Guardar</button>
+                        <button class="btn btn-success">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -598,7 +686,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button class="btn btn-primary">Guardar</button>
+                        <button class="btn btn-success">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -629,7 +717,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button class="btn btn-primary">Guardar</button>
+                        <button class="btn btn-success">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -660,7 +748,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button class="btn btn-primary">Guardar</button>
+                        <button class="btn btn-success">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -690,7 +778,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button class="btn btn-primary">Guardar</button>
+                        <button class="btn btn-success">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -720,7 +808,67 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button class="btn btn-primary">Guardar</button>
+                        <button class="btn btn-success">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{-- UPLOAD DOC AUTHORIZATION LETTER MODAL --}}
+    <div class="modal" tabindex="-1" id="authorizationLetterUploadDocModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="{{ route('students.authorizationLetterUploadSignedDoc', $student) }}" method="POST"
+                    enctype="multipart/form-data">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Cargar carta de autorización de uso de Información</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        @csrf
+                        @method('PUT')
+
+                        <div class="form-group">
+                            <label for="signed_document_al1">Documento</label>
+                            <input type="file" class="form-control" name="signed_document" id="signed_document_al1"
+                                accept="application/pdf" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button class="btn btn-success">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{-- UPLOAD DOC AUTHORIZATION LETTER MODAL --}}
+    <div class="modal" tabindex="-1" id="externalQualificationLetterUploadDocModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="{{ route('students.externalQualificationLetterUploadSignedDoc', $student) }}" method="POST"
+                    enctype="multipart/form-data">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Cargar formato evaluación externo</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        @csrf
+                        @method('PUT')
+
+                        <div class="form-group">
+                            <label for="signed_document_eql1">Documento</label>
+                            <input type="file" class="form-control" name="signed_document" id="signed_document_eql1"
+                                accept="application/pdf" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button class="btn btn-success">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -751,7 +899,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button class="btn btn-primary" @if (!$student->presentationLetter->needsCorrections()) disabled @endif>Marcar como corregida</button>
+                            <button class="btn btn-success" @if (!$student->presentationLetter->needsCorrections()) disabled @endif>Marcar como corregida</button>
                         </div>
                     </form>
                 </div>
@@ -783,7 +931,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button class="btn btn-primary" @if (!$student->commitmentLetter->needsCorrections()) disabled @endif>Marcar como corregida</button>
+                            <button class="btn btn-success" @if (!$student->commitmentLetter->needsCorrections()) disabled @endif>Marcar como corregida</button>
                         </div>
                     </form>
                 </div>
@@ -814,7 +962,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button class="btn btn-primary" @if (!$student->acceptanceLetter->needsCorrections()) disabled @endif>Marcar como corregida</button>
+                            <button class="btn btn-success" @if (!$student->acceptanceLetter->needsCorrections()) disabled @endif>Marcar como corregida</button>
                         </div>
                     </form>
                 </div>
@@ -844,7 +992,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button class="btn btn-primary" @if (!$student->paperStructure->needsCorrections()) disabled @endif>Marcar como corregida</button>
+                            <button class="btn btn-success" @if (!$student->paperStructure->needsCorrections()) disabled @endif>Marcar como corregida</button>
                         </div>
                     </form>
                 </div>
@@ -875,7 +1023,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button class="btn btn-primary" @if (!$student->assignmentLetter->needsCorrections()) disabled @endif>Marcar como corregida</button>
+                            <button class="btn btn-success" @if (!$student->assignmentLetter->needsCorrections()) disabled @endif>Marcar como corregida</button>
                         </div>
                     </form>
                 </div>
@@ -906,7 +1054,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button class="btn btn-primary" @if (!$student->preliminaryLetter->needsCorrections()) disabled @endif>Marcar como corregida</button>
+                            <button class="btn btn-success" @if (!$student->preliminaryLetter->needsCorrections()) disabled @endif>Marcar como corregida</button>
                         </div>
                     </form>
                 </div>
@@ -937,7 +1085,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button class="btn btn-primary" @if (!$student->complianceLetter->needsCorrections()) disabled @endif>Marcar como corregida</button>
+                            <button class="btn btn-success" @if (!$student->complianceLetter->needsCorrections()) disabled @endif>Marcar como corregida</button>
                         </div>
                     </form>
                 </div>
@@ -968,7 +1116,67 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button class="btn btn-primary" @if (!$student->submissionLetter->needsCorrections()) disabled @endif>Marcar como corregida</button>
+                            <button class="btn btn-success" @if (!$student->submissionLetter->needsCorrections()) disabled @endif>Marcar como corregida</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endif
+    {{-- CORRECTIONS MODAL --}}
+    @if ($student->authorizationLetter->corrections->isNotEmpty())
+        <div class="modal" tabindex="-1" id="authorizationLetterCorrectionsModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form action="{{ route('students.authorizationLetterMarkCorrectionsAsSolved') }}" method="POST">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Enviar correcciones</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            @csrf
+                            @method('PUT')
+                            <ul>
+                                @foreach ($student->authorizationLetter->corrections as $correction)
+                                    <li>{{ $correction->content }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <button class="btn btn-success" @if (!$student->authorizationLetter->needsCorrections()) disabled @endif>Marcar como corregida</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endif
+    {{-- CORRECTIONS MODAL --}}
+    @if ($student->externalQualificationLetter->corrections->isNotEmpty())
+        <div class="modal" tabindex="-1" id="externalQualificationLetterCorrectionsModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form action="{{ route('students.externalQualificationLetterMarkCorrectionsAsSolved') }}" method="POST">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Enviar correcciones</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            @csrf
+                            @method('PUT')
+                            <ul>
+                                @foreach ($student->externalQualificationLetter->corrections as $correction)
+                                    <li>{{ $correction->content }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <button class="btn btn-success" @if (!$student->externalQualificationLetter->needsCorrections()) disabled @endif>Marcar como corregida</button>
                         </div>
                     </form>
                 </div>
@@ -999,7 +1207,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button class="btn btn-primary" @if (!$student->qualificationLetter->needsCorrections()) disabled @endif>Marcar como corregida</button>
+                            <button class="btn btn-success" @if (!$student->qualificationLetter->needsCorrections()) disabled @endif>Marcar como corregida</button>
                         </div>
                     </form>
                 </div>
@@ -1030,12 +1238,25 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button class="btn btn-primary" @if (!$student->completionLetter->needsCorrections()) disabled @endif>Marcar como corregida</button>
+                            <button class="btn btn-success" @if (!$student->completionLetter->needsCorrections()) disabled @endif>Marcar como corregida</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     @endif
+@endpush
 
+@push('js')
+    
+
+    @if (session('processFinished'))
+    <script>
+        Swal.fire(
+            'Terminación de residencias',
+            'Felicidades! Terminaste tu residencia profesional.',
+            'success'
+        )
+    </script>
+    @endif
 @endpush

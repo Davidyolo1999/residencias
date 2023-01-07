@@ -16,6 +16,9 @@
         "postcss": "^8.1.14"
     },
     "dependencies": {
+        "apexcharts": "^3.36.3",
+        "bootstrap-select": "^1.13.18",
+        "material-icons": "^1.11.11",
         "sweetalert2": "^11.3.0",
         "swiper": "^7.4.1"
     }

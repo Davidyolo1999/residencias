@@ -19,6 +19,11 @@ class Location extends Model
         return $this->hasMany(Location::class, 'parent_id');
     }
 
+    public function parentLocation()
+    {
+        return $this->belongsTo(Location::class, 'parent_id');
+    }
+
     /**
      * Scopes
      */
@@ -26,4 +31,6 @@ class Location extends Model
     {
         return $query->whereNull('parent_id');
     }
+
+
 }

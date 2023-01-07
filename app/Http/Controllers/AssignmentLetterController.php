@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Enum\DocumentStatus;
 use App\Models\AssignmentLetter;
+use App\Models\Configuration;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 use Throwable;
 
 class AssignmentLetterController extends Controller
@@ -22,6 +24,8 @@ class AssignmentLetterController extends Controller
             ->where('user_id', $userId)
             ->firstOrFail();
 
+        $configuration = $student->period;
+
         if (!$student->assignmentLetter->exists && Auth::id() !== $student->user_id) {
             return back()->with('alert', [
                 'type' => 'danger',
@@ -29,10 +33,16 @@ class AssignmentLetterController extends Controller
             ]);
         }
 
-        if (!$student->approvedAcceptanceletter){
+        if (!$student->approvedAuthorizationLetter) {
             return redirect()->route('students.residencyProcess')->with('alert', [
                 'type' => 'danger',
-                'message' => 'Debe estar aprobada la carta de aceptaciòn',
+                'message' => 'Debe estar aprobada la carta de uso de información',
+            ]);
+        }
+        if (!$student->approvedAuthorizationletter->signed_document) {
+            return redirect()->route('students.residencyProcess')->with('alert', [
+                'type' => 'danger',
+                'message' => 'Aún no se ha cargado el documento final de la carta de uso de información',
             ]);
         }
 
@@ -43,13 +53,15 @@ class AssignmentLetterController extends Controller
                 'company_id' => $student->company->id,
             ]);
 
-        $pdf = PDF::loadView('residency-process.assignment-letter',[
-            'student'=>$student,
+        $pdf = PDF::loadView('residency-process.assignment-letter', [
+            'student' => $student,
             'externalCompany' => $student->company,
-            'assignmentLetter'=> $assignmentLetter,
+            'assignmentLetter' => $assignmentLetter,
+            'configuration' => $configuration,
         ]);
 
-        return $pdf->stream('assignment-letter');
+        $customReportName = 'Asignación de Asesor Interno-' . $student->full_name . '_' . Carbon::now()->format('d-m-Y') . '.pdf';
+        return $pdf->stream($customReportName);
     }
 
     public function assignmentLetterCorrections(Request $request, Student $student)
@@ -77,7 +89,7 @@ class AssignmentLetterController extends Controller
             $assignmentLetter->corrections()->create(['content' => $data['corrections']]);
 
             DB::commit();
-        } catch(Throwable $t) {
+        } catch (Throwable $t) {
             DB::rollBack();
 
             return back()->with('alert', [
@@ -108,6 +120,8 @@ class AssignmentLetterController extends Controller
         $assignmentLetter->status = DocumentStatus::STATUS_PROCESSING;
 
         $assignmentLetter->save();
+
+        $assignmentLetter->corrections->each(fn ($correction) => $correction->update(['is_solved' => true]));
 
         return back()->with('alert', [
             'type' => 'success',

@@ -2,7 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\Correction;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -25,5 +29,17 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Paginator::useBootstrap();
+
+        View::composer('layouts.navbars.navs.auth', function ($view) {
+            $corrections = Correction::query()
+                ->where('is_solved', 0)
+                ->whereHas('correctionable', fn($query) => $query->where('user_id', Auth::id()))
+                ->get();
+
+            $view->with('corrections', $corrections);
+        });
+
+        Model::unguard();
     }
 }
+

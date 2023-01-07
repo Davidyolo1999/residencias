@@ -33,6 +33,10 @@ class UpdateTeacherRequest extends FormRequest
             'sex' => 'required|in:m,f',
             'curp' => ['required', 'max:18', Rule::unique('teachers', 'curp')->ignore($this->teacher->user_id, 'user_id')],
             'phone_number' => 'required|numeric|digits:10',
+            'career_id' => [
+                'required',
+                Rule::exists('careers', 'id')
+            ],
             'state_id' => [
                 'required',
                 Rule::exists('locations', 'id')->whereNull('parent_id'),

@@ -1,6 +1,6 @@
 <div class="row mb-3">
     <div class="col-md-3">
-        <label for="{{ $name }}" class="d-block">{{ $label }}</label>
+        <label for="{{ $name }}" class="d-block letter text-dark">{{ $label }}</label>
     </div>
     <div class="col-md-9">
         <div class="input-group input-group-dynamic label-floating has-warning">

@@ -23,12 +23,15 @@ class CreateCompaniesTable extends Migration
             $table->string('office_phone_number', 10);
             $table->string('personal_phone_number', 10);
             $table->string('commercial_business');
+            $table->string('Department_requesting_project');
             $table->string('zip_code', 10);
+            $table->string('sector');
+            $table->string('number_of_agreement')->nullable();
+            $table->date('date')->nullable();
             $table->unsignedBigInteger('user_id')->unique();
             $table->timestamps();
 
             $table->foreign('user_id')->references('user_id')->on('students')->onDelete('CASCADE');
-
         });
     }
 

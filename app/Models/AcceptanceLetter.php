@@ -11,4 +11,7 @@ class AcceptanceLetter extends Model
     use HasFactory, ResidencyProcessDocument;
 
     protected $guarded = [];
+
+    protected $dates = ['request_date'];
+
 }

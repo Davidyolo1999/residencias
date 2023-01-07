@@ -38,5 +38,9 @@ class StudentPolicy
     {
         return $user->role === User::ADMIN_ROLE;
     }
-
+    
+    public function export(User $user)
+    {
+        return $user->role === User::ADMIN_ROLE;
+    }
 }

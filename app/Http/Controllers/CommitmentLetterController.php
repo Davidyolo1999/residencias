@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Enum\DocumentStatus;
 use App\Models\CommitmentLetter;
+use App\Models\Configuration;
 use App\Models\Student;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 use Throwable;
 
 class CommitmentLetterController extends Controller
@@ -22,6 +24,8 @@ class CommitmentLetterController extends Controller
             ->where('user_id', $userId)
             ->firstOrFail();
 
+        $configuration = $student->period;
+
         if (!$student->commitmentLetter->exists && Auth::id() !== $student->user_id) {
             return back()->with('alert', [
                 'type' => 'danger',
@@ -29,14 +33,14 @@ class CommitmentLetterController extends Controller
             ]);
         }
 
-        if (!$student->approvedPresentationletter){
+        if (!$student->approvedPresentationletter) {
             return redirect()->route('students.residencyProcess')->with('alert', [
                 'type' => 'danger',
                 'message' => 'Debe estar aprobada la carta de presentacion',
             ]);
         }
 
-        if (!$student->approvedPresentationletter->signed_document){
+        if (!$student->approvedPresentationletter->signed_document) {
             return redirect()->route('students.residencyProcess')->with('alert', [
                 'type' => 'danger',
                 'message' => 'Aún no se ha cargado el documento final de la carta de presentación',
@@ -50,13 +54,15 @@ class CommitmentLetterController extends Controller
                 'company_id' => $student->company->id,
             ]);
 
-        $pdf = PDF::loadView('residency-process.commitment-letter',[
-            'student'=>$student,
+        $pdf = PDF::loadView('residency-process.commitment-letter', [
+            'student' => $student,
             'externalCompany' => $student->company,
-            'commitmentLetter'=>$commitmentLetter,
+            'commitmentLetter' => $commitmentLetter,
+            'configuration' => $configuration,
         ]);
 
-        return $pdf->stream('commitment-letter');
+        $customReportName = 'Carta Compromiso-' . $student->full_name . '_' . Carbon::now()->format('d-m-Y') . '.pdf';
+        return $pdf->stream($customReportName);
     }
 
     public function commitmentLetterCorrections(Request $request, Student $student)
@@ -84,7 +90,7 @@ class CommitmentLetterController extends Controller
             $commitmentLetter->corrections()->create(['content' => $data['corrections']]);
 
             DB::commit();
-        } catch(Throwable $t) {
+        } catch (Throwable $t) {
             DB::rollBack();
 
             return back()->with('alert', [
@@ -115,6 +121,8 @@ class CommitmentLetterController extends Controller
         $commitmentLetter->status = DocumentStatus::STATUS_PROCESSING;
 
         $commitmentLetter->save();
+
+        $commitmentLetter->corrections->each(fn ($correction) => $correction->update(['is_solved' => true]));
 
         return back()->with('alert', [
             'type' => 'success',

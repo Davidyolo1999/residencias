@@ -29,7 +29,7 @@
                     {{-- PASSWORD --}}
                     <div class="row mb-3">
                         <div class="col-md-3">
-                            <label for="password" class="d-block">Contraseña:</label>
+                            <label for="password" class="d-block letter text-dark">Contraseña:</label>
                         </div>
                         <div class="col-md-9">
                             <div class="input-group input-group-dynamic has-warning">
@@ -45,7 +45,7 @@
                     {{-- PASSWORD CONFIRMATION --}}
                     <div class="row mb-3">
                         <div class="col-md-3">
-                            <label for="password_confirmation" class="d-block">Confirmar Contraseña:</label>
+                            <label for="password_confirmation" class="d-block letter text-dark">Confirmar Contraseña:</label>
                         </div>
                         <div class="col-md-9">
                             <div class="input-group input-group-dynamic has-warning">
@@ -54,12 +54,12 @@
                             </div>
                         </div>
                     </div>
-                        <div class="text-right">
-                            <a href="{{ route('admins.index') }}" class="btn  btn-warning mr-3">
+                        <div class="float-right">
+                            <a href="{{ route('admins.index') }}" class="btn btn-sm btn-warning mr-3">
                                 <i class="material-icons">cancel</i><b> Cancelar</b> </a>
-                            <button class="btn  btn-success"><i class="material-icons">save</i><b> Guardar</b></button>
+                            <button class="btn  btn-success btn-sm"><i class="material-icons">save</i><b> Guardar</b></button>
                         </div>
-                    
+
                 </form>
             </div>
         </div>

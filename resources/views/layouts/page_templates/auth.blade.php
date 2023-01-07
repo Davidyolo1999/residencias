@@ -1,8 +1,10 @@
-<div class="wrapper ">
+<div class="wrapper">
+    <x-period-modal />
+    <x-tutorial-component />
     @include('layouts.navbars.sidebar')
     <div class="main-panel">
         @include('layouts.navbars.navs.auth')
-            @yield('content')
+        @yield('content')
         @include('layouts.footers.auth')
     </div>
 </div>

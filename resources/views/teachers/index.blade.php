@@ -2,82 +2,122 @@
 
 @section('content')
     <div class="content">
-        @if($alert = session('alert'))
-            <div class="alert alert-{{ $alert['type'] }}" role="alert">
-                {{ $alert['message'] }}
-            </div>
-        @endif
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    @if ($alert = session('alert'))
+                        <div class="row">
+                            <div class="col-sm-12">
 
-        <div class="card">
-            <div class="card-header card-header-success">
-                <h4 class="card-title text-white"><b>Profesores</b> </h4>
-                <p class="cart-category text-white"><b>Lista de Profesores</b> </p>
-            </div>
+                                <div class="alert alert-{{ $alert['type'] }}" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <i class="material-icons">close</i>
+                                    </button>
+                                    <span>{{ $alert['message'] }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
 
-            <div class="card-body">
-                <div class="text-right">
-                    <a href="{{ route('teachers.create') }}" class="btn btn-sm btn-warning"><i class="material-icons">person_add</i> Añadir Profesor</a>
+                    <div class="card">
+                        <div class="card-header card-header-success">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4 class="card-title text-white"><b>Profesores</b> </h4>
+                                    <p class="card-category text-white"><b>Lista de Profesores</b> </p>
+                                </div>
+                                <form class="col-md-6">
+                                    <div class="form-group text-center text-dark has-white search col-md-12">
+                                        <label for="period_id" class="text-white">
+                                            Buscar:
+                                        </label>
+                                        <input type="text" class="form-control" autofocus name="search"
+                                            value="{{ request('search') }}">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="text-right">
+                                <a href="{{ route('teachers.create') }}" data-toggle-second="tooltip" data-placement="top"
+                                    title="Aquí puedes crear un nuevo profesor." class="btn btn-sm btn-warning btn-round"><i
+                                        class="material-icons">person_add</i> Nuevo</a>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead class="text-primary text-center">
+                                        <tr class="text-dark">
+                                            <th> # </th>
+                                            <th> E-mail </th>
+                                            <th> Nombre </th>
+                                            <th> Apellido Paterno </th>
+                                            <th> Apellido Materno </th>
+                                            <th> Sexo </th>
+                                            <th> CURP </th>
+                                            <th> Licenciatura </th>
+                                            <th> Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @forelse ($teachers as $teacher)
+                                            <tr class="text-dark text-center">
+                                                <td>{{ $teacher->user_id }} </td>
+                                                <td>{{ $teacher->email }} </td>
+                                                <td>{{ $teacher->first_name }} </td>
+                                                <td>{{ $teacher->fathers_last_name }} </td>
+                                                <td>{{ $teacher->mothers_last_name }} </td>
+                                                <td>{{ $teacher->sex_text }} </td>
+                                                <td>{{ $teacher->curp }} </td>
+                                                <td>{{ $teacher->career->name ?? '--' }} </td>
+                                                <td class="td-actions text-nowrap">
+                                                    <a href="" class="btn btn-sm btn-info"
+                                                        data-toggle-second="tooltip" data-placement="top"
+                                                        title="Aquí puedes ver los detalles generales del profesor."
+                                                        title="Ver detalles">
+                                                        <i class="material-icons">details</i>
+                                                    </a>
+                                                    <a href="{{ route('teachers.edit', $teacher) }}"
+                                                        class="btn btn-sm btn-info btn-success" data-toggle-second="tooltip"
+                                                        data-placement="top"
+                                                        title="Aquí puedes editar la información del profesor."
+                                                        title="Editar">
+                                                        <i class="material-icons">edit</i>
+                                                    </a>
+                                                    <form action="{{ route('teachers.destroy', $teacher) }}" method="POST"
+                                                        data-toggle-second="tooltip" data-placement="top"
+                                                        title="Aquí puedes eliminar al profesor."
+                                                        class="d-inline-block delete-teacher-form">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button class="btn btn-sm btn-danger">
+                                                            <i class="material-icons">delete</i>
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        @empty
+                                            <tr>
+                                                <td colspan="9" class="text-center text-danger">Sin registros</td>
+                                            </tr>
+                                        @endforelse
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            {{ $teachers->links() }}
+                        </div>
+                    </div>
                 </div>
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead class="text-primary text-center">
-                            <tr class="text-dark">
-                                <th><b> # </b></th>
-                                <th><b> E-mail </b></th>
-                                <th><b> Nombres </b></th>
-                                <th><b> Apellido Paterno </b></th>
-                                <th><b> Apellido Materno </b></th>
-                                <th><b> Sexo </b></th>
-                                <th><b> CURP </b></th>
-                                <th><b> Acciones</b></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($teachers as $teacher)
-                                <tr class="text-dark text-center">
-                                    <td><b>{{ $teacher->user_id }} </b></td>
-                                    <td><b>{{ $teacher->email }} </b></td>
-                                    <td><b>{{ $teacher->first_name }} </b></td>
-                                    <td><b>{{ $teacher->fathers_last_name }} </b></td>
-                                    <td><b>{{ $teacher->mothers_last_name }} </b></td>
-                                    <td><b>{{ $teacher->sex_text }} </b></td>
-                                    <td><b>{{ $teacher->curp }} </b></td>
-                                    <td>
-                                        <a href="" class="btn btn-sm btn-info" title="Ver detalles">
-                                            <i class="material-icons">details</i>
-                                        </a>
-                                        <a href="{{ route('teachers.edit', $teacher) }}" class="btn btn-sm btn-info" title="Editar" >
-                                            <i class="material-icons">edit</i>
-                                        </a>
-                                        <form
-                                            action="{{ route('teachers.destroy', $teacher) }}"
-                                            method="POST"
-                                            class="d-inline-block delete-teacher-form"
-                                        >
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="btn btn-sm btn-danger">
-                                                <i class="material-icons">delete</i>
-                                            </button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="card-footer">
-                {{ $teachers->links() }}
             </div>
         </div>
     </div>
 @endsection
 
 @push('js')
-    <script>        
+    <script>
         const deleteTeacherForms = document.querySelectorAll('.delete-teacher-form');
-        
+
         deleteTeacherForms.forEach(form => form.addEventListener('submit', function(e) {
             e.preventDefault();
 

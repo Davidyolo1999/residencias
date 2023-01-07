@@ -4,11 +4,19 @@ use App\Http\Controllers\AcceptanceLetterController;
 use App\Http\Controllers\AdminsController;
 use App\Http\Controllers\AssignmentLetterController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AuthorizationLetterController;
+use App\Http\Controllers\ChartsController;
 use App\Http\Controllers\CommitmentLetterController;
 use App\Http\Controllers\CompletionLetterController;
 use App\Http\Controllers\ComplianceLetterController;
+use App\Http\Controllers\ConfigurationController;
+use App\Http\Controllers\CorrectionsController;
 use App\Http\Controllers\ExternalAdvisorsController;
+use App\Http\Controllers\ExternalQualificationLetterController;
+use App\Http\Controllers\LocationsController;
 use App\Http\Controllers\PaperStructureController;
+use App\Http\Controllers\PeriodsController;
+use App\Http\Controllers\PersonalInformationController;
 use App\Http\Controllers\PreliminaryLetterController;
 use App\Http\Controllers\PresentationLetterController;
 use App\Http\Controllers\QualificationLetterController;
@@ -19,6 +27,7 @@ use App\Http\Controllers\SubmissionLetterController;
 use App\Http\Controllers\TeachersController;
 use App\Models\Admin;
 use App\Models\ExternalAdvisor;
+use App\Models\Period;
 use App\Models\Student;
 use App\Models\Teacher;
 use Illuminate\Support\Facades\Route;
@@ -31,8 +40,14 @@ Route::get('/login', [AuthController::class, 'loginForm'])->name('login')->middl
 Route::post('/login', [AuthController::class, 'login'])->name('login')->middleware('guest');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
 
-Route::middleware('auth')->group(function() {
-    Route::prefix('/admins')->name('admins.')->group(function() {
+Route::middleware('auth')->group(function () {
+
+    Route::get('/mi-perfil', [AuthController::class, 'profile'])->name('profile');
+    Route::put('/actualizar-perfil', [AuthController::class, 'updateProfile'])->name('updateProfile');
+
+    Route::get('/graphics', [ChartsController::class, 'index'])->name('charts.index');
+
+    Route::prefix('/admins')->name('admins.')->group(function () {
         Route::get('/', [AdminsController::class, 'index'])->name('index')->can('index', Admin::class);
         Route::get('/create', [AdminsController::class, 'create'])->name('create')->can('create', Admin::class);
         Route::post('/', [AdminsController::class, 'store'])->name('store')->can('create', Admin::class);
@@ -42,42 +57,61 @@ Route::middleware('auth')->group(function() {
         Route::put('/{admin}/password', [AdminsController::class, 'updatePassword'])->name('updatePassword')->can('update', 'admin');
     });
 
-    Route::prefix('/teachers')->name('teachers.')->group(function() {
+    Route::prefix('/periods')->name('periods.')->group(function () {
+        Route::get('/', [PeriodsController::class, 'index'])->name('index')->can('index', Period::class);
+        Route::get('/create', [PeriodsController::class, 'create'])->name('create')->can('create', Period::class);
+        Route::post('/', [PeriodsController::class, 'store'])->name('store')->can('create', Period::class);
+        Route::delete('/{period}', [PeriodsController::class, 'destroy'])->name('destroy')->can('destroy', 'period');
+        Route::get('/{period}/edit', [PeriodsController::class, 'edit'])->name('edit')->can('update', 'period');
+        Route::put('/{period}', [PeriodsController::class, 'update'])->name('update')->can('update', 'period');
+    });
+
+    Route::prefix('/teachers')->name('teachers.')->group(function () {
         Route::get('/', [TeachersController::class, 'index'])->name('index')->can('index', Teacher::class);
         Route::get('/create', [TeachersController::class, 'create'])->name('create')->can('create', Teacher::class);
         Route::post('/', [TeachersController::class, 'store'])->name('store')->can('create', Teacher::class);
         Route::delete('/{teacher}', [TeachersController::class, 'destroy'])->name('destroy')->can('destroy', 'teacher');
-        Route::get('/{teacher}/edit', [TeachersController::class, 'edit'])->name('edit')->can('update','teacher');
-        Route::put('/{teacher}', [TeachersController::class, 'update'])->name('update')->can('update','teacher');
-        Route::put('/{teacher}/password', [TeachersController::class, 'updatePassword'])->name('updatePassword')->can('update','teacher');
+        Route::get('/{teacher}/edit', [TeachersController::class, 'edit'])->name('edit')->can('update', 'teacher');
+        Route::put('/{teacher}', [TeachersController::class, 'update'])->name('update')->can('update', 'teacher');
+        Route::put('/{teacher}/password', [TeachersController::class, 'updatePassword'])->name('updatePassword')->can('update', 'teacher');
     });
 
-    Route::prefix('/external-advisor')->name('externalAdvisor.')->group(function() {
+    Route::prefix('/external-advisor')->name('externalAdvisor.')->group(function () {
         Route::get('/', [ExternalAdvisorsController::class, 'index'])->name('index')->can('index', ExternalAdvisor::class);
         Route::get('/create', [ExternalAdvisorsController::class, 'create'])->name('create')->can('create', ExternalAdvisor::class);
         Route::post('/', [ExternalAdvisorsController::class, 'store'])->name('store')->can('create', ExternalAdvisor::class);
-        Route::delete('/{externaladvisor}', [ExternalAdvisorsController::class, 'destroy'])->name('destroy')->can('destroy','externaladvisor');
+        Route::delete('/{externaladvisor}', [ExternalAdvisorsController::class, 'destroy'])->name('destroy')->can('destroy', 'externaladvisor');
         Route::get('/{externaladvisor}/edit', [ExternalAdvisorsController::class, 'edit'])->name('edit')->can('update', 'externaladvisor');
         Route::put('/{externaladvisor}', [ExternalAdvisorsController::class, 'update'])->name('update')->can('update', 'externaladvisor');
         Route::put('/{externaladvisor}/password', [ExternalAdvisorsController::class, 'updatePassword'])->name('updatePassword')->can('update', 'externaladvisor');
     });
 
-    Route::prefix('/students')->name('students.')->group(function() {
+    Route::prefix('/students')->name('students.')->group(function () {
         Route::get('/', [StudentsController::class, 'index'])->name('index')->can('index', Student::class);
+        Route::get('/excel', [StudentsController::class, 'excel'])->name('excel')->can('export', Student::class);
         Route::get('/create', [StudentsController::class, 'create'])->name('create')->can('create', Student::class);
         Route::post('/', [StudentsController::class, 'store'])->name('store')->can('create', Student::class);
         Route::get('/{student}', [StudentsController::class, 'show'])->name('show')->where('student', '[0-9]+')->can('show', 'student');
         Route::get('/personal-info', [StudentsController::class, 'personalInfo'])->name('personalInfo')->can('view-personal-info');
         Route::put('/personal-info', [StudentsController::class, 'updatePersonalInfo'])->name('updatePersonalInfo');
-        Route::get('/company-info', [StudentsController::class,'companyInfo'])->name('companyInfo')->can('view-company-info');
-        Route::put('/company-info', [StudentsController::class,'updateCompanyInfo'])->name('updateCompanyInfo');
-        Route::get('/project-info', [StudentsController::class,'projectInfo'])->name('projectInfo')->can('view-project-info');
+        Route::get('/company-info', [StudentsController::class, 'companyInfo'])->name('companyInfo')->can('view-company-info');
+        Route::put('/company-info', [StudentsController::class, 'updateCompanyInfo'])->name('updateCompanyInfo');
+        Route::get('/project-info', [StudentsController::class, 'projectInfo'])->name('projectInfo')->can('view-project-info');
         Route::put('/project-info', [StudentsController::class, 'updateProjectInfo'])->name('updateProjectInfo');
-        Route::delete('/{student}', [StudentsController::class, 'destroy'])->name('destroy')->can('destroy','student');
-        Route::get('/{student}/edit', [StudentsController::class, 'edit'])->name('edit')->can('update','student');
-        Route::put('/{student}', [StudentsController::class, 'update'])->name('update')->can('update','student');
-        Route::put('/{student}/password', [StudentsController::class, 'updatePassword'])->name('updatePassword')->can('update','student');
+        Route::get('/project-info/{project}/view-progress', [StudentsController::class, 'viewProjectProgress'])->name('viewProjectProgress');
+        Route::get('/project-info/{project}/load-progress', [StudentsController::class, 'loadProjectProgress'])->name('loadProjectProgress');
+        Route::get('/project-info/{project}/edit-progress/{progress}', [StudentsController::class, 'editProjectProgress'])->name('editProjectProgress');
+        Route::get('/project-info/{project}/export-progress', [StudentsController::class, 'exportProjectProgress'])->name('exportProjectProgress');
+        Route::post('/project-info/load-progress', [StudentsController::class, 'storeProjectProgress'])->name('storeProjectProgress');
+        Route::put('/project-info/update-progress/{progress}', [StudentsController::class, 'updateProjectProgress'])->name('updateProjectProgress');
+        Route::delete('/project-info/{progress}', [StudentsController::class, 'deleteProjectProgress'])->name('deleteProjectProgress');
+        Route::delete('/{student}', [StudentsController::class, 'destroy'])->name('destroy')->can('destroy', 'student');
+        Route::get('/{student}/edit', [StudentsController::class, 'edit'])->name('edit')->can('update', 'student');
+        Route::put('/{student}', [StudentsController::class, 'update'])->name('update')->can('update', 'student');
+        Route::put('/{student}/password', [StudentsController::class, 'updatePassword'])->name('updatePassword')->can('update', 'student');
         Route::get('/residency-process', [ResidencyProcessController::class, 'residencyProcess'])->name('residencyProcess')->can('view-residency-info');
+        Route::get('/{student}/registration-in-the-system', [PersonalInformationController::class, 'personalInformation'])->name('personalInformation');
+
         // Residency request
         Route::post('/residency-process/residency-request', [ResidencyRequestController::class, 'residencyRequest'])->name('residencyRequest');
         Route::put('/residency-process/residency-request/corrections/mark-as-solved', [ResidencyRequestController::class, 'residencyRequestMarkCorrectionsAsSolved'])->name('residencyRequestMarkCorrectionsAsSolved');
@@ -100,6 +134,7 @@ Route::middleware('auth')->group(function() {
         Route::put('/{student}/commitment-letter/signed-document', [CommitmentLetterController::class, 'commitmentLetterUploadSignedDoc'])->name('commitmentLetterUploadSignedDoc');
         Route::get('/{student}/commitment-letter/signed-document', [CommitmentLetterController::class, 'commitmentLetterDownloadSignedDoc'])->name('commitmentLetterDownloadSignedDoc');
         // Acceptance Letter
+        Route::post('/residency-process/acceptance-letter', [AcceptanceLetterController::class, 'acceptanceLetter'])->name('acceptanceLetter');
         Route::put('/{student}/acceptance-letter/signed-document', [AcceptanceLetterController::class, 'acceptanceLetterUploadSignedDoc'])->name('acceptanceLetterUploadSignedDoc');
         Route::get('/{student}/acceptance-letter/signed-document', [AcceptanceLetterController::class, 'acceptanceLetterDownloadSignedDoc'])->name('acceptanceLetterDownloadSignedDoc');
         Route::post('/{student}/acceptance-letter/corrections', [AcceptanceLetterController::class, 'acceptanceLetterCorrections'])->name('acceptanceLetterCorrections');
@@ -138,6 +173,7 @@ Route::middleware('auth')->group(function() {
         Route::post('/{student}/qualification-letter/corrections', [QualificationLetterController::class, 'qualificationLetterCorrections'])->name('qualificationLetterCorrections');
         Route::put('/residency-process/qualification-letter/corrections/mark-as-solved', [QualificationLetterController::class, 'qualificationLetterMarkCorrectionsAsSolved'])->name('qualificationLetterMarkCorrectionsAsSolved');
         Route::put('/{student}/qualification-letter/mark-as-approved', [QualificationLetterController::class, 'qualificationLetterMarkAsApproved'])->name('qualificationLetterMarkAsApproved');
+        Route::put('/{student}/qualification-letter/modified', [QualificationLetterController::class, 'qualificationLetterModify'])->name('qualificationLetterModify');
         Route::put('/{student}/qualification-letter/signed-document', [QualificationLetterController::class, 'qualificationLetterUploadSignedDoc'])->name('qualificationLetterUploadSignedDoc');
         Route::get('/{student}/qualification-letter/signed-document', [QualificationLetterController::class, 'qualificationLetterDownloadSignedDoc'])->name('qualificationLetterDownloadSignedDoc');
         //Completion Letter
@@ -154,9 +190,38 @@ Route::middleware('auth')->group(function() {
         Route::put('/{student}/submission-letter/mark-as-approved', [SubmissionLetterController::class, 'submissionLetterMarkAsApproved'])->name('submissionLetterMarkAsApproved');
         Route::put('/{student}/submission-letter/signed-document', [SubmissionLetterController::class, 'submissionLetterUploadSignedDoc'])->name('submissionLetterUploadSignedDoc');
         Route::get('/{student}/submission-letter/signed-document', [SubmissionLetterController::class, 'submissionLetterDownloadSignedDoc'])->name('submissionLetterDownloadSignedDoc');
+        //Authorization Letter
+        Route::post('/residency-process/authorization-letter', [AuthorizationLetterController::class, 'authorizationLetter'])->name('authorizationLetter');
+        Route::post('/{student}/authorization-letter/corrections', [AuthorizationLetterController::class, 'authorizationLetterCorrections'])->name('authorizationLetterCorrections');
+        Route::put('/residency-process/authorization-letter/corrections/mark-as-solved', [AuthorizationLetterController::class, 'authorizationLetterMarkCorrectionsAsSolved'])->name('authorizationLetterMarkCorrectionsAsSolved');
+        Route::put('/{student}/authorization-letter/mark-as-approved', [AuthorizationLetterController::class, 'authorizationLetterMarkAsApproved'])->name('authorizationLetterMarkAsApproved');
+        Route::put('/{student}/authorization-letter/signed-document', [AuthorizationLetterController::class, 'authorizationLetterUploadSignedDoc'])->name('authorizationLetterUploadSignedDoc');
+        Route::get('/{student}/authorization-letter/signed-document', [AuthorizationLetterController::class, 'authorizationLetterDownloadSignedDoc'])->name('authorizationLetterDownloadSignedDoc');
+        //External Qualification Letter
+        Route::post('/residency-process/external-qualification-letter', [ExternalQualificationLetterController::class, 'externalQualificationLetter'])->name('externalQualificationLetter');
+        Route::post('/{student}/external-qualification-letter/corrections', [ExternalQualificationLetterController::class, 'externalQualificationLetterCorrections'])->name('externalQualificationLetterCorrections');
+        Route::post('/{student}/external-qualification-letter/answers', [ExternalQualificationLetterController::class, 'externalQualificationLetterAnswers'])->name('externalQualificationLetterAnswers');
+        Route::put('/residency-process/external-qualification-letter/corrections/mark-as-solved', [ExternalQualificationLetterController::class, 'externalQualificationLetterMarkCorrectionsAsSolved'])->name('externalQualificationLetterMarkCorrectionsAsSolved');
+        Route::put('/{student}/external-qualification-letter/mark-as-approved', [ExternalQualificationLetterController::class, 'externalQualificationLetterMarkAsApproved'])->name('externalQualificationLetterMarkAsApproved');
+        Route::put('/{student}/external-qualification-letter/signed-document', [ExternalQualificationLetterController::class, 'externalQualificationLetterUploadSignedDoc'])->name('externalQualificationLetterUploadSignedDoc');
+        Route::get('/{student}/external-qualification-letter/signed-document', [ExternalQualificationLetterController::class, 'externalQualificationLetterDownloadSignedDoc'])->name('externalQualificationLetterDownloadSignedDoc');
+    });
 
-        
+    Route::post('/corrections/{correctionId}/mark-as-solved', [CorrectionsController::class, 'markAsSolved'])->name('corrections.markAsSolved');
 
-    
+    Route::prefix('/locations')->name('locations.')->group(function () {
+
+        Route::get('/', [LocationsController::class, 'index'])->name('index')->can('index', Admin::class);
+        Route::get('/create', [LocationsController::class, 'create'])->name('create')->can('create', Admin::class);
+        Route::post('/', [LocationsController::class, 'store'])->name('store')->can('create', Admin::class);
+        Route::delete('/{location}', [LocationsController::class, 'destroy'])->name('destroy');
+        Route::get('/{location}/edit', [LocationsController::class, 'edit'])->name('edit');
+        Route::put('/{location}', [LocationsController::class, 'update'])->name('update');
+    });
+
+    Route::prefix('/configurations')->name('configurations.')->group(function () {
+
+        Route::get('/unit-info', [ConfigurationController::class, 'unitInfo'])->name('unitInfo')->can('index', Admin::class);
+        Route::put('/unit-info', [ConfigurationController::class, 'updateUnitInfo'])->name('updateUnitInfo');
     });
 });

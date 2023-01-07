@@ -18,19 +18,21 @@ class CreateStudentsTable extends Migration
             $table->string('first_name');
             $table->string('fathers_last_name');
             $table->string('mothers_last_name');
-            $table->string('account_number');
+            $table->string('account_number', 8);
             $table->char('sex');
             $table->string('curp', 18);
+            $table->string('rpa');
             $table->double('career_percentage');
             $table->string('phone_number', 10);
-            $table->boolean('is_enrolled');
-            $table->boolean('is_social_service_concluded');
+            $table->boolean('is_enrolled')->default(false);
+            $table->boolean('is_social_service_concluded')->default(false);
+            $table->boolean('regulate')->default(false);
             $table->unsignedBigInteger('career_id');
             $table->unsignedBigInteger('teacher_id');
             $table->unsignedBigInteger('external_advisor_id');
-            $table->unsignedBigInteger('state_id');
-            $table->unsignedBigInteger('municipality_id');
-            $table->unsignedBigInteger('locality_id');
+            $table->unsignedBigInteger('state_id')->nullable();
+            $table->unsignedBigInteger('municipality_id')->nullable();
+            $table->unsignedBigInteger('locality_id')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('CASCADE');
