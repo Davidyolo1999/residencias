@@ -32,6 +32,7 @@
                                     @if ($project->title)
                                         <div class="col-md-2">
                                             <a href="{{ route('students.viewProjectProgress', $project) }}"
+                                            data-toggle-second="tooltip" data-placement="left" title="Aquí puedes ver el listado de tus avances."
                                                 class="btn btn-sm btn-round btn-secondary">
                                                 <span class="material-icons">
                                                     format_list_bulleted
@@ -41,7 +42,9 @@
                                         </div>
                                         <div class="col-md-2">
                                             <a href="{{ route('students.loadProjectProgress', $project) }}"
-                                                class="btn btn-sm btn-round btn-secondary">
+                                                class="btn btn-sm btn-round btn-secondary"
+                                                data-toggle-second="tooltip" data-placement="left" title="Aquí puedes agregar los avances de acuerdo a las revisión por tu asesor."
+                                                >
                                                 <span class="material-icons">
                                                     upload
                                                     </span>
@@ -63,7 +66,7 @@
                                     <div class="col-md-3">
                                         <label for="title" class="d-block letter text-dark">
                                             Título del Proyecto:
-                                            <i data-toggle="tooltip" data-placement="top"
+                                            <i data-toggle-second="tooltip" data-placement="top"
                                                 class="align-middle material-icons"
                                                 style="cursor: pointer; font-size: 18px;"
                                                 data-original-title="
@@ -90,7 +93,7 @@
                                     <div class="col-md-3">
                                         <label for="start_date" class="d-block letter text-dark">
                                             Fecha de Inicio:
-                                            <i data-toggle="tooltip" data-placement="top"
+                                            <i data-toggle-second="tooltip" data-placement="top"
                                                 class="align-middle material-icons"
                                                 style="cursor: pointer; font-size: 18px;"
                                                 data-original-title="Plazo mínimo de 4 meses y máximo de 6 meses.
@@ -116,7 +119,7 @@
                                     <div class="col-md-3">
                                         <label for="end_date" class="d-block letter text-dark">
                                             Fecha de Término:
-                                            <i data-toggle="tooltip" data-placement="top"
+                                            <i data-toggle-second="tooltip" data-placement="top"
                                                 class="align-middle material-icons"
                                                 style="cursor: pointer; font-size: 18px;"
                                                 data-original-title="Plazo mínimo de 4 meses y máximo de 6 meses.
@@ -141,7 +144,7 @@
                                 <div class="row mb-3">
                                     <div class="col-md-3">
                                         <label for="schedule" class="d-block letter text-dark">Horario Requerdido:
-                                            <i data-toggle="tooltip" data-placement="top"
+                                            <i data-toggle-second="tooltip" data-placement="top"
                                                 class="align-middle material-icons"
                                                 style="cursor: pointer; font-size: 18px;"
                                                 data-original-title=" De acuerdo a las fechas de inicio y término del proyecto, debera cubrir 640 horas.
@@ -166,7 +169,7 @@
                                     <div class="col-md-3">
                                         <label for="general_objective" class="d-block letter text-dark">
                                             Objetivo General:
-                                            <i data-toggle="tooltip" 
+                                            <i data-toggle-second="tooltip" 
                                                 class="align-middle material-icons"
                                                 style="cursor: pointer; font-size: 18px;"
                                                 data-original-title="
@@ -190,7 +193,7 @@
                                 <div class="row mb-3">
                                     <div class="col-md-3">
                                         <label for="" class="letter text-dark">Objetivos Específicos:
-                                            <i data-toggle="tooltip" data-placement="top"
+                                            <i data-toggle-second="tooltip" data-placement="top"
                                                 class="align-middle material-icons"
                                                 style="cursor: pointer; font-size: 18px;"
                                                 data-original-title="
@@ -247,7 +250,7 @@
                                 <div class="row mb-3">
                                     <div class="col-md-3">
                                         <label for="justification" class="d-block letter text-dark">Justificación:
-                                            <i data-toggle="tooltip" data-placement="bottom"
+                                            <i data-toggle-second="tooltip" data-placement="bottom"
                                                 class="align-middle material-icons"
                                                 style="cursor: pointer; font-size: 18px;"
                                                 title="¡Extensión máxima: Una cuartilla!

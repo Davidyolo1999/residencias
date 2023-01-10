@@ -35,6 +35,7 @@
                                 </div>
                                 <div class="col-md-2">
                                     <a href="{{route('students.viewProjectProgress', $project)}}"
+                                    data-toggle-second="tooltip" data-placement="left" title="Aquí puedes ver el listado de tus avances."
                                         class="btn btn-sm btn-round btn-secondary">
                                         <span class="material-icons">
                                             format_list_bulleted
@@ -72,7 +73,7 @@
                                 @enderror                                
                             </div>
                             <div class="text-right">
-                                <button class="btn  btn-success">
+                                <button class="btn btn-sm btn-success">
                                     <i class="material-icons">save</i>
                                     <b>
                                         Guardar

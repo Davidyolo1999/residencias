@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
 {
     protected const REDIRECTS = [
-        User::ADMIN_ROLE => '/configurations/unit-info',
+        User::ADMIN_ROLE => '/periods',
         User::STUDENT_ROLE => '/students/personal-info',
         User::TEACHER_ROLE => '/students',
         User::EXTERNAL_ADVISOR_ROLE => '/students',

@@ -219,9 +219,9 @@ Route::middleware('auth')->group(function () {
         Route::put('/{location}', [LocationsController::class, 'update'])->name('update');
     });
 
-    Route::prefix('/configurations')->name('configurations.')->group(function () {
+    // Route::prefix('/configurations')->name('configurations.')->group(function () {
 
-        Route::get('/unit-info', [ConfigurationController::class, 'unitInfo'])->name('unitInfo')->can('index', Admin::class);
-        Route::put('/unit-info', [ConfigurationController::class, 'updateUnitInfo'])->name('updateUnitInfo');
-    });
+    //     Route::get('/unit-info', [ConfigurationController::class, 'unitInfo'])->name('unitInfo')->can('index', Admin::class);
+    //     Route::put('/unit-info', [ConfigurationController::class, 'updateUnitInfo'])->name('updateUnitInfo');
+    // });
 });
