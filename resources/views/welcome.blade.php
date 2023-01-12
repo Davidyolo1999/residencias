@@ -83,7 +83,7 @@
     <header class="grid grid-cols-1 lg:grid-cols-2 min-h-screen bg-white">
         {{-- Left side --}}
         <div class="p-12 text-white text-center lg:text-left space-y-4">
-            <img src="{{ asset('img/o.jpg') }}" alt="UMB" class="m-auto lg:m-0 mb-12 rounded-full border-black border-4">
+            <img src="{{ asset('img/welcome.png') }}" alt="UMB" class="m-auto lg:m-0 mb-12 rounded-full border-black border-4">
             <h2 class="mb-3 text-8xl font-semibold text-lime-500">
                 UMB
             </h2>
@@ -169,7 +169,11 @@
                         <a href="//umb.edomex.gob.mx/directorio" target="_blank">
                             Unidades de Estudios Superiores
                         </a>
-                    </h3>
+                    </h3>    
+                        <p style="font-size: 14px;">
+                            Conoce el directorio de autoridades de la UMB
+                        </p>
+                    
                 </div>
                 <div class="principales">
                     <a class="flex items-center justify-center" href="//umb.edomex.gob.mx/modelo_oferta" target="_blank">
@@ -180,6 +184,9 @@
                             Modelo y Oferta Educativa
                         </a>
                     </h3>
+                    <p style="font-size: 14px;">
+                        Impulso a un nuevo modelo educativo congruente con las necesidades de la entidad
+                    </p>
                 </div>
                 <div class="principales">
                     <a class="flex items-center justify-center" href="http://sidiumb.umb.edu.mx:8088/" target="_blank">
@@ -190,6 +197,9 @@
                             SIDIUMB
                         </a>
                     </h3>
+                    <p style="font-size: 14px;">
+                        Visita el sistema de información de la UMB
+                    </p>
                 </div>
                 <div class="center principales">
                     <a class="flex items-center justify-center" href="https://sfpya.edomexico.gob.mx/recaudacion/" target="_blank">
