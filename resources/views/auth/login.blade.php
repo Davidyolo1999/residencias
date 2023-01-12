@@ -10,10 +10,12 @@
                 <form class="form" method="POST" action="{{ route('login') }}">
                     @csrf
                     <div style="opacity: .9;" class="card card-login card-hidden mb-3">
-                    
-                        <div class="card-body  text-center">
+                        <div class="card-header card-header-success text-center" style="border-radius: 20px;" >
+                            <p  class="card-category text-white" style="font-size: 25px;"><b>Bienvenido de Nuevo</b> </p>
 
-                            <h2 style="font-weight: bold;" class="text-warning mb-2 text-uppercase">Bienvenido</h2>
+                        </div>
+                        <div class="card-body  text-center">
+                            
                             <div class="col-md-9 ml-auto mr-auto text-center" align="center">
                                 <img src="{{ asset('img/logo2.png') }}" alt="umb_logo" height="95" width="180">
                             </div>
@@ -63,6 +65,14 @@
                         </div>
                     </div>
                 </form>
+                <div class="row">
+                    <div class="col-6">
+                        <a href="" class="text-light">
+                            <small>{{ __('Olvidaste tu contraseña?') }}</small>
+                        </a>
+                    </div>
+                    
+                </div>
             </div>
         </div>
     </div>
