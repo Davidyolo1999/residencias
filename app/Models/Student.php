@@ -217,17 +217,17 @@ class Student extends Model
     }
     public function externalQualificationLetter()
     {
-        return $this->hasOne(externalQualificationLetter::class, 'user_id')->withDefault();
+        return $this->hasOne(ExternalQualificationLetter::class, 'user_id')->withDefault();
     }
 
     public function inProcessExternalQualificationLetter()
     {
-        return $this->hasOne(externalQualificationLetter::class, 'user_id')->where('status', DocumentStatus::STATUS_PROCESSING);
+        return $this->hasOne(ExternalQualificationLetter::class, 'user_id')->where('status', DocumentStatus::STATUS_PROCESSING);
     }
 
     public function approvedExternalQualificationLetter()
     {
-        return $this->hasOne(externalQualificationLetter::class, 'user_id')->where('status', DocumentStatus::STATUS_APPROVED);
+        return $this->hasOne(ExternalQualificationLetter::class, 'user_id')->where('status', DocumentStatus::STATUS_APPROVED);
     }
 
     public function company()
