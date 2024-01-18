@@ -6,6 +6,7 @@ use App\Models\Admin;
 use App\Models\Period;
 use App\Models\Teacher;
 use App\Models\User;
+use App\Models\Student;
 use App\Policies\AdminPolicy;
 use App\Policies\PeriodPolicy;
 use App\Policies\StudentPolicy;
